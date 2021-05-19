@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	   => '',
-	'hostname' => 'mysql:host=localhost:3306;dbname=appliedi_gudang;',
+	'hostname' => 'mysql:hostname=localhost:3306;dbname=appliedi_gudang;',
 	'username' => 'appliedi_itdivapplied',
 	'password' => 'itdivisi0n',
 	'database' => '',
