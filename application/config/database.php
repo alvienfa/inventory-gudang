@@ -95,4 +95,4 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
-var_dump(getenv('DATABASE'))
+var_dump(getenv('DATABASE'));
