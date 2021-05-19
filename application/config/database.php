@@ -78,7 +78,7 @@ $db['default'] = array(
 	'hostname' => 'mysql:hostname=localhost:3306; dbname=appliedi_gudang; charset=utf8;',
 	'username' => 'appliedi_itdivapplied',
 	'password' => 'itdivisi0n',
-	'database' => $_ENV['test'],
+	'database' => getenv('test'),
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
