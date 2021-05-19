@@ -77,7 +77,7 @@ $db['default'] = array(
 	'dsn'	   => '',
 	'hostname' => 'mysql:host=localhost:3306;',
 	'username' => 'appliedi_itdivapplied',
-	'password' =>'itdivisi0n',
+	'password' => 'itdivisi0n',
 	'database' => 'appliedi_gudang',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
@@ -94,5 +94,3 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
-var_dump($_ENV['DATABASE']);
