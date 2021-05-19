@@ -74,10 +74,10 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	   => getenv('DATABASE_HOSTNAME'),
-	'hostname' => getenv('DATABASE_HOSTNAME'),
-	'username' => getenv('DATABASE_USERNAME'),
-	'password' => getenv('DATABASE_PASSWORD'),
+	'dsn'	   => $_SERVER['DATABASE_HOSTNAME'],
+	'hostname' => $_SERVER['DATABASE_HOSTNAME'],
+	'username' => $_SERVER['DATABASE_USERNAME'],
+	'password' => $_SERVER['DATABASE_PASSWORD'],
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
