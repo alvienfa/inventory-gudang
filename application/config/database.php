@@ -77,7 +77,7 @@ $db['default'] = array(
 	'dsn'	   => '',
 	'hostname' => 'mysql:host=localhost:3306;',
 	'username' => 'appliedi_itdivapplied',
-	'password' => '',
+	'password' => 'itdivisi0n',
 	'database' => 'appliedi_gudang',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
