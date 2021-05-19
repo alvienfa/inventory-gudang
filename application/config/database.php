@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mysql:hostname=localhost; dbname=appliedi_gudang; charset=utf8;',
-	'username' => '',
-	'password' => '',
+	'hostname' => 'mysql:hostname=localhost:3306; dbname=appliedi_gudang; charset=utf8;',
+	'username' => 'appliedi_itdivapplied',
+	'password' => 'itdivisi0n',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
