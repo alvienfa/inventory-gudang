@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	   => '',
-	'hostname' => 'mysql:host=localhost;dbname=appliedi_gudang;charset=utf8;',
-	'username' => 'appliedi_itdivapplied',
-	'password' => 'itdivisi0n',
-	'database' => 'appliedi_gudang',
+	'dsn'	=> '',
+	'hostname' => 'mysql:hostname=localhost; dbname=web_gudang; charset=utf8;',
+	'username' => 'root',
+	'password' => '',
+	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
