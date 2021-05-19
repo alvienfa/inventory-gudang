@@ -6,9 +6,7 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 
-/license.txt
-.env
-!application/config/database.php
+
 !application/*/.htaccess
 
 composer.lock
@@ -34,3 +32,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/results/
 
 ## Database
+
+.env
