@@ -33,4 +33,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 ## Database
 
-.env
+.env.development
