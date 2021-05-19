@@ -75,11 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	   => '',
-	'hostname' => getenv('DATABASE_HOSTNAME'),
+	'hostname' => getenv('DATABASE_DSN'),
 	'username' => getenv('DATABASE_USERNAME'),
 	'password' => getenv('DATABASE_PASSWORD'),
-	'database' => getenv('DATABASE'),
-	'dbdriver' => 'mysqli',
+	'database' => '',
+	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
