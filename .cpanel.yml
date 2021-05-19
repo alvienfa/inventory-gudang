@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/appliedi/github-test/
+    # - /bin/cp index.html $DEPLOYPATH
+    # - /bin/cp style.css $DEPLOYPATH
