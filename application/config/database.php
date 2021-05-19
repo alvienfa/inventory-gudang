@@ -74,7 +74,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	   => '',
+	'dsn'	   => getenv('DATABASE_DSN'),
 	'hostname' => getenv('DATABASE_DSN'),
 	'username' => getenv('DATABASE_USERNAME'),
 	'password' => getenv('DATABASE_PASSWORD'),
