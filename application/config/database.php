@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	   => '',
-	'hostname' => 'mysql:host=localhost:3306;',
+	'hostname' => 'mysql:host=localhost:3306;dbname=appliedi_gudang;',
 	'username' => 'appliedi_itdivapplied',
 	'password' => 'itdivisi0n',
-	'database' => 'appliedi_gudang',
+	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
