@@ -74,8 +74,8 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	   => '',
-	'hostname' => 'mysql:hostname=localhost;dbname=web_gudang;charset=utf8;',
+	'dsn'	=> '',
+	'hostname' => 'mysql:hostname=localhost; dbname=web_gudang; charset=utf8;',
 	'username' => 'root',
 	'password' => '',
 	'database' => '',
