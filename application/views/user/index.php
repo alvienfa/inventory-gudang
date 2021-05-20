@@ -25,8 +25,9 @@
                                     </label>
                                 </p>
                                 
+                                
                                 <p>
-                                    <button class="btn btn-small btn-theme03">SUBMIT</button>
+                                    <button class="btn-theme">SUBMIT</button>
                                 </p>
                                 <br>
                                 
@@ -34,6 +35,7 @@
                         </div>
         
     </div>
-    
+    <link rel="stylesheet" href="<?php echo base_url()?>assets/js/qrCodeScanner.js">
+
   </div>
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/js/qrCodeScanner.js">
+  
