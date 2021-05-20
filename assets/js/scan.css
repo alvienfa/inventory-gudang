@@ -1,0 +1,5 @@
+#qr-canvas {
+    margin: auto;
+    width: calc(100% - 20px);
+    max-width: 300px;
+  }

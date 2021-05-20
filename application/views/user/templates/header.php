@@ -35,7 +35,7 @@
       }
       .jumbotron{
         margin-bottom: 2rem;
-        background-color: #e9ecef;
+        background-color: aqua;
         border-radius: .3rem;
       }
       .mr-auto{
