@@ -138,6 +138,7 @@
           <ul class="treeview-menu">
             <li><a href="<?= base_url('admin/form_barangmasuk')?>"><i class="fa fa-circle-o"></i> Tambah Data Barang Masuk</a></li>
             <li><a href="<?= base_url('admin/form_satuan')?>"><i class="fa fa-circle-o"></i> Tambah Satuan Barang</a></li>
+            <li><a href="<?= base_url('admin/barang_keluar')?>"><i class="fa fa-circle-o"></i> Keluar Satuan Barang</a></li>
           </ul>
         </li>
         <li class="treeview active">
@@ -148,8 +149,8 @@
                 </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<?= base_url('admin/tabel_barangmasuk')?>"><i class="fa fa-circle-o"></i> Tabel Barang Masuk</a></li>
-            <li><a href="<?= base_url('admin/tabel_barangkeluar')?>"><i class="fa fa-circle-o"></i> Tabel Barang Keluar</a></li>
+            <li class="active"><a href="<?= base_url('admin/tabel_barangmasuk')?>"><i class="fa fa-circle-o"></i> Tabel Stok Barang</a></li>
+            <li><a href="<?= base_url('admin/tabel_barangkeluar')?>"><i class="fa fa-circle-o"></i>Data Barang Keluar</a></li>
             <li><a href="<?= base_url('admin/tabel_satuan')?>"><i class="fa fa-circle-o"></i> Tabel Satuan</a></li>
           </ul>
         </li>
@@ -172,7 +173,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Tabel Barang Masuk
+        Tabel Stok Barang
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?=base_url('admin')?>"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -222,7 +223,7 @@
                   <th>QR Code</th>
                   <th>Update</th>
                   <th>Delete</th>
-                  <th>Keluarkan</th>
+                  <!-- <th>Keluarkan</th> -->
                 </tr>
                 </thead>
                 <tbody>
@@ -237,10 +238,15 @@
                     <td><?=$dd->nama_barang?></td>
                     <td><?=$dd->satuan?></td>
                     <td><?=$dd->jumlah?></td>
-                    <td><img style="width: 100px;" src="<?php echo base_url().'assets/qrcode/images/'.$dd->qr_code;?>"></td>
+                    <td><a download href="<?php echo base_url().'assets/qrcode/images/'.$dd->qr_code;?>">
+                      <img 
+                      style="width: 100px;" 
+                      src="<?php echo base_url().'assets/qrcode/images/'.$dd->qr_code;?>">
+                    </a>
+                    </td>
                     <td><a type="button" class="btn btn-info"  href="<?=base_url('admin/update_barang/'.$dd->id_transaksi)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                     <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('admin/delete_barang/'.$dd->id_transaksi)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                    <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?=base_url('admin/barang_keluar/'.$dd->id_transaksi)?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td>
+                    <!-- <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?=base_url('admin/barang_keluar/'.$dd->id_transaksi)?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td> -->
                 </tr>
               <?php $no++; ?>
               <?php endforeach;?>
@@ -248,18 +254,7 @@
                     <td colspan="7" align="center"><strong>Data Kosong</strong></td>
               <?php } ?>
                 </tbody>
-                <tfoot>
-                <tr>
-                  <th>No</th>
-                  <th>ID_transaksi</th>
-                  <th>Tanggal</th>
-                  <th>Lokasi</th>
-                  <th>Kode Barang</th>
-                  <th>Nama Barang</th>
-                  <th>Satuan</th>
-                  <th>Jumlah</th>
-                </tr>
-                </tfoot>
+                
               </table>
             </div>
             <!-- /.box-body -->

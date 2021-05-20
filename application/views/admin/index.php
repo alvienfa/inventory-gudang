@@ -209,6 +209,7 @@
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url('admin/form_barangmasuk')?>"><i class="fa fa-circle-o"></i> Tambah Data Barang Masuk</a></li>
             <li><a href="<?php echo base_url('admin/form_satuan')?>"><i class="fa fa-circle-o"></i> Tambah Satuan Barang</a></li>
+            <li><a href="<?= base_url('admin/barang_keluar')?>"><i class="fa fa-circle-o"></i> Keluar Satuan Barang</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -219,9 +220,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?= base_url('admin/tabel_barangmasuk') ?>"><i class="fa fa-circle-o"></i> Tabel Barang Masuk</a></li>
-            <li><a href="<?= base_url('admin/tabel_barangkeluar')?>"><i class="fa fa-circle-o"></i> Tabel Barang Keluar</a></li>
-            <li><a href="<?= base_url('admin/tabel_satuan')?>"><i class="fa fa-circle-o"></i> Tabel Satuan</a></li>
+            <li><a href="<?= base_url('admin/tabel_barangmasuk') ?>"><i class="fa fa-circle-o"></i> Tabel Stok Barang</a></li>
+            <li><a href="<?= base_url('admin/tabel_barangkeluar')?>"><i class="fa fa-circle-o"></i> Data Barang Keluar</a></li>
+            <li><a href="<?= base_url('admin/tabel_satuan')?>"><i class="fa fa-circle-o"></i>Tabel Satuan</a></li>
           </ul>
 
         <li class="header">LABELS</li>
@@ -287,7 +288,7 @@
              <?php }else{?>
               <h3>0</h3>
              <?php } ?>
-              <p>Stok Barang Keluar</p>
+              <p>Data Barang Keluar</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
