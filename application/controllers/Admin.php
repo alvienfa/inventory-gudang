@@ -98,15 +98,12 @@ class Admin extends CI_Controller{
                  );
       $this->load->library('upload',$config);
       $this->upload->initialize($config);
-      if(!$this->upload->do_upload('userpicture'))
+
+      if( ! $this->upload->do_upload('userpicture'))
       {
-        $error = array('error' => $this->upload->display_errors());
-          var_dump($error);
-        die();
-        // $this->session->set_flashdata('msg_error_gambar', $this->upload->display_errors());
-        // $data['pesan_error'] = $this->upload->display_errors();
-        // $this->load->view('admin/profile',$data);
-        redirect(base_url('admin/profile'));
+        $data['pesan_error'] = $this->upload->display_errors();
+        $this->session->set_flashdata('msg_error_gambar', $this->upload->display_errors());
+        $this->load->view('admin/profile',$data);
       }else{
         $upload_data = $this->upload->data();
         $nama_file = $upload_data['file_name'];
@@ -124,8 +121,7 @@ class Admin extends CI_Controller{
         $this->image_lib->initialize($config);
 				if (!$this->image_lib->resize())
         {
-          // $data['pesan_error'] = $this->image_lib->display_errors();
-          $data['pesan_error'] = 'wkwkwkw';
+          $data['pesan_error'] = $this->image_lib->display_errors();
           $this->load->view('admin/profile',$data);
         }
 
@@ -143,6 +139,7 @@ class Admin extends CI_Controller{
         redirect(base_url('admin/profile'));
       }
   }
+
 
   ####################################
            // End Profile

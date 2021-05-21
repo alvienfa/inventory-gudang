@@ -196,11 +196,6 @@
               <li><a href="#picture" data-toggle="tab">Change Picture</a></li>
             </ul>
             <div class="tab-content">
-
-              <!-- /.tab-pane -->
-
-              <!-- /.tab-pane -->
-
               <div class="tab-pane" id="picture">
                 <form class="form-horizontal" action="<?=base_url('admin/proses_gambar_upload')?>" method="post" enctype="multipart/form-data">
 
@@ -208,7 +203,7 @@
                     <label for="username" class="col-sm-2 control-label">Open Picture</label>
 
                     <div class="col-sm-10">
-                      <input type="file" name="userpicture" class="form-control" id="username" capture="userpicture" >
+                      <input type="file" name="userpicture" class="form-control" id="username" >
                     </div>
                   </div>
                   <?php if(isset($token_generate)){ ?>
@@ -219,7 +214,7 @@
 
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-success"><i class="fa fa-send" aria-hidden="true"></i>&nbsp;Submit</button>
+                      <button type="submit" class="btn btn-success"><i class="fa fa-send" aria-hidden="true"></i>&nbsp;Upload Gambar</button>
                     </div>
                   </div>
                 </form>
