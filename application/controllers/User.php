@@ -77,6 +77,8 @@ class User extends CI_Controller
       session_destroy();
       redirect(base_url());
   }
+  
+  
 
   ####################################
         // DATA BARANG MASUK

@@ -123,8 +123,8 @@ ol, ul {
 }
 
 .cp-footer {
-    background: #fff;
-    border-top: 1px solid #DCDCDC;
+    background: aqua;
+    border: 1px solid #fff;
     margin-top: 50px;
     padding-top: 10px;
     padding-bottom: 10px;
