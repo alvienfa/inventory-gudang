@@ -94,7 +94,6 @@ class Admin extends CI_Controller
 
   public function proses_gambar_upload()
   {
-    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
     $config =  array(
       'upload_path'     => "./assets/upload/user/img/",
       'allowed_types'   => "gif|jpg|png|jpeg",
@@ -127,6 +126,8 @@ class Admin extends CI_Controller
       $this->image_lib->initialize($config);
       if (!$this->image_lib->resize()) {
         $data['pesan_error'] = $this->image_lib->display_errors();
+        $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+        $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
         $this->load->view('admin/profile', $data);
       }
 
@@ -484,8 +485,8 @@ class Admin extends CI_Controller
       $this->session->set_flashdata('msg_berhasil', 'Data satuan Berhasil Ditambahkan');
       redirect(base_url('admin/form_satuan'));
     } else {
-      $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
       $this->load->view('admin/form_satuan/form_insert', $data);
     }
   }
@@ -514,6 +515,7 @@ class Admin extends CI_Controller
       $this->session->set_flashdata('msg_berhasil', 'Data satuan Berhasil Di Update');
       redirect(base_url('admin/tabel_satuan'));
     } else {
+      $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
       $this->load->view('layout/head', $head);
       $this->load->view('admin/form_satuan/form_update');
@@ -572,6 +574,7 @@ class Admin extends CI_Controller
       redirect(base_url('admin/tabel_barangmasuk'));
     } else {
       $head['title'] = 'Inventory Gudang | Perpindahan Barang';
+      $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
       $this->load->view('layout/head', $head);
       $this->load->view('perpindahan_barang/form_update/' . $id_transaksi);
