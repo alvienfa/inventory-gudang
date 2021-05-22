@@ -8,7 +8,7 @@
         font-weight: 700;
     }
     .card-body{
-        
+        font-weight: 700;
     }
     .title{
         padding-left: 1.5rem;
