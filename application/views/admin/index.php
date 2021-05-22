@@ -93,6 +93,9 @@
           
         </div>
       </section>
+      <section class="content">
+        <?= $views['card']?>
+      </section>
     </div>
 
     <footer class="main-footer">
