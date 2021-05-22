@@ -21,6 +21,7 @@ class Admin extends CI_Controller
       $data['dataUser'] = $this->M_admin->numrows('user');
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
       $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+      $data['views']['card'] = $this->load->view('components/card', $data, TRUE);
       $this->load->view('layout/head', $head);
       $this->load->view('admin/index', $data);
       $this->load->view('layout/script');
