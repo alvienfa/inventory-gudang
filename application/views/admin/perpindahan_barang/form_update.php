@@ -218,7 +218,7 @@
                 </div>
                 <div class="form-group" style="margin-bottom:40px;">
                   <label for="lokasi" style="margin-left:220px;display:inline;">Lokasi</label>
-                  <input type="text" name="lokasi" style="margin-left:117px;width:20%;display:inline;" class="form-control" readonly="readonly" value="<?=$d->lokasi?>">
+                  <input type="text" name="lokasi" style="margin-left:117px;width:20%;display:inline;" class="form-control"  value="<?=$d->lokasi?>">
                 </div>
                 <div class="form-group" style="display:inline-block;">
                   <label for="kode_barang" style="width:87%;margin-left: 12px;">Kode Barang / Barcode</label>
@@ -244,6 +244,10 @@
                 <label for="jumlah" style="width:73%;margin-left:33px;">Jumlah</label>
                 <input type="number" name="jumlah" style="width:41%;margin-left:34px;margin-right:18px;" class="form-control" id="jumlah" max="<?=$d->jumlah?>" value="<?=$d->jumlah?>">
             </div>
+            <div class="form-group" style="display:inline-block;">
+                  <label for="status" style="width:73%;">Keterangan</label>
+                  <input type="text" name="status" style="width:90%;margin-right: 67px;" class="form-control" id="status" value="<?=$d->status?>">
+              </div>
             <?php } ?>
               <!-- /.box-body -->
 
@@ -492,6 +496,7 @@
   <!-- ./wrapper -->
 
   <!-- jQuery 3 -->
+  
   <script src="<?php echo base_url()?>assets/web_admin/bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
   <script src="<?php echo base_url()?>assets/web_admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
