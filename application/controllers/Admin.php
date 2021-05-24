@@ -589,7 +589,9 @@ class Admin extends CI_Controller
       $nama_barang    = $this->input->post('nama_barang', TRUE);
       $satuan         = $this->input->post('satuan', TRUE);
       $jumlah         = $this->input->post('jumlah', TRUE);
-      $status         = $this->input->post('status', TRUE);
+      $keterangan         = $this->input->post('keterangan', TRUE);
+      $nm_penjab         = $this->input->post('nm_penjab', TRUE);
+      $nohp_penjab         = $this->input->post('nohp_penjab', TRUE);
 
       $where = array('id_transaksi' => $id_transaksi);
       $data = array(
@@ -601,7 +603,9 @@ class Admin extends CI_Controller
         'nama_barang' => $nama_barang,
         'satuan' => $satuan,
         'jumlah' => $jumlah,
-        'status' => $status
+        'keterangan' => $keterangan,
+        'nm_penjab' => $nm_penjab,
+        'nohp_penjab' => $nohp_penjab
       );
       $this->M_admin->mengurangi('tb_barang_masuk', $id_transaksi,$jumlah);
       $this->M_admin->insert('tb_barang_keluar', $data);
@@ -613,7 +617,7 @@ class Admin extends CI_Controller
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
       $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
       $this->load->view('layout/head', $head);
-      $this->load->view('perpindahan_barang/form_update/' . $id_transaksi);
+      $this->load->view('admin/form_barangmasuk/scanner_barcode/' . $id_transaksi);
     }
   }
   ####################################

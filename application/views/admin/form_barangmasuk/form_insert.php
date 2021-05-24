@@ -68,7 +68,7 @@
                       </div>
                       
                 <div class="form-group" style="margin-bottom:40px;">
-                  <label for="keterangan" style="margin-left:220px;display:inline;">Lokasi</label>
+                  <label for="keterangan" style="margin-left:220px;display:inline;">Keterangan</label>
                   <select class="form-control" name="keterangan" style="margin-left:75px;width:20%;display:inline;">
                     <option value="">-- Pilih --</option>
                     <option value="Stok Gudang Pak Sandy">Stok Gudang Pak Sandy</option>

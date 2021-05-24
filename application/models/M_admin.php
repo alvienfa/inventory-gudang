@@ -32,6 +32,14 @@ class M_admin extends CI_Model
     return $query->result_array();
   }
 
+  public function get_data_row($tabel, $id)
+  {
+    $query = $this->db->select()
+                      ->from($tabel)
+                      ->where($id)
+                      ->get();
+    return $query->row();
+  }
   public function get_data($tabel,$id_transaksi)
   {
     $query = $this->db->select()

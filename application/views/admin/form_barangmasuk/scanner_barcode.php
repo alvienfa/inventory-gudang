@@ -108,18 +108,26 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="tanggal_keluar">Tanggal Keluar</label>
-                                                                <input type="text" name="tanggal_keluar" class="form-control form_datetime" required="" placeholder="Klik Disini">
+                                                                <input type="date" name="tanggal_keluar" class="form-control" required="" placeholder="Klik Disini">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="lokasi">Lokasi</label>
                                                                 <input type="text" name="lokasi" class="form-control" >
                                                             </div>
                                                             <div class="form-group">
+                                                                <label for="nm_penjab" >Nama Penanggung Jawab</label>
+                                                                <input type="text" name="nm_penjab" required="required" class="form-control" id="nama_Barang" >
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="nohp_penjab" >No. Handphone Penanggung Jawab</label>
+                                                                <input type="text" name="nohp_penjab" required="required" class="form-control" id="nama_Barang" >
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label for="kode_barang">Kode Barang / Barcode</label>
                                                                 <input type="text" name="kode_barang" class="form-control" readonly="readonly" id="kode_barang" value="<?= $d->kode_barang ?>">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="nama_Barang" style="width:73%;">Nama Barang</label>
+                                                                <label for="nama_Barang">Nama Barang</label>
                                                                 <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $d->nama_barang ?>">
                                                             </div>
                                                             <div class="form-group">
@@ -139,8 +147,8 @@
                                                                 <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $d->jumlah ?>" value="<?= $d->jumlah ?>">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="status">Keterangan</label>
-                                                                <input type="text" name="status" class="form-control" id="status">
+                                                                <label for="keterangan">Keterangan</label>
+                                                                <input type="text" name="keterangan" class="form-control" id="status">
                                                             </div>
                                                             <div class="form-group">
                                                                 <a type="button" class="btn btn-warning" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
