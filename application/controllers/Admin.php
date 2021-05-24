@@ -643,7 +643,7 @@ class Admin extends CI_Controller
     $uri = $this->uri->segment(3);
     $head['title'] = 'Inventory Gudang | Barang Kembali';
     $where = array('id_transaksi' => $uri);
-    $data['list_data'] = $this->M_admin->get_data('tb_barang_masuk', $where);
+    $data['list_data'] = $this->M_admin->get_data('tb_barang_keluar', $where);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
@@ -676,6 +676,7 @@ class Admin extends CI_Controller
         'jumlah'  => $jumlah,
         'status'  => $status
       );
+      $this->M_admin->menambah('tb_barang_masuk',$id_transaksi,$jumlah);
       $this->M_admin->insert('tb_barang_kembali', $data);
       $this->session->set_flashdata('msg_berhasil_masuk', 'Data Berhasil Masuk');
       redirect(base_url('admin/tabel_barangmasuk'));
