@@ -657,7 +657,6 @@ class Admin extends CI_Controller
     $id_transaksi    = $this->input->post('id_transaksi', TRUE);
     if ($this->form_validation->run() === TRUE) {
       $tanggal_kembali = $this->input->post('tanggal_kembali', TRUE);
-      $tanggal_keluar  = $this->input->post('tanggal_keluar');
       $lokasi          = $this->input->post('lokasi', TRUE);
       $kode_barang     = $this->input->post('kode_barang', TRUE);
       $nama_barang     = $this->input->post('nama_barang', TRUE);

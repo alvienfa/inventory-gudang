@@ -90,81 +90,83 @@
                                             <?php } ?>
 
 
+                                            <div class="container-fluid">
+                                                <div class="box-body" id='barang_scan'>
 
-                                            <div class="box-body" id='barang_scan'>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
 
-
-
-                                                <div class="form-group">
-                                                    <?php foreach ($list_data as $d) { ?>
-                                                        <label for="id_transaksi">ID Transaksi</label>
-                                                        <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $d->id_transaksi ?>">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="tanggal">Tanggal Masuk</label>
-                                                    <input type="text" name="tanggal" class="form-control" readonly="readonly" value="<?= $d->tanggal ?>">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="tanggal_keluar">Tanggal Keluar</label>
-                                                    <input type="text" name="tanggal_keluar" class="form-control form_datetime" required="" placeholder="Klik Disini">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="lokasi">Lokasi</label>
-                                                    <input type="text" name="lokasi" class="form-control" value="<?= $d->lokasi ?>">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="kode_barang">Kode Barang / Barcode</label>
-                                                    <input type="text" name="kode_barang" class="form-control" readonly="readonly" id="kode_barang" value="<?= $d->kode_barang ?>">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="nama_Barang" style="width:73%;">Nama Barang</label>
-                                                    <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $d->nama_barang ?>">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="satuan">Satuan</label>
-                                                    <select class="form-control" name="satuan">
-                                                        <?php foreach ($list_satuan as $s) { ?>
-                                                            <?php if ($d->satuan == $s->nama_satuan) { ?>
-                                                                <option value="<?= $d->satuan ?>" selected=""><?= $d->satuan ?></option>
-                                                            <?php } else { ?>
-                                                                <option value="<?= $s->kode_satuan ?>"><?= $s->nama_satuan ?></option>
-                                                            <?php } ?>
+                                                            <div class="form-group">
+                                                                <?php foreach ($list_data as $d) { ?>
+                                                                    <label for="id_transaksi">ID Transaksi</label>
+                                                                    <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $d->id_transaksi ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="tanggal">Tanggal Masuk</label>
+                                                                <input type="text" name="tanggal" class="form-control" readonly="readonly" value="<?= $d->tanggal ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="tanggal_keluar">Tanggal Keluar</label>
+                                                                <input type="text" name="tanggal_keluar" class="form-control form_datetime" required="" placeholder="Klik Disini">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="lokasi">Lokasi</label>
+                                                                <input type="text" name="lokasi" class="form-control" value="<?= $d->lokasi ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="kode_barang">Kode Barang / Barcode</label>
+                                                                <input type="text" name="kode_barang" class="form-control" readonly="readonly" id="kode_barang" value="<?= $d->kode_barang ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="nama_Barang" style="width:73%;">Nama Barang</label>
+                                                                <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $d->nama_barang ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="satuan">Satuan</label>
+                                                                <select class="form-control" name="satuan">
+                                                                    <?php foreach ($list_satuan as $s) { ?>
+                                                                        <?php if ($d->satuan == $s->nama_satuan) { ?>
+                                                                            <option value="<?= $d->satuan ?>" selected=""><?= $d->satuan ?></option>
+                                                                        <?php } else { ?>
+                                                                            <option value="<?= $s->kode_satuan ?>"><?= $s->nama_satuan ?></option>
+                                                                        <?php } ?>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="jumlah">Jumlah</label>
+                                                                <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $d->jumlah ?>" value="<?= $d->jumlah ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="status">Keterangan</label>
+                                                                <input type="text" name="status" class="form-control" id="status">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <a type="button" class="btn btn-warning" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
+                                                                <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
+                                                            </div>
                                                         <?php } ?>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="jumlah">Jumlah</label>
-                                                    <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $d->jumlah ?>" value="<?= $d->jumlah ?>">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="status">Keterangan</label>
-                                                    <input type="text" name="status" class="form-control" id="status">
-                                                </div>
-                                                <div class="form-group">
-                                                    <a type="button" class="btn btn-warning" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
-                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
-                                                </div>
-                                            <?php } ?>
 
-                                            <!-- /.box-body -->
+                                                        <!-- /.box-body -->
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                                                
-                                                                
+                                                    
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                    </section>
         </div>
+
     </div>
-
-
-
-
+    
+    
 <?php endif; ?>
-
+</div>
 <!-- /.content-wrapper -->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
