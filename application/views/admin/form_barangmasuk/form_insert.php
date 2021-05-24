@@ -66,10 +66,17 @@
                         <label for="tanggal" style="margin-left:220px;display:inline;">Tanggal</label>
                         <input type="date" name="tanggal" style="margin-left:66px;width:20%;display:inline;" class="form-control" placeholder="Klik Disini">
                       </div>
-                      <div class="form-group" style="margin-bottom:40px;">
-                        <label for="nama_barang" style="margin-left:220px;display:inline;">Keterangan</label>
-                        <input type="text" name="lokasi" style="margin-left:45px;width:20%;display:inline;" class="form-control" placeholder="Lokasi">
-                      </div>
+                      
+                <div class="form-group" style="margin-bottom:40px;">
+                  <label for="keterangan" style="margin-left:220px;display:inline;">Lokasi</label>
+                  <select class="form-control" name="keterangan" style="margin-left:75px;width:20%;display:inline;">
+                    <option value="">-- Pilih --</option>
+                    <option value="Stok Gudang Pak Sandy">Stok Gudang Pak Sandy</option>
+                    <option value="Stok Gudang Rizqi Semesta">Stok Gudang Rizqi Semesta</option>
+                    <option value="Stok Gudang Inventaris">Stok Gudang Inventaris</option>
+                    
+                  </select>
+                </div>
 
                       <div class="form-group" style="display:inline-block;">
                         <label for="kode_barang" style="width:87%;margin-left: 12px;">Kode Barang / Barcode</label>

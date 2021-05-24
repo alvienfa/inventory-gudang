@@ -332,7 +332,7 @@ class Admin extends CI_Controller
 
   public function proses_databarang_masuk_insert()
   {
-    $this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
+    $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
     $this->form_validation->set_rules('kode_barang', 'Kode Barang', 'required');
     $this->form_validation->set_rules('nama_barang', 'Nama Barang', 'required');
     $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
@@ -340,7 +340,7 @@ class Admin extends CI_Controller
     if ($this->form_validation->run() == TRUE) {
       $id_transaksi = $this->input->post('id_transaksi', TRUE);
       $tanggal      = $this->input->post('tanggal', TRUE);
-      $lokasi       = $this->input->post('lokasi', TRUE);
+      $keterangan   = $this->input->post('keterangan', TRUE);
       $kode_barang  = $this->input->post('kode_barang', TRUE);
       $nama_barang  = $this->input->post('nama_barang', TRUE);
       $satuan       = $this->input->post('satuan', TRUE);
@@ -387,7 +387,7 @@ class Admin extends CI_Controller
         $data = array(
           'id_transaksi' => $id_transaksi,
           'tanggal'      => $tanggal,
-          'lokasi'       => $lokasi,
+          'keterangan'   => $keterangan,
           'kode_barang'  => $kode_barang,
           'nama_barang'  => $nama_barang,
           'satuan'       => $satuan,
