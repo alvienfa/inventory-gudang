@@ -59,11 +59,11 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li class='<?= (base_url('admin/scan_masuk') == current_url() ? ' active' : '') ?> '>
-            <a href="<?= base_url('admin/scan_masuk') ?>"><i class="fa fa-arrow-up text-success"></i> Scan Masuk</a>
+          <li class='<?= (base_url('admin/scan_barang_kembali') == current_url() ? ' active' : '') ?> '>
+            <a href="<?= base_url('admin/scan_barang_kembali') ?>"><i class="fa fa-arrow-up text-success"></i> Scan Masuk</a>
           </li>
-          <li class='<?= (base_url('admin/scan_keluar') == current_url() ? ' active' : '') ?> '>
-            <a href="<?= base_url('admin/scan_keluar') ?>"><i class="fa fa-arrow-down text-danger"></i> Scan Keluar</a>
+          <li class='<?= (base_url('admin/barang_keluar') == current_url() ? ' active' : '') ?> '>
+            <a href="<?= base_url('admin/barang_keluar') ?>"><i class="fa fa-arrow-down text-danger"></i> Scan Keluar</a>
           </li>
         </ul>
       </li>

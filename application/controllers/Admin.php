@@ -301,7 +301,7 @@ class Admin extends CI_Controller
   public function tabel_barangmasuk()
   {
     $data = array(
-      'list_data' => $this->M_admin->select('tb_barang_masuk') || 0,
+      'list_data' => $this->M_admin->select('tb_barang_masuk') ,
       'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'))
     );
     $head['title'] = 'Inventory Gudang | Table Barang Masuk';
@@ -574,7 +574,7 @@ class Admin extends CI_Controller
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
-    $this->load->view('admin/perpindahan_barang/form_update', $data);
+    $this->load->view('admin/form_barangmasuk/scanner_barcode', $data);
   }
 
   public function proses_data_keluar()
@@ -640,18 +640,15 @@ class Admin extends CI_Controller
   {
 
     $uri = $this->uri->segment(3);
-    $where = array(
-      'id_transaksi' => $uri,
-      'status' => 0
-    );
+    $head['title'] = 'Inventory Gudang | Barang Kembali';
+    $where = array('id_transaksi' => $uri);
     $data['list_data'] = $this->M_admin->get_data('tb_barang_masuk', $where);
-    $data['list_kembali'] = $this->M_admin->get_data('tb_barang_keluar', $where);
-    // var_dump($data['list_kembali']);
-    // die();
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
-    // $this->load->view('admin/perpindahan_barang/form_update',$data);
-    $this->load->view('admin/scanner/scan_barang_keluar',$data);
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
+    $this->load->view('admin/scanner/scan_barang_keluar', $data);
   }
 
   public function proses_data_kembali()
@@ -672,7 +669,6 @@ class Admin extends CI_Controller
       $data  = array(
         'id_transaksi' => $id_transaksi,
         'tanggal_kembali' => $tanggal_kembali,
-        'tanggal_keluar'  => $tanggal_keluar,
         'lokasi'  => $lokasi,
         'kode_barang' => $kode_barang,
         'nama_barang' => $nama_barang,
