@@ -55,7 +55,7 @@ class M_admin extends CI_Model
 
   public function mengurangi($tabel,$id_transaksi,$jumlah)
   {
-    $this->db->set("jumlah","jumlah - $jumlah");
+    $this->db->set("jumlah","jumlah - $jumlah",FALSE);
     $this->db->where('id_transaksi',$id_transaksi);
     $this->db->update($tabel);
   }

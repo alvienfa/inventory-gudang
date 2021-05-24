@@ -603,6 +603,7 @@ class Admin extends CI_Controller
         'jumlah' => $jumlah,
         'status' => $status
       );
+      $this->M_admin->mengurangi('tb_barang_masuk', $id_transaksi,$jumlah);
       $this->M_admin->insert('tb_barang_keluar', $data);
       $this->session->set_flashdata('msg_berhasil_keluar', 'Data Berhasil Keluar');
       redirect(base_url('admin/tabel_barangmasuk'));

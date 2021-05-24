@@ -1,8 +1,9 @@
 <style>
     #qr-canvas {
         margin: auto;
-        width: 50%;
+        width: 100%;
         max-width: 100%;
+        align-items: center;
 
     }
 
@@ -111,7 +112,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="lokasi">Lokasi</label>
-                                                                <input type="text" name="lokasi" class="form-control" value="<?= $d->lokasi ?>">
+                                                                <input type="text" name="lokasi" class="form-control" >
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="kode_barang">Kode Barang / Barcode</label>
