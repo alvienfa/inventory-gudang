@@ -702,8 +702,14 @@ class Admin extends CI_Controller
 
   public function tabel_barangkembali()
   {
+    $head['title'] = 'Inventory Gudang | Barang Kembali';
     $data['list_data'] = $this->M_admin->select('tb_barang_kembali');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
+
     $this->load->view('admin/tabel/tabel_barangkembali', $data);
   }
+
 }
