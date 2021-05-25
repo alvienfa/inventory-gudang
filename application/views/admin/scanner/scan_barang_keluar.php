@@ -1,8 +1,9 @@
 <style>
     #qr-canvas {
         margin: auto;
-        width: 50%;
+        width: 100%;
         max-width: 100%;
+        align-items: center;
 
     }
 
@@ -70,88 +71,102 @@
                     </div>
                 </section>
             <?php else : ?>
-                <section class="content">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="container">
+                <form action="<?= base_url('admin/proses_data_keluar') ?>" role="form" method="post">
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="box box-primary">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Kembali</h3>
+                                        <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Keluar</h3>
                                     </div>
-                                    
-                                    <div class="container">
-                                        <form action="<?= base_url('admin/proses_data_kembali') ?>" role="form" method="post">
-                                            <?php if (validation_errors()) { ?>
-                                                <div class="alert alert-warning alert-dismissible">
-                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                                    <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
-                                                </div>
-                                            <?php } ?>
+                                    <?php if (validation_errors()) { ?>
+                                        <div class="alert alert-warning alert-dismissible">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
+                                        </div>
+                                    <?php } ?>
 
-                                            <div class="container-fluid">
-                                                <div class="box-body" id='barang_scan'>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <?php foreach ($list_data as $d) { ?>
-                                                                <input type="hidden" name="id" readonly value="<?= $d->id ?>">
-                                                                <div class="form-group">
-                                                                    <label for="id_transaksi">ID Transaksi</label>
-                                                                    <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $d->id_transaksi ?>">
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label for="tanggal_keluar">Tanggal Kembali</label>
-                                                                    <input type="text" name="tanggal_kembali" class="form-control form_datetime" required="" value="<?= date('Y-m-d') ?>" placeholder="Klik Disini">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="lokasi">Lokasi</label>
-                                                                    <input type="text" name="lokasi" class="form-control" value="<?= $d->lokasi ?>">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="kode_barang">Kode Barang / Barcode</label>
-                                                                    <input type="text" name="kode_barang" class="form-control" readonly="readonly" id="kode_barang" value="<?= $d->kode_barang ?>">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="nama_Barang" style="width:73%;">Nama Barang</label>
-                                                                    <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $d->nama_barang ?>">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="satuan">Satuan</label>
-                                                                    <select class="form-control" name="satuan">
-                                                                        <?php foreach ($list_satuan as $s) { ?>
-                                                                            <?php if ($d->satuan == $s->nama_satuan) { ?>
-                                                                                <option value="<?= $d->satuan ?>" selected=""><?= $d->satuan ?></option>
-                                                                            <?php } else { ?>
-                                                                                <option value="<?= $s->kode_satuan ?>"><?= $s->nama_satuan ?></option>
-                                                                            <?php } ?>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="jumlah">Jumlah</label>
-                                                                    <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $d->jumlah ?>" value="<?= $d->jumlah ?>">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="status">Keterangan</label>
-                                                                    <input type="text" name="status" class="form-control" id="status">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <a type="button" class="btn btn-warning" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
-                                                                </div>
+                                    <div class="container-fluid">
+                                        <div class="box-body" id='barang_scan'>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="id_transaksi">ID Transaksi</label>
+                                                        <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $list_data->id_transaksi ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="tanggal">Tanggal Masuk</label>
+                                                        <input type="text" name="tanggal" class="form-control" readonly="readonly" value="<?= $list_data->tanggal ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="tanggal_keluar">Tanggal Keluar</label>
+                                                        <input type="text" name="tanggal_keluar" class="form-control form_datetime" required="" placeholder="Klik Disini">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="kode_barang">Kode Barang / Barcode</label>
+                                                        <input type="text" name="kode_barang" class="form-control" readonly="readonly" id="kode_barang" value="<?= $list_data->kode_barang ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="nama_Barang" style="width:73%;">Nama Barang</label>
+                                                        <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $list_data->nama_barang ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="satuan">Satuan</label>
+                                                        <select class="form-control" name="satuan">
+                                                            <?php foreach ($list_satuan as $s) { ?>
+                                                                <?php if ($list_data->satuan == $s->nama_satuan) { ?>
+                                                                    <option value="<?= $list_data->satuan ?>" selected=""><?= $list_data->satuan ?></option>
+                                                                <?php } else { ?>
+                                                                    <option value="<?= $s->kode_satuan ?>"><?= $s->nama_satuan ?></option>
+                                                                <?php } ?>
                                                             <?php } ?>
-                                                        </div>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="jumlah">Jumlah</label>
+                                                        <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $list_data->jumlah ?>" value="<?= $list_data->jumlah ?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="status">Keterangan</label>
+                                                        <input type="text" name="keterangan" class="form-control" id="status">
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
 
-                                        </form>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><i class="fa fa-map-marker" aria-hidden="true"></i> Alamat Tujuan</h3>
+                                    </div>
+                                    <?php if (validation_errors()) { ?>
+                                        <div class="alert alert-warning alert-dismissible">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
+                                        </div>
+                                    <?php } ?>
+
+                                    <div class="container-fluid">
+                                        <div class="box-body" id='barang_scan'>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <?= $this->load->view('components/forms/form_lokasi', '', TRUE) ?>
+                                                    <div class="form-group">
+                                                        <a type="button" class="btn btn-danger" onclick="history.back(-1)" name="btn_kembali"> Cancel</a>
+                                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </form>
             <?php endif; ?>
         </div>
         <!-- /.content-wrapper -->
@@ -163,8 +178,6 @@
 
         </footer>
 
-        <!-- Control Sidebar -->
-        <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
@@ -191,7 +204,7 @@
                 outputData.value = res;
                 res.replace("X", "-");
                 document.getElementById("qr-content").style.display = 'none';
-                window.location.href = '<?= base_url('admin/scan_list_barang/') ?>' + res;
+                window.location.href = '<?= base_url('admin/scan_barang_keluar/') ?>' + res;
                 scanning = false;
 
                 // Stop video
