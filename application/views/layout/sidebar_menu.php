@@ -46,6 +46,7 @@
         <ul class="treeview-menu">
           <li class='<?= (base_url('admin/tabel_barangmasuk') == current_url() ? ' active' : '') ?> '><a href="<?= base_url('admin/tabel_barangmasuk') ?>"><i class="fa fa-circle-o"></i> Tabel Barang Masuk</a></li>
           <li class='<?= (base_url('admin/tabel_barangkeluar') == current_url() ? ' active' : '') ?> '><a href="<?= base_url('admin/tabel_barangkeluar') ?>"><i class="fa fa-circle-o"></i> Tabel Barang Keluar</a></li>
+          <li class='<?= (base_url('admin/tabel_barangkembali') == current_url() ? ' active' : '') ?> '><a href="<?= base_url('admin/tabel_barangkembali') ?>"><i class="fa fa-circle-o"></i> Tabel Barang Kembali</a></li>
           <li class='<?= (base_url('admin/tabel_satuan') == current_url() ? ' active' : '') ?> '><a href="<?= base_url('admin/tabel_satuan') ?>"><i class="fa fa-circle-o"></i> Tabel Satuan</a></li>
         </ul>
       </li>

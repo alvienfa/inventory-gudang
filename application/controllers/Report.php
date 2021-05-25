@@ -102,12 +102,11 @@ class Report extends CI_Controller
   public function barangKeluar()
   {
     $id = $this->uri->segment(3);
-    $tgl1 = $this->uri->segment(4);
-    $tgl2 = $this->uri->segment(5);
-    $tgl3 = $this->uri->segment(6);
-    $ls   = array('id_transaksi' => $id ,'tanggal_keluar' => $tgl1.'/'.$tgl2.'/'.$tgl3);
-    $data = $this->M_admin->get_data('tb_barang_keluar',$ls);
-
+    // $lokasi = $this->uri->segment(7);
+    $ls   = array(
+      'id' => $id
+      );
+    $data = $this->M_admin->get_data_row('tb_barang_keluar',$ls);
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
     // document informasi
@@ -145,11 +144,12 @@ class Report extends CI_Controller
     $html=
       '<div>
         <h1 align="center">Invoice Bukti Pengeluaran Barang</h1><br>
-        <p>No Id Transaksi  : '.$id.'</p>
-        <p>Ditunjukan Untuk :</p>
-        <p>Tanggal          : '.$tgl1.'/'.$tgl2.'/'.$tgl3.'</p>
+        <p>No Id Transaksi  :'.$id.'</p>
+        <p>Ditunjukan Untuk :'.$data->lokasi.'</p>
+        <p>Penanggung Jawab :'.$data->nm_penjab.'</p>
+        <p>No. Handphone :'.$data->nohp_penjab.'</p>
+        <p>Tanggal          :'.$data->tanggal_keluar.'</p>
         <p>Po.Customer      :</p>
-
 
         <table border="1">
           <tr>
@@ -166,30 +166,27 @@ class Report extends CI_Controller
 
 
           $no = 1;
-          foreach($data as $d){
             $html .= '<tr>';
             $html .= '<td align="center">'.$no.'</td>';
-            $html .= '<td align="center">'.$d->id_transaksi.'</td>';
-            $html .= '<td align="center">'.$d->tanggal_masuk.'</td>';
-            $html .= '<td align="center">'.$d->tanggal_keluar.'</td>';
-            $html .= '<td align="center">'.$d->lokasi.'</td>';
-            $html .= '<td align="center">'.$d->kode_barang.'</td>';
-            $html .= '<td align="center">'.$d->nama_barang.'</td>';
-            $html .= '<td align="center">'.$d->satuan.'</td>';
-            $html .= '<td align="center">'.$d->jumlah.'</td>';
+            $html .= '<td align="center">'.$data->id_transaksi.'</td>';
+            $html .= '<td align="center">'.$data->tanggal_masuk.'</td>';
+            $html .= '<td align="center">'.$data->tanggal_keluar.'</td>';
+            $html .= '<td align="center">'.$data->lokasi.'</td>';
+            $html .= '<td align="center">'.$data->kode_barang.'</td>';
+            $html .= '<td align="center">'.$data->nama_barang.'</td>';
+            $html .= '<td align="center">'.$data->satuan.'</td>';
+            $html .= '<td align="center">'.$data->jumlah.'</td>';
             $html .= '</tr>';
 
             $html .= '<tr>';
             $html .= '<td align="center" colspan="8"><b>Jumlah</b></td>';
-            $html .= '<td align="center">'.$d->jumlah.'</td>';
+            $html .= '<td align="center">'.$data->jumlah.'</td>';
             $html .= '</tr>';
             $no++;
-          }
-
 
         $html .='
             </table><br>
-            <h6>Mengetahui</h6><br><br><br>
+            <h6>Mengetahui</h6><br><br><br><br>
             <h6>Admin</h6>
           </div>';
 

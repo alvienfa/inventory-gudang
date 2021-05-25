@@ -597,6 +597,8 @@ class Admin extends CI_Controller
         'provinsi' => $this->input->post('provinsi', TRUE),
         'kode_pos' => $this->input->post('kode_pos', TRUE),
       );
+      $nm_penjab         = $this->input->post('nm_penjab', TRUE);
+      $nohp_penjab         = $this->input->post('nohp_penjab', TRUE);
 
       $this->db->insert('map_lokasi', $alamat);
       $id_lokasi = $this->db->insert_id();
@@ -612,7 +614,9 @@ class Admin extends CI_Controller
         'nama_barang' => $nama_barang,
         'satuan' => $satuan,
         'jumlah' => $jumlah,
-        'keterangan' => $keterangan
+        'keterangan' => $keterangan,
+        'nm_penjab' => $nm_penjab,
+        'nohp_penjab' => $nohp_penjab
       );
 
       $this->M_admin->mengurangi('tb_barang_masuk', $id_transaksi,$jumlah);
@@ -625,7 +629,7 @@ class Admin extends CI_Controller
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
       $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
       $this->load->view('layout/head', $head);
-      $this->load->view('perpindahan_barang/form_update/' . $id_transaksi);
+      $this->load->view('admin/form_barangmasuk/scanner_barcode/' . $id_transaksi);
     }
   }
   ####################################
@@ -655,7 +659,7 @@ class Admin extends CI_Controller
     $uri = $this->uri->segment(3);
     $head['title'] = 'Inventory Gudang | Barang Kembali';
     $where = array('id_transaksi' => $uri);
-    $data['list_data'] = $this->M_admin->get_data('tb_barang_masuk', $where);
+    $data['list_data'] = $this->M_admin->get_data('tb_barang_keluar', $where);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
@@ -771,8 +775,13 @@ class Admin extends CI_Controller
 
   public function tabel_barangkembali()
   {
+    $head['title'] = 'Inventory Gudang | Barang Kembali';
     $data['list_data'] = $this->M_admin->select('tb_barang_kembali');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
+
     $this->load->view('admin/tabel/tabel_barangkembali', $data);
   }
 }
