@@ -78,8 +78,7 @@
                                     <div class="box-header with-border">
                                         <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Kembali</h3>
                                     </div>
-                                    <!-- /.box-header -->
-                                    <!-- form start -->
+                                    
                                     <div class="container">
                                         <form action="<?= base_url('admin/proses_data_kembali') ?>" role="form" method="post">
                                             <?php if (validation_errors()) { ?>
@@ -89,381 +88,184 @@
                                                 </div>
                                             <?php } ?>
 
-
                                             <div class="container-fluid">
                                                 <div class="box-body" id='barang_scan'>
-
                                                     <div class="row">
                                                         <div class="col-md-12">
-
-                                                            <div class="form-group">
-                                                                <?php foreach ($list_data as $d) { ?>
+                                                            <?php foreach ($list_data as $d) { ?>
+                                                                <input type="hidden" name="id" readonly value="<?= $d->id ?>">
+                                                                <div class="form-group">
                                                                     <label for="id_transaksi">ID Transaksi</label>
                                                                     <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $d->id_transaksi ?>">
-                                                            </div>
+                                                                </div>
 
-                                                            <div class="form-group">
-                                                                <label for="tanggal_keluar">Tanggal Kembali</label>
-                                                                <input type="text" name="tanggal_kembali" class="form-control form_datetime" required="" value="<?= date('Y-m-d') ?>" placeholder="Klik Disini">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="lokasi">Lokasi</label>
-                                                                <input type="text" name="lokasi" class="form-control" value="<?= $d->lokasi ?>">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="kode_barang">Kode Barang / Barcode</label>
-                                                                <input type="text" name="kode_barang" class="form-control" readonly="readonly" id="kode_barang" value="<?= $d->kode_barang ?>">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="nama_Barang" style="width:73%;">Nama Barang</label>
-                                                                <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $d->nama_barang ?>">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="satuan">Satuan</label>
-                                                                <select class="form-control" name="satuan">
-                                                                    <?php foreach ($list_satuan as $s) { ?>
-                                                                        <?php if ($d->satuan == $s->nama_satuan) { ?>
-                                                                            <option value="<?= $d->satuan ?>" selected=""><?= $d->satuan ?></option>
-                                                                        <?php } else { ?>
-                                                                            <option value="<?= $s->kode_satuan ?>"><?= $s->nama_satuan ?></option>
+                                                                <div class="form-group">
+                                                                    <label for="tanggal_keluar">Tanggal Kembali</label>
+                                                                    <input type="text" name="tanggal_kembali" class="form-control form_datetime" required="" value="<?= date('Y-m-d') ?>" placeholder="Klik Disini">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="lokasi">Lokasi</label>
+                                                                    <input type="text" name="lokasi" class="form-control" value="<?= $d->lokasi ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="kode_barang">Kode Barang / Barcode</label>
+                                                                    <input type="text" name="kode_barang" class="form-control" readonly="readonly" id="kode_barang" value="<?= $d->kode_barang ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="nama_Barang" style="width:73%;">Nama Barang</label>
+                                                                    <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $d->nama_barang ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="satuan">Satuan</label>
+                                                                    <select class="form-control" name="satuan">
+                                                                        <?php foreach ($list_satuan as $s) { ?>
+                                                                            <?php if ($d->satuan == $s->nama_satuan) { ?>
+                                                                                <option value="<?= $d->satuan ?>" selected=""><?= $d->satuan ?></option>
+                                                                            <?php } else { ?>
+                                                                                <option value="<?= $s->kode_satuan ?>"><?= $s->nama_satuan ?></option>
+                                                                            <?php } ?>
                                                                         <?php } ?>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="jumlah">Jumlah</label>
-                                                                <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $d->jumlah ?>" value="<?= $d->jumlah ?>">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="status">Keterangan</label>
-                                                                <input type="text" name="status" class="form-control" id="status">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <a type="button" class="btn btn-warning" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
-                                                                <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
-                                                            </div>
-                                                        <?php } ?>
-
-                                                        <!-- /.box-body -->
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="jumlah">Jumlah</label>
+                                                                    <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $d->jumlah ?>" value="<?= $d->jumlah ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="status">Keterangan</label>
+                                                                    <input type="text" name="status" class="form-control" id="status">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <a type="button" class="btn btn-warning" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
+                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
+                                                                </div>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                                    
+
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </section>
+                </section>
+            <?php endif; ?>
         </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.4.0
+            </div>
+            <strong>Copyright &copy; <?= date('Y') ?></strong>
 
-    </div>
-    
-    
-<?php endif; ?>
-</div>
-<!-- /.content-wrapper -->
-<footer class="main-footer">
-    <div class="pull-right hidden-xs">
-        <b>Version</b> 2.4.0
-    </div>
-    <strong>Copyright &copy; <?= date('Y') ?></strong>
+        </footer>
 
-</footer>
-
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-        <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-        <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <!-- Home tab content -->
-        <div class="tab-pane" id="control-sidebar-home-tab">
-            <h3 class="control-sidebar-heading">Recent Activity</h3>
-            <ul class="control-sidebar-menu">
-                <li>
-                    <a href="javascript:void(0)">
-                        <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-                        <div class="menu-info">
-                            <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                            <p>Will be 23 on April 24th</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <i class="menu-icon fa fa-user bg-yellow"></i>
-
-                        <div class="menu-info">
-                            <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                            <p>New phone +1(800)555-1234</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-                        <div class="menu-info">
-                            <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                            <p>nora@example.com</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-                        <div class="menu-info">
-                            <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                            <p>Execution time 5 seconds</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <!-- /.control-sidebar-menu -->
-
-            <h3 class="control-sidebar-heading">Tasks Progress</h3>
-            <ul class="control-sidebar-menu">
-                <li>
-                    <a href="javascript:void(0)">
-                        <h4 class="control-sidebar-subheading">
-                            Custom Template Design
-                            <span class="label label-danger pull-right">70%</span>
-                        </h4>
-
-                        <div class="progress progress-xxs">
-                            <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <h4 class="control-sidebar-subheading">
-                            Update Resume
-                            <span class="label label-success pull-right">95%</span>
-                        </h4>
-
-                        <div class="progress progress-xxs">
-                            <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <h4 class="control-sidebar-subheading">
-                            Laravel Integration
-                            <span class="label label-warning pull-right">50%</span>
-                        </h4>
-
-                        <div class="progress progress-xxs">
-                            <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">
-                        <h4 class="control-sidebar-subheading">
-                            Back End Framework
-                            <span class="label label-primary pull-right">68%</span>
-                        </h4>
-
-                        <div class="progress progress-xxs">
-                            <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <!-- /.control-sidebar-menu -->
-
-        </div>
-        <!-- /.tab-pane -->
-        <!-- Stats tab content -->
-        <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-        <!-- /.tab-pane -->
-        <!-- Settings tab content -->
-        <div class="tab-pane" id="control-sidebar-settings-tab">
-            <form method="post">
-                <h3 class="control-sidebar-heading">General Settings</h3>
-
-                <div class="form-group">
-                    <label class="control-sidebar-subheading">
-                        Report panel usage
-                        <input type="checkbox" class="pull-right" checked>
-                    </label>
-
-                    <p>
-                        Some information about this general settings option
-                    </p>
-                </div>
-                <!-- /.form-group -->
-
-                <div class="form-group">
-                    <label class="control-sidebar-subheading">
-                        Allow mail redirect
-                        <input type="checkbox" class="pull-right" checked>
-                    </label>
-
-                    <p>
-                        Other sets of options are available
-                    </p>
-                </div>
-                <!-- /.form-group -->
-
-                <div class="form-group">
-                    <label class="control-sidebar-subheading">
-                        Expose author name in posts
-                        <input type="checkbox" class="pull-right" checked>
-                    </label>
-
-                    <p>
-                        Allow the user to show his name in blog posts
-                    </p>
-                </div>
-                <!-- /.form-group -->
-
-                <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-                <div class="form-group">
-                    <label class="control-sidebar-subheading">
-                        Show me as online
-                        <input type="checkbox" class="pull-right" checked>
-                    </label>
-                </div>
-                <!-- /.form-group -->
-
-                <div class="form-group">
-                    <label class="control-sidebar-subheading">
-                        Turn off notifications
-                        <input type="checkbox" class="pull-right">
-                    </label>
-                </div>
-                <!-- /.form-group -->
-
-                <div class="form-group">
-                    <label class="control-sidebar-subheading">
-                        Delete chat history
-                        <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-                    </label>
-                </div>
-                <!-- /.form-group -->
-            </form>
-        </div>
-        <!-- /.tab-pane -->
-    </div>
-</aside>
-<!-- /.control-sidebar -->
-<!-- Add the sidebar's background. This div must be placed
+        <!-- Control Sidebar -->
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-<div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-<script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
-<script>
-    const qrcodes = window.qrcode;
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- ./wrapper -->
+    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+    <script>
+        const qrcodes = window.qrcode;
 
-    const video = document.createElement("video");
-    const canvasElement = document.getElementById("qr-canvas");
-    const canvas = canvasElement.getContext("2d");
+        const video = document.createElement("video");
+        const canvasElement = document.getElementById("qr-canvas");
+        const canvas = canvasElement.getContext("2d");
 
-    const qrResult = document.getElementById("qr-result");
-    const outputData = document.getElementById("outputData");
-    const btnScanQR = document.getElementById("btn-scan-qr");
+        const qrResult = document.getElementById("qr-result");
+        const outputData = document.getElementById("outputData");
+        const btnScanQR = document.getElementById("btn-scan-qr");
 
-    let scanning = false;
+        let scanning = false;
 
-    // Scan
-    qrcodes.callback = res => {
-        // If result is true, ...
-        if (res) {
-            outputData.value = res;
-            res.replace("X", "-");
-            document.getElementById("qr-content").style.display = 'none';
-            window.location.href = '<?= base_url('admin/scan_barang_kembali/') ?>' + res;
-            scanning = false;
+        // Scan
+        qrcodes.callback = res => {
+            // If result is true, ...
+            if (res) {
+                outputData.value = res;
+                res.replace("X", "-");
+                document.getElementById("qr-content").style.display = 'none';
+                window.location.href = '<?= base_url('admin/scan_list_barang/') ?>' + res;
+                scanning = false;
 
-            // Stop video
-            video.srcObject.getTracks().forEach(track => {
-                track.stop();
-            })
+                // Stop video
+                video.srcObject.getTracks().forEach(track => {
+                    track.stop();
+                })
 
-            qrResult.hidden = false; // Show result
-            canvasElement.hidden = true; // Hide canvas
-            btnScanQR.hidden = false; // Show scan button again
+                qrResult.hidden = false; // Show result
+                canvasElement.hidden = true; // Hide canvas
+                btnScanQR.hidden = false; // Show scan button again
+            }
+        };
+
+        // When scan button on click, ...
+        btnScanQR.onclick = () => {
+            navigator.mediaDevices
+                .getUserMedia({
+                    video: {
+                        facingMode: "environment"
+                    }
+                })
+                .then(function(stream) {
+                    scanning = true;
+                    qrResult.hidden = true;
+                    btnScanQR.hidden = true;
+                    canvasElement.hidden = false;
+                    video.setAttribute("playsinline", true);
+
+                    video.srcObject = stream;
+                    video.play(); // Show video
+                    tick(); // Set canvas
+                    scan(); // Scan QRCode
+                });
+        };
+
+        function tick() {
+            canvasElement.height = video.videoHeight;
+            canvasElement.width = video.videoWidth;
+            canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+
+            scanning && requestAnimationFrame(tick);
         }
-    };
 
-    // When scan button on click, ...
-    btnScanQR.onclick = () => {
-        navigator.mediaDevices
-            .getUserMedia({
-                video: {
-                    facingMode: "environment"
-                }
-            })
-            .then(function(stream) {
-                scanning = true;
-                qrResult.hidden = true;
-                btnScanQR.hidden = true;
-                canvasElement.hidden = false;
-                video.setAttribute("playsinline", true);
-
-                video.srcObject = stream;
-                video.play(); // Show video
-                tick(); // Set canvas
-                scan(); // Scan QRCode
-            });
-    };
-
-    function tick() {
-        canvasElement.height = video.videoHeight;
-        canvasElement.width = video.videoWidth;
-        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
-
-        scanning && requestAnimationFrame(tick);
-    }
-
-    function scan() {
-        try {
-            qrcode.decode();
-        } catch (e) {
-            setTimeout(scan, 300);
+        function scan() {
+            try {
+                qrcode.decode();
+            } catch (e) {
+                setTimeout(scan, 300);
+            }
         }
-    }
-</script>
-<!-- jQuery 3 -->
+    </script>
+    <!-- jQuery 3 -->
 
-<script src="<?php echo base_url() ?>assets/web_admin/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?php echo base_url() ?>assets/web_admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="<?php echo base_url() ?>assets/web_admin/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url() ?>assets/web_admin/dist/js/adminlte.min.js"></script>
-<script src="<?php echo base_url() ?>assets/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url() ?>assets/web_admin/dist/js/demo.js"></script>
+    <script src="<?php echo base_url() ?>assets/web_admin/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="<?php echo base_url() ?>assets/web_admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="<?php echo base_url() ?>assets/web_admin/bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="<?php echo base_url() ?>assets/web_admin/dist/js/adminlte.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="<?php echo base_url() ?>assets/web_admin/dist/js/demo.js"></script>
 
-<script type="text/javascript">
-    $(".form_datetime").datetimepicker({
-        format: 'dd/mm/yyyy',
-        autoclose: true,
-        todayBtn: true,
-        pickTime: false,
-        minView: 2,
-        maxView: 4,
-    });
-</script>
+    <script type="text/javascript">
+        $(".form_datetime").datetimepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            todayBtn: true,
+            pickTime: false,
+            minView: 2,
+            maxView: 4,
+        });
+    </script>
 </body>
 
 </html>

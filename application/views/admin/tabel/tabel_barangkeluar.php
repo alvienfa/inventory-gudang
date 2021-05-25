@@ -50,8 +50,8 @@
                   <th>Lokasi</th>
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
-                  <th>Satuan</th>
                   <th>Jumlah</th>
+                  <th>Status</th>
                   <th>Invoice</th>
                   <!-- <th></th> -->
                 </tr>
@@ -66,11 +66,27 @@
                     <td><?=$dd->tanggal_masuk?></td>
                     <td><?=$dd->tanggal_keluar?></td>
                     <td><?=$dd->lokasi?></td>
-                    <td><?=$dd->kode_barang?></td>
+                    <td><?=strtoupper($dd->kode_barang)?></td>
                     <td><?=$dd->nama_barang?></td>
-                    <td><?=$dd->satuan?></td>
-                    <td><?=$dd->jumlah?></td>
-                    <td><a type="button" class="btn btn-danger btn-report"  href="<?=base_url('report/barangKeluar/'.$dd->id)?>" name="btn_report" style="margin:auto;"><i class="fa fa-file-text" aria-hidden="true"></i></a></td>
+                    <td><span class="text-bold"> <?=$dd->jumlah?> </span>(<?=$dd->satuan?>)</td>
+                    <td style="vertical-align:middle">
+                    <?php switch($dd->status):
+                        case '0':
+                            echo '<span class="label label-warning">ongoing</span>';
+                            break;
+                        case '1':
+                            echo '<span class="label label-success">sudah dikembalikan</span>';
+                            break;
+                        case '2':
+                            echo '<span class="label label-primary">diperbaiki</span>';
+                            break;
+                        case '3': 
+                            echo '<span class="label label-danger">rusak</span>';
+                            break;   
+                        endswitch;
+                    ?>
+                    </td>
+                    <td><a type="button" class="btn btn-danger btn-report"  href="<?=base_url('report/barangKeluar/'.$dd->id_transaksi.'/'.$dd->tanggal_keluar)?>" name="btn_report" style="margin:auto;"><i class="fa fa-file-text" aria-hidden="true"></i></a></td>
                 </tr>
               <?php $no++; ?>
               <?php endforeach;?>
@@ -87,8 +103,9 @@
                   <th>Lokasi</th>
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
-                  <th>Satuan</th>
                   <th>Jumlah</th>
+                  <th>Status</th>
+                  <th>Invoice</th>
                 </tr>
                 </tfoot>
               </table>

@@ -50,8 +50,8 @@
           <li class='<?= (base_url('admin/tabel_satuan') == current_url() ? ' active' : '') ?> '><a href="<?= base_url('admin/tabel_satuan') ?>"><i class="fa fa-circle-o"></i> Tabel Satuan</a></li>
         </ul>
       </li>
-      <?php $scans = base_url('admin/scan_masuk') == current_url() ||
-        base_url('admin/scan_keluar') == current_url() || base_url('admin/tabel_satuan') == current_url() ? 'treeview active' : 'treeview' ?>
+      <?php $scans = base_url('admin/scan_barang_kembali') == current_url() ||
+        base_url('admin/barang_keluar') == current_url() || base_url('admin/tabel_satuan') == current_url() ? 'treeview active' : 'treeview' ?>
       <li class="<?= $scans ?>">
         <a href="#">
           <i class="fa fa-qrcode"></i> <span>Scan QR </span>

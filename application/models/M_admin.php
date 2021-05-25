@@ -8,6 +8,12 @@ class M_admin extends CI_Model
     $this->db->insert($tabel,$data);
   }
 
+  public function select_desc($tabel)
+  {
+    $this->db->order_by('id', 'DESC');
+    $query = $this->db->get($tabel);
+    return $query->result();
+  }
   public function select($tabel)
   {
     $query = $this->db->get($tabel);
@@ -32,14 +38,16 @@ class M_admin extends CI_Model
     return $query->result_array();
   }
 
-  public function get_data_row($tabel, $id)
+  
+  public function get_data_row($tabel,$where)
   {
     $query = $this->db->select()
                       ->from($tabel)
-                      ->where($id)
+                      ->where($where)
                       ->get();
     return $query->row();
   }
+
   public function get_data($tabel,$id_transaksi)
   {
     $query = $this->db->select()
