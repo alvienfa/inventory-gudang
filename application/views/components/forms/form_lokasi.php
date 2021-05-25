@@ -20,5 +20,5 @@
 </div>
 <div class="form-group">
     <label for="lokasi">Kode POS</label>
-    <input type="number" name="kode_pos" class="form-control" >
+    <input type="phone" name="kode_pos" class="form-control" >
 </div>

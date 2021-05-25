@@ -16,5 +16,5 @@
 </div>
 <div class="form-group">
     <label for="lokasi">Kode POS</label>
-    <input type="number" name="kode_pos" class="form-control" value="<?= isset($kode_pos)? $kode_pos: '' ?>" readonly>
+    <input type="phone" name="kode_pos" class="form-control" value="<?= isset($kode_pos)? $kode_pos: '' ?>" readonly>
 </div>

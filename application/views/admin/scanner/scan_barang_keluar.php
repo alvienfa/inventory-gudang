@@ -138,25 +138,35 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="box box-primary">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title"><i class="fa fa-map-marker" aria-hidden="true"></i> Alamat Tujuan</h3>
-                                    </div>
-                                    <?php if (validation_errors()) { ?>
-                                        <div class="alert alert-warning alert-dismissible">
-                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
+                                <div class="row">
+                                    <div class="box box-primary">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title"><i class="fa fa-map-marker" aria-hidden="true"></i> Alamat Tujuan</h3>
                                         </div>
-                                    <?php } ?>
-
-                                    <div class="container-fluid">
-                                        <div class="box-body" id='barang_scan'>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <?= $this->load->view('components/forms/form_lokasi', '', TRUE) ?>
-                                                    <div class="form-group">
-                                                        <a type="button" class="btn btn-danger" onclick="history.back(-1)" name="btn_kembali"> Cancel</a>
-                                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
+                                        <div class="container-fluid">
+                                            <div class="box-body" id='barang_scan'>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <?= $this->load->view('components/forms/form_lokasi', '', TRUE) ?>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="box-header with-border">
+                                                            <h3 class="box-title"><i class="fa fa-map-marker" aria-hidden="true"></i>Penanggung Jawab</h3>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="status">Nama Penjab</label>
+                                                            <input type="text" name="nm_penjab" class="form-control" id="nm_penjab">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="status">Contact Penjab</label>
+                                                            <input type="phone" name="nohp_penjab" class="form-control" id="nohp_penjab">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <a type="button" class="btn btn-danger" onclick="history.back(-1)" name="btn_kembali"> Cancel</a>
+                                                            <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -24,7 +24,7 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
               <div class="inner">
-                <?php if (!isset($stokBarangMasuk)) { ?>
+                <?php if (!empty($stokBarangMasuk)) { ?>
                   <?php foreach ($stokBarangMasuk as $d) { ?>
                     <h3><?= $d->jumlah ?></h3>
                   <?php } ?>
@@ -44,7 +44,7 @@
             <!-- small box -->
             <div class="small-box bg-green">
               <div class="inner">
-                <?php if (!empty($stokBarangKeluar)) { ?>
+                <?php if (!isset($stokBarangKeluar)) { ?>
                   <?php foreach ($stokBarangKeluar as $d) { ?>
                     <h3><?= $d->jumlah ?></h3>
                   <?php } ?>
@@ -66,7 +66,9 @@
               <div class="inner">
                 <?php if (!empty($dataUser)) { ?>
                   <h3><?= $dataUser ?></h3>
-                <?php } ?>
+                <?php }else { ?>
+                  <h3>0</h3>
+                <?php }?>
                 <p>Users</p>
               </div>
               <div class="icon">

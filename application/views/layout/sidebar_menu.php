@@ -73,7 +73,7 @@
         <a href="<?php echo base_url('admin/profile') ?>">
           <i class="fa fa-cogs" aria-hidden="true"></i> <span>Profile</span></a>
       </li>
-      <li class='<?= (base_url('admin/users') ==  () ? ' active' : '') ?> '>
+      <li class='<?= (base_url('admin/users') ==  current_url() ? ' active' : '') ?> '>
         <a href="<?php echo base_url('admin/users') ?>">
           <i class="fa fa-fw fa-users" aria-hidden="true"></i> <span>Users</span></a>
       </li>
