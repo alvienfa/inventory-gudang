@@ -44,8 +44,8 @@
             <?php } ?>
 
               <div class="box-body">
+                <?php foreach($data_barang_update as $d){ ?>
                 <div class="form-group">
-                  <?php foreach($data_barang_update as $d){ ?>
                   <label for="id_transaksi" style="margin-left:220px;display:inline;">ID Transaksi</label>
                   <input type="text" name="id_transaksi" style="margin-left:37px;width:20%;display:inline;" class="form-control" readonly="readonly" value="<?=$d->id_transaksi?>">
                 </div>
