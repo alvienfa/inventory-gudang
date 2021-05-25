@@ -56,7 +56,9 @@
                                             <img class="icon-qr" src="<?= base_url() . "/assets/img/scan-me.png" ?>">
                                         </a>
                                     </div>
-                                    <canvas hidden="" id="qr-canvas"></canvas>
+                                    <div align="center">
+                                        <canvas hidden="" id="qr-canvas"></canvas>
+                                    </div>
                                     <div class="text-center" id="qr-result">
                                         <form method="post" action="process/submit_qrcode.php" enctype="multipart/form-data">
                                             <label>
@@ -72,14 +74,14 @@
             <?php else : ?>
                 <section class="content">
                     <div class="row">
-                        <div class="col-md-8">
-                            <div class="container">
+                        <div class="col-md-12">
+                            <div class="container-fluid">
                                 <div class="box box-primary">
                                     <div class="box-header with-border">
                                         <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Kembali</h3>
                                     </div>
-                                    
-                                    <div class="container">
+
+                                    <div class="container-fluid">
                                         <form action="<?= base_url('admin/proses_data_kembali') ?>" role="form" method="post">
                                             <?php if (validation_errors()) { ?>
                                                 <div class="alert alert-warning alert-dismissible">

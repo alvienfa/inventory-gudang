@@ -4,7 +4,7 @@
         width: 100%;
         max-width: 100%;
         align-items: center;
-
+        
     }
 
     .posisi {
@@ -57,7 +57,9 @@
                                             <img class="icon-qr" src="<?= base_url() . "/assets/img/scan-me.png" ?>">
                                         </a>
                                     </div>
+                                    <div align="center">
                                     <canvas hidden="" id="qr-canvas"></canvas>
+                                    </div>
                                     <div class="text-center" id="qr-result">
                                         <form method="post" action="process/submit_qrcode.php" enctype="multipart/form-data">
                                             <label>

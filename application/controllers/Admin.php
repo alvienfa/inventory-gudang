@@ -707,7 +707,7 @@ class Admin extends CI_Controller
     $update = array(
       'status' => $status
     );
-    $this->M_admin->menambah('tb_barang_kembali', $id_transaksi, $jumlah);
+    $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
     $this->M_admin->insert('tb_barang_kembali', $insert);
     $this->M_admin->update('tb_barang_keluar', $update ,$where);
     $this->session->set_flashdata('msg_berhasil_masuk', 'Barang Berhasil DiKembalikan');
