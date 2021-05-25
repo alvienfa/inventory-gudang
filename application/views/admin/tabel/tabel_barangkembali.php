@@ -68,13 +68,13 @@
                           <td><?= $dd->satuan ?></td>
                           <td><?= $dd->jumlah ?></td>
                           <td><?php if ($dd->status === '0') {
-                                echo 'Belum';
+                                echo '<span class="label label-warning">Belum</span>';
                               } elseif ($dd->status === '1') {
-                                echo 'Sudah';
+                                echo '<span class="label label-success">Sudah</span>';
                               } elseif ($dd->status === '2') {
-                                echo 'diperbaiki';
+                                echo '<span class="label label-primary">Diperbaiki</span>';
                               } elseif ($dd->status === '3'){
-                                echo 'rusak';
+                                echo '<span class="label label-danger">Rusak</span>';
                               }
 
                               ?>

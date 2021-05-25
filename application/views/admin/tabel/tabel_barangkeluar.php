@@ -72,7 +72,7 @@
                     <td style="vertical-align:middle">
                     <?php switch($dd->status):
                         case '0':
-                            echo '<span class="label label-warning">ongoing</span>';
+                            echo '<span class="label label-warning">belum</span>';
                             break;
                         case '1':
                             echo '<span class="label label-success">sudah dikembalikan</span>';
