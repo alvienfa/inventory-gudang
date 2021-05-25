@@ -69,7 +69,7 @@
                       
                 <div class="form-group" style="margin-bottom:40px;">
                   <label for="keterangan" style="margin-left:220px;display:inline;">Keterangan</label>
-                  <select class="form-control" name="keterangan" style="margin-left:75px;width:20%;display:inline;">
+                  <select class="form-control" name="keterangan" style="margin-left:45px;width:20%;display:inline;">
                     <option value="">-- Pilih --</option>
                     <option value="Stok Gudang Pak Sandy">Stok Gudang Pak Sandy</option>
                     <option value="Stok Gudang Rizqi Semesta">Stok Gudang Rizqi Semesta</option>
@@ -100,8 +100,8 @@
                         <input type="number" name="jumlah" style="width:41%;margin-left:34px;margin-right:-60px;" class="form-control" id="jumlah">
                       </div>
                       <div class="form-group" style="display:inline-block;">
-                        <label for="gambar" style="width:53%;">Foto Barang</label>
-                        <input type="file" name="gambar" style="width:70%;margin-right:65px;" class="form-control" id="gambar">
+                        <label for="gambar" style="width:53%;margin-left:10px;">Foto Barang</label>
+                        <input type="file" name="gambar" style="width:70%;margin-left:10px;margin-right:65px;" class="form-control" id="gambar">
                       </div>
                       <div class="form-group" style="display:inline-block;">
                         <button type="reset" class="btn btn-basic" name="btn_reset" style="width:95px;margin-left:8px;"><i class="fa fa-eraser" aria-hidden="true"></i> Reset</button>

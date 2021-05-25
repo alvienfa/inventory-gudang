@@ -769,7 +769,8 @@ class Admin extends CI_Controller
     $this->load->view('admin/tabel/tabel_barangkembali', $data);
   }
 
-  
+  public function submit()
+  {
     
-  
+  }
 }
