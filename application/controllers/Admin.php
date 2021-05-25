@@ -759,4 +759,9 @@ class Admin extends CI_Controller
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $this->load->view('admin/tabel/tabel_barangkembali', $data);
   }
+
+  public function submit()
+  {
+    
+  }
 }
