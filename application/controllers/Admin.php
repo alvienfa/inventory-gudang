@@ -301,7 +301,7 @@ class Admin extends CI_Controller
   public function tabel_barangmasuk()
   {
     $data = array(
-      'list_data' => $this->M_admin->select('tb_barang_masuk') ,
+      'list_data' => $this->M_admin->select_desc('tb_barang_masuk') ,
       'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'))
     );
     $head['title'] = 'Inventory Gudang | Table Barang Masuk';
@@ -627,7 +627,8 @@ class Admin extends CI_Controller
   public function tabel_barangkeluar()
   {
     $head['title'] = 'Inventory Gudang | Barang Keluar';
-    $data['list_data'] = $this->M_admin->select('tb_barang_keluar');
+    // $data['list_data'] = $this->M_admin->select('tb_barang_keluar');
+    $data['list_data'] = $this->M_admin->select_desc('tb_barang_keluar');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
@@ -638,7 +639,6 @@ class Admin extends CI_Controller
 
   public function scan_barang_kembali()
   {
-
     $uri = $this->uri->segment(3);
     $head['title'] = 'Inventory Gudang | Barang Kembali';
     $where = array('id_transaksi' => $uri);
@@ -651,6 +651,63 @@ class Admin extends CI_Controller
     $this->load->view('admin/scanner/scan_barang_keluar', $data);
   }
 
+
+  public function edit_list_barang()
+  {
+    $id = $this->uri->segment(3);
+    $head['title'] = 'Inventory Gudang | Form Barang Kembali';
+    $where = array('id' => $id);
+    $data['list_data'] = $this->M_admin->get_data('tb_barang_keluar', $where);
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
+    $this->load->view('admin/scanner/form_barang_kembali.php', $data);
+  }
+  public function scan_list_barang()
+  {
+    $uri = $this->uri->segment(3);
+    $head['title'] = 'Inventory Gudang | List Barang by QR';
+    $where = array(
+      'status'       => '0',
+      'id_transaksi' => $uri
+    );
+    $data['list_data'] = $this->M_admin->get_data('tb_barang_keluar', $where);
+    $data['list_satuan'] = $this->M_admin->select('tb_satuan');
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data ,TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
+    $this->load->view('admin/scanner/list_barang', $data);
+  } 
+
+  public function submit_barang_kembali()
+  {
+    $id_transaksi    = $this->input->post('id_transaksi', TRUE);
+    $jumlah          = $this->input->post('jumlah', TRUE);
+    $status          = $this->input->post('status', TRUE);
+    $where = array('id' => $this->input->post('id', TRUE));
+  
+    $data = $this->M_admin->get_data_row('tb_barang_keluar', $where);
+    $insert = array(
+      'id_transaksi'    => $data->id_transaksi,
+      'tanggal_kembali' => date('Y-m-d'),
+      'lokasi'          => $data->lokasi,
+      'kode_barang'     => $data->kode_barang,
+      'nama_barang'     => $data->nama_barang,
+      'satuan'          => $data->satuan,
+      'jumlah'          => $jumlah,
+      'status'          => $status,
+    );
+    $update = array(
+      'status' => $status
+    );
+    $this->M_admin->menambah('tb_barang_kembali', $id_transaksi, $jumlah);
+    $this->M_admin->insert('tb_barang_kembali', $insert);
+    $this->M_admin->update('tb_barang_keluar', $update ,$where);
+    $this->session->set_flashdata('msg_berhasil_masuk', 'Barang Berhasil DiKembalikan');
+    redirect(base_url('admin/tabel_barangkeluar'));
+  }
   public function proses_data_kembali()
   {
     $this->form_validation->set_rules('tanggal_kembali', 'Tanggal Kembali', 'trim|required');
@@ -675,8 +732,9 @@ class Admin extends CI_Controller
         'jumlah'  => $jumlah,
         'status'  => $status
       );
+      $this->M_admin->menambah('tb_barang_kembali', $id_transaksi, $jumlah);
       $this->M_admin->insert('tb_barang_kembali', $data);
-      $this->session->set_flashdata('msg_berhasil_masuk', 'Data Berhasil Masuk');
+      $this->session->set_flashdata('msg_berhasil_masuk', 'Barang Berhasil DiKembalikan');
       redirect(base_url('admin/tabel_barangmasuk'));
     } else {
       $this->load->view('perpindahan_barang/form_update_kembali/' . $id_transaksi);

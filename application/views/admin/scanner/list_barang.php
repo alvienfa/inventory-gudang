@@ -1,6 +1,5 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
   <?= $views['header'] ?>
   <!-- Left side column. contains the logo and sidebar -->
   <?= $views['sidebar_menu']?>
@@ -10,12 +9,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Tabel Stok Barang
+        Tabel Barang Keluar
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?=base_url('admin')?>"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Tables</li>
-        <li class="active"><a href="<?=base_url('admin/tabel_barangmasuk')?>">Tabel Barang Masuk</li>
+        <li class="active"><a href="<?=base_url('admin/tabel_barangkeluar')?>">Tabel Barang Keluar</a></li>
       </ol>
     </section>
 
@@ -38,21 +37,21 @@
                     <strong>Success!</strong><br> <?php echo $this->session->flashdata('msg_berhasil');?>
                </div>
               <?php } ?>
-              
-              <a href="<?=base_url('admin/form_barangmasuk')?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data Masuk</a>
+
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>No </th>
-                  <th>ID_Transaksi</th>
-                  <th>Tanggal</th>
+                  <th>No</th>
+                  <th>ID Transaksi</th>
+                  <th>Tanggal Masuk</th>
+                  <th>Tanggal Keluar</th>
+                  <th>Lokasi</th>
                   <th>Kode Barang</th>
                   <th>Nama Barang</th>
-                  <th>Jumlah</th>
-                  <th>QR Code</th>
-                  <th>Update</th>
-                  <th>Delete</th>
-                  <!-- <th>Keluarkan</th> -->
+                  <th>Satuan</th>
+                  <th>Status</th>
+                  <th>Kembalikan</th>
+                  <!-- <th></th> -->
                 </tr>
                 </thead>
                 <tbody>
@@ -62,33 +61,59 @@
                   <?php foreach($list_data as $dd): ?>
                     <td><?=$no?></td>
                     <td><?=$dd->id_transaksi?></td>
-                    <td><?=$dd->tanggal?></td>
-                    <td><?=strtoupper($dd->kode_barang)?></td>
+                    <td><?=$dd->tanggal_masuk?></td>
+                    <td><?=$dd->tanggal_keluar?></td>
+                    <td><?=$dd->lokasi?></td>
+                    <td><?=$dd->kode_barang?></td>
                     <td><?=$dd->nama_barang?></td>
-                    <td><span class="text-bold"><?=$dd->jumlah?></span>(<?=$dd->satuan?>)</td>
-                    <td><a download href="<?php echo base_url().'assets/qrcode/images/'.$dd->qr_code;?>">
-                      <img 
-                      style="width: 100px;" 
-                      src="<?php echo base_url().'assets/qrcode/images/'.$dd->qr_code;?>">
-                    </a>
+                    <td><?=$dd->jumlah; ?> <?=$dd->satuan?></td>
+                    <td style="vertical-align:middle">
+                    <?php switch($dd->status):
+                        case '0':
+                            echo '<span class="label label-warning">pending</span>';
+                            break;
+                        case '1':
+                            echo '<span class="label label-success">success</span>';
+                            break;
+                        case '2':
+                            echo '<span class="label label-primary">primary </span>';
+                            break;
+                        case '3': 
+                            echo '<span class="label label-danger">danger </span>';
+                            break;   
+                        endswitch;
+                    ?>
                     </td>
-                    <td><a type="button" class="btn btn-info"  href="<?=base_url('admin/update_barang/'.$dd->id_transaksi)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                    <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('admin/delete_barang/'.$dd->id_transaksi)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                    <!-- <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?=base_url('admin/barang_keluar/'.$dd->id_transaksi)?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td> -->
+                    <td><a type="button" class="btn btn-sm btn-success btn-report"  
+                    href="<?= base_url('admin/edit_list_barang/' . $dd->id)?>
+                    " name="btn_report" style="margin:auto;"><i class="fa fa-check" aria-hidden="true"></i></a></td>
                 </tr>
               <?php $no++; ?>
               <?php endforeach;?>
               <?php }else { ?>
-                    <td align="center" colspan="11" center="center"><strong style="color:gray">Data Kosong</strong></td>
+                    <td colspan="7" align="center"><strong>Data Kosong</strong></td>
               <?php } ?>
                 </tbody>
-                
+                <tfoot>
+                <tr>
+                  <th>No</th>
+                  <th>ID Transaksi</th>
+                  <th>Tanggal Masuk</th>
+                  <th>Tanggal Keluar</th>
+                  <th>Lokasi</th>
+                  <th>Kode Barang</th>
+                  <th>Nama Barang</th>
+                  <th>Satuan</th>
+                  <th>Status</th>
+                  <th>Kembalikan</th>
+                </tr>
+                </tfoot>
               </table>
             </div>
             <!-- /.box-body -->
           </div>
-          <!-- /.box -->
-        </div>
+
+
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -101,6 +126,7 @@
       <b>Version</b> 2.4.0
     </div>
     <strong>Copyright &copy; <?=date('Y')?></strong>
+    
   </footer>
 
   <!-- Add the sidebar's background. This div must be placed
@@ -144,7 +170,7 @@ jQuery(document).ready(function($){
   });
 
   $(function () {
-    $('#example1').DataTable()
+    $('#example1').DataTable();
     $('#example2').DataTable({
       'paging'      : true,
       'lengthChange': false,
