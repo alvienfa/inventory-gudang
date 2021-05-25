@@ -146,6 +146,8 @@ class Report extends CI_Controller
         <h1 align="center">Invoice Bukti Pengeluaran Barang</h1><br>
         <p>No Id Transaksi  :'.$id.'</p>
         <p>Ditunjukan Untuk :'.$data->lokasi.'</p>
+        <p>Penanggung Jawab :'.$data->nm_penjab.'</p>
+        <p>No. Handphone :'.$data->nohp_penjab.'</p>
         <p>Tanggal          :'.$data->tanggal_keluar.'</p>
         <p>Po.Customer      :</p>
 
@@ -184,7 +186,7 @@ class Report extends CI_Controller
 
         $html .='
             </table><br>
-            <h6>Mengetahui</h6><br><br><br>
+            <h6>Mengetahui</h6><br><br><br><br>
             <h6>Admin</h6>
           </div>';
 
