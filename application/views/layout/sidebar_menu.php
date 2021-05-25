@@ -30,7 +30,7 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li class='<?= (base_url('admin/form_barangmasuk') == current_url() ? ' active' : '') ?> '><a href="<?php echo base_url('admin/form_barangmasuk') ?>"><i class="fa fa-circle-o"></i> Tambah Data Barang Masuk</a></li>
+          <li class='<?= (base_url('admin/form_barangmasuk') == current_url() ? ' active' : '') ?> '><a href="<?php echo base_url('admin/form_barangmasuk') ?>"><i class="fa fa-circle-o"></i> Tambah Data Barang Baru</a></li>
           <li class='<?= (base_url('admin/form_satuan') == current_url() ? ' active' : '') ?> '><a href="<?php echo base_url('admin/form_satuan') ?>"><i class="fa fa-circle-o"></i> Tambah Satuan Barang</a></li>
         </ul>
       </li>
@@ -51,7 +51,7 @@
         </ul>
       </li>
       <?php $scans = base_url('admin/scan_barang_kembali') == current_url() ||
-        base_url('admin/barang_keluar') == current_url() || base_url('admin/tabel_satuan') == current_url() ? 'treeview active' : 'treeview' ?>
+        base_url('admin/scan_barang_keluar') == current_url() ? 'treeview active' : 'treeview' ?>
       <li class="<?= $scans ?>">
         <a href="#">
           <i class="fa fa-qrcode"></i> <span>Scan QR </span>
@@ -61,10 +61,10 @@
         </a>
         <ul class="treeview-menu">
           <li class='<?= (base_url('admin/scan_barang_kembali') == current_url() ? ' active' : '') ?> '>
-            <a href="<?= base_url('admin/scan_barang_kembali') ?>"><i class="fa fa-arrow-up text-success"></i> Scan Masuk</a>
+            <a href="<?= base_url('admin/scan_barang_kembali') ?>"><i class="fa fa-arrow-up text-green"></i> Scan Barang Kembali</a>
           </li>
-          <li class='<?= (base_url('admin/barang_keluar') == current_url() ? ' active' : '') ?> '>
-            <a href="<?= base_url('admin/barang_keluar') ?>"><i class="fa fa-arrow-down text-danger"></i> Scan Keluar</a>
+          <li class='<?= (base_url('admin/scan_barang_keluar') == current_url() ? ' active' : '') ?> '>
+            <a href="<?= base_url('admin/scan_barang_keluar') ?>"><i class="fa fa-arrow-down text-red"></i> Scan Barang Keluar</a>
           </li>
         </ul>
       </li>
@@ -73,7 +73,7 @@
         <a href="<?php echo base_url('admin/profile') ?>">
           <i class="fa fa-cogs" aria-hidden="true"></i> <span>Profile</span></a>
       </li>
-      <li class='<?= (base_url('admin/users') == current_url() ? ' active' : '') ?> '>
+      <li class='<?= (base_url('admin/users') ==  current_url() ? ' active' : '') ?> '>
         <a href="<?php echo base_url('admin/users') ?>">
           <i class="fa fa-fw fa-users" aria-hidden="true"></i> <span>Users</span></a>
       </li>
