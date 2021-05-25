@@ -73,15 +73,15 @@
             <?php else : ?>
                 <section class="content">
                     <div class="row">
-                        <div class="col-md-8">
-                            <div class="container">
+                        <div class="col-md-12">
+                            <div class="container-fluid">
                                 <div class="box box-primary">
                                     <div class="box-header with-border">
                                         <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Keluar</h3>
                                     </div>
                                     <!-- /.box-header -->
                                     <!-- form start -->
-                                    <div class="container">
+                                    <div class="container-fluid">
                                         <form action="<?= base_url('admin/proses_data_keluar') ?>" role="form" method="post">
                                             <?php if (validation_errors()) { ?>
                                                 <div class="alert alert-warning alert-dismissible">
@@ -170,12 +170,12 @@
                     </div>
                     </section>
         </div>
+<?php endif; ?>
 
     </div>
     
     
-<?php endif; ?>
-</div>
+
 <!-- /.content-wrapper -->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
