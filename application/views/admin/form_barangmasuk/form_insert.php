@@ -48,7 +48,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Keluar</h3>
                 </div>
-               
+
                 <div class="container-fluid">
                   <div class="box-body" id='barang_scan'>
                     <div class="row">
@@ -91,11 +91,11 @@
                           <input type="phone" name="jumlah" class="form-control" id="jumlah">
                         </div>
                         <div class="form-group">
-                          <img src="<?= base_url('assets/img/preview.jpg')?>" id="frame" alt="preview" width="200px" height="200px" onerror="" />
+                          <img src="<?= base_url('assets/img/preview.jpg') ?>" id="frame" alt="preview" width="200px" height="200px" onerror="" />
                         </div>
                         <div class="form-group">
                           <label for="gambar">Foto Barang</label>
-                          <input type="file" name="gambar" class="form-control" id="gambar" onchange="preview()" >
+                          <input type="file" name="gambar" class="form-control" id="gambar" onchange="preview()">
                         </div>
                         <div class="form-group">
                           <label for="status">Keterangan</label>

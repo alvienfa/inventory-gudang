@@ -11,7 +11,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Tambah Data Barang Kembali
+                    Scan QR Data Barang Kembali
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -44,7 +44,7 @@
                                                         <input type="hidden" name="id" readonly value="<?= $list_data->id ?>">
                                                         <div class="form-group">
                                                             <label for="id_transaksi">ID Transaksi</label>
-                                                            <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $list_data->id ?>">
+                                                            <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $list_data->id_transaksi ?>">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="lokasi">Lokasi</label>

@@ -51,7 +51,7 @@
                   <th>Foto Barang</th>
                   <th>Satuan</th>
                   <th>Jumlah</th>
-                  <th>Keteragan</th>
+                  <th>Gudang</th>
                   <th>QR Code</th>
                   <th>Delete</th>
                   <!-- <th>Keluarkan</th> -->
@@ -73,7 +73,7 @@
                       src="<?php echo base_url().'assets/upload/gambar/'.$dd->gambar;?>"></td>
                     <td><?=$dd->satuan?></td>
                     <td><?=$dd->jumlah?></td>
-                    <td><?=$dd->keterangan?></td>
+                    <td><?=$dd->nama_gudang?></td>
                     <td><a download href="<?php echo base_url().'assets/qrcode/images/'.$dd->qr_code;?>">
                       <img 
                       style="width: 100px;" 

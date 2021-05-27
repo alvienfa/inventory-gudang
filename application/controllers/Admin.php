@@ -301,8 +301,10 @@ class Admin extends CI_Controller
 
   public function tabel_barangmasuk()
   {
+    $list_data = $this->M_admin->select_desc('tb_barang_masuk');
+    $join_data = $this->M_admin->join_tabel_desc();
     $data = array(
-      'list_data' => $this->M_admin->select_desc('tb_barang_masuk') ,
+      'list_data' => $join_data,
       'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'))
     );
     $head['title'] = 'Inventory Gudang | Table Barang Masuk';
@@ -314,11 +316,15 @@ class Admin extends CI_Controller
 
   public function update_barang($id_transaksi)
   {
+    
+    $head['title'] = 'Inventory Gudang | Form Update Barang Masuk';
     $where = array('id_transaksi' => $id_transaksi);
     $data['data_barang_update'] = $this->M_admin->get_data('tb_barang_masuk', $where);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
     $this->load->view('admin/form_barangmasuk/form_update', $data);
   }
 
@@ -346,7 +352,7 @@ class Admin extends CI_Controller
       $nama_barang  = $this->input->post('nama_barang', TRUE);
       $satuan       = $this->input->post('satuan', TRUE);
       $jumlah       = $this->input->post('jumlah', TRUE);
-
+      $id_gudang = $this->input->post('id_gudang', TRUE);
       //qrcode
       $qr = $this->load->library('ciqrcode'); //pemanggilan library QR CODE
       $config['cacheable']    = true; //boolean, the default is true
@@ -394,7 +400,8 @@ class Admin extends CI_Controller
           'satuan'       => $satuan,
           'jumlah'       => $jumlah,
           'qr_code'      => $image_name,
-          'gambar'       => $nama_file
+          'gambar'       => $nama_file,
+          'id_gudang'    => $id_gudang
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
@@ -601,8 +608,7 @@ class Admin extends CI_Controller
       $nm_penjab         = $this->input->post('nm_penjab', TRUE);
       $nohp_penjab         = $this->input->post('nohp_penjab', TRUE);
 
-      $this->db->insert('map_lokasi', $alamat);
-      $id_lokasi = $this->db->insert_id();
+      $id_lokasi = $this->M_admin->insert_lokasi('map_lokasi', $alamat);
       
       $where = array('id_transaksi' => $id_transaksi);
       $data = array(
@@ -619,11 +625,11 @@ class Admin extends CI_Controller
         'nm_penjab' => $nm_penjab,
         'nohp_penjab' => $nohp_penjab
       );
-
+      
       $this->M_admin->mengurangi('tb_barang_masuk', $id_transaksi,$jumlah);
       $this->M_admin->insert('tb_barang_keluar', $data);
       $this->session->set_flashdata('msg_berhasil_keluar', 'Data Berhasil Keluar');
-      redirect(base_url('admin/tabel_barangmasuk'));
+      redirect(base_url('admin/tabel_barangkeluar'));
     } else {
       $head['title'] = 'Inventory Gudang | Perpindahan Barang';
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
@@ -719,11 +725,13 @@ class Admin extends CI_Controller
       'satuan'          => $data->satuan,
       'jumlah'          => $jumlah,
       'status'          => $status,
+      'keterangan'      => $keterangan
     );
     $update = array(
       'status' => $status,
       'keterangan' => $keterangan
     );
+    // var_dump($this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah));die();
     $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
     $this->M_admin->insert('tb_barang_kembali', $insert);
     $this->M_admin->update('tb_barang_keluar', $update ,$where);
@@ -742,6 +750,7 @@ class Admin extends CI_Controller
       $satuan          = $this->input->post('satuan', TRUE);
       $jumlah          = $this->input->post('jumlah', TRUE);
       $status          = $this->input->post('status', TRUE);
+      $keterangan      = $this->input->post('keterangan', TRUE);
 
       $where = array('id_transaksi' => $id_transaksi);
       $data  = array(
@@ -752,9 +761,11 @@ class Admin extends CI_Controller
         'nama_barang' => $nama_barang,
         'satuan'  => $satuan,
         'jumlah'  => $jumlah,
-        'status'  => $status
+        'status'  => $status,
+        'keterangan' => $keterangan
       );
-      $this->M_admin->menambah('tb_barang_kembali', $id_transaksi, $jumlah);
+
+      $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
       $this->M_admin->insert('tb_barang_kembali', $data);
       $this->session->set_flashdata('msg_berhasil_masuk', 'Barang Berhasil DiKembalikan');
       redirect(base_url('admin/tabel_barangmasuk'));

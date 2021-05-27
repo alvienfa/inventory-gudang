@@ -36,7 +36,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Tambah Data Barang Kembali
+                    Scan QR Data Barang Keluar
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -75,13 +75,13 @@
             <?php else : ?>
                 <section class="content">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="container-fluid">
                                 <div class="box box-primary">
                                     <div class="box-header with-border">
                                         <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Keluar</h3>
                                     </div>
-                                    <form action="<?= base_url('admin/proses_data_kembali') ?>" role="form" method="post">
+                                    <form action="<?= base_url('admin/proses_data_keluar') ?>" role="form" method="post">
 
                                         <?php if (validation_errors()) { ?>
                                             <div class="alert alert-warning alert-dismissible">
@@ -94,7 +94,7 @@
                                             <div class="box-body" id='barang_scan'>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <input type="hidden" name="id" readonly value="<?= $d->id ?>">
+                                                        <input type="hidden" name="id" readonly value="<?= $list_data->id ?>">
                                                         <div class="form-group">
                                                             <label for="id_transaksi">ID Transaksi</label>
                                                             <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $list_data->id_transaksi ?>">
@@ -142,7 +142,9 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="container-fluid">
                                 <div class="row">
                                     <div class="box box-primary">
                                         <div class="box-header with-border">
@@ -156,16 +158,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-12">
                                                         <div class="box-header with-border">
-                                                            <h3 class="box-title"><i class="fa fa-map-marker" aria-hidden="true"></i>Penanggung Jawab</h3>
+                                                            <h3 class="box-title"><i class="fa fa-user" aria-hidden="true"></i> Penanggung Jawab</h3>
                                                         </div>
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="status">Nama Penjab</label>
+                                                            <label for="status">Nama Penanggung Jawab</label>
                                                             <input type="text" name="nm_penjab" class="form-control" id="nm_penjab">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="status">Contact Penjab</label>
+                                                            <label for="status">Contact Penanggung Jawab</label>
                                                             <input type="phone" name="nohp_penjab" class="form-control" id="nohp_penjab">
                                                         </div>
                                                         <div class="form-group">
