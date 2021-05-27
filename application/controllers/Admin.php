@@ -294,6 +294,7 @@ class Admin extends CI_Controller
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $data['list_gudang'] = $this->M_admin->select('tb_gudang'); 
     $this->load->view('layout/head', $head);
     $this->load->view('admin/form_barangmasuk/form_insert', $data);
   }
