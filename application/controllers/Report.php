@@ -51,15 +51,47 @@ class Report extends CI_Controller
     $html=
       '<div>
         <h1 align="center">Invoice Bukti Pengeluaran Barang</h1>
-        <p>No Id Transaksi  :</p>
-        <p>Ditunjukan Untuk :</p>
-        <p>Penanggung Jawab :</p>
-        <p>No. Handphone :</p>
-        <p>Tanggal          :</p>
-        <p>Po.Customer      :</p>
+        <table border="0" width="100%">';
+        $html .= '<thead>';
+        $html .= '<tr>';
+        $html .= '<td style="width:110px"> No. Transaksi</td>';
+        $html .= '<td>:</td>';
+        $html .= '<td colspan="8" style="width:140px"></td>';
+        $html .= '</tr>';
 
+            $html .= '<tr>';
+            $html .= '<td style="width:510px">Ditunjukkan untuk</td>';
+            $html .= '<td>:</td>';
+            $html .= '<td></td>';
+            $html .= '<td></td>';
+            $html .= '<td></td>';
+            $html .= '<td>Penanggung Jawab</td>';
+            $html .= '<td>:</td>';
+            $html .= '<td></td>';
+            
+            $html .= '</tr>';
 
-        <table border="1">
+            $html .= '<tr>';
+            $html .= '<td>Tanggal</td>';
+            $html .= '<td>:</td>';
+            $html .= '<td></td>';
+            $html .= '<td></td>';
+            $html .= '<td></td>';
+            $html .= '<td>No. Handphone</td>';
+            $html .= '<td>:</td>';
+            $html .= '<td></td>';
+            
+            $html .= '</tr>';
+            
+        $html .= '<tr>';
+        $html .= '<td colspan="8" style="width:140px">Po. Customer  :</td>';
+        $html .= '</tr>';
+        $html .= '</thead>';
+
+    $html .=
+      '</table>
+        
+        <table border="1" >
           <tr>
             <th style="width:40px" align="center">No</th>
             <th style="width:110px" align="center">ID Transaksi</th>
@@ -72,27 +104,29 @@ class Report extends CI_Controller
             <th style="width:80px" align="center">Jumlah</th>
           </tr>';
 
-        $html .= '<tr>
-                    <td style="height:180px"></td>
-                    <td  style="height:180px"></td>
-                    <td style="height:180px"></td>
-                    <td style="height:180px"></td>
-                    <td style="height:180px"></td>
-                    <td style="height:180px"></td>
-                    <td style="height:180px"></td>
-                    <td style="height:180px"></td>
-                    <td style="height:180px"></td>
-                 </tr>
-                 <tr>
-                  <td align="center" colspan="8">Jumlah</td>
-                  <td></td>
-                 </tr>';
 
+          $no = 1;
+            $html .= '<tr>';
+            $html .= '<td align="center"></td>';
+            $html .= '<td align="center"></td>';
+            $html .= '<td align="center"></td>';
+            $html .= '<td align="center"></td>';
+            $html .= '<td align="center"></td>';
+            $html .= '<td align="center"></td>';
+            $html .= '<td align="center"></td>';
+            $html .= '<td align="center"></td>';
+            $html .= '<td align="center"></td>';
+            $html .= '</tr>';
 
+            $html .= '<tr>';
+            $html .= '<td align="center" colspan="8"><b>Jumlah</b></td>';
+            $html .= '<td align="center"></td>';
+            $html .= '</tr>';
+            $no++;
 
         $html .='
-            </table>
-            <h6>Mengetahui</h6><br>
+            </table><br>
+            <h6>Mengetahui</h6><br><br><br><br>
             <h6>Admin</h6>
           </div>';
 
@@ -142,31 +176,51 @@ class Report extends CI_Controller
     $pdf->SetFont('helvetica','',14,'',true);
 
     $pdf->AddPage('L');
-
+    
     $html=
       '<div>
         <h1 align="center">Invoice Bukti Pengeluaran Barang</h1><br>
-        <p>No Transaksi  :&nbsp;'.$data->id_transaksi.'</p> 
-        <p>Ditunjukan Untuk :&nbsp;'.$data->lokasi.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Penanggung Jawab :&nbsp;'.$data->nm_penjab.'</p>
-        <p>Tanggal          :&nbsp;'.$data->tanggal_keluar.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-        &nbsp;
-        No. Handphone :&nbsp;'.$data->nohp_penjab.'</p><br>
-        <p>Po.Customer      :</p>
 
-        <table border="1">
+        <table border="0" width="100%">';
+        $html .= '<thead>';
+        $html .= '<tr>';
+        $html .= '<td style="width:180px">No. Transaksi</td>';
+        $html .= '<td style="width:10px">:</td>';
+        $html .= '<td colspan="6" style="width:340px">'.$data->id_transaksi.'</td>';
+        $html .= '</tr>';
+
+            $html .= '<tr>';
+            $html .= '<td style="width:180px">Ditunjukkan untuk</td>';
+            $html .= '<td style="width:10px">:</td>';
+            $html .= '<td style="width:110px">'.$data->lokasi.'</td>';
+            $html .= '<td style="width:100px"></td>';
+            $html .= '<td style="width:150px"></td>';
+            $html .= '<td style="width:180px">Penanggung Jawab</td>';
+            $html .= '<td style="width:10px">:</td>';
+            $html .= '<td style="width:180px">'.$data->nm_penjab.'</td>';
+            
+            $html .= '</tr>';
+
+            $html .= '<tr>';
+            $html .= '<td>Tanggal</td>';
+            $html .= '<td>:</td>';
+            $html .= '<td>'.$data->tanggal_keluar.'</td>';
+            $html .= '<td></td>';
+            $html .= '<td></td>';
+            $html .= '<td>No. Handphone</td>';
+            $html .= '<td>:</td>';
+            $html .= '<td>'.$data->nohp_penjab.'<br></td>';
+            $html .= '</tr>';
+            
+        $html .= '<tr>';
+        $html .= '<td colspan="8" style="width:140px">Po. Customer  :<br></td>';
+        $html .= '</tr>';
+        $html .= '</thead>';
+
+    $html .=
+      '</table>
+        
+        <table border="1" >
           <tr>
             <th style="width:40px" align="center">No</th>
             <th style="width:110px" align="center">ID Transaksi</th>
@@ -206,9 +260,8 @@ class Report extends CI_Controller
           </div>';
 
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);
-
+    
     $pdf->Output('invoice_barang_keluar.pdf','I');
 
   }
 }
-?>
