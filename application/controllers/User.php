@@ -14,9 +14,36 @@ class User extends CI_Controller
   {
     if($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 0)
     {
-      $this->load->view('user/templates/header.php');
-      $this->load->view('user/index');
-      $this->load->view('user/templates/footer.php');
+      // $this->load->view('user/templates/header.php');
+      // $this->load->view('user/index');
+      // $this->load->view('user/templates/footer.php');
+
+      $cards['progress_barang'] = $this->M_user->progress_barang();
+      $cards['last_data']       = $this->M_user->select_limit('tb_barang_kembali','tb_status', 10);
+      $data = array(
+        'title'             => 'Dashboard',
+        'barang_keluar'     => $this->M_user->select('tb_barang_keluar'),
+        'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
+        'barang_kembali'    => $this->M_user->select('tb_barang_kembali'),
+        'total' => array(
+          'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
+          'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
+          'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali'),
+          'barang_jual'     => $this->M_user->total_row('tb_barang_jual') 
+        ),
+          
+        'views' => array(
+          'header' =>$this->header(),
+          'card_satu'  => $this->load->view('user_stisla/cards/barang_kembali.php' ,$cards, TRUE),
+          'card_dua' => $this->load->view('user_stisla/cards/progress_barang.php' ,$cards, TRUE)
+        ),
+        
+      );
+      $head['username'] = $this->session->userdata('email');
+      $head['title'] = 'Dashboard | User';
+      $this->load->view('template/head.php' , $head);
+      $this->load->view('user_stisla/index' , $data);
+      $this->load->view('template/footer.php', $data);
     }else {
       $this->load->view('login/login');
     }
@@ -78,32 +105,47 @@ class User extends CI_Controller
       redirect(base_url());
   }
   
-  
-
-  ####################################
-        // DATA BARANG MASUK
-  ####################################
-
-  public function tabel_barangmasuk()
+  public function tabel_barang_masuk()
   {
-    $this->load->view('user/templates/header.php');
-    $data['list_data'] = $this->M_user->select('tb_barang_masuk');
-    $this->load->view('user/tabel/tabel_barangmasuk',$data);
-    $this->load->view('user/templates/footer.php');
+    $cards['progress_barang'] = $this->M_user->progress_barang();
+    $cards['list_data']       = $this->M_user->barang_masuk('tb_barang_masuk','tb_gudang');
+    $data = array(
+      'title' => 'Tabel Barang Masuk',
+      'barang_keluar'     => $this->M_user->select('tb_barang_keluar'),
+      'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
+      'barang_kembali'    => $this->M_user->select('tb_barang_kembali'),
+      'views' => array(
+        'header' => $this->header(),
+        'card_satu'  => $this->load->view('user_stisla/tabel/barang_masuk.php' ,$cards, TRUE),
+      ),
+      
+    );
+
+    $head['username'] = $this->session->userdata('email');
+    $head['title'] = 'Barang Masuk | User';
+    $this->load->view('template/head.php' , $head);
+    $this->load->view('user_stisla/index' , $data);
+    $this->load->view('template/footer.php', $data);
   }
 
-
-  ####################################
-        // DATA BARANG KELUAR
-  ####################################
-
-  public function tabel_barangkeluar()
+  public function tabel_barang_keluar()
   {
     $this->load->view('user/templates/header.php');
     $data['list_data'] = $this->M_user->select('tb_barang_keluar');
     $this->load->view('user/tabel/tabel_barangkeluar',$data);
     $this->load->view('user/templates/footer.php');
   }
+  public function header(){
+    $data = array(
+      'total' => array(
+        'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
+        'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
+        'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali'),
+        'barang_jual'     => $this->M_user->total_row('tb_barang_jual') 
+      )      
+    );
+    return $this->load->view('template/header',$data, TRUE);
+  } 
 
 }
 

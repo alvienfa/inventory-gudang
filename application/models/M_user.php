@@ -1,44 +1,82 @@
 <?php
-class M_user extends CI_Model{
+class M_user extends CI_Model
+{
 
-  public function insert($tabel,$data)
+  public function insert($tabel, $data)
   {
-    $this->db->insert($tabel,$data);
+    $this->db->insert($tabel, $data);
   }
 
-  public function update($tabel,$data,$where)
+  public function update($tabel, $data, $where)
   {
     $this->db->where($where);
-    $this->db->update($tabel,$data);
+    $this->db->update($tabel, $data);
   }
 
-  public function mengurangi($tabel,$id_transaksi,$jumlah)
+  public function mengurangi($tabel, $id_transaksi, $jumlah)
   {
-    $this->db->set("jumlah","jumlah - $jumlah");
-    $this->db->where('id_transaksi',$id_transaksi);
+    $this->db->set("jumlah", "jumlah - $jumlah");
+    $this->db->where('id_transaksi', $id_transaksi);
     $this->db->update($tabel);
   }
 
-  public function sum($tabel,$field)
+  public function sum($tabel, $field)
   {
     $query = $this->db->select_sum($field)
-                      ->from($tabel)
-                      ->get();
+      ->from($tabel)
+      ->get();
     return $query->result();
   }
-  
-  public function update_password($tabel,$where,$data)
+
+  public function update_password($tabel, $where, $data)
   {
     $this->db->where($where);
-    $this->db->update($tabel,$data);
+    $this->db->update($tabel, $data);
   }
 
   public function select($tabel)
   {
     return $this->db->select()
-                    ->from($tabel)
-                    ->get()->result();
+      ->from($tabel)
+      ->order_by('id', 'desc')
+      ->get()->result();
+  }
+
+  //====================================
+  // 
+  //
+  // ===================================
+
+  public function progress_barang()
+  {
+    $query = $this->db->from('tb_barang_masuk')->order_by('jumlah', 'desc')->limit(7)->get();
+    return $query->result();
+  }
+
+  public function total_row($tabel)
+  {
+    $query = $this->db->select()->from($tabel)->get();
+    return $query->num_rows();
+  }
+
+  public function select_limit($tabel1, $tabel2, $limit)
+  {
+    $query = $this->db->select("a.*,b.text_status")
+      ->from($tabel1 . ' as a')
+      ->join($tabel2 . ' as b', 'b.id = a.status', 'LEFT')
+      ->limit($limit)
+      ->order_by('id', 'desc')
+      ->get()->result();
+    return $query;
+  }
+
+  public function barang_masuk($a, $b)
+  {
+    $query = $this->db->select("a.*,b.nama_gudang")
+      ->from($a . ' as a')
+      ->join($b . ' as b', 'b.id = a.id_gudang', 'LEFT')
+      ->order_by('id', 'desc')
+      ->get()->result();
+    return $query;
   }
 }
-
- ?>

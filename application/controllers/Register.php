@@ -10,7 +10,11 @@ class Register extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('login/register_stisla');
+    if ($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 0) {
+			redirect('user');
+    }else{
+      $this->load->view('login/register_stisla');
+    }
 	}
 
   private function hash_password($password){
