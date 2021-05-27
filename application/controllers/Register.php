@@ -10,7 +10,7 @@ class Register extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('login/register');
+		$this->load->view('login/register_stisla');
 	}
 
   private function hash_password($password){

@@ -1,25 +1,11 @@
 <style>
+    #qr-content{
+        align-items: center;
+    }
     #qr-canvas {
         margin: auto;
-        width: 50%;
         max-width: 100%;
-        align-items: center;
-
-    }
-
-    .posisi {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: auto;
-        /* margin-left: 350px;
-            padding-left: 50px; */
-    }
-
-    .icon-qr {
-        align-self: center;
-        object-position: center;
-        width: 200px
+        /* border: 5px solid white; */
     }
 </style>
 
@@ -32,32 +18,26 @@
         <?= $views['sidebar_menu'] ?>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background:black">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
                     Scan QR Data Barang Keluar
                 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li><a href="#">Forms</a></li>
-                    <li class="active">Data Barang Keluar</li>
-                </ol>
             </section>
 
             <!-- Main content -->
             <?php if (!$list_data) : ?>
                 <section id="qr-content" class="content">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="container-fluid">
+                        <div class="col-md-6">
+                            <div class="">
                                 <div id="qr-wrapper">
                                     <div class="posisi">
                                         <a href="#" id="btn-scan-qr">
-                                            <img class="icon-qr" src="<?= base_url() . "/assets/img/scan-me.png" ?>">
                                         </a>
                                     </div>
-                                    <div align="center">
+                                    <div>
                                         <canvas hidden="" id="qr-canvas"></canvas>
                                     </div>
                                     <div class="text-center" id="qr-result">
@@ -187,7 +167,7 @@
             <?php endif; ?>
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
+        <footer class="main-footer text-white" style="background:black">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.4.0
             </div>
@@ -213,7 +193,9 @@
         const btnScanQR = document.getElementById("btn-scan-qr");
 
         let scanning = false;
-
+        window.onload = function() {
+            document.getElementById("btn-scan-qr").click();
+        };
         // Scan
         qrcodes.callback = res => {
             // If result is true, ...
