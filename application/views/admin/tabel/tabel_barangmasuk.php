@@ -53,6 +53,7 @@
                   <th>Jumlah</th>
                   <th>Gudang</th>
                   <th>QR Code</th>
+                  <th>Update</th>
                   <th>Delete</th>
                   <!-- <th>Keluarkan</th> -->
                 </tr>
@@ -80,6 +81,7 @@
                       src="<?php echo base_url().'assets/qrcode/images/'.$dd->qr_code;?>">
                     </a>
                     </td>
+                    <td><a type="button" class="btn btn-info"  href="<?=base_url('admin/update_barang/'.$dd->id_transaksi)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                     <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('admin/delete_barang/'.$dd->id_transaksi)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                     <!-- <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?=base_url('admin/scan_barang_keluar/'.$dd->id_transaksi)?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td> -->
                 </tr>

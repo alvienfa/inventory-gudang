@@ -1,7 +1,7 @@
 <style>
     #qr-canvas {
         margin: auto;
-        width: 100%;
+        width: 50%;
         max-width: 100%;
         align-items: center;
 
