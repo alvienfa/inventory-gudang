@@ -129,7 +129,7 @@ class M_admin extends CI_Model
   }
   public function join_tabel_desc()
   {
-    $this->db->select('*');
+    $this->db->select('tb_barang_masuk.*,nama_gudang');
     $this->db->from('tb_barang_masuk');
     $this->db->join('tb_gudang', "tb_gudang.id = tb_barang_masuk.id_gudang");
     $this->db->order_by('tb_barang_masuk.id', 'DESC');
