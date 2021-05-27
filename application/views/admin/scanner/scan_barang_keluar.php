@@ -57,7 +57,9 @@
                                             <img class="icon-qr" src="<?= base_url() . "/assets/img/scan-me.png" ?>">
                                         </a>
                                     </div>
-                                    <canvas hidden="" id="qr-canvas"></canvas>
+                                    <div align="center">
+                                        <canvas hidden="" id="qr-canvas"></canvas>
+                                    </div>
                                     <div class="text-center" id="qr-result">
                                         <form method="post" action="process/submit_qrcode.php" enctype="multipart/form-data">
                                             <label>
@@ -71,69 +73,72 @@
                     </div>
                 </section>
             <?php else : ?>
-                <form action="<?= base_url('admin/proses_data_keluar') ?>" role="form" method="post">
-                    <section class="content">
-                        <div class="row">
-                            <div class="col-md-6">
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="container-fluid">
                                 <div class="box box-primary">
                                     <div class="box-header with-border">
                                         <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Keluar</h3>
                                     </div>
-                                    <?php if (validation_errors()) { ?>
-                                        <div class="alert alert-warning alert-dismissible">
-                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
-                                        </div>
-                                    <?php } ?>
+                                    <form action="<?= base_url('admin/proses_data_kembali') ?>" role="form" method="post">
 
-                                    <div class="container-fluid">
-                                        <div class="box-body" id='barang_scan'>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="id_transaksi">ID Transaksi</label>
-                                                        <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $list_data->id_transaksi ?>">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="tanggal">Tanggal Masuk</label>
-                                                        <input type="text" name="tanggal" class="form-control" readonly="readonly" value="<?= $list_data->tanggal ?>">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="tanggal_keluar">Tanggal Keluar</label>
-                                                        <input type="text" name="tanggal_keluar" class="form-control form_datetime" required="" placeholder="Klik Disini">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="kode_barang">Kode Barang / Barcode</label>
-                                                        <input type="text" name="kode_barang" class="form-control" readonly="readonly" id="kode_barang" value="<?= $list_data->kode_barang ?>">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="nama_Barang" style="width:73%;">Nama Barang</label>
-                                                        <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $list_data->nama_barang ?>">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="satuan">Satuan</label>
-                                                        <select class="form-control" name="satuan">
-                                                            <?php foreach ($list_satuan as $s) { ?>
-                                                                <?php if ($list_data->satuan == $s->nama_satuan) { ?>
-                                                                    <option value="<?= $list_data->satuan ?>" selected=""><?= $list_data->satuan ?></option>
-                                                                <?php } else { ?>
-                                                                    <option value="<?= $s->kode_satuan ?>"><?= $s->nama_satuan ?></option>
+                                        <?php if (validation_errors()) { ?>
+                                            <div class="alert alert-warning alert-dismissible">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
+                                            </div>
+                                        <?php } ?>
+
+                                        <div class="container-fluid">
+                                            <div class="box-body" id='barang_scan'>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="hidden" name="id" readonly value="<?= $d->id ?>">
+                                                        <div class="form-group">
+                                                            <label for="id_transaksi">ID Transaksi</label>
+                                                            <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $list_data->id_transaksi ?>">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="tanggal">Tanggal Masuk</label>
+                                                            <input type="text" name="tanggal" class="form-control" readonly="readonly" value="<?= $list_data->tanggal ?>">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="tanggal_keluar">Tanggal Keluar</label>
+                                                            <input type="text" name="tanggal_keluar" class="form-control form_datetime" required="" placeholder="Klik Disini">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="kode_barang">Kode Barang / Barcode</label>
+                                                            <input type="text" name="kode_barang" class="form-control" readonly="readonly" id="kode_barang" value="<?= $list_data->kode_barang ?>">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="nama_Barang" style="width:73%;">Nama Barang</label>
+                                                            <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $list_data->nama_barang ?>">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="satuan">Satuan</label>
+                                                            <select class="form-control" name="satuan">
+                                                                <?php foreach ($list_satuan as $s) { ?>
+                                                                    <?php if ($list_data->satuan == $s->nama_satuan) { ?>
+                                                                        <option value="<?= $list_data->satuan ?>" selected=""><?= $list_data->satuan ?></option>
+                                                                    <?php } else { ?>
+                                                                        <option value="<?= $s->kode_satuan ?>"><?= $s->nama_satuan ?></option>
+                                                                    <?php } ?>
                                                                 <?php } ?>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="jumlah">Jumlah</label>
-                                                        <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $list_data->jumlah ?>" value="<?= $list_data->jumlah ?>">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="status">Keterangan</label>
-                                                        <input type="text" name="keterangan" class="form-control" id="status">
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="jumlah">Jumlah</label>
+                                                            <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $list_data->jumlah ?>" value="<?= $list_data->jumlah ?>">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="status">Keterangan</label>
+                                                            <input type="text" name="keterangan" class="form-control" id="status">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
                                 </div>
                             </div>
@@ -175,7 +180,7 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
+                </section>
                 </form>
             <?php endif; ?>
         </div>

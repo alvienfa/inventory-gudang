@@ -53,6 +53,8 @@ class Report extends CI_Controller
         <h1 align="center">Invoice Bukti Pengeluaran Barang</h1>
         <p>No Id Transaksi  :</p>
         <p>Ditunjukan Untuk :</p>
+        <p>Penanggung Jawab :</p>
+        <p>No. Handphone :</p>
         <p>Tanggal          :</p>
         <p>Po.Customer      :</p>
 
@@ -144,11 +146,24 @@ class Report extends CI_Controller
     $html=
       '<div>
         <h1 align="center">Invoice Bukti Pengeluaran Barang</h1><br>
-        <p>No Id Transaksi  :'.$id.'</p>
-        <p>Ditunjukan Untuk :'.$data->lokasi.'</p>
-        <p>Penanggung Jawab :'.$data->nm_penjab.'</p>
-        <p>No. Handphone :'.$data->nohp_penjab.'</p>
-        <p>Tanggal          :'.$data->tanggal_keluar.'</p>
+        <p>No Transaksi  :&nbsp;'.$data->id_transaksi.'</p> 
+        <p>Ditunjukan Untuk :&nbsp;'.$data->lokasi.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Penanggung Jawab :&nbsp;'.$data->nm_penjab.'</p>
+        <p>Tanggal          :&nbsp;'.$data->tanggal_keluar.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        &nbsp;
+        No. Handphone :&nbsp;'.$data->nohp_penjab.'</p><br>
         <p>Po.Customer      :</p>
 
         <table border="1">

@@ -48,13 +48,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Keluar</h3>
                 </div>
-                <?php if (validation_errors()) { ?>
-                  <div class="alert alert-warning alert-dismissible">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
-                  </div>
-                <?php } ?>
-
+               
                 <div class="container-fluid">
                   <div class="box-body" id='barang_scan'>
                     <div class="row">
