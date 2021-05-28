@@ -12,6 +12,8 @@ class Register extends CI_Controller {
 	{
     if ($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 0) {
 			redirect('user');
+    }else if($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 1){
+			redirect('admin');	  
     }else{
       $this->load->view('login/register_stisla');
     }
