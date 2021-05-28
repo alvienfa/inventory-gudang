@@ -29,7 +29,6 @@ class User extends CI_Controller
           'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
           'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
           'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali'),
-          'barang_jual'     => $this->M_user->total_row('tb_barang_jual') 
         ),
           
         'views' => array(
@@ -101,8 +100,8 @@ class User extends CI_Controller
 
   public function signout()
   {
-      session_destroy();
-      redirect(base_url());
+    session_destroy();
+    redirect('login');
   }
   
   public function tabel_barang_masuk()
@@ -146,7 +145,7 @@ class User extends CI_Controller
 
   public function tabel_barang_kembali()
   {
-    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali');
+    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali','tb_status');
     $data = array(
       'title' => 'Tabel Barang Kembali',
       'barang_kembali'    => $this->M_user->select('tb_barang_kembali'),
@@ -169,8 +168,7 @@ class User extends CI_Controller
       'total' => array(
         'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
         'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
-        'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali'),
-        'barang_jual'     => $this->M_user->total_row('tb_barang_jual') 
+        'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
       )      
     );
     return $this->load->view('template/header',$data, TRUE);

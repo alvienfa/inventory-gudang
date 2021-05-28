@@ -53,7 +53,7 @@
               <h4>Barang Jual</h4>
             </div>
             <div class="card-body">
-              <?= $total['barang_jual'] ?>
+              
             </div>
           </div>
         </div>

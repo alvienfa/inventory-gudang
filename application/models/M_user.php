@@ -91,13 +91,12 @@ class M_user extends CI_Model
   return $query;
   }
 
-  public function barang_kembali($a)
+  public function barang_kembali($a,$b)
   {
-    $query = $this->db->select("*")
-    ->from($a)
-    // ->join($b . ' as b', 'b.id=a.id_lokasi','left')
-    // ->join($c . ' as c', 'c.id=a.status', 'left')
-    ->order_by('id', 'desc')
+    $query = $this->db->select("a.*,b.text_status")
+    ->from($a . ' as a')
+    ->join($b . ' as b', 'b.id=a.status', 'left')
+    ->order_by('a.id', 'desc')
     ->get()->result();
   return $query;
   }
