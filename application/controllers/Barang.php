@@ -15,7 +15,7 @@ class Barang extends CI_Controller
 
   public function index()
   {
-    $head['title'] = 'Detail Barang | User';
+    $head['title'] = 'Scan QR Barang | User';
     $head['username'] = $this->session->userdata('email');
     $data = array(
       'title' => 'Scan Barcode',

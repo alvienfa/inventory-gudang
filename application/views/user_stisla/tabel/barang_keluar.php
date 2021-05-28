@@ -1,7 +1,7 @@
 <div class="col-lg-12 col-md-6 col-12 col-sm-12">
     <div class="card">
         <div class="card-header">
-            <h4>Barang Masuk</h4>
+            <h4>Barang Keluar</h4>
             <div class="card-header-action">
                 <a href="#" class="btn btn-primary">View All</a>
             </div>
@@ -33,11 +33,11 @@
                                 <!-- <td>
                                     <button 
                                     class="btn btn-primary modal-2" 
-                                    data-alamat="<?= $item->alamat?>"
+                                    data-alamat="<?= $item->alamat ?>"
                                     data-kecamatan="<?= $item->kecamatan ?>"
-                                    data-kota="<?= $item->kota?>"
-                                    data-provinsi="<?= $item->provinsi?>"
-                                    data-pos="<?= $item->kode_pos?>"
+                                    data-kota="<?= $item->kota ?>"
+                                    data-provinsi="<?= $item->provinsi ?>"
+                                    data-pos="<?= $item->kode_pos ?>"
                                     ><i class="fas fa-map-marker"></i></button>
                                 </td> -->
                                 <?php
@@ -63,6 +63,11 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="card-body d-flex justify-content-center">
+                    <nav class="" aria-label="...">
+                        <?= $pagination ?>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

@@ -138,7 +138,7 @@ class Report extends CI_Controller
   public function barangKeluar()
   {
     $id = $this->uri->segment(3);
-    // $lokasi = $this->uri->segment(7);
+    
     $ls   = array(
       'id' => $id
       );

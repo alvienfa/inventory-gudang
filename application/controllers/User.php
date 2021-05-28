@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class User extends CI_Controller
 {
@@ -12,10 +12,9 @@ class User extends CI_Controller
 
   public function index()
   {
-    if($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 0)
-    {
+    if ($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 0) {
       $cards['progress_barang'] = $this->M_user->progress_barang();
-      $cards['last_data']       = $this->M_user->select_limit('tb_barang_kembali','tb_status', 10);
+      $cards['last_data']       = $this->M_user->select_limit('tb_barang_kembali', 'tb_status', 10);
       $data = array(
         'title'             => 'Dashboard',
         'barang_keluar'     => $this->M_user->select('tb_barang_keluar'),
@@ -24,22 +23,22 @@ class User extends CI_Controller
         'total' => array(
           'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
           'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
-          'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali') 
+          'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
         ),
-          
+
         'views' => array(
-          'header' =>$this->header(),
-          'card_satu'  => $this->load->view('user_stisla/cards/barang_kembali.php' ,$cards, TRUE),
-          'card_dua' => $this->load->view('user_stisla/cards/progress_barang.php' ,$cards, TRUE)
+          'header' => $this->header(),
+          'card_satu'  => $this->load->view('user_stisla/cards/barang_kembali.php', $cards, TRUE),
+          'card_dua' => $this->load->view('user_stisla/cards/progress_barang.php', $cards, TRUE)
         ),
-        
+
       );
       $head['username'] = $this->session->userdata('email');
       $head['title'] = 'Dashboard | User';
-      $this->load->view('template/head.php' , $head);
-      $this->load->view('user_stisla/index' , $data);
+      $this->load->view('template/head.php', $head);
+      $this->load->view('user_stisla/index', $data);
       $this->load->view('template/footer.php', $data);
-    }else {
+    } else {
       $this->load->view('login/login');
     }
   }
@@ -51,17 +50,17 @@ class User extends CI_Controller
 
   private function hash_password($password)
   {
-    return password_hash($password,PASSWORD_DEFAULT);
+    return password_hash($password, PASSWORD_DEFAULT);
   }
 
   public function setting()
   {
-      $data['token_generate'] = $this->token_generate();
-      $this->session->set_userdata($data);
+    $data['token_generate'] = $this->token_generate();
+    $this->session->set_userdata($data);
 
-      $this->load->view('user/templates/header.php');
-      $this->load->view('user/setting',$data);
-      $this->load->view('user/templates/footer.php');
+    $this->load->view('user/templates/header.php');
+    $this->load->view('user/setting', $data);
+    $this->load->view('user/templates/footer.php');
   }
 
   public function setting_user()
@@ -71,37 +70,35 @@ class User extends CI_Controller
 
     $head['title'] = 'Barang Keluar | User';
     $head['username'] = $this->session->userdata('email');
-    $this->load->view('template/head.php' , $head);
-    $this->load->view('user_stisla/setting_user' , $data);
+    $this->load->view('template/head.php', $head);
+    $this->load->view('user_stisla/setting_user', $data);
     $this->load->view('template/footer.php', $data);
   }
 
   public function proses_new_password()
   {
-    $this->form_validation->set_rules('new_password','New Password','required');
-    $this->form_validation->set_rules('confirm_new_password','Confirm New Password','required|matches[new_password]');
+    $this->form_validation->set_rules('new_password', 'New Password', 'required');
+    $this->form_validation->set_rules('confirm_new_password', 'Confirm New Password', 'required|matches[new_password]');
 
-    if($this->form_validation->run() == TRUE)
-    {
-      if($this->session->userdata('token_generate') === $this->input->post('token'))
-      {
+    if ($this->form_validation->run() == TRUE) {
+      if ($this->session->userdata('token_generate') === $this->input->post('token')) {
         $username = $this->input->post('username');
         $new_password = $this->input->post('new_password');
 
         $data = array(
-            'password' => $this->hash_password($new_password)
+          'password' => $this->hash_password($new_password)
         );
 
         $where = array(
-            'id' =>$this->session->userdata('id')
+          'id' => $this->session->userdata('id')
         );
 
-        $this->M_user->update_password('user',$where,$data);
+        $this->M_user->update_password('user', $where, $data);
 
-        $this->session->set_flashdata('msg_berhasil','Password Telah Diganti');
+        $this->session->set_flashdata('msg_berhasil', 'Password Telah Diganti');
         redirect(base_url('user/setting_user'));
       }
-    }else {
+    } else {
       $this->load->view('user/setting_user');
     }
   }
@@ -111,75 +108,156 @@ class User extends CI_Controller
     session_destroy();
     redirect('login');
   }
-  
+
   public function tabel_barang_masuk()
   {
-    $cards['progress_barang'] = $this->M_user->progress_barang();
-    $cards['list_data']       = $this->M_user->barang_masuk('tb_barang_masuk','tb_gudang');
+    $this->load->library('pagination');
+    $limit = $this->input->get('limit')? intval($this->input->get('limit')) : 10;
+    $config['base_url']             = base_url('user/tabel_barang_masuk?limit='.$limit);
+    $config['total_rows']           = $this->M_user->total_row('tb_barang_masuk');
+    $config['per_page']             = $limit;
+    $config['enable_query_strings'] = TRUE;
+    $config['page_query_string']    = TRUE;
+    $config['use_page_numbers']     = TRUE;
+    $config['first_link']           = 'FIRST'; 
+    $config['last_link']            = 'LAST';
+    $config['num_links']            = 2;
+    $config['query_string_segment'] = 'page';
+    $config['full_tag_open']        = '<ul class="pagination">';
+    $config['full_tag_close']       = '</ul>';
+    $config['prev_link']            = '<i class="fas fa-chevron-left"></i>';
+    $config['next_link']            = '<i class="fas fa-chevron-right"></i>';
+    $config['cur_tag_open']         = '<li class="page-item active"><a class="page-link">';
+    $config['cur_tag_close']        = '</a></li>';
+    $config['num_tag_open']         = '<li class="page-item">';
+    $config['num_tag_close']        = '</li>';
+
+    $start = $this->input->get('page')?(intval($this->input->get('page')) - 1) * $limit:0;
+
+    $this->pagination->initialize($config);
+
+    $cards['pagination'] = $this->pagination->create_links();
+  
+    // $cards['progress_barang'] = $this->M_user->progress_barang();
+    $cards['list_data']       = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit,$start);
+  
     $data = array(
       'title' => 'Tabel Barang Masuk',
       'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
       'views' => array(
         'header' => $this->header(),
-        'card_satu'  => $this->load->view('user_stisla/tabel/barang_masuk.php' ,$cards, TRUE),
+        'card_satu'  => $this->load->view('user_stisla/tabel/barang_masuk.php', $cards, TRUE),
       ),
     );
 
     $head['username'] = $this->session->userdata('email');
     $head['title'] = 'Barang Masuk | User';
-    $this->load->view('template/head.php' , $head);
-    $this->load->view('user_stisla/index' , $data);
+    $this->load->view('template/head.php', $head);
+    $this->load->view('user_stisla/index', $data);
     $this->load->view('template/footer.php', $data);
   }
 
   public function tabel_barang_keluar()
   {
-    $cards['list_data'] = $this->M_user->barang_keluar('tb_barang_keluar','map_lokasi', 'tb_status');
+    
+    $this->load->library('pagination');
+    $limit = $this->input->get('limit')? intval($this->input->get('limit')) : 10;
+    $config['base_url']             = base_url('user/tabel_barang_keluar?limit='.$limit);
+    $config['total_rows']           = $this->M_user->total_row('tb_barang_keluar');
+    $config['per_page']             = $limit;
+    $config['enable_query_strings'] = TRUE;
+    $config['page_query_string']    = TRUE;
+    $config['use_page_numbers']     = TRUE;
+    $config['first_link']           = 'FIRST'; 
+    $config['last_link']            = 'LAST';
+    $config['num_links']            = 2;
+    $config['query_string_segment'] = 'page';
+    $config['full_tag_open']        = '<ul class="pagination">';
+    $config['full_tag_close']       = '</ul>';
+    $config['prev_link']            = '<i class="fas fa-chevron-left"></i>';
+    $config['next_link']            = '<i class="fas fa-chevron-right"></i>';
+    $config['cur_tag_open']         = '<li class="page-item active"><a class="page-link">';
+    $config['cur_tag_close']        = '</a></li>';
+    $config['num_tag_open']         = '<li class="page-item">';
+    $config['num_tag_close']        = '</li>';
+
+    $start = $this->input->get('page')?(intval($this->input->get('page')) - 1) * $limit:0;
+
+    $this->pagination->initialize($config);
+
+    $cards['pagination'] = $this->pagination->create_links();
+
+    $cards['list_data'] = $this->M_user->barang_keluar('tb_barang_keluar', 'map_lokasi', 'tb_status', $limit,$start);
     $data = array(
       'title' => 'Tabel Barang Keluar',
       'views' => array(
         'header' => $this->header(),
-        'card_satu'  => $this->load->view('user_stisla/tabel/barang_keluar.php' ,$cards, TRUE),
+        'card_satu'  => $this->load->view('user_stisla/tabel/barang_keluar.php', $cards, TRUE),
       ),
     );
 
     $head['title'] = 'Barang Keluar | User';
     $head['username'] = $this->session->userdata('email');
-    $this->load->view('template/head.php' , $head);
-    $this->load->view('user_stisla/index' , $data);
+    $this->load->view('template/head.php', $head);
+    $this->load->view('user_stisla/index', $data);
     $this->load->view('template/footer.php', $data);
   }
 
   public function tabel_barang_kembali()
   {
-    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali','tb_status');
+    $this->load->library('pagination');
+    $limit = $this->input->get('limit')? intval($this->input->get('limit')) : 10;
+    $config['base_url']             = base_url('user/tabel_barang_kembali?limit='.$limit);
+    $config['total_rows']           = $this->M_user->total_row('tb_barang_kembali');
+    $config['per_page']             = $limit;
+    $config['enable_query_strings'] = TRUE;
+    $config['page_query_string']    = TRUE;
+    $config['use_page_numbers']     = TRUE;
+    $config['first_link']           = 'FIRST'; 
+    $config['last_link']            = 'LAST';
+    $config['num_links']            = 2;
+    $config['query_string_segment'] = 'page';
+    $config['full_tag_open']        = '<ul class="pagination">';
+    $config['full_tag_close']       = '</ul>';
+    $config['prev_link']            = '<i class="fas fa-chevron-left"></i>';
+    $config['next_link']            = '<i class="fas fa-chevron-right"></i>';
+    $config['cur_tag_open']         = '<li class="page-item active"><a class="page-link">';
+    $config['cur_tag_close']        = '</a></li>';
+    $config['num_tag_open']         = '<li class="page-item">';
+    $config['num_tag_close']        = '</li>';
+
+    $start = $this->input->get('page')?(intval($this->input->get('page')) - 1) * $limit:0;
+
+    $this->pagination->initialize($config);
+
+    $cards['pagination'] = $this->pagination->create_links();
+
+    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali', 'tb_status',$limit,$start);
     $data = array(
       'title' => 'Tabel Barang Kembali',
       'views' => array(
         'header' => $this->header(),
-        'card_satu'  => $this->load->view('user_stisla/tabel/barang_kembali.php' ,$cards, TRUE),
+        'card_satu'  => $this->load->view('user_stisla/tabel/barang_kembali.php', $cards, TRUE),
       ),
     );
 
     $head['title'] = 'Barang Kembali | User';
     $head['username'] = $this->session->userdata('email');
-    $this->load->view('template/head.php' , $head);
-    $this->load->view('user_stisla/index' , $data);
+    $this->load->view('template/head.php', $head);
+    $this->load->view('user_stisla/index', $data);
     $this->load->view('template/footer.php', $data);
   }
-  
-  
-  public function header(){
+
+
+  public function header()
+  {
     $data = array(
       'total' => array(
         'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
         'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
         'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
-      )      
+      )
     );
-    return $this->load->view('template/header',$data, TRUE);
-  } 
-
+    return $this->load->view('template/header', $data, TRUE);
+  }
 }
-
-?>

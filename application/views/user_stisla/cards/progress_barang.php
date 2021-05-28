@@ -1,7 +1,7 @@
 <div class="col-lg-3 col-md-6 col-12 col-sm-12">
     <div class="card">
         <div class="card-header">
-            <h4>Progress Barang</h4>
+            <h4>Total Barang</h4>
         </div>
         <div class="card-body">
             <?php foreach ($progress_barang as $data) :

@@ -51,6 +51,11 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="card-body d-flex justify-content-center">
+                    <nav class="" aria-label="...">
+                        <?= $pagination ?>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
