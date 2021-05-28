@@ -25,10 +25,28 @@
                             <tr>
                                 <td><?= $item->id_transaksi ?></td>
                                 <td class="font-weight-bold"><?= $item->nama_barang ?></td>
-                                <td class="text-uppercase"><?= $item->kode_barang?></td>
+                                <td class="text-uppercase"><?= $item->kode_barang ?></td>
                                 <td><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </td>
-                                <td><?= $item->status ?></td>
-                                <td><?= $item->lokasi?></td>
+                                <?php
+                                switch ($item->status):
+                                    case '0':
+                                        $badge = 'badge badge-warning';
+                                        break;
+                                    case '1':
+                                        $badge = 'badge badge-success';
+                                        break;
+                                    case '2':
+                                        $badge = 'badge badge-primary';
+                                        break;
+                                    case '3':
+                                        $badge = 'badge badge-danger';
+                                        break;
+                                endswitch;
+                                ?>
+                                <td class="text-uppercase">
+                                    <span class="<?= $badge ?>"><?= $item->text_status ?></span>
+                                </td>
+                                <td><?= $item->lokasi ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

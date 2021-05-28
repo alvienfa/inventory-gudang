@@ -82,7 +82,7 @@ class M_user extends CI_Model
 
   public function barang_keluar($a,$b,$c)
   {
-    $query = $this->db->select("a.*,b.*,c.text_status")
+    $query = $this->db->select("a.*,b.alamat,b.kecamatan,b.kota,b.provinsi,b.kode_pos,c.text_status")
     ->from($a . ' as a')
     ->join($b . ' as b', 'b.id=a.id_lokasi','left')
     ->join($c . ' as c', 'c.id=a.status', 'left')
@@ -91,12 +91,11 @@ class M_user extends CI_Model
   return $query;
   }
 
-  public function barang_kembali($a)
+  public function barang_kembali($a,$b)
   {
-    $query = $this->db->select("*")
-    ->from($a)
-    // ->join($b . ' as b', 'b.id=a.id_lokasi','left')
-    // ->join($c . ' as c', 'c.id=a.status', 'left')
+    $query = $this->db->select("a.*,b.text_status")
+    ->from($a . ' as a')
+    ->join($b . ' as b', 'b.id=a.status','left')
     ->order_by('id', 'desc')
     ->get()->result();
   return $query;

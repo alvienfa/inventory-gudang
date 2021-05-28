@@ -30,7 +30,18 @@
                                 <td><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </td>
                                 <td class="text-uppercase"><?= $item->nm_penjab ?> (<?= $item->nohp_penjab ?>)</td>
                                 <td><?= $item->keterangan ?></td>
-                                <?php switch($item->status):
+                                <!-- <td>
+                                    <button 
+                                    class="btn btn-primary modal-2" 
+                                    data-alamat="<?= $item->alamat?>"
+                                    data-kecamatan="<?= $item->kecamatan ?>"
+                                    data-kota="<?= $item->kota?>"
+                                    data-provinsi="<?= $item->provinsi?>"
+                                    data-pos="<?= $item->kode_pos?>"
+                                    ><i class="fas fa-map-marker"></i></button>
+                                </td> -->
+                                <?php
+                                switch ($item->status):
                                     case '0':
                                         $badge = 'badge badge-warning';
                                         break;
@@ -43,15 +54,35 @@
                                     case '3':
                                         $badge = 'badge badge-danger';
                                         break;
-                                    endswitch;
+                                endswitch;
                                 ?>
-                                        <td class="text-uppercase">
-                                            <span class="<?= $badge ?>"><?= $item->text_status?></span>
-                                        </td>
+                                <td class="text-uppercase">
+                                    <span class="<?= $badge ?>"><?= $item->text_status ?></span>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal Lamtoro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer bg-whitesmoke br">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

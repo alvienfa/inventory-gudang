@@ -26,11 +26,12 @@
 <script src="https://demo.getstisla.com/assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 
 <!-- Template JS File -->
-<script src="https://demo.getstisla.com/assets/js/scripts.js"></script>
-<script src="https://demo.getstisla.com/assets/js/custom.js"></script>
+<script src="<?= base_url('assets/stisla/script.js')?>"></script>
+<script src="<?= base_url('assets/stisla/custom.js')?>"></script>
 
 <!-- Page Specific JS File -->
 <script src="https://demo.getstisla.com/assets/js/page/index-0.js"></script>
+<script src="<?= base_url('assets/stisla/bootstrap-modal.js')?>"></script>
 </body>
 
 </html>

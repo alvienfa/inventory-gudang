@@ -22,14 +22,7 @@
 
                         <?php foreach ($list_data as $last) : ?>
                             <tr>
-                                <td>
-                                    <?= $last->nama_barang ?>
-                                    <div class="table-links">
-                                        in <a href="#">Web Development</a>
-                                        <div class="bullet"></div>
-                                        <a href="#">View</a>
-                                    </div>
-                                </td>
+                                <td><?= $last->nama_barang ?></td>
                                 <td><?= $last->id_transaksi ?></td>
                                 <td><span class="font-weight-bold"><?= $last->jumlah . "</span> " . $last->satuan ?> </td>
                                 <td>

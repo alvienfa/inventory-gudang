@@ -14,10 +14,6 @@ class User extends CI_Controller
   {
     if($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 0)
     {
-      // $this->load->view('user/templates/header.php');
-      // $this->load->view('user/index');
-      // $this->load->view('user/templates/footer.php');
-
       $cards['progress_barang'] = $this->M_user->progress_barang();
       $cards['last_data']       = $this->M_user->select_limit('tb_barang_kembali','tb_status', 10);
       $data = array(
@@ -28,8 +24,7 @@ class User extends CI_Controller
         'total' => array(
           'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
           'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
-          'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali'),
-          'barang_jual'     => $this->M_user->total_row('tb_barang_jual') 
+          'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali') 
         ),
           
         'views' => array(
@@ -130,7 +125,6 @@ class User extends CI_Controller
     $cards['list_data'] = $this->M_user->barang_keluar('tb_barang_keluar','map_lokasi', 'tb_status');
     $data = array(
       'title' => 'Tabel Barang Keluar',
-      // 'barang_keluar'     => $this->M_user->select('tb_barang_keluar'),
       'views' => array(
         'header' => $this->header(),
         'card_satu'  => $this->load->view('user_stisla/tabel/barang_keluar.php' ,$cards, TRUE),
@@ -146,10 +140,9 @@ class User extends CI_Controller
 
   public function tabel_barang_kembali()
   {
-    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali');
+    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali', 'tb_status');
     $data = array(
       'title' => 'Tabel Barang Kembali',
-      'barang_kembali'    => $this->M_user->select('tb_barang_kembali'),
       'views' => array(
         'header' => $this->header(),
         'card_satu'  => $this->load->view('user_stisla/tabel/barang_kembali.php' ,$cards, TRUE),
@@ -169,8 +162,7 @@ class User extends CI_Controller
       'total' => array(
         'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
         'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
-        'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali'),
-        'barang_jual'     => $this->M_user->total_row('tb_barang_jual') 
+        'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
       )      
     );
     return $this->load->view('template/header',$data, TRUE);
