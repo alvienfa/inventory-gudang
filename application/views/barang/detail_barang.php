@@ -34,11 +34,7 @@
                             <th>:</th>
                             <th><?= $detail->jumlah ?> <?= $detail->satuan ?></th>
                         </tr>
-                        <tr>
-                            <th class="text-right">Lokasi</th>
-                            <th>:</th>
-                            <th><?= $detail->lokasi ?></th>
-                        </tr>
+                      
                         <tr>
                             <th class="text-right">Keterangan</th>
                             <th>:</th>
