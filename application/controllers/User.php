@@ -68,6 +68,18 @@ class User extends CI_Controller
       $this->load->view('user/templates/footer.php');
   }
 
+  public function setting_user()
+  {
+    $data['token_generate'] = $this->token_generate();
+    $this->session->set_userdata($data);
+
+    $head['title'] = 'Barang Keluar | User';
+    $head['username'] = $this->session->userdata('email');
+    $this->load->view('template/head.php' , $head);
+    $this->load->view('user_stisla/setting_user' , $data);
+    $this->load->view('template/footer.php', $data);
+  }
+
   public function proses_new_password()
   {
     $this->form_validation->set_rules('new_password','New Password','required');
@@ -91,10 +103,10 @@ class User extends CI_Controller
         $this->M_user->update_password('user',$where,$data);
 
         $this->session->set_flashdata('msg_berhasil','Password Telah Diganti');
-        redirect(base_url('user/setting'));
+        redirect(base_url('user/setting_user'));
       }
     }else {
-      $this->load->view('user/setting');
+      $this->load->view('user/setting_user');
     }
   }
 
