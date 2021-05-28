@@ -111,14 +111,11 @@ class User extends CI_Controller
     $cards['list_data']       = $this->M_user->barang_masuk('tb_barang_masuk','tb_gudang');
     $data = array(
       'title' => 'Tabel Barang Masuk',
-      'barang_keluar'     => $this->M_user->select('tb_barang_keluar'),
       'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
-      'barang_kembali'    => $this->M_user->select('tb_barang_kembali'),
       'views' => array(
         'header' => $this->header(),
         'card_satu'  => $this->load->view('user_stisla/tabel/barang_masuk.php' ,$cards, TRUE),
       ),
-      
     );
 
     $head['username'] = $this->session->userdata('email');
@@ -130,11 +127,43 @@ class User extends CI_Controller
 
   public function tabel_barang_keluar()
   {
-    $this->load->view('user/templates/header.php');
-    $data['list_data'] = $this->M_user->select('tb_barang_keluar');
-    $this->load->view('user/tabel/tabel_barangkeluar',$data);
-    $this->load->view('user/templates/footer.php');
+    $cards['list_data'] = $this->M_user->barang_keluar('tb_barang_keluar','map_lokasi', 'tb_status');
+    $data = array(
+      'title' => 'Tabel Barang Keluar',
+      // 'barang_keluar'     => $this->M_user->select('tb_barang_keluar'),
+      'views' => array(
+        'header' => $this->header(),
+        'card_satu'  => $this->load->view('user_stisla/tabel/barang_keluar.php' ,$cards, TRUE),
+      ),
+    );
+
+    $head['title'] = 'Barang Keluar | User';
+    $head['username'] = $this->session->userdata('email');
+    $this->load->view('template/head.php' , $head);
+    $this->load->view('user_stisla/index' , $data);
+    $this->load->view('template/footer.php', $data);
   }
+
+  public function tabel_barang_kembali()
+  {
+    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali');
+    $data = array(
+      'title' => 'Tabel Barang Kembali',
+      'barang_kembali'    => $this->M_user->select('tb_barang_kembali'),
+      'views' => array(
+        'header' => $this->header(),
+        'card_satu'  => $this->load->view('user_stisla/tabel/barang_kembali.php' ,$cards, TRUE),
+      ),
+    );
+
+    $head['title'] = 'Barang Kembali | User';
+    $head['username'] = $this->session->userdata('email');
+    $this->load->view('template/head.php' , $head);
+    $this->load->view('user_stisla/index' , $data);
+    $this->load->view('template/footer.php', $data);
+  }
+  
+  
   public function header(){
     $data = array(
       'total' => array(

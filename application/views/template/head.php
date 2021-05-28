@@ -146,9 +146,9 @@
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-table"></i> <span>Table</span></a>
                 <ul class="dropdown-menu">
-                  <li><a class="nav-link" href="<?= base_url()?>">Table Barang Masuk</a></li>
-                  <li><a class="nav-link" href="<?= base_url()?>">Table Barang Keluar</a></li>
-                  <li><a class="nav-link" href="<?= base_url()?>">Table Barang Kembali</a></li>
+                  <li><a class="nav-link" href="<?= base_url('user/tabel_barang_masuk')?>">Table Barang Masuk</a></li>
+                  <li><a class="nav-link" href="<?= base_url('user/tabel_barang_keluar')?>">Table Barang Keluar</a></li>
+                  <li><a class="nav-link" href="<?= base_url('user/tabel_barang_kembali')?>">Table Barang Kembali</a></li>
                 </ul>
               </li>  
             </ul>

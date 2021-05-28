@@ -75,8 +75,30 @@ class M_user extends CI_Model
     $query = $this->db->select("a.*,b.nama_gudang")
       ->from($a . ' as a')
       ->join($b . ' as b', 'b.id = a.id_gudang', 'LEFT')
-      ->order_by('id', 'desc')
+      ->order_by('a.id', 'desc')
       ->get()->result();
     return $query;
+  }
+
+  public function barang_keluar($a,$b,$c)
+  {
+    $query = $this->db->select("a.*,b.*,c.text_status")
+    ->from($a . ' as a')
+    ->join($b . ' as b', 'b.id=a.id_lokasi','left')
+    ->join($c . ' as c', 'c.id=a.status', 'left')
+    ->order_by('a.id', 'desc')
+    ->get()->result();
+  return $query;
+  }
+
+  public function barang_kembali($a)
+  {
+    $query = $this->db->select("*")
+    ->from($a)
+    // ->join($b . ' as b', 'b.id=a.id_lokasi','left')
+    // ->join($c . ' as c', 'c.id=a.status', 'left')
+    ->order_by('id', 'desc')
+    ->get()->result();
+  return $query;
   }
 }
