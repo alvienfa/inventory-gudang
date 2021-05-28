@@ -40,7 +40,6 @@
                             <div id="qr-wrapper">
                                 <div class="posisi">
                                     <a href="#" id="btn-scan-qr">
-                                        <!-- <img class="icon-qr" src="<?= base_url() . "/assets/img/scan-me.png" ?>"> -->
                                     </a>
                                 </div>
                                 <canvas hidden="" id="qr-canvas"></canvas>

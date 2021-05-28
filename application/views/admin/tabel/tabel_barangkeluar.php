@@ -34,102 +34,102 @@
                 <?php if ($this->session->flashdata('msg_berhasil')) { ?>
                   <div class="alert alert-success alert-dismissible" style="width:100%">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Success!</strong><br> <?php echo $this->session->flashdata('msg_berhasil');?>
-               </div>
-              <?php } ?>
+                    <strong>Success!</strong><br> <?php echo $this->session->flashdata('msg_berhasil'); ?>
+                  </div>
+                <?php } ?>
 
-              <a href="<?=base_url('admin/scan_barang_keluar')?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data Keluar</a>
-              <a href="<?=base_url('report/barangKeluarManual')?>" style="margin-bottom:10px;" type="button" class="btn btn-danger" name="laporan_data"><i class="fa fa-file-text" aria-hidden="true"></i> Invoice Manual</a>
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>No</th>
-                  <th>ID Transaksi</th>
-                  <th>Tanggal Masuk</th>
-                  <th>Tanggal Keluar</th>
-                  <th>Lokasi</th>
-                  <th>Kode Barang</th>
-                  <th>Nama Barang</th>
-                  <th>Jumlah</th>
-                  <th>Status</th>
-                  <th>Invoice</th>
-                  <!-- <th></th> -->
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <?php if(is_array($list_data)){ ?>
-                  <?php $no = 1;?>
-                  <?php foreach($list_data as $dd): ?>
-                    <td><?=$no?></td>
-                    <td><?=$dd->id_transaksi?></td>
-                    <td><?=$dd->tanggal_masuk?></td>
-                    <td><?=$dd->tanggal_keluar?></td>
-                    <td><?=$dd->lokasi?></td>
-                    <td><?=strtoupper($dd->kode_barang)?></td>
-                    <td><?=$dd->nama_barang?></td>
-                    <td><span class="text-bold"> <?=$dd->jumlah?> </span>(<?=$dd->satuan?>)</td>
-                    <td style="vertical-align:middle">
-                    <?php switch($dd->status):
-                        case '0':
-                            echo '<span class="label label-warning text-uppercase">belum</span>';
-                            break;
-                        case '1':
-                            echo '<span class="label label-success text-uppercase">sudah</span>';
-                            break;
-                        case '2':
-                            echo '<span class="label label-primary text-uppercase">diperbaiki</span>';
-                            break;
-                        case '3': 
-                            echo '<span class="label label-danger text-uppercase">rusak</span>';
-                            break;   
-                        endswitch;
-                    ?>
-                    </td>
-                    <td><a 
-                    type="button" class="btn btn-danger btn-report"  
-                    href="<?=base_url('report/barangKeluar/'.$dd->id)?>" name="btn_report" style="margin:auto;"><i class="fa fa-file-text" aria-hidden="true"></i></a></td>
-                </tr>
-              <?php $no++; ?>
-              <?php endforeach;?>
-              <?php }else { ?>
+                <a href="<?= base_url('admin/scan_barang_keluar') ?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data Keluar</a>
+                <a href="<?= base_url('report/barangKeluarManual') ?>" style="margin-bottom:10px;" type="button" class="btn btn-danger" name="laporan_data"><i class="fa fa-file-text" aria-hidden="true"></i> Invoice Manual</a>
+                <div class="table-responsive">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>ID Transaksi</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Tanggal Keluar</th>
+                        <th>Lokasi</th>
+                        <th>Kode Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah</th>
+                        <th>Status</th>
+                        <th>Invoice</th>
+                        <!-- <th></th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <?php if (is_array($list_data)) { ?>
+                          <?php $no = 1; ?>
+                          <?php foreach ($list_data as $dd) : ?>
+                            <td><?= $no ?></td>
+                            <td><?= $dd->id_transaksi ?></td>
+                            <td><?= $dd->tanggal_masuk ?></td>
+                            <td><?= $dd->tanggal_keluar ?></td>
+                            <td><?= $dd->lokasi ?></td>
+                            <td><?= strtoupper($dd->kode_barang) ?></td>
+                            <td><?= $dd->nama_barang ?></td>
+                            <td><span class="text-bold"> <?= $dd->jumlah ?> </span>(<?= $dd->satuan ?>)</td>
+                            <td style="vertical-align:middle">
+                              <?php switch ($dd->status):
+                                case '0':
+                                  echo '<span class="label label-warning text-uppercase">belum</span>';
+                                  break;
+                                case '1':
+                                  echo '<span class="label label-success text-uppercase">sudah</span>';
+                                  break;
+                                case '2':
+                                  echo '<span class="label label-primary text-uppercase">diperbaiki</span>';
+                                  break;
+                                case '3':
+                                  echo '<span class="label label-danger text-uppercase">rusak</span>';
+                                  break;
+                              endswitch;
+                              ?>
+                            </td>
+                            <td><a type="button" class="btn btn-danger btn-report" href="<?= base_url('report/barangKeluar/' . $dd->id) ?>" name="btn_report" style="margin:auto;"><i class="fa fa-file-text" aria-hidden="true"></i></a></td>
+                      </tr>
+                      <?php $no++; ?>
+                    <?php endforeach; ?>
+                  <?php } else { ?>
                     <td colspan="7" align="center"><strong>Data Kosong</strong></td>
-              <?php } ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>No</th>
-                  <th>ID Transaksi</th>
-                  <th>Tanggal Masuk</th>
-                  <th>Tanggal Keluar</th>
-                  <th>Lokasi</th>
-                  <th>Kode Barang</th>
-                  <th>Nama Barang</th>
-                  <th>Jumlah</th>
-                  <th>Status</th>
-                  <th>Invoice</th>
-                </tr>
-                </tfoot>
-              </table>
+                  <?php } ?>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>ID Transaksi</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Tanggal Keluar</th>
+                        <th>Lokasi</th>
+                        <th>Kode Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah</th>
+                        <th>Status</th>
+                        <th>Invoice</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <!-- /.box-body -->
+              </div>
             </div>
-            <!-- /.box-body -->
+            <!-- /.col -->
           </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
+          <!-- /.row -->
+      </section>
+      <!-- /.content -->
     </div>
-    <strong>Copyright &copy; <?=date('Y')?></strong>
-    
-  </footer>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 2.4.0
+      </div>
+      <strong>Copyright &copy; <?= date('Y') ?></strong>
 
-  <!-- Add the sidebar's background. This div must be placed
+    </footer>
+
+    <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
   </div>

@@ -3,13 +3,9 @@
         align-items: center;
     }
     #qr-canvas {
-        width: 100%;
+        margin: auto;
         max-width: 100%;
         /* border: 5px solid white; */
-    }
-
-    .icon-qr {
-        width: 200px
     }
 </style>
 
@@ -25,8 +21,8 @@
         <div class="content-wrapper" style="background:black">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1 class="text-white">
-                    Scan Barang Keluar
+                <h1>
+                    Scan QR Data Barang Keluar
                 </h1>
             </section>
 
@@ -39,7 +35,6 @@
                                 <div id="qr-wrapper">
                                     <div class="posisi">
                                         <a href="#" id="btn-scan-qr">
-                                            <!-- <img class="icon-qr" src="<?= base_url() . "/assets/img/scan-me.png" ?>"> -->
                                         </a>
                                     </div>
                                     <div>
@@ -60,7 +55,7 @@
             <?php else : ?>
                 <section class="content">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="container-fluid">
                                 <div class="box box-primary">
                                     <div class="box-header with-border">
@@ -127,7 +122,9 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="container-fluid">
                                 <div class="row">
                                     <div class="box box-primary">
                                         <div class="box-header with-border">
@@ -141,16 +138,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-12">
                                                         <div class="box-header with-border">
-                                                            <h3 class="box-title"><i class="fa fa-map-marker" aria-hidden="true"></i>Penanggung Jawab</h3>
+                                                            <h3 class="box-title"><i class="fa fa-user" aria-hidden="true"></i> Penanggung Jawab</h3>
                                                         </div>
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="status">Nama Penjab</label>
+                                                            <label for="status">Nama Penanggung Jawab</label>
                                                             <input type="text" name="nm_penjab" class="form-control" id="nm_penjab">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="status">Contact Penjab</label>
+                                                            <label for="status">Contact Penanggung Jawab</label>
                                                             <input type="phone" name="nohp_penjab" class="form-control" id="nohp_penjab">
                                                         </div>
                                                         <div class="form-group">
