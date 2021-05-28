@@ -95,8 +95,8 @@ class M_user extends CI_Model
   {
     $query = $this->db->select("a.*,b.text_status")
     ->from($a . ' as a')
-    ->join($b . ' as b', 'b.id=a.status','left')
-    ->order_by('id', 'desc')
+    ->join($b . ' as b', 'b.id=a.status', 'left')
+    ->order_by('a.id', 'desc')
     ->get()->result();
   return $query;
   }

@@ -64,12 +64,7 @@
                                                             <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $list_data->jumlah ?>" value="<?= $list_data->jumlah ?>">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="jumlah">Status
-                                                                <span class="text-sm"><i class="fa fa-circle text-yellow"></i>Belum</span>
-                                                                <span class="text-sm"><i class="fa fa-circle text-green"></i>Sudah</span>
-                                                                <span class="text-sm"><i class="fa fa-circle text-blue"></i>Diperbaiki</span>
-                                                                <span class="text-sm"><i class="fa fa-circle text-red"></i>Rusak</span>
-                                                            </label>
+                                                            
                                                             <select name="status" class="form-control">
                                                                 <option value="0">Belum</option>
                                                                 <option value="1">Success</option>
