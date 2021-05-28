@@ -40,57 +40,59 @@
                 <?php } ?>
 
                 <a href="<?= base_url('admin/scan_barang_kembali') ?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data Barang Kembali</a>
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>No </th>
-                      <th>ID_Transaksi</th>
-                      <th>Tanggal</th>
-                      <th>Kode Barang</th>
-                      <th>Nama Barang</th>
-                      <th>Satuan</th>
-                      <th>Jumlah</th>
-                      <th>Status</th>
+                <div class="table-responsive">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>No </th>
+                        <th>ID_Transaksi</th>
+                        <th>Tanggal</th>
+                        <th>Kode Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Satuan</th>
+                        <th>Jumlah</th>
+                        <th>Status</th>
 
-                      <!-- <th>Keluarkan</th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <?php if (is_array($list_data)) { ?>
-                        <?php $no = 1; ?>
-                        <?php foreach ($list_data as $dd) : ?>
-                          <td><?= $no ?></td>
-                          <td><?= $dd->id_transaksi ?></td>
-                          <td><?= $dd->tanggal_kembali ?></td>
-                          <td><?= $dd->kode_barang ?></td>
-                          <td><?= $dd->nama_barang ?></td>
-                          <td><?= $dd->satuan ?></td>
-                          <td><?= $dd->jumlah ?></td>
-                          <td><?php if ($dd->status === '0') {
-                                echo '<span class="label label-warning">Belum</span>';
-                              } elseif ($dd->status === '1') {
-                                echo '<span class="label label-success">Sudah</span>';
-                              } elseif ($dd->status === '2') {
-                                echo '<span class="label label-primary">Diperbaiki</span>';
-                              } elseif ($dd->status === '3'){
-                                echo '<span class="label label-danger">Rusak</span>';
-                              }
+                        <!-- <th>Keluarkan</th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <?php if (is_array($list_data)) { ?>
+                          <?php $no = 1; ?>
+                          <?php foreach ($list_data as $dd) : ?>
+                            <td><?= $no ?></td>
+                            <td><?= $dd->id_transaksi ?></td>
+                            <td><?= $dd->tanggal_kembali ?></td>
+                            <td><?= $dd->kode_barang ?></td>
+                            <td><?= $dd->nama_barang ?></td>
+                            <td><?= $dd->satuan ?></td>
+                            <td><?= $dd->jumlah ?></td>
+                            <td><?php if ($dd->status === '0') {
+                                  echo '<span class="label label-warning">Belum</span>';
+                                } elseif ($dd->status === '1') {
+                                  echo '<span class="label label-success">Sudah</span>';
+                                } elseif ($dd->status === '2') {
+                                  echo '<span class="label label-primary">Diperbaiki</span>';
+                                } elseif ($dd->status === '3') {
+                                  echo '<span class="label label-danger">Rusak</span>';
+                                }
 
-                              ?>
+                                ?>
 
-                          </td>
+                            </td>
 
-                          <!-- <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?= base_url('admin/barang_keluar/' . $dd->id_transaksi) ?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td> -->
-                    </tr>
-                    <?php $no++; ?>
-                  <?php endforeach; ?>
-                <?php } else { ?>
-                  <td align="center" colspan="11" center="center"><strong style="color:gray">Data Kosong</strong></td>
-                <?php } ?>
-                  </tbody>
+                            <!-- <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?= base_url('admin/barang_keluar/' . $dd->id_transaksi) ?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td> -->
+                      </tr>
+                      <?php $no++; ?>
+                    <?php endforeach; ?>
+                  <?php } else { ?>
+                    <td align="center" colspan="11" center="center"><strong style="color:gray">Data Kosong</strong></td>
+                  <?php } ?>
+                    </tbody>
 
-                </table>
+                  </table>
+                </div>
               </div>
               <!-- /.box-body -->
             </div>
