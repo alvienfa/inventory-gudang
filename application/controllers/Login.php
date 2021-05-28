@@ -9,7 +9,7 @@ class Login extends CI_Controller {
 	}
 	public function index()
 	{
-		if ($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 0) {
+		if ($this->session->userdata('status') == 'login') {
 			redirect('user');
 		}else{
 		    $data['token_generate'] = $this->token_generate();
