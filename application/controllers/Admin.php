@@ -733,11 +733,10 @@ class Admin extends CI_Controller
   public function submit_barang_kembali()
   {
     $id_transaksi     = $this->input->post('id_transaksi', TRUE);
-    $jumlah           = $this->input->post('jumlah', TRUE);
     $status           = $this->input->post('status', TRUE);
     $keterangan       = $this->input->post('keterangan', TRUE);
     $where = array('id' => $this->input->post('id', TRUE));
-
+    $jumlah           = $this->input->post('jumlah', TRUE);
     $data = $this->M_admin->get_data_row('tb_barang_keluar', $where);
     $insert = array(
       'id_transaksi'    => $data->id_transaksi,
@@ -754,8 +753,11 @@ class Admin extends CI_Controller
       'status' => $status,
       'keterangan' => $keterangan
     );
-    // var_dump($this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah));die();
-    $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
+    
+    if($status == '1'){
+      $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
+    }
+
     $this->M_admin->insert('tb_barang_kembali', $insert);
     $this->M_admin->update('tb_barang_keluar', $update, $where);
     $this->session->set_flashdata('msg_berhasil_masuk', 'Barang Berhasil DiKembalikan');
