@@ -754,7 +754,7 @@ class Admin extends CI_Controller
       'keterangan' => $keterangan
     );
 
-    if($status == '1'){
+    if($status == '1' || $status == '2'){
       $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
     }
 
