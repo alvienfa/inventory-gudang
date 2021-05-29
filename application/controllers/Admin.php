@@ -331,9 +331,9 @@ class Admin extends CI_Controller
     $this->load->view('admin/form_barangmasuk/form_update', $data);
   }
 
-  public function delete_barang($id_transaksi)
+  public function delete_barang($id)
   {
-    $where = array('id_transaksi' => $id_transaksi);
+    $where = array('id' => $id);
     $this->M_admin->delete('tb_barang_masuk', $where);
     redirect(base_url('admin/tabel_barangmasuk'));
   }
