@@ -385,9 +385,20 @@ class Admin extends CI_Controller
       $this->load->library('upload', $config);
       $this->upload->initialize($config);
       if (!$this->upload->do_upload('gambar')) {
-        $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
-        $data['list_satuan'] = $this->M_admin->select('tb_satuan');
-        $this->session->set_flashdata('msg_gagal', $this->upload->display_errors());
+        $data = array(
+          'id_transaksi' => $id_transaksi,
+          'tanggal'      => $tanggal,
+          'keterangan'   => $keterangan,
+          'kode_barang'  => $kode_barang,
+          'nama_barang'  => $nama_barang,
+          'satuan'       => $satuan,
+          'jumlah'       => $jumlah,
+          'qr_code'      => $image_name,
+          'gambar'       => 'preview.jpg',
+          'id_gudang'    => $id_gudang
+        );
+        $this->M_admin->insert('tb_barang_masuk', $data);
+        $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
         redirect(base_url('admin/form_barangmasuk'));
       } else {
         $upload_data = $this->upload->data();
