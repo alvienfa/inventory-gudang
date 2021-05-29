@@ -10,11 +10,13 @@ class Admin extends CI_Controller
     $this->load->model('M_admin');
     $this->load->library('upload');
     
-		// if($this->session->userdata('role') === 0){
-		// 	redirect('user', 'refresh');
-		// }
+    if($this->session->userdata('role') == 0 && $this->session->userdata('status') == 'login'){
+      redirect('user');
+    }
 
-    // if($this)
+    if(!$this->session->userdata('status') == 'login'){
+      redirect('login');
+    }
   }
 
   public function index()
@@ -331,11 +333,12 @@ class Admin extends CI_Controller
     $this->load->view('admin/form_barangmasuk/form_update', $data);
   }
 
-  public function delete_barang($id_transaksi)
+  public function delete_barang()
   {
-    $where = array('id_transaksi' => $id_transaksi);
+    $id = $this->input->post('id', TRUE);
+    $where = array('id' => $id);
     $this->M_admin->delete('tb_barang_masuk', $where);
-    redirect(base_url('admin/tabel_barangmasuk'));
+    redirect('admin/tabel_barangmasuk');
   }
 
 
