@@ -401,7 +401,7 @@ class Admin extends CI_Controller
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
-        redirect(base_url('admin/form_barangmasuk'));
+        redirect('admin/form_barangmasuk');
       } else {
         $upload_data = $this->upload->data();
         $nama_file = $upload_data['file_name'];
