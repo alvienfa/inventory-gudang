@@ -435,6 +435,7 @@ class Admin extends CI_Controller
     $id_gudang    = $this->input->post('id_gudang', TRUE);
     $nama_barang  = $this->input->post('nama_barang', TRUE);
     $keterangan   = $this->input->post('keterangan', TRUE);
+    $jumlah       = $this->input->post('jumlah', TRUE);
     $where = array('id' => $id);
     //update gambar
     $config =  array(
@@ -453,6 +454,7 @@ class Admin extends CI_Controller
         'nama_barang'  => $nama_barang,
         'id_gudang'    => $id_gudang,
         'gambar'       => $gambar,
+        'jumlah'       => $jumlah,
         'keterangan'   => $keterangan
       );
       $this->M_admin->update('tb_barang_masuk', $data, $where);
@@ -465,6 +467,7 @@ class Admin extends CI_Controller
         'nama_barang'  => $nama_barang,
         'id_gudang'    => $id_gudang,
         'gambar'       => $nama_file,
+        'jumlah'       => $jumlah,
         'keterangan'   => $keterangan
       );
       //
