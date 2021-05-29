@@ -8,6 +8,13 @@ class User extends CI_Controller
   {
     parent::__construct();
     $this->load->model('M_user');
+    
+		if($this->session->userdata('role') === 1) { //cek login ga?
+			redirect('admin', 'refresh');
+		}
+		if(!$this->session->userdata('role') === 1){
+			redirect('login', 'refresh');
+		}
   }
 
   public function index()

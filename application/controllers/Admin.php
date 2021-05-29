@@ -9,25 +9,27 @@ class Admin extends CI_Controller
     parent::__construct();
     $this->load->model('M_admin');
     $this->load->library('upload');
+    
+		// if($this->session->userdata('role') === 0){
+		// 	redirect('user', 'refresh');
+		// }
+
+    // if($this)
   }
 
   public function index()
   {
     $head['title'] = 'Inventory Gudang | Dashboard';
-    if ($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 1) {
-      $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
-      $data['stokBarangMasuk'] = $this->M_admin->sum('tb_barang_masuk', 'jumlah');
-      $data['stokBarangKeluar'] = $this->M_admin->sum('tb_barang_keluar', 'jumlah');
-      $data['dataUser'] = $this->M_admin->numrows('user');
-      $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
-      $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
-      $data['views']['card'] = $this->load->view('components/card', $data, TRUE);
-      $this->load->view('layout/head', $head);
-      $this->load->view('admin/index', $data);
-      $this->load->view('layout/script');
-    } else {
-      $this->load->view('login/login');
-    }
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['stokBarangMasuk'] = $this->M_admin->sum('tb_barang_masuk', 'jumlah');
+    $data['stokBarangKeluar'] = $this->M_admin->sum('tb_barang_keluar', 'jumlah');
+    $data['dataUser'] = $this->M_admin->numrows('user');
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $data['views']['card'] = $this->load->view('components/card', $data, TRUE);
+    $this->load->view('layout/head', $head);
+    $this->load->view('admin/index', $data);
+    $this->load->view('layout/script');
   }
 
   public function signout()
@@ -444,7 +446,7 @@ class Admin extends CI_Controller
         'keterangan'   => $keterangan
       );
       $this->M_admin->update('tb_barang_masuk', $data, $where);
-      $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Diupdate');  
+      $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Diupdate');
       redirect(base_url('admin/tabel_barangmasuk'));
     } else {
       $upload_data = $this->upload->data();
@@ -455,10 +457,10 @@ class Admin extends CI_Controller
         'gambar'       => $nama_file,
         'keterangan'   => $keterangan
       );
-    //
-    $this->M_admin->update('tb_barang_masuk', $data, $where);
-    $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Diupdate');
-    redirect(base_url('admin/tabel_barangmasuk'));
+      //
+      $this->M_admin->update('tb_barang_masuk', $data, $where);
+      $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Diupdate');
+      redirect(base_url('admin/tabel_barangmasuk'));
     }
   }
   ####################################
