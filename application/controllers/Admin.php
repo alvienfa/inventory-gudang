@@ -345,7 +345,6 @@ class Admin extends CI_Controller
 
   public function proses_databarang_masuk_insert()
   {
-    $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
     $this->form_validation->set_rules('kode_barang', 'Kode Barang', 'required');
     $this->form_validation->set_rules('nama_barang', 'Nama Barang', 'required');
     $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
@@ -404,7 +403,7 @@ class Admin extends CI_Controller
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
-        redirect(base_url('admin/form_barangmasuk'));
+        redirect('admin/form_barangmasuk');
       } else {
         $upload_data = $this->upload->data();
         $nama_file = $upload_data['file_name'];
@@ -439,6 +438,7 @@ class Admin extends CI_Controller
     $id_gudang    = $this->input->post('id_gudang', TRUE);
     $nama_barang  = $this->input->post('nama_barang', TRUE);
     $keterangan   = $this->input->post('keterangan', TRUE);
+    $jumlah       = $this->input->post('jumlah', TRUE);
     $where = array('id' => $id);
     //update gambar
     $config =  array(
@@ -457,6 +457,7 @@ class Admin extends CI_Controller
         'nama_barang'  => $nama_barang,
         'id_gudang'    => $id_gudang,
         'gambar'       => $gambar,
+        'jumlah'       => $jumlah,
         'keterangan'   => $keterangan
       );
       $this->M_admin->update('tb_barang_masuk', $data, $where);
@@ -469,6 +470,7 @@ class Admin extends CI_Controller
         'nama_barang'  => $nama_barang,
         'id_gudang'    => $id_gudang,
         'gambar'       => $nama_file,
+        'jumlah'       => $jumlah,
         'keterangan'   => $keterangan
       );
       //

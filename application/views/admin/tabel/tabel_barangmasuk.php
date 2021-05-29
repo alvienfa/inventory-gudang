@@ -49,6 +49,7 @@
                         <th>Tanggal</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
+                        <th>Keterangan Barang</th>
                         <th>Foto Barang</th>
                         <th>Satuan</th>
                         <th>Jumlah</th>
@@ -69,6 +70,7 @@
                             <td><?= $dd->tanggal ?></td>
                             <td><?= strtoupper($dd->kode_barang) ?></td>
                             <td><?= $dd->nama_barang ?></td>
+                            <td><?= $dd->keterangan ?></td>
                             <td>
                               <img style="width: 100px;" src="<?php echo base_url() . 'assets/upload/gambar/' . $dd->gambar; ?>">
                             </td>

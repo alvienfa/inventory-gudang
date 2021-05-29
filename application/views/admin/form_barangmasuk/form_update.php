@@ -87,7 +87,7 @@
                         </div>
                         <div class="form-group">
                           <label for="jumlah">Jumlah</label>
-                          <input type="phone" name="jumlah" class="form-control" id="jumlah" value="<?= $list_data->jumlah?> <?= $list_data->satuan?>" readonly>
+                          <input type="phone" name="jumlah" class="form-control" id="jumlah" value="<?= $list_data->jumlah?> ">
                         </div>
                         <div class="form-group">
                           <img src="<?= base_url('assets/upload/gambar/'.$list_data->gambar) ?>" id="frame" alt="preview" width="200px" height="200px" onerror="" />
