@@ -342,7 +342,6 @@ class Admin extends CI_Controller
 
   public function proses_databarang_masuk_insert()
   {
-    $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
     $this->form_validation->set_rules('kode_barang', 'Kode Barang', 'required');
     $this->form_validation->set_rules('nama_barang', 'Nama Barang', 'required');
     $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
