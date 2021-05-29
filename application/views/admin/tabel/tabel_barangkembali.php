@@ -49,7 +49,6 @@
                         <th>Tanggal</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
-                        <th>Satuan</th>
                         <th>Jumlah</th>
                         <th>Status</th>
 
@@ -66,8 +65,7 @@
                             <td><?= $dd->tanggal_kembali ?></td>
                             <td><?= $dd->kode_barang ?></td>
                             <td><?= $dd->nama_barang ?></td>
-                            <td><?= $dd->satuan ?></td>
-                            <td><?= $dd->jumlah ?></td>
+                            <td><?= $dd->jumlah ?> <?= $dd->satuan ?></td>
                             <td><?php if ($dd->status === '0') {
                                   echo '<span class="label label-warning">Belum</span>';
                                 } elseif ($dd->status === '1') {
