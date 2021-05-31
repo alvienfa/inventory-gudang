@@ -99,7 +99,7 @@
                         </div>
                         <div class="form-group">
                           <label for="status">Keterangan</label>
-                          <input type="text" name="keterangan" class="form-control" id="status">
+                          <input type="text" name="keterangan" class="form-control" id="status" value="<?= $list_data->keterangan ?>">
                         </div>
                       </div>
                     </div>
