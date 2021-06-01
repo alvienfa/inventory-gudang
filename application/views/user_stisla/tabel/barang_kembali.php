@@ -3,7 +3,7 @@
         <div class="card-header">
             <h4>Barang Kembali</h4>
             <div class="card-header-action">
-                <a href="#" class="btn btn-primary">View All</a>
+                <a href="#" class="btn btn-primary">Search <i class="fas fa-search"></i></a>
             </div>
         </div>
         <div class="card-body p-0">
@@ -11,22 +11,26 @@
                 <table class="table table-striped table-hover mb-0">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>ID Transaksi</th>
                             <th>Nama</th>
                             <th>Kode</th>
                             <th>Jumlah</th>
                             <th>Status</th>
                             <th>Lokasi</th>
+                            <th>Detail</th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        <?php foreach ($list_data as $item) : ?>
+                        <?php
+                        $no = 1;
+                        foreach ($list_data as $item) : ?>
                             <tr>
-                                <td><?= $item->id_transaksi ?></td>
+                                <td><?= $no?></td>
                                 <td class="font-weight-bold"><?= $item->nama_barang ?></td>
-                                <td class="text-uppercase"><?= $item->kode_barang ?></td>
-                                <td><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </td>
+                                <td><small><?= $item->id_transaksi ?></small></td>
+                                <td class="text-uppercase"><small><?= $item->kode_barang ?></small></td>
+                                <td><small><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </small></td>
                                 <?php
                                 switch ($item->status):
                                     case '0':
@@ -44,11 +48,14 @@
                                 endswitch;
                                 ?>
                                 <td class="text-uppercase">
-                                    <span class="<?= $badge ?>"><?= $item->text_status ?></span>
+                                    <span class="<?= $badge ?>"><small><?= $item->text_status ?></small></span>
                                 </td>
-                                <td><?= $item->lokasi ?></td>
+                                <td><small><?= $item->lokasi ?></small></td>
+                                <td>
+                                    <a class="btn btn-secondary btn-sm" href="<?= base_url('barang/') . $item->id_transaksi ?>"><i class="fas fa-eye"></i></a>
+                                </td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php $no++; endforeach; ?>
                     </tbody>
                 </table>
                 <div class="card-body d-flex justify-content-center">

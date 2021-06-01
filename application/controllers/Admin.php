@@ -747,7 +747,8 @@ class Admin extends CI_Controller
       'satuan'          => $data->satuan,
       'jumlah'          => $jumlah,
       'status'          => $status,
-      'keterangan'      => $keterangan
+      'keterangan'      => $keterangan,
+      'created_at'      => date('Y-m-d H:i:s')
     );
     $update = array(
       'status' => $status,

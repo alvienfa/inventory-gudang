@@ -1,9 +1,9 @@
-<div class="col-lg-9 col-md-6 col-12 col-sm-12">
+<div class="col-lg-6 col-md-6 col-12 col-sm-12">
     <div class="card">
         <div class="card-header">
             <h4>Last Barang Kembali</h4>
             <div class="card-header-action">
-                <a href="#" class="btn btn-primary">View All</a>
+                <a href="<?= base_url('user/tabel_barang_kembali')?>" class="btn btn-primary">View All</a>
             </div>
         </div>
         <div class="card-body p-0">

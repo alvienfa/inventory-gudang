@@ -32,19 +32,34 @@ class Barang extends CI_Controller
   {
     $head['title'] = 'Detail Barang | User';
     $cards['detail'] = $this->M_barang->barang($id_transaksi);
-    $data = array(
-      'title' => 'Detail Barang',
-      'views' => array(
-        'header'    =>  $this->header(),
-        'card_satu' => $this->load->view('barang/photo_barang.php' ,$cards, TRUE),
-        'card_dua'  => $this->load->view('barang/detail_barang.php' ,$cards, TRUE),
-      ),
-    );
-
-    $head['username'] = $this->session->userdata('email');
-    $this->load->view('template/head.php' , $head);
-    $this->load->view('user_stisla/index' , $data);
-    $this->load->view('template/footer.php', $data);
+    if($this->M_barang->barang($id_transaksi)){
+      $data = array(
+        'title' => $cards['detail']->nama_barang,
+        'views' => array(
+          'header'    => $this->header(),
+          'card_satu' => $this->load->view('barang/photo_barang.php' ,$cards, TRUE),
+          'card_dua'  => $this->load->view('barang/detail_barang.php' ,$cards, TRUE),
+        ),
+      );
+  
+      $head['username'] = $this->session->userdata('email');
+      $this->load->view('template/head.php' , $head);
+      $this->load->view('user_stisla/index' , $data);
+      $this->load->view('template/footer.php', $data);
+    }else{
+      $data = array(
+        'title' => 'Barang Tidak Ada',
+        'views' => array(
+          'header'    => $this->header(),
+          'card_satu' => $this->load->view('barang/404.php' ,'', TRUE),
+        ),
+      );
+  
+      $head['username'] = $this->session->userdata('email');
+      $this->load->view('template/head.php' , $head);
+      $this->load->view('user_stisla/index' , $data);
+      $this->load->view('template/footer.php', $data);
+    }
   }
 
   public function header(){
