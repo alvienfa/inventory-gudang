@@ -44,7 +44,7 @@
             <!-- small box -->
             <div class="small-box bg-green">
               <div class="inner">
-                <?php if (!isset($stokBarangKeluar)) { ?>
+                <?php if (!empty($stokBarangKeluar)) { ?>
                   <?php foreach ($stokBarangKeluar as $d) { ?>
                     <h3><?= $d->jumlah ?></h3>
                   <?php } ?>
