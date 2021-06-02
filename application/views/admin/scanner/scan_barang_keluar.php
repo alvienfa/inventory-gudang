@@ -93,7 +93,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="nama_Barang" style="width:73%;">Nama Barang</label>
-                                                            <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $list_data->nama_barang ?>-<?= $list_data->keterangan ?>">
+                                                            <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $list_data->nama_barang ?>- <?= $list_data->keterangan ?>">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="satuan">Satuan</label>
