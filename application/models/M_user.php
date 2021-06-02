@@ -42,11 +42,6 @@ class M_user extends CI_Model
       ->get()->result();
   }
 
-  //====================================
-  // 
-  //
-  // ===================================
-
   public function progress_barang()
   {
     $query = $this->db->from('tb_barang_masuk')->order_by('jumlah', 'desc')->limit(7)->get();
@@ -70,15 +65,16 @@ class M_user extends CI_Model
     return $query;
   }
 
-  public function barang_masuk($a, $b,$limit,$start,$search)
+  public function barang_masuk($a, $b,$limit,$start,$search=FALSE)
   {
-    $query = $this->db->select("a.*,b.nama_gudang")
-      ->from($a . ' as a')
-      ->join($b . ' as b', 'b.id = a.id_gudang', 'LEFT')
-      ->limit($limit,$start)
-      ->or_like($search)
-      ->order_by('a.id', 'desc')
-      ->get()->result();  
+    $this->db->select("a.*,b.nama_gudang");
+    $this->db->from($a . ' as a');
+    $this->db->join($b . ' as b', 'b.id = a.id_gudang', 'LEFT');
+    $this->db->limit($limit,$start);
+    $this->db->or_like($search);
+    $this->db->not_like('a.is_deleted', 1);
+    $this->db->order_by('a.id', 'desc');
+    $query = $this->db->get()->result();
     return $query;
   }
 
