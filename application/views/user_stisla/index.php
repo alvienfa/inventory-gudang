@@ -2,7 +2,7 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header">
-      <h1><?= $title?></h1>
+      <h1 class="text-uppercase"><?= $title?></h1>
     </div>
     <div class="row">
       <?= isset($views['header'])?$views['header']:NULL?>
@@ -12,4 +12,8 @@
         <?= isset($views['card_dua'])? $views['card_dua']: NULL ?>
     </div>
   </section>
+  
+  <?= $this->load->view('user_stisla/modals/search_modal', '', TRUE)?>
+  <?= $this->load->view('user_stisla/modals/detail_modal', '', TRUE)?>
+
 </div>

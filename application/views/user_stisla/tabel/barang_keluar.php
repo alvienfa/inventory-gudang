@@ -3,7 +3,7 @@
         <div class="card-header">
             <h4>Barang Keluar</h4>
             <div class="card-header-action">
-                <a href="#" class="btn btn-primary">View All</a>
+                <a href="#" class="btn btn-primary">Search <i class="fas fa-search"></i></a>
             </div>
         </div>
         <div class="card-body p-0">
@@ -11,35 +11,31 @@
                 <table class="table table-striped table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>ID Transaksi</th>
+                            <th>No</th>
                             <th>Nama</th>
+                            <th>ID Transaksi</th>
                             <th>Kode Barang</th>
                             <th>Jumlah</th>
-                            <th>Penanggung Jawab</th>
-                            <th>Keterangan</th>
+                            <th>Gudang</th>
+                            <th>Contact</th>
+                            <th>Detail</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        <?php foreach ($list_data as $item) : ?>
+                        <?php
+                        $no = 1;
+                        foreach ($list_data as $item) : ?>
                             <tr>
-                                <td><?= $item->id_transaksi ?></td>
-                                <td class="font-weight-bold"><?= $item->nama_barang ?></td>
-                                <td class="text-uppercase"><?= $item->kode_barang ?></td>
-                                <td><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </td>
-                                <td class="text-uppercase"><?= $item->nm_penjab ?> (<?= $item->nohp_penjab ?>)</td>
-                                <td><?= $item->keterangan ?></td>
-                                <!-- <td>
-                                    <button 
-                                    class="btn btn-primary modal-2" 
-                                    data-alamat="<?= $item->alamat ?>"
-                                    data-kecamatan="<?= $item->kecamatan ?>"
-                                    data-kota="<?= $item->kota ?>"
-                                    data-provinsi="<?= $item->provinsi ?>"
-                                    data-pos="<?= $item->kode_pos ?>"
-                                    ><i class="fas fa-map-marker"></i></button>
-                                </td> -->
+                                <td><?= $no ?></td>
+                                <td class="font-weight-bold">
+                                    <smaall><?= $item->nama_barang ?></smaall>
+                                </td>
+                                <td><small><?= $item->id_transaksi ?></small></td>
+                                <td class="text-uppercase"><small><?= $item->kode_barang ?></small></td>
+                                <td><small><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </small></td>
+                                <td><small><?= $item->nama_gudang ?></small></td>
+                                <td class="text-uppercase text-small"><small><i class="fas fa-user"></i> <?= $item->nm_penjab ?> (<?= $item->nohp_penjab ?>)</small></td>
                                 <?php
                                 switch ($item->status):
                                     case '0':
@@ -56,11 +52,25 @@
                                         break;
                                 endswitch;
                                 ?>
-                                <td class="text-uppercase">
-                                    <span class="<?= $badge ?>"><?= $item->text_status ?></span>
+                                <td>
+                                    <a
+                                    type="button"
+                                    data-keterangan=<?= $item->keterangan?> 
+                                    data-alamat=<?= $item->alamat ?> 
+                                    data-kecamatan=<?= $item->kecamatan ?> 
+                                    data-kota=<?= $item->kota ?> 
+                                    data-provinsi=<?= $item->provinsi ?> 
+                                    data-pos=<?= $item->kode_pos ?> 
+                                    class="btn btn-secondary btn-sm btn-detail">...</a>
+                                </td>
+                                <td class="text-uppercase text-sm">
+                                    <span class="<?= $badge ?>">
+                                        <small><?= $item->text_status ?></small>
+                                    </span>
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php $no++;
+                        endforeach; ?>
                     </tbody>
                 </table>
                 <div class="card-body d-flex justify-content-center">
@@ -68,26 +78,6 @@
                         <?= $pagination ?>
                     </nav>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal Lamtoro</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer bg-whitesmoke br">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

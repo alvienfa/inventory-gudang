@@ -8,12 +8,12 @@ class User extends CI_Controller
   {
     parent::__construct();
     $this->load->model('M_user');
-    
-    if($this->session->userdata('role') == 1 && $this->session->userdata('status') == 'login'){
+
+    if ($this->session->userdata('role') == 1 && $this->session->userdata('status') == 'login') {
       redirect('admin');
     }
 
-    if(!$this->session->userdata('status') == 'login'){
+    if (!$this->session->userdata('status') == 'login') {
       redirect('login');
     }
   }
@@ -120,14 +120,14 @@ class User extends CI_Controller
   public function tabel_barang_masuk()
   {
     $this->load->library('pagination');
-    $limit = $this->input->get('limit')? intval($this->input->get('limit')) : 10;
-    $config['base_url']             = base_url('user/tabel_barang_masuk?limit='.$limit);
+    $limit = $this->input->get('limit') ? intval($this->input->get('limit')) : 10;
+    $config['base_url']             = base_url('user/tabel_barang_masuk?limit=' . $limit);
     $config['total_rows']           = $this->M_user->total_row('tb_barang_masuk');
     $config['per_page']             = $limit;
     $config['enable_query_strings'] = TRUE;
     $config['page_query_string']    = TRUE;
     $config['use_page_numbers']     = TRUE;
-    $config['first_link']           = 'FIRST'; 
+    $config['first_link']           = 'FIRST';
     $config['last_link']            = 'LAST';
     $config['num_links']            = 2;
     $config['query_string_segment'] = 'page';
@@ -140,15 +140,19 @@ class User extends CI_Controller
     $config['num_tag_open']         = '<li class="page-item">';
     $config['num_tag_close']        = '</li>';
 
-    $start = $this->input->get('page')?(intval($this->input->get('page')) - 1) * $limit:0;
+    $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
 
     $this->pagination->initialize($config);
 
+    $search = array(
+      'nama_barang'   => $this->input->get('nama_barang'),
+      'id_gudang'     => $this->input->get('id_gudang'),
+      'id_transaksi'  => $this->input->get('id_transaksi'),
+    );
+    $cards['total_barang_masuk'] = $this->M_user->total_row('tb_barang_masuk');
+    $cards['page']       = $this->input->get('page');
     $cards['pagination'] = $this->pagination->create_links();
-  
-    // $cards['progress_barang'] = $this->M_user->progress_barang();
-    $cards['list_data']       = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit,$start);
-  
+    $cards['list_data']  = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search);
     $data = array(
       'title' => 'Tabel Barang Masuk',
       'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
@@ -156,6 +160,7 @@ class User extends CI_Controller
         'header' => $this->header(),
         'card_satu'  => $this->load->view('user_stisla/tabel/barang_masuk.php', $cards, TRUE),
       ),
+      'list_gudang' => $this->M_user->select('tb_gudang')
     );
 
     $head['username'] = $this->session->userdata('email');
@@ -167,16 +172,15 @@ class User extends CI_Controller
 
   public function tabel_barang_keluar()
   {
-    
     $this->load->library('pagination');
-    $limit = $this->input->get('limit')? intval($this->input->get('limit')) : 10;
-    $config['base_url']             = base_url('user/tabel_barang_keluar?limit='.$limit);
+    $limit = $this->input->get('limit') ? intval($this->input->get('limit')) : 10;
+    $config['base_url']             = base_url('user/tabel_barang_keluar?limit=' . $limit);
     $config['total_rows']           = $this->M_user->total_row('tb_barang_keluar');
     $config['per_page']             = $limit;
     $config['enable_query_strings'] = TRUE;
     $config['page_query_string']    = TRUE;
     $config['use_page_numbers']     = TRUE;
-    $config['first_link']           = 'FIRST'; 
+    $config['first_link']           = 'FIRST';
     $config['last_link']            = 'LAST';
     $config['num_links']            = 2;
     $config['query_string_segment'] = 'page';
@@ -189,19 +193,20 @@ class User extends CI_Controller
     $config['num_tag_open']         = '<li class="page-item">';
     $config['num_tag_close']        = '</li>';
 
-    $start = $this->input->get('page')?(intval($this->input->get('page')) - 1) * $limit:0;
+    $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
 
     $this->pagination->initialize($config);
 
     $cards['pagination'] = $this->pagination->create_links();
 
-    $cards['list_data'] = $this->M_user->barang_keluar('tb_barang_keluar', 'map_lokasi', 'tb_status', $limit,$start);
+    $cards['list_data'] = $this->M_user->barang_keluar('tb_barang_keluar', 'map_lokasi', 'tb_status', 'tb_gudang', $limit, $start);
     $data = array(
       'title' => 'Tabel Barang Keluar',
       'views' => array(
         'header' => $this->header(),
         'card_satu'  => $this->load->view('user_stisla/tabel/barang_keluar.php', $cards, TRUE),
       ),
+      'list_gudang' => $this->M_user->select('tb_gudang')
     );
 
     $head['title'] = 'Barang Keluar | User';
@@ -214,14 +219,14 @@ class User extends CI_Controller
   public function tabel_barang_kembali()
   {
     $this->load->library('pagination');
-    $limit = $this->input->get('limit')? intval($this->input->get('limit')) : 10;
-    $config['base_url']             = base_url('user/tabel_barang_kembali?limit='.$limit);
+    $limit = $this->input->get('limit') ? intval($this->input->get('limit')) : 10;
+    $config['base_url']             = base_url('user/tabel_barang_kembali?limit=' . $limit);
     $config['total_rows']           = $this->M_user->total_row('tb_barang_kembali');
     $config['per_page']             = $limit;
     $config['enable_query_strings'] = TRUE;
     $config['page_query_string']    = TRUE;
     $config['use_page_numbers']     = TRUE;
-    $config['first_link']           = 'FIRST'; 
+    $config['first_link']           = 'FIRST';
     $config['last_link']            = 'LAST';
     $config['num_links']            = 2;
     $config['query_string_segment'] = 'page';
@@ -234,13 +239,13 @@ class User extends CI_Controller
     $config['num_tag_open']         = '<li class="page-item">';
     $config['num_tag_close']        = '</li>';
 
-    $start = $this->input->get('page')?(intval($this->input->get('page')) - 1) * $limit:0;
+    $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
 
     $this->pagination->initialize($config);
 
     $cards['pagination'] = $this->pagination->create_links();
 
-    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali', 'tb_status',$limit,$start);
+    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali', 'tb_status', $limit, $start);
     $data = array(
       'title' => 'Tabel Barang Kembali',
       'views' => array(
@@ -256,6 +261,71 @@ class User extends CI_Controller
     $this->load->view('template/footer.php', $data);
   }
 
+  public function list_barang_masuk()
+  {
+    $this->load->library('pagination');
+    $limit = 24;
+    $config['base_url']             = base_url('user/list_barang_masuk');
+    $config['total_rows']           = $this->M_user->total_row('tb_barang_masuk');
+    $config['per_page']             = $limit;
+    $config['enable_query_strings'] = TRUE;
+    $config['page_query_string']    = TRUE;
+    $config['use_page_numbers']     = TRUE;
+    $config['first_link']           = 'FIRST';
+    $config['last_link']            = 'LAST';
+    $config['num_links']            = 1;
+    $config['query_string_segment'] = 'page';
+    $config['full_tag_open']        = '<ul class="pagination">';
+    $config['full_tag_close']       = '</ul>';
+    $config['prev_link']            = '<i class="fas fa-chevron-left"></i>';
+    $config['next_link']            = '<i class="fas fa-chevron-right"></i>';
+    $config['cur_tag_open']         = '<li class="page-item active"><a class="page-link">';
+    $config['cur_tag_close']        = '</a></li>';
+    $config['num_tag_open']         = '<li class="page-item">';
+    $config['num_tag_close']        = '</li>';
+
+    $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
+
+    $this->pagination->initialize($config);
+
+    $search = array(
+      'id_transaksi'  => $this->input->get('search'),
+      'nama_barang'   => $this->input->get('search'),
+      'nama_gudang'   => $this->input->get('search'),
+      'kode_barang'   => $this->input->get('search'),
+    );
+
+    $cards['total_barang_masuk'] = count($this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search));      
+    if (!$this->input->get('search')) 
+    {
+      $search = array(
+        'nama_barang'   => $this->input->get('nama_barang'),
+        'id_gudang'     => $this->input->get('id_gudang'),
+        'id_transaksi'  => $this->input->get('id_transaksi'),
+        'nama_barang'   => $this->input->get('search')
+      );
+      $cards['pagination'] = $this->pagination->create_links();
+      $cards['total_barang_masuk'] = $this->M_user->total_row('tb_barang_masuk');
+    }
+    
+    $cards['page']       = $this->input->get('page');
+    $cards['list_data']  = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search);
+    $data = array(
+      'title' => 'List Barang Masuk',
+      'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
+      'views' => array(
+        'header' => $this->search(),
+        'card_satu'  => $this->load->view('user_stisla/list/barang_masuk.php', $cards, TRUE),
+      ),
+      'list_gudang' => $this->M_user->select('tb_gudang')
+    );
+
+    $head['username'] = $this->session->userdata('email');
+    $head['title'] = 'Barang Masuk | User';
+    $this->load->view('template/head.php', $head);
+    $this->load->view('user_stisla/index', $data);
+    $this->load->view('template/footer.php', $data);
+  }
 
   public function header()
   {
@@ -267,5 +337,10 @@ class User extends CI_Controller
       )
     );
     return $this->load->view('template/header', $data, TRUE);
+  }
+
+  public function search()
+  {
+    return $this->load->view('user_stisla/list/search', '', TRUE);
   }
 }

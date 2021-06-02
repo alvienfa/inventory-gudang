@@ -1,51 +1,25 @@
+<?php
+$text_class = "text-uppercase font-weight-bold text-primary mb-0";
+?>
 <div class="col-lg-6 col-md-6 col-12 col-sm-12">
     <article class="article article-style-c">
         <div class="article-details">
             <div class="article-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th class="text-right">ID Transaksi</th>
-                            <th>:</th>
-                            <th><?= $detail->id_transaksi ?></th>
-                        </tr>
-                        <tr>
-                            <th class="text-right">Nama Barang</th>
-                            <th>:</th>
-                            <th class="text-uppercase"><?= $detail->nama_barang ?></th>
-                        </tr>
-                        <tr>
-                            <th class="text-right">Detail Barang</th>
-                            <th>:</th>
-                            <th>...</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right">Merek</th>
-                            <th>:</th>
-                            <th>...</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right">Type</th>
-                            <th>:</th>
-                            <th>...</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right">Jumlah</th>
-                            <th>:</th>
-                            <th><?= $detail->jumlah ?> <?= $detail->satuan ?></th>
-                        </tr>
-                      
-                        <tr>
-                            <th class="text-right">Keterangan</th>
-                            <th>:</th>
-                            <th><?= $detail->keterangan ?></th>
-                        </tr>
-                        <tr>
-                            <th class="text-right">Gudang</th>
-                            <th>:</th>
-                            <th><?= $detail->nama_gudang ?></th>
-                        </tr>
-                    </table>
+                <div class="form-group">
+                    <label class="mb-0" for="">ID Transaksi</label>
+                    <p class="<?= $text_class ?>"><?= $detail->id_transaksi ?></p>
+                    <label class="mb-0" for="">Nama Barang</label>
+                    <p class="<?= $text_class ?>"><?= $detail->nama_barang ?></p>
+                    <label class="mb-0" for="">Serie</label>
+                    <p class="mb-0">________________</p>
+                    <label class="mb-0" for="">Warna</label>
+                    <p class="mb-0">________________</p>
+                    <label class="mb-0" for="">Jumlah </label>
+                    <p class="<?= $text_class ?>"><?= $detail->jumlah ?> <?= $detail->satuan ?></p>
+                    <label class="mb-0" for="">Nama Gudang</label>
+                    <p class="<?= $text_class ?>"><?= $detail->nama_gudang ?></p>
+                    <label class="mb-0" for="">Keterangan</label>
+                    <p class="<?= $text_class ?>"><?= $detail->keterangan ?></p>
                 </div>
             </div>
         </div>
