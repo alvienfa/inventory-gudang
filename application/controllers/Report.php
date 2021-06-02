@@ -50,24 +50,25 @@ class Report extends CI_Controller
 
     $html=
       '<div>
-        <h1 align="center">Invoice Bukti Pengeluaran Barang</h1>
+        <h1 align="center">Invoice Bukti Pengeluaran Barang</h1><br>
+
         <table border="0" width="100%">';
         $html .= '<thead>';
         $html .= '<tr>';
-        $html .= '<td style="width:110px"> No. Transaksi</td>';
-        $html .= '<td>:</td>';
-        $html .= '<td colspan="8" style="width:140px"></td>';
+        $html .= '<td style="width:180px">No. Transaksi</td>';
+        $html .= '<td style="width:10px">:</td>';
+        $html .= '<td colspan="6" style="width:340px"></td>';
         $html .= '</tr>';
 
             $html .= '<tr>';
-            $html .= '<td style="width:510px">Ditunjukkan untuk</td>';
-            $html .= '<td>:</td>';
-            $html .= '<td></td>';
-            $html .= '<td></td>';
-            $html .= '<td></td>';
-            $html .= '<td>Penanggung Jawab</td>';
-            $html .= '<td>:</td>';
-            $html .= '<td></td>';
+            $html .= '<td style="width:180px">Ditunjukkan untuk</td>';
+            $html .= '<td style="width:10px">:</td>';
+            $html .= '<td style="width:110px"></td>';
+            $html .= '<td style="width:100px"></td>';
+            $html .= '<td style="width:150px"></td>';
+            $html .= '<td style="width:180px">Penanggung Jawab</td>';
+            $html .= '<td style="width:10px">:</td>';
+            $html .= '<td style="width:180px"></td>';
             
             $html .= '</tr>';
 
@@ -79,12 +80,11 @@ class Report extends CI_Controller
             $html .= '<td></td>';
             $html .= '<td>No. Handphone</td>';
             $html .= '<td>:</td>';
-            $html .= '<td></td>';
-            
+            $html .= '<td><br></td>';
             $html .= '</tr>';
             
         $html .= '<tr>';
-        $html .= '<td colspan="8" style="width:140px">Po. Customer  :</td>';
+        $html .= '<td colspan="8" style="width:140px">Po. Customer  :<br></td>';
         $html .= '</tr>';
         $html .= '</thead>';
 
