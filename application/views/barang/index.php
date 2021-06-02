@@ -32,7 +32,7 @@
         </div>
     </div>
     <!-- ./wrapper -->
-    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/qr-packed.js"  ></script>
     <script>
         const qrcodes = window.qrcode;
 
