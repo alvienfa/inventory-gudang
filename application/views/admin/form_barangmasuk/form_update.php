@@ -19,12 +19,6 @@
           <li class="active">Data Barang Masuk</li>
         </ol>
       </section>
-      <?php if ($this->session->flashdata('msg_berhasil')) { ?>
-        <div class="alert alert-success alert-dismissible" style="width:91%">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <strong>Success!</strong><br> <?php echo $this->session->flashdata('msg_berhasil'); ?>
-        </div>
-      <?php } ?>
 
       <?php if (validation_errors()) { ?>
         <div class="alert alert-warning alert-dismissible">
@@ -40,7 +34,8 @@
         </div>
       <?php } ?>
 
-      <form action="<?= base_url('admin/proses_databarang_masuk_update/' . $list_data->id) ?>" role="form" method="post" enctype="multipart/form-data">
+      <form action="<?= base_url('admin/proses_databarang_masuk_update/' . $list_data->id) ?>" 
+      role="form" method="post" enctype="multipart/form-data">
         <section class="content">
           <div class="row">
             <div class="col-md-8">
@@ -95,7 +90,7 @@
                         <div class="form-group">
                           <label for="gambar">Foto Barang</label>
                           <input type="hidden" name="old_gambar" value="<?= $list_data->gambar?>">
-                          <input type="file" name="gambar" class="form-control" id="gambar" onchange="preview()">
+                          <input accept="image/*" type="file" name="gambar" class="form-control" id="gambar" onchange="preview()">
                         </div>
                         <div class="form-group">
                           <label for="status">Keterangan</label>
