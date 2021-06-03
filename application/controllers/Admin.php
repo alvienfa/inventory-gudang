@@ -655,7 +655,7 @@ class Admin extends CI_Controller
       $id_lokasi = $this->M_admin->insert_lokasi('map_lokasi', $alamat);
 
       $where = array('id_transaksi' => $id_transaksi);
-      $data = array(
+      $insert = array(
         'id_transaksi' => $id_transaksi,
         'tanggal_masuk' => $tanggal_masuk,
         'tanggal_keluar' => $tanggal_keluar,
@@ -667,11 +667,12 @@ class Admin extends CI_Controller
         'jumlah' => $jumlah,
         'keterangan' => $keterangan,
         'nm_penjab' => $nm_penjab,
-        'nohp_penjab' => $nohp_penjab
+        'nohp_penjab' => $nohp_penjab,
+        'created_at'  => date("Y-m-d H:i:s")
       );
 
       $this->M_admin->mengurangi('tb_barang_masuk', $id_transaksi, $jumlah);
-      $this->M_admin->insert('tb_barang_keluar', $data);
+      $this->M_admin->insert('tb_barang_keluar', $insert);
       $this->session->set_flashdata('msg_berhasil_keluar', 'Data Berhasil Keluar');
       redirect(base_url('admin/tabel_barangkeluar'));
     } else {
