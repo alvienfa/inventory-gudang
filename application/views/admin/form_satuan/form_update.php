@@ -30,7 +30,7 @@
             <!-- general form elements -->
           <div class="box box-primary" style="width:94%;">
             <div class="box-header with-border">
-              <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Update Data Barang Masuk</h3>
+              <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Update Satuan</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -46,22 +46,22 @@
 
               <div class="box-body">
                 <div class="form-group">
-                  <?php foreach($data_satuan as $d){ ?>
                     <div class="box-body">
                       <div class="form-group" style="display:inline-block;">
-                        <input type="hidden" name="id_satuan" value="<?=$d->id_satuan?>">
+                        <input type="hidden" name="id_satuan" value="<?=$data_satuan->id_satuan?>">
                         <label for="kode_satuan" style="width:87%;margin-left: 12px;">Kode Satuan</label>
-                        <input type="text" required name="kode_satuan" style="width: 90%;margin-right: 67px;margin-left: 11px;" class="form-control" id="kode_satuan" placeholder="Kode Satuan" value="<?=$d->kode_satuan?>">
+                        <input type="text" required name="kode_satuan" style="width: 90%;margin-right: 67px;margin-left: 11px;" class="form-control" id="kode_satuan" placeholder="Kode Satuan" 
+                        value="<?=$data_satuan->kode_satuan?>">
                       </div>
                       <div class="form-group" style="display:inline-block;">
                         <label for="nama_satuan" style="width:73%;">Nama Satuan</label>
-                        <input type="text" required name="nama_satuan" style="width:90%;margin-right: 67px;" class="form-control" id="nama_satuan" placeholder="Nama Satuan" value="<?=$d->nama_satuan?>">
+                        <input type="text" required name="nama_satuan" style="width:90%;margin-right: 67px;" 
+                        class="form-control" id="nama_satuan" placeholder="Nama Satuan" 
+                        value="<?=$data_satuan->nama_satuan?>">
                     </div>
                     <div class="form-group" style="display:inline-block;">
                       <button type="reset" class="btn btn-basic" name="btn_reset" style="width:95px;margin-left:20px;"><i class="fa fa-eraser" aria-hidden="true"></i> Reset</button>
                     </div>
-                    <?php } ?>
-                    <!-- /.box-body -->
 
                     <div class="box-footer" style="width:93%;">
                       <a type="button" class="btn btn-default" style="width:10%;margin-right:26%" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>

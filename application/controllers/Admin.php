@@ -511,16 +511,16 @@ class Admin extends CI_Controller
 
   public function update_satuan()
   {
-    $head['title'] = 'Inventory Gudang | Update Data Satuan';
     $id = $this->uri->segment(3);
+    $head['title'] = 'Inventory Gudang | Update Data Satuan';
     $data['token_generate'] = $this->token_generate();
-    $data['data_satuan'] = $this->M_admin->get_data('tb_satuan', $id);
+    $data['data_satuan'] = $this->M_admin->get_data_row('tb_satuan', array('id_satuan' => $id));
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->session->set_userdata($data);
     $this->load->view('layout/head', $head);
-    $this->load->view('admin/form_users/form_update', $data);
+    $this->load->view('admin/form_satuan/form_update', $data);
 
     
   }
@@ -827,5 +827,17 @@ class Admin extends CI_Controller
     $this->load->view('layout/head', $head);
 
     $this->load->view('admin/tabel/tabel_barangkembali', $data);
+  }
+
+  public function tabel_gudang()
+  {
+    $head['title'] = 'Inventory Gudang | Data Gudang';
+    $data['list_data'] = $this->M_admin->select_desc('tb_gudang');
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
+
+    $this->load->view('admin/tabel/tabel_gudang', $data);
   }
 }

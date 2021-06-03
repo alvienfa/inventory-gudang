@@ -15,7 +15,7 @@
         <ol class="breadcrumb">
           <li><a href="<?= base_url('admin') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
           <li>Tables</li>
-          <li class="active"><a href="<?= base_url('admin/tabel_barangkembali') ?>">Tabel Barang Kembali</a></li>
+          <li class="active"><a href="<?= base_url('admin/tabel_gudang') ?>">Tabel Data Gudang</a></li>
         </ol>
       </section>
 
@@ -27,7 +27,7 @@
             <!-- /.box -->
             <div class="box">
               <div class="box-header">
-                <h3 class="box-title"><i class="fa fa-table" aria-hidden="true"></i> Stok Barang Masuk</h3>
+                <h3 class="box-title"><i class="fa fa-table" aria-hidden="true"></i> Data Gudang</h3>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -39,18 +39,15 @@
                   </div>
                 <?php } ?>
 
-                <a href="<?= base_url('admin/scan_barang_kembali') ?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data Barang Kembali</a>
+                
                 <div class="table-responsive">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>No </th>
-                        <th>ID_Transaksi</th>
-                        <th>Tanggal</th>
-                        <th>Kode Barang</th>
-                        <th>Nama Barang</th>
-                        <th>Jumlah</th>
-                        <th>Status</th>
+                        <th>Nama Gudang</th>
+                        <th>Detail Gudang</th>
+                        
 
                         <!-- <th>Keluarkan</th> -->
                       </tr>
@@ -61,24 +58,10 @@
                           <?php $no = 1; ?>
                           <?php foreach ($list_data as $dd) : ?>
                             <td><?= $no ?></td>
-                            <td><?= $dd->id_transaksi ?></td>
-                            <td><?= $dd->tanggal_kembali ?></td>
-                            <td><?= $dd->kode_barang ?></td>
-                            <td><?= $dd->nama_barang ?></td>
-                            <td><?= $dd->jumlah ?> <?= $dd->satuan ?></td>
-                            <td><?php if ($dd->status === '0') {
-                                  echo '<span class="label label-warning">Belum</span>';
-                                } elseif ($dd->status === '1') {
-                                  echo '<span class="label label-success">Sudah</span>';
-                                } elseif ($dd->status === '2') {
-                                  echo '<span class="label label-primary">Diperbaiki</span>';
-                                } elseif ($dd->status === '3') {
-                                  echo '<span class="label label-danger">Rusak</span>';
-                                }
-
-                                ?>
-
-                            </td>
+                            <td><?= $dd->nama_gudang ?></td>
+                            <td><?= $dd->detail_gudang ?></td>
+                            
+                            
 
                             <!-- <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?= base_url('admin/barang_keluar/' . $dd->id_transaksi) ?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td> -->
                       </tr>
