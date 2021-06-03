@@ -91,7 +91,7 @@
               <?php $no++; ?>
               <?php endforeach;?>
               <?php }else { ?>
-                    <td colspan="7" align="center"><strong>Data Kosong</strong></td>
+                    <td colspan="7" class="text-center"><strong>Data Kosong</strong></td>
               <?php } ?>
                 </tbody>
                 <tfoot>
