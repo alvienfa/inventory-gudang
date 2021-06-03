@@ -739,13 +739,14 @@ class Admin extends CI_Controller
   public function submit_barang_kembali()
   {
     $id_transaksi     = $this->input->post('id_transaksi', TRUE);
-    $status           = intval($this->input->post('status', TRUE));
+    $status           = $this->input->post('status', TRUE);
     $keterangan       = $this->input->post('keterangan', TRUE);
-    $where            = array('id' => $this->input->post('id', TRUE));
+    $where = array('id' => $this->input->post('id', TRUE));
     $jumlah           = $this->input->post('jumlah', TRUE);
-    $data             = $this->M_admin->get_data_row('tb_barang_keluar', $where);
+    $data = $this->M_admin->get_data_row('tb_barang_keluar', $where);
     $insert = array(
       'id_transaksi'    => $data->id_transaksi,
+      'tanggal_kembali' => date('Y-m-d'),
       'lokasi'          => $data->lokasi,
       'kode_barang'     => $data->kode_barang,
       'nama_barang'     => $data->nama_barang,
@@ -753,26 +754,21 @@ class Admin extends CI_Controller
       'jumlah'          => $jumlah,
       'status'          => $status,
       'keterangan'      => $keterangan,
-      'tanggal_kembali' => date('Y-m-d'),
       'created_at'      => date('Y-m-d H:i:s')
     );
     $update = array(
-      'status'          => $status,
-      'keterangan'      => $keterangan,
-      'updated_at'      => date('Y-m-d H:i:s')
+      'status' => $status,
+      'keterangan' => $keterangan
     );
-    $barang_masuk = array('updated_at' => date('Y-m-d H:i:s')); //updated_at tb_barang_masuk
 
-    //jika status sudah(1) & diperbaiki(2)
-    if($status == 1 || $status == 2){
+    if($status == '1' || $status == '2'){
       $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
-      $this->M_admin->update('tb_barang_masuk', $barang_masuk, array('id_transaksi' => $id_transaksi)); //updated_at tb_barang_masuk
     }
 
     $this->M_admin->insert('tb_barang_kembali', $insert);
-    $this->M_admin->update('tb_barang_keluar', $update, $where); //status & keterangan tb_barang_keluar
+    $this->M_admin->update('tb_barang_keluar', $update, $where);
     $this->session->set_flashdata('msg_berhasil_masuk', 'Barang Berhasil DiKembalikan');
-    redirect('admin/tabel_barangkeluar');
+    redirect(base_url('admin/tabel_barangkeluar'));
   }
   public function proses_data_kembali()
   {
