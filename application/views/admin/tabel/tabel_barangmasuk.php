@@ -45,15 +45,14 @@
                     <thead>
                       <tr>
                         <th>No </th>
-                        <th>ID_Transaksi</th>
+                        <th>ID</th>
                         <th>Tanggal</th>
-                        <th>Kode Barang</th>
                         <th>Nama Barang</th>
-                        <th>Keterangan Barang</th>
-                        <th>Foto Barang</th>
+                        <th>Keterangan</th>
                         <th>Jumlah</th>
                         <th>Gudang</th>
-                        <th>QR Code</th>
+                        <th>Foto</th>
+                        <th>QR</th>
                         <th>Update</th>
                         <th>Delete</th>
                         <!-- <th>Keluarkan</th> -->
@@ -65,18 +64,17 @@
                           <?php $no = 1; ?>
                           <?php foreach ($list_data as $dd) : ?>
                             <td><?= $no ?></td>
-                            <td><?= $dd->id_transaksi ?></td>
-                            <td><?= $dd->tanggal ?></td>
-                            <td><?= strtoupper($dd->kode_barang) ?></td>
-                            <td><?= $dd->nama_barang ?></td>
-                            <td><?= $dd->keterangan ?></td>
+                            <td style="white-space: nowrap;"><small><?= $dd->id_transaksi ?></small></td>
+                            <td style="white-space: nowrap;"><small><?= $dd->tanggal ?></small></td>
+                            <td><small class="text-bold"><?= strtoupper($dd->nama_barang) ?></small><br><small>#<?= strtoupper($dd->kode_barang) ?></small></td>
+                            <td><small><?= $dd->keterangan ?></small></td>
+                            <td><small><span class="text-bold"><?= $dd->jumlah ?> </span><?= $dd->satuan ?></small></td>
+                            <td><small><?= $dd->nama_gudang ?></small></td>
                             <td>
-                              <img style="width: 100px;" src="<?php echo base_url() . 'assets/upload/gambar/' . $dd->gambar; ?>">
+                              <img class="img-thumbnail" style="width: 50px;" src="<?php echo base_url() . 'assets/upload/gambar/' . $dd->gambar; ?>">
                             </td>
-                            <td><?= $dd->jumlah ?> <?= $dd->satuan ?></td>
-                            <td><?= $dd->nama_gudang ?></td>
                             <td><a download href="<?php echo base_url() . 'assets/qrcode/images/' . $dd->qr_code; ?>">
-                                <img style="width: 100px;" src="<?php echo base_url() . 'assets/qrcode/images/' . $dd->qr_code; ?>">
+                                <img class="img-thumbnail" style="width: 50px;" src="<?php echo base_url() . 'assets/qrcode/images/' . $dd->qr_code; ?>">
                               </a>
                             </td>
                             <td><a type="button" class="btn btn-info" href="<?= base_url('admin/update_barang/') . $dd->id ?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
