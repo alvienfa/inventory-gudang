@@ -80,11 +80,10 @@ class M_user extends CI_Model
 
   public function barang_keluar($a,$b,$c,$d,$limit,$start)
   {
-    $query = $this->db->select("a.*,b.alamat,b.kecamatan,b.kota,b.provinsi,b.kode_pos,c.text_status,d.nama_gudang")
+    $query = $this->db->select("a.*,b.alamat,b.kecamatan,b.kota,b.provinsi,b.kode_pos,c.text_status")
     ->from($a . ' as a')
     ->join($b . ' as b', 'b.id=a.id_lokasi','left')
     ->join($c . ' as c', 'c.id=a.status', 'left')
-    ->join($d . ' as d', 'd.id=a.id_gudang', 'left')
     ->limit($limit,$start)
     ->order_by('a.id', 'desc')
     ->get()->result();
