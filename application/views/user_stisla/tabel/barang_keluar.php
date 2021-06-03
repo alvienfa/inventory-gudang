@@ -16,7 +16,6 @@
                             <th>ID Transaksi</th>
                             <th>Kode Barang</th>
                             <th>Jumlah</th>
-                            <th>Gudang</th>
                             <th>Contact</th>
                             <th>Detail</th>
                             <th>Status</th>
@@ -34,7 +33,6 @@
                                 <td><small><?= $item->id_transaksi ?></small></td>
                                 <td class="text-uppercase"><small><?= $item->kode_barang ?></small></td>
                                 <td><small><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </small></td>
-                                <td><small><?= $item->nama_gudang ?></small></td>
                                 <td class="text-uppercase text-small"><small><i class="fas fa-user"></i> <?= $item->nm_penjab ?> (<?= $item->nohp_penjab ?>)</small></td>
                                 <?php
                                 switch ($item->status):
