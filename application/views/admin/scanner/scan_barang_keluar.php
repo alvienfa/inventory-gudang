@@ -96,6 +96,10 @@
                                                             <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $list_data->nama_barang ?>">
                                                         </div>
                                                         <div class="form-group">
+                                                            <label for="nama_Barang" style="width:73%;">Stok</label>
+                                                            <input type="text" name="stok" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $list_data->keterangan ?>">
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label for="satuan">Satuan</label>
                                                             <select class="form-control" name="satuan">
                                                                 <?php foreach ($list_satuan as $s) { ?>
@@ -180,7 +184,7 @@
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
-    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/qr-packed.js"  ></script>
     <script>
         const qrcodes = window.qrcode;
 
