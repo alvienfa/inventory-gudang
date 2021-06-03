@@ -9,12 +9,12 @@ class Admin extends CI_Controller
     parent::__construct();
     $this->load->model('M_admin');
     $this->load->library('upload');
-
-    if ($this->session->userdata('role') == 0 && $this->session->userdata('status') == 'login') {
+    
+    if($this->session->userdata('role') == 0 && $this->session->userdata('status') == 'login'){
       redirect('user');
     }
 
-    if (!$this->session->userdata('status') == 'login') {
+    if(!$this->session->userdata('status') == 'login'){
       redirect('login');
     }
   }
@@ -357,38 +357,34 @@ class Admin extends CI_Controller
       $nama_barang  = $this->input->post('nama_barang', TRUE);
       $satuan       = $this->input->post('satuan', TRUE);
       $jumlah       = $this->input->post('jumlah', TRUE);
-      $id_gudang    = $this->input->post('id_gudang', TRUE);
+      $id_gudang = $this->input->post('id_gudang', TRUE);
       //qrcode
-      $this->load->library('ciqrcode'); //pemanggilan library QR CODE
+      $qr = $this->load->library('ciqrcode'); //pemanggilan library QR CODE
       $config['cacheable']    = true; //boolean, the default is true
       $config['cachedir']     = './assets/qrcode'; //string, the default is application/cache/
       $config['errorlog']     = './assets/qrcode'; //string, the default is application/logs/
       $config['imagedir']     = './assets/qrcode/images/'; //direktori penyimpanan qr code
       $config['quality']      = true; //boolean, the default is true
-      $config['size']         = 1024; //integer, the default is 1024
+      $config['size']         = '1024'; //interger, the default is 1024
       $config['black']        = array(224, 255, 255); // array, default is array(255,255,255)
       $config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
       $this->ciqrcode->initialize($config);
 
       $image_name = $id_transaksi . '.png'; //buat name dari qr code sesuai dengan nim
 
-      $params['data']     = $id_transaksi; //data yang akan di jadikan QR CODE
-      $params['level']    = 'H'; //H=High
-      $params['size']     = 10;
+      $params['data'] = $id_transaksi; //data yang akan di jadikan QR CODE
+      $params['level'] = 'H'; //H=High
+      $params['size'] = 10;
       $params['savename'] = FCPATH . $config['imagedir'] . $image_name; //simpan image QR CODE ke folder assets/images/
-
       $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
       //upload gambar
-      $date = new DateTime();
       $config =  array(
-        'upload_path'       => "./assets/upload/gambar/",
-        'allowed_types'     => "gif|jpg|png|jpeg|webp",
-        'encrypt_name'      => False, //
-        'max_size'          => "400000",  // ukuran file gambar
-        'max_height'        => "9680",
-        'max_width'         => "9024",
-        'file_ext_tolower'  => TRUE,
-        'encrypt_name'      => TRUE,
+        'upload_path'     => "./assets/upload/gambar/",
+        'allowed_types'   => "gif|jpg|png|jpeg",
+        'encrypt_name'    => False, //
+        'max_size'        => "60000",  // ukuran file gambar
+        'max_height'      => "9680",
+        'max_width'       => "9024"
       );
       $this->load->library('upload', $config);
       $this->upload->initialize($config);
@@ -403,12 +399,11 @@ class Admin extends CI_Controller
           'jumlah'       => $jumlah,
           'qr_code'      => $image_name,
           'gambar'       => 'preview.jpg',
-          'id_gudang'    => $id_gudang,
-          'created_at'   => date('Y-m-d h:i:s')
+          'id_gudang'    => $id_gudang
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
-        redirect('admin/tabel_barangmasuk');
+        redirect('admin/form_barangmasuk');
       } else {
         $upload_data = $this->upload->data();
         $nama_file = $upload_data['file_name'];
@@ -422,12 +417,11 @@ class Admin extends CI_Controller
           'jumlah'       => $jumlah,
           'qr_code'      => $image_name,
           'gambar'       => $nama_file,
-          'id_gudang'    => $id_gudang,
-          'created_at'   => date('Y-m-d h:i:s')
+          'id_gudang'    => $id_gudang
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
-        redirect('admin/tabel_barangmasuk');
+        redirect(base_url('admin/form_barangmasuk'));
       }
     } else {
       $head['title'] = 'Inventory Gudang | From Barang Masuk';
@@ -445,7 +439,6 @@ class Admin extends CI_Controller
     $nama_barang  = $this->input->post('nama_barang', TRUE);
     $keterangan   = $this->input->post('keterangan', TRUE);
     $jumlah       = $this->input->post('jumlah', TRUE);
-    $gambar       = $this->input->post('old_gambar', TRUE);
     $where = array('id' => $id);
     //update gambar
     $config =  array(
@@ -454,39 +447,31 @@ class Admin extends CI_Controller
       'encrypt_name'    => False, //
       'max_size'        => "60000",  // ukuran file gambar
       'max_height'      => "9680",
-      'max_width'       => "9024",
-      'encrypt_name'      => TRUE,
+      'max_width'       => "9024"
     );
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
-    
     if (!$this->upload->do_upload('gambar')) {
+      $gambar       = $this->input->post('old_gambar', TRUE);
       $data = array(
         'nama_barang'  => $nama_barang,
         'id_gudang'    => $id_gudang,
         'gambar'       => $gambar,
         'jumlah'       => $jumlah,
-        'keterangan'   => $keterangan,
-        'updated_at'   => date('Y-m-d h:i:s')
+        'keterangan'   => $keterangan
       );
       $this->M_admin->update('tb_barang_masuk', $data, $where);
       $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Diupdate');
       redirect(base_url('admin/tabel_barangmasuk'));
     } else {
-      $upload_data  = $this->upload->data();
-      $nama_file    = $upload_data['file_name'];
-      $file         = FCPATH . "assets/upload/gambar/" . $gambar;
-      if ($gambar !== "preview.jpg") {
-        unlink($file);
-      }
-
+      $upload_data = $this->upload->data();
+      $nama_file = $upload_data['file_name'];
       $data = array(
         'nama_barang'  => $nama_barang,
         'id_gudang'    => $id_gudang,
         'gambar'       => $nama_file,
         'jumlah'       => $jumlah,
-        'keterangan'   => $keterangan,
-        'updated_at'   => date('Y-m-d h:i:s')
+        'keterangan'   => $keterangan
       );
       //
       $this->M_admin->update('tb_barang_masuk', $data, $where);
@@ -528,15 +513,14 @@ class Admin extends CI_Controller
   {
     $head['title'] = 'Inventory Gudang | Update Data Satuan';
     $id = $this->uri->segment(3);
-    $where = array('id_satuan' => $id);
     $data['token_generate'] = $this->token_generate();
-    $data['data_satuan'] = $this->M_admin->get_data('tb_satuan', $where);
+    $data['data_satuan'] = $this->M_admin->get_data('tb_satuan', $id);
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->session->set_userdata($data);
     $this->load->view('layout/head', $head);
-    $this->load->view('admin/form_satuan/form_update', $data);
+    $this->load->view('admin/form_users/form_update', $data);
 
     
   }
@@ -755,13 +739,14 @@ class Admin extends CI_Controller
   public function submit_barang_kembali()
   {
     $id_transaksi     = $this->input->post('id_transaksi', TRUE);
-    $status           = intval($this->input->post('status', TRUE));
+    $status           = $this->input->post('status', TRUE);
     $keterangan       = $this->input->post('keterangan', TRUE);
-    $where            = array('id' => $this->input->post('id', TRUE));
+    $where = array('id' => $this->input->post('id', TRUE));
     $jumlah           = $this->input->post('jumlah', TRUE);
-    $data             = $this->M_admin->get_data_row('tb_barang_keluar', $where);
+    $data = $this->M_admin->get_data_row('tb_barang_keluar', $where);
     $insert = array(
       'id_transaksi'    => $data->id_transaksi,
+      'tanggal_kembali' => date('Y-m-d'),
       'lokasi'          => $data->lokasi,
       'kode_barang'     => $data->kode_barang,
       'nama_barang'     => $data->nama_barang,
@@ -769,26 +754,21 @@ class Admin extends CI_Controller
       'jumlah'          => $jumlah,
       'status'          => $status,
       'keterangan'      => $keterangan,
-      'tanggal_kembali' => date('Y-m-d'),
       'created_at'      => date('Y-m-d H:i:s')
     );
     $update = array(
-      'status'          => $status,
-      'keterangan'      => $keterangan,
-      'updated_at'      => date('Y-m-d H:i:s')
+      'status' => $status,
+      'keterangan' => $keterangan
     );
-    $barang_masuk = array('updated_at' => date('Y-m-d H:i:s')); //updated_at tb_barang_masuk
 
-    //jika status sudah(1) & diperbaiki(2)
-    if ($status == 1 || $status == 2) {
+    if($status == '1' || $status == '2'){
       $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
-      $this->M_admin->update('tb_barang_masuk', $barang_masuk, array('id_transaksi' => $id_transaksi)); //updated_at tb_barang_masuk
     }
 
     $this->M_admin->insert('tb_barang_kembali', $insert);
-    $this->M_admin->update('tb_barang_keluar', $update, $where); //status & keterangan tb_barang_keluar
+    $this->M_admin->update('tb_barang_keluar', $update, $where);
     $this->session->set_flashdata('msg_berhasil_masuk', 'Barang Berhasil DiKembalikan');
-    redirect('admin/tabel_barangkeluar');
+    redirect(base_url('admin/tabel_barangkeluar'));
   }
   public function proses_data_kembali()
   {
