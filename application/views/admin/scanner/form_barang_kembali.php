@@ -42,6 +42,9 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <input type="hidden" name="id" readonly value="<?= $list_data->id ?>">
+                                                        <div class="">
+                                                            <img class="img-fluid" src="<?= base_url('assets/upload/gambar/') . $gambar_barang->gambar?>" alt="<?= $gambar_barang->gambar?>">
+                                                        </div>
                                                         <div class="form-group">
                                                             <label for="id_transaksi">ID Transaksi</label>
                                                             <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $list_data->id_transaksi ?>">

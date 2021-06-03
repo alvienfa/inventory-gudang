@@ -129,11 +129,19 @@ class M_admin extends CI_Model
   }
   public function join_tabel_desc()
   {
-    $this->db->select('tb_barang_masuk.*,nama_gudang');
-    $this->db->from('tb_barang_masuk');
-    $this->db->join('tb_gudang', "tb_gudang.id = tb_barang_masuk.id_gudang");
-    $this->db->order_by('tb_barang_masuk.id', 'DESC');
+    $this->db->select('a.*,b.nama_gudang');
+    $this->db->from('tb_barang_masuk as a');
+    $this->db->join('tb_gudang as b', "b.id = a.id_gudang");
+    $this->db->where('a.is_deleted', 0);
+    $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get();
     return $query->result();
+  }
+
+  public function get_gambar($id_transaksi){
+    $this->db->select("gambar")->from('tb_barang_masuk')->where('id_transaksi', $id_transaksi);
+    $query = $this->db->get()->row();
+    // var_dump($query);die();
+    return $query;
   }
 }

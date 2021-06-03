@@ -680,7 +680,6 @@ class Admin extends CI_Controller
   public function tabel_barangkeluar()
   {
     $head['title'] = 'Inventory Gudang | Barang Keluar';
-    // $data['list_data'] = $this->M_admin->select('tb_barang_keluar');
     $data['list_data'] = $this->M_admin->select_desc('tb_barang_keluar');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
@@ -711,6 +710,7 @@ class Admin extends CI_Controller
     $head['title'] = 'Inventory Gudang | Form Barang Kembali';
     $where = array('id' => $id);
     $list_data = $this->M_admin->get_data_row('tb_barang_keluar', $where);
+    $data['gambar_barang']= $this->M_admin->get_gambar($list_data->id_transaksi);
     $data['alamat'] = $this->M_admin->get_data_row('map_lokasi', array('id' => $list_data->id_lokasi));
     $data['list_data'] = $list_data;
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
