@@ -149,18 +149,19 @@ class User extends CI_Controller
       'id_gudang'     => $this->input->get('id_gudang'),
       'id_transaksi'  => $this->input->get('id_transaksi'),
     );
+
     $cards['total_barang_masuk'] = $this->M_user->total_row('tb_barang_masuk');
-    $cards['page']       = $this->input->get('page');
-    $cards['pagination'] = $this->pagination->create_links();
-    $cards['list_data']  = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search);
+    $cards['page']               = $this->input->get('page');
+    $cards['pagination']         = $this->pagination->create_links();
+    $cards['list_data']          = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search);
     $data = array(
       'title' => 'Tabel Barang Masuk',
-      'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
-      'views' => array(
-        'header' => $this->header(),
-        'card_satu'  => $this->load->view('user_stisla/tabel/barang_masuk.php', $cards, TRUE),
+      'barang_masuk'  => $this->M_user->select('tb_barang_masuk'),
+      'views'         => array(
+        'header'      => $this->header(),
+        'card_satu'   => $this->load->view('user_stisla/tabel/barang_masuk.php', $cards, TRUE),
       ),
-      'list_gudang' => $this->M_user->select('tb_gudang')
+      'list_gudang'   => $this->M_user->select('tb_gudang')
     );
 
     $head['username'] = $this->session->userdata('email');
@@ -266,7 +267,6 @@ class User extends CI_Controller
     $this->load->library('pagination');
     $limit = 24;
     $config['base_url']             = base_url('user/list_barang_masuk');
-    $config['total_rows']           = $this->M_user->total_row('tb_barang_masuk');
     $config['per_page']             = $limit;
     $config['enable_query_strings'] = TRUE;
     $config['page_query_string']    = TRUE;
@@ -283,33 +283,30 @@ class User extends CI_Controller
     $config['cur_tag_close']        = '</a></li>';
     $config['num_tag_open']         = '<li class="page-item">';
     $config['num_tag_close']        = '</li>';
+    $config['total_rows']           = $this->M_user->total_row('tb_barang_masuk');
 
     $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
+    
+    if (!$this->input->get('search') == NULL) {
+      $search = array(
+        'id_transaksi'  => $this->input->get('search'),
+        'nama_barang'   => $this->input->get('search'),
+        'nama_gudang'   => $this->input->get('search'),
+        'kode_barang'   => $this->input->get('search'),
+      );
+      $list_data = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search);
+      $config['total_rows'] = count($list_data); 
+    }else{
+      $search = array();
+      $list_data = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search);
+    }
 
     $this->pagination->initialize($config);
 
-    $search = array(
-      'id_transaksi'  => $this->input->get('search'),
-      'nama_barang'   => $this->input->get('search'),
-      'nama_gudang'   => $this->input->get('search'),
-      'kode_barang'   => $this->input->get('search'),
-    );
-
-    $cards['total_barang_masuk'] = count($this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search));      
-    if (!$this->input->get('search')) 
-    {
-      $search = array(
-        'nama_barang'   => $this->input->get('nama_barang'),
-        'id_gudang'     => $this->input->get('id_gudang'),
-        'id_transaksi'  => $this->input->get('id_transaksi'),
-        'nama_barang'   => $this->input->get('search')
-      );
-      $cards['pagination'] = $this->pagination->create_links();
-      $cards['total_barang_masuk'] = $this->M_user->total_row('tb_barang_masuk');
-    }
-    
-    $cards['page']       = $this->input->get('page');
-    $cards['list_data']  = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search);
+    $cards['pagination']         = $this->pagination->create_links();
+    $cards['total_barang_masuk'] = $config['total_rows'];
+    $cards['page']               = $this->input->get('page');
+    $cards['list_data']          = $list_data;
     $data = array(
       'title' => 'List Barang Masuk',
       'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
