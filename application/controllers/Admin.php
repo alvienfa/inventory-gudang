@@ -526,13 +526,19 @@ class Admin extends CI_Controller
 
   public function update_satuan()
   {
-    $uri = $this->uri->segment(3);
-    $where = array('id_satuan' => $uri);
+    $head['title'] = 'Inventory Gudang | Update Data Satuan';
+    $id = $this->uri->segment(3);
+    $where = array('id_satuan' => $id);
+    $data['token_generate'] = $this->token_generate();
     $data['data_satuan'] = $this->M_admin->get_data('tb_satuan', $where);
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->session->set_userdata($data);
+    $this->load->view('layout/head', $head);
     $this->load->view('admin/form_satuan/form_update', $data);
+
+    
   }
 
   public function delete_satuan()
