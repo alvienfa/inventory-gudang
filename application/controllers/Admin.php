@@ -514,7 +514,7 @@ class Admin extends CI_Controller
     $head['title'] = 'Inventory Gudang | Update Data Satuan';
     $id = $this->uri->segment(3);
     $data['token_generate'] = $this->token_generate();
-    $data['data_satuan'] = $this->M_admin->get_data('tb_satuan', $where);
+    $data['data_satuan'] = $this->M_admin->get_data('tb_satuan', $id);
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
