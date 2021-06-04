@@ -80,7 +80,7 @@ class Report extends CI_Controller
             $html .= '<td></td>';
             $html .= '<td>No. Handphone</td>';
             $html .= '<td>:</td>';
-            $html .= '<td><br></td>';
+            $html .= '<td><br><br></td>';
             $html .= '</tr>';
             
         $html .= '<tr>';
@@ -107,7 +107,7 @@ class Report extends CI_Controller
 
           $no = 1;
             $html .= '<tr>';
-            $html .= '<td align="center"></td>';
+            $html .= '<td style="height:50px" align="center"></td>';
             $html .= '<td align="center"></td>';
             $html .= '<td align="center"></td>';
             $html .= '<td align="center"></td>';
