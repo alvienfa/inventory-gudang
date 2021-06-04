@@ -64,7 +64,8 @@ class M_admin extends CI_Model
   public function update($tabel, $data, $where)
   {
     $this->db->where($where);
-    $this->db->update($tabel, $data);
+    $query = $this->db->update($tabel, $data);
+    return $query;
   }
 
   public function delete($tabel, $where)

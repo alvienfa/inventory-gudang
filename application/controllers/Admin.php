@@ -10,12 +10,19 @@ class Admin extends CI_Controller
     $this->load->model('M_admin');
     $this->load->library('upload');
     
-    if($this->session->userdata('role') == 0 && $this->session->userdata('status') == 'login'){
-      redirect('user');
-    }
-
-    if(!$this->session->userdata('status') == 'login'){
-      redirect('login');
+    if ($this->session->userdata('status') == 'login') {
+      if($this->session->userdata('role') == 0){
+        redirect('user');
+      }
+      $role = $this->db->select('*')
+                      ->from('tb_role')
+                      ->where('id', $this->session->userdata('role'))
+                      ->get()->result();
+      if($role){
+        $this->role = $this->session->userdata('role');
+      }else{
+        redirect('login');
+      }
     }
   }
 
@@ -839,5 +846,25 @@ class Admin extends CI_Controller
     $this->load->view('layout/head', $head);
 
     $this->load->view('admin/tabel/tabel_gudang', $data);
+  }
+
+  public function tabel_delete_barang()
+  {
+    
+  }
+
+  public function soft_delete_barang($id=false)
+  {
+    $update = array(
+      'deleted_at'  => date("Y-m-d H:i:s"),
+      'is_deleted' => 1
+    );
+    $where = array('id' => $id);
+    if($this->M_admin->update('tb_barang_masuk',$update,$where)){
+      redirect("admin/tabel_barangmasuk");
+    }else{
+      $error = array('error' => 'gagal delete barang');
+      echo json_encode($error);
+    }
   }
 }
