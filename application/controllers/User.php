@@ -9,46 +9,46 @@ class User extends CI_Controller
     parent::__construct();
     $this->load->model('M_user');
 
-    if ($this->session->userdata('role') == 1 && $this->session->userdata('status') == 'login') {
-      redirect('admin');
-    }
-
-    if (!$this->session->userdata('status') == 'login') {
-      redirect('login');
+    if ($this->session->userdata('status') == 'login') {
+      $role = $this->db->select('*')
+                      ->from('tb_role')
+                      ->where('id', $this->session->userdata('role'))
+                      ->get()->result();
+      if($role){
+        $this->role = $this->session->userdata('role');
+      }else{
+        redirect('login');
+      }
     }
   }
 
   public function index()
   {
-    if ($this->session->userdata('status') == 'login' && $this->session->userdata('role') == 0) {
-      $cards['progress_barang'] = $this->M_user->progress_barang();
-      $cards['last_data']       = $this->M_user->select_limit('tb_barang_kembali', 'tb_status', 10);
-      $data = array(
-        'title'             => 'Dashboard',
-        'barang_keluar'     => $this->M_user->select('tb_barang_keluar'),
-        'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
-        'barang_kembali'    => $this->M_user->select('tb_barang_kembali'),
-        'total' => array(
-          'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
-          'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
-          'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
-        ),
+    $cards['progress_barang'] = $this->M_user->progress_barang();
+    $cards['last_data']       = $this->M_user->select_limit('tb_barang_kembali', 'tb_status', 10);
+    $data = array(
+      'title'             => 'Dashboard',
+      'barang_keluar'     => $this->M_user->select('tb_barang_keluar'),
+      'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
+      'barang_kembali'    => $this->M_user->select('tb_barang_kembali'),
+      'total' => array(
+        'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
+        'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
+        'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
+      ),
 
-        'views' => array(
-          'header' => $this->header(),
-          'card_satu'  => $this->load->view('user_stisla/cards/barang_kembali.php', $cards, TRUE),
-          'card_dua' => $this->load->view('user_stisla/cards/progress_barang.php', $cards, TRUE)
-        ),
+      'views' => array(
+        'header' => $this->header(),
+        'card_satu'  => $this->load->view('user_stisla/cards/barang_kembali.php', $cards, TRUE),
+        'card_dua' => $this->load->view('user_stisla/cards/progress_barang.php', $cards, TRUE)
+      ),
 
-      );
-      $head['username'] = $this->session->userdata('email');
-      $head['title'] = 'Dashboard | User';
-      $this->load->view('template/head.php', $head);
-      $this->load->view('user_stisla/index', $data);
-      $this->load->view('template/footer.php', $data);
-    } else {
-      $this->load->view('login/login');
-    }
+    );
+    $head['username'] = $this->session->userdata('email');
+    $head['title'] = 'Dashboard | User';
+    $this->load->view('template/head.php', $head);
+    $this->load->view('user_stisla/index', $data);
+    $this->load->view('template/footer.php', $data);
   }
 
   public function token_generate()
@@ -286,7 +286,7 @@ class User extends CI_Controller
     $config['total_rows']           = $this->M_user->total_row('tb_barang_masuk');
 
     $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
-    
+
     if (!$this->input->get('search') == NULL) {
       $search = array(
         'id_transaksi'  => $this->input->get('search'),
@@ -295,8 +295,8 @@ class User extends CI_Controller
         'kode_barang'   => $this->input->get('search'),
       );
       $list_data = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search);
-      $config['total_rows'] = count($list_data); 
-    }else{
+      $config['total_rows'] = count($list_data);
+    } else {
       $search = array();
       $list_data = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search);
     }

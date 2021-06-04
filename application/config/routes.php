@@ -54,3 +54,4 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['barang'] = 'barang/index';
 $route['barang/(:any)'] = 'barang/get_by_id/$1';
+$route['logout'] = 'admin/signout';

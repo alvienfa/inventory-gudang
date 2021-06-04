@@ -54,6 +54,7 @@
                         <th>Foto</th>
                         <th>QR</th>
                         <th>Update</th>
+                        <th>Hide</th>
                         <th>Delete</th>
                         <!-- <th>Keluarkan</th> -->
                       </tr>
@@ -85,6 +86,9 @@
                             </td>
                             <td><a type="button" class="btn btn-info" href="<?= base_url('admin/update_barang/') . $dd->id ?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                             <td>
+                              <a class="btn btn-success" href="<?= base_url('admin/soft_delete_barang/') . $dd->id?>"><i class="fa fa-eye"></i></a>
+                            </td>
+                            <td>
                               <form class="form-delete" role="form" action="<?= base_url('admin/delete_barang') ?>" method="post">
                                 <input type="hidden" name="id" value="<?= $dd->id ?>">
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -110,19 +114,10 @@
         </div>
         <!-- /.row -->
         <div class="modal fade" id="modal-default">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 id="modal-transaksi" class="modal-title">FOTO BARANG</h4>
-              </div>
+          <div style="width: fit-content;" class="modal-dialog modal-dialog-centered">
+            <div class="modal-content ">
               <div class="modal-body">
-                <img class="img-fluid" id="modal-foto" src="" alt="foto-barang">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <img width="400" class="img-fluid" id="modal-foto" src="" alt="foto-barang">
               </div>
             </div>
             <!-- /.modal-content -->

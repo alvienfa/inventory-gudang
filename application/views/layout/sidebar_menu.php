@@ -49,6 +49,7 @@
           <li class='<?= (base_url('admin/tabel_barangkembali') == current_url() ? ' active' : '') ?> '><a href="<?= base_url('admin/tabel_barangkembali') ?>"><i class="fa fa-circle-o"></i> Tabel Barang Kembali</a></li>
           <li class='<?= (base_url('admin/tabel_satuan') == current_url() ? ' active' : '') ?> '><a href="<?= base_url('admin/tabel_satuan') ?>"><i class="fa fa-circle-o"></i> Tabel Satuan</a></li>
           <li class='<?= (base_url('admin/tabel_gudang') == current_url() ? ' active' : '') ?> '><a href="<?= base_url('admin/tabel_gudang') ?>"><i class="fa fa-circle-o"></i> Tabel Data Gudang</a></li>
+          <li class='<?= (base_url('admin/tabel_barang_delete') == current_url() ? ' active' : '') ?> '><a href="<?= base_url('admin/tabel_barang_delete') ?>"><i class="fa fa-trash"></i> Deleted Barang</a></li>
         </ul>
       </li>
       <?php $scans = base_url('admin/scan_barang_kembali') == current_url() ||
