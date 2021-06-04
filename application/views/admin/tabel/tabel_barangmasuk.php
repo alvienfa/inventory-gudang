@@ -71,7 +71,13 @@
                             <td><small><span class="text-bold"><?= $dd->jumlah ?> </span><?= $dd->satuan ?></small></td>
                             <td><small><?= $dd->nama_gudang ?></small></td>
                             <td>
-                              <img class="img-thumbnail" style="width: 50px;" src="<?php echo base_url() . 'assets/upload/gambar/' . $dd->gambar; ?>">
+                              <a href="javascript:void(0)" type="button" 
+                              class="show-modal" 
+                            
+                              data-toggle="modal" 
+                              data-target="#modal-default">
+                                <img data-image="<?= $dd->gambar?>"   class="img-thumbnail" style="width: 50px;" src="<?= base_url() . 'assets/upload/gambar/' . $dd->gambar; ?>">
+                              </a>
                             </td>
                             <td><a download href="<?php echo base_url() . 'assets/qrcode/images/' . $dd->qr_code; ?>">
                                 <img class="img-thumbnail" style="width: 50px;" src="<?php echo base_url() . 'assets/qrcode/images/' . $dd->qr_code; ?>">
@@ -85,7 +91,6 @@
                               </form>
                               </a>
                             </td>
-                            <!-- <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?= base_url('admin/scan_barang_keluar/' . $dd->id_transaksi) ?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td> -->
                       </tr>
                       <?php $no++; ?>
                     <?php endforeach; ?>
@@ -104,6 +109,27 @@
           <!-- /.col -->
         </div>
         <!-- /.row -->
+        <div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 id="modal-transaksi" class="modal-title">FOTO BARANG</h4>
+              </div>
+              <div class="modal-body">
+                <img class="img-fluid" id="modal-foto" src="" alt="foto-barang">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
       </section>
       <!-- /.content -->
     </div>
@@ -179,6 +205,17 @@
         'autoWidth': false
       })
     });
+  </script>
+
+  <script>
+    const btnShow = document.querySelectorAll(".show-modal")
+    btnShow.forEach(item => {
+      item.addEventListener('click', (e) => {
+        console.log(e.target.dataset.image)
+        $("#modal-defaul").modal('show')
+        $("#modal-foto").attr('src', '<?= base_url("assets/upload/gambar/")?>' +  e.target.dataset.image);
+      })
+    })
   </script>
 </body>
 
