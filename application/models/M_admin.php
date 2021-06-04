@@ -144,4 +144,16 @@ class M_admin extends CI_Model
     // var_dump($query);die();
     return $query;
   }
+
+  public function barang_by_gudang($id_gudang)
+  {
+    $this->db->select('a.*,b.nama_gudang');
+    $this->db->from('tb_barang_masuk as a');
+    $this->db->join('tb_gudang as b', "b.id = a.id_gudang");
+    $this->db->where('a.is_deleted', 0);
+    $this->db->where('a.id_gudang', $id_gudang);
+    $this->db->order_by('a.id', 'DESC');
+    $query = $this->db->get();
+    return $query->result();
+  } 
 }

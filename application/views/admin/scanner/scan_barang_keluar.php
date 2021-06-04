@@ -1,7 +1,8 @@
 <style>
-    #qr-content{
+    #qr-content {
         align-items: center;
     }
+
     #qr-canvas {
         margin: auto;
         max-width: 100%;
@@ -77,8 +78,7 @@
                                                         <input type="hidden" name="id" readonly value="<?= $list_data->id ?>">
                                                         <div class="form-group">
                                                             <div align="center">
-                                                            <img style="width: 300px;" class="img-fluid" 
-                                                            src="<?= base_url('assets/upload/gambar/') . $list_data->gambar?>" alt="<?= $list_data->nama_barang ?>">
+                                                                <img style="width: 300px;" class="img-fluid" src="<?= base_url('assets/upload/gambar/') . $list_data->gambar ?>" alt="<?= $list_data->nama_barang ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
@@ -135,35 +135,33 @@
                         </div>
                         <div class="col-md-6">
                             <div class="container-fluid">
-                                <div class="row">
-                                    <div class="box box-primary">
-                                        <div class="box-header with-border">
-                                            <h3 class="box-title"><i class="fa fa-map-marker" aria-hidden="true"></i> Alamat Tujuan</h3>
-                                        </div>
-                                        <div class="container-fluid">
-                                            <div class="box-body" id='barang_scan'>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <?= $this->load->view('components/forms/form_lokasi', '', TRUE) ?>
-                                                    </div>
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><i class="fa fa-map-marker" aria-hidden="true"></i> Alamat Tujuan</h3>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <div class="box-body" id='barang_scan'>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <?= $this->load->view('components/forms/form_lokasi', '', TRUE) ?>
                                                 </div>
-                                                <div class="row">
-                                                        <div class="box-header with-border">
-                                                            <h3 class="box-title"><i class="fa fa-user" aria-hidden="true"></i> Penanggung Jawab</h3>
-                                                        </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="status">Nama Penanggung Jawab</label>
-                                                            <input type="text" name="nm_penjab" class="form-control" id="nm_penjab">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="status">Contact Penanggung Jawab</label>
-                                                            <input type="phone" name="nohp_penjab" class="form-control" id="nohp_penjab">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <a type="button" class="btn btn-danger" onclick="history.back(-1)" name="btn_kembali"> Cancel</a>
-                                                            <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
-                                                        </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title"><i class="fa fa-user" aria-hidden="true"></i> Penanggung Jawab</h3>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="status">Nama Penanggung Jawab</label>
+                                                        <input type="text" name="nm_penjab" class="form-control" id="nm_penjab">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="status">Contact Penanggung Jawab</label>
+                                                        <input type="phone" name="nohp_penjab" class="form-control" id="nohp_penjab">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <a type="button" class="btn btn-danger" onclick="history.back(-1)" name="btn_kembali"> Cancel</a>
+                                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>&nbsp;&nbsp;&nbsp;
                                                     </div>
                                                 </div>
                                             </div>
@@ -190,7 +188,7 @@
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
-    <script src="<?php echo base_url() ?>assets/js/qr-packed.js"  ></script>
+    <script src="<?php echo base_url() ?>assets/js/qr-packed.js"></script>
     <script>
         const qrcodes = window.qrcode;
 

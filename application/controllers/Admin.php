@@ -840,4 +840,21 @@ class Admin extends CI_Controller
 
     $this->load->view('admin/tabel/tabel_gudang', $data);
   }
+
+  public function gudang($id_gudang=false)
+  {
+    $total_gudang = $this->M_admin->numrows('tb_gudang');
+    if ($id_gudang <= $total_gudang){
+      $head['title'] = 'Inventory Gudang | Data Gudang';
+      $data['list_data'] = $this->M_admin->barang_by_gudang($id_gudang);
+      $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+      $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+      $this->load->view('layout/head', $head);
+      $this->load->view('admin/stok/tabel_stok', $data);
+    }else{
+      redirect(base_url('admin/tabel_gudang'));;
+    }
+
+  }
 }
