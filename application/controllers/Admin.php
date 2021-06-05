@@ -9,18 +9,25 @@ class Admin extends CI_Controller
     parent::__construct();
     $this->load->model('M_admin');
     $this->load->library('upload');
-    
+
     if ($this->session->userdata('status') == 'login') {
-      $role = $this->db->select('a.*,b.nama_gudang')
-                      ->from('tb_role as a')
-                      ->join('tb_gudang as b', 'b.id=a.id_gudang')
-                      ->where('a.id', $this->session->userdata('role'))
-                      ->get()->row();
-      if($role){
-        $this->gudang = $role->nama_gudang;
-        $this->id_gudang = $role->id_gudang;
-        $this->role = $this->session->userdata('role');
-      }else{
+      $role = $this->session->userdata('role');
+      $data = $this->db->select('a.*,b.nama_gudang')
+        ->from('tb_role as a')
+        ->join('tb_gudang as b', 'b.id=a.id_gudang')
+        ->where('a.id', $role)
+        ->get()->row();
+      if ($role == 2 || $role == 3 || $role == 4) {
+        $this->gudang = $data->nama_gudang;
+        $this->id_gudang = $data->id_gudang;
+        $this->role = $role;
+      } elseif ($role == 6 || $role == 5) {
+        redirect('user');
+      } elseif ($role == 1) {
+        $this->role = $role;//superadmin
+        $this->gudang = 'all';
+        $this->id_gudang = 'all';
+      } else {
         redirect('login');
       }
     }
@@ -328,7 +335,7 @@ class Admin extends CI_Controller
     $this->load->view('admin/form_barangmasuk/form_insert', $data);
   }
 
-  public function tabel_barangmasuk($id_kategori=false)
+  public function tabel_barangmasuk($id_kategori = false)
   {
     $id_kategori = $this->input->get('id_kategori');
     $where = array(
@@ -352,7 +359,7 @@ class Admin extends CI_Controller
   public function update_barang($id)
   {
     $data['role'] = $this->role;
-    $data['sidebar']['nama_gudang'] = $this->gudang;  
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | Form Update Barang Masuk';
     $where = array('id' => $id);
     $data['list_gudang'] = $this->M_admin->select('tb_gudang');
@@ -561,8 +568,6 @@ class Admin extends CI_Controller
     $this->session->set_userdata($data);
     $this->load->view('layout/head', $head);
     $this->load->view('admin/form_satuan/form_update', $data);
-
-    
   }
 
   public function delete_satuan()
@@ -732,7 +737,7 @@ class Admin extends CI_Controller
     $id_kategori = $this->input->get('id_kategori');
     $id_gudang = $this->id_gudang;
     $data['sidebar']['nama_gudang'] = $this->gudang;
-    $data['list_data'] = $this->M_admin->stok_barang_keluar($id_gudang,$id_kategori);
+    $data['list_data'] = $this->M_admin->stok_barang_keluar($id_gudang, $id_kategori);
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
@@ -763,7 +768,7 @@ class Admin extends CI_Controller
     $head['title'] = 'Inventory Gudang | Form Barang Kembali';
     $where = array('id' => $id);
     $list_data = $this->M_admin->get_data_row('tb_barang_keluar', $where);
-    $data['gambar_barang']= $this->M_admin->get_gambar($list_data->id_transaksi);
+    $data['gambar_barang'] = $this->M_admin->get_gambar($list_data->id_transaksi);
     $data['alamat'] = $this->M_admin->get_data_row('map_lokasi', array('id' => $list_data->id_lokasi));
     $data['list_data'] = $list_data;
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
@@ -818,7 +823,7 @@ class Admin extends CI_Controller
       'keterangan' => $keterangan
     );
 
-    if($status == '1' || $status == '2'){
+    if ($status == '1' || $status == '2') {
       $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
     }
 
@@ -881,7 +886,7 @@ class Admin extends CI_Controller
     $id_kategori = $this->input->get('id_kategori');
     $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = $this->gudang . ' | Barang Keluar';
-    $data['list_data'] = $this->M_admin->stok_barang_kembali($id_gudang,$id_kategori);
+    $data['list_data'] = $this->M_admin->stok_barang_kembali($id_gudang, $id_kategori);
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
@@ -904,10 +909,10 @@ class Admin extends CI_Controller
     $this->load->view('admin/tabel/tabel_gudang', $data);
   }
 
-  public function gudang($id_gudang=false)
+  public function gudang($id_gudang = false)
   {
     $total_gudang = $this->M_admin->numrows('tb_gudang');
-    if ($id_gudang <= $total_gudang){
+    if ($id_gudang <= $total_gudang) {
       $head['title'] = 'Inventory Gudang | Data Gudang';
       $data['list_data'] = $this->M_admin->barang_by_gudang($id_gudang);
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
@@ -917,28 +922,27 @@ class Admin extends CI_Controller
       $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
       $this->load->view('layout/head', $head);
       $this->load->view('admin/tabel/tabel_barangmasuk', $data);
-    }else{
+    } else {
       redirect(base_url('admin/gudang/1'));;
     }
   }
 
- 
+
 
   public function tabel_delete_barang()
   {
-    
   }
 
-  public function soft_delete_barang($id=false)
+  public function soft_delete_barang($id = false)
   {
     $update = array(
       'deleted_at'  => date("Y-m-d H:i:s"),
       'is_deleted' => 1
     );
     $where = array('id' => $id);
-    if($this->M_admin->update('tb_barang_masuk',$update,$where)){
+    if ($this->M_admin->update('tb_barang_masuk', $update, $where)) {
       redirect("admin/tabel_barangmasuk");
-    }else{
+    } else {
       $error = array('error' => 'gagal delete barang');
       echo json_encode($error);
     }
