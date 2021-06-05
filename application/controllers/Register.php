@@ -13,8 +13,8 @@ class Register extends CI_Controller
 			if($this->session->userdata('role') == 1) { //cek login ga?
 				redirect('admin', 'refresh');
 			}
-			if($this->session->userdata('role') == 0) { //cek login ga?
-				redirect('user', 'refresh');
+			if($this->session->userdata('role') == 2) { //cek login ga?
+				redirect('admin', 'refresh');
 			}
 		}
   }

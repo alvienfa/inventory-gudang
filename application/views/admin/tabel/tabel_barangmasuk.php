@@ -48,7 +48,7 @@
                         <th>ID</th>
                         <th>Tanggal</th>
                         <th>Nama Barang</th>
-                        <th>Keterangan</th>
+                        <th>Kategori</th>
                         <th>Jumlah</th>
                         <th>Gudang</th>
                         <th>Foto</th>
@@ -68,7 +68,7 @@
                             <td style="white-space: nowrap;"><small><?= $dd->id_transaksi ?></small></td>
                             <td style="white-space: nowrap;"><small><?= $dd->tanggal ?></small></td>
                             <td><small class="text-bold"><?= strtoupper($dd->nama_barang) ?></small><br><small>#<?= strtoupper($dd->kode_barang) ?></small></td>
-                            <td><small><?= $dd->keterangan ?></small></td>
+                            <td><small><?= $dd->nama_kategori ?></small></td>
                             <td><small><span class="text-bold"><?= $dd->jumlah ?> </span><?= $dd->satuan ?></small></td>
                             <td><small><?= $dd->nama_gudang ?></small></td>
                             <td>

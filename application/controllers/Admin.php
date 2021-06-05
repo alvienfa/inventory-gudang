@@ -11,14 +11,14 @@ class Admin extends CI_Controller
     $this->load->library('upload');
     
     if ($this->session->userdata('status') == 'login') {
-      if($this->session->userdata('role') == 0){
-        redirect('user');
-      }
-      $role = $this->db->select('*')
-                      ->from('tb_role')
-                      ->where('id', $this->session->userdata('role'))
-                      ->get()->result();
+      $role = $this->db->select('a.*,b.nama_gudang')
+                      ->from('tb_role as a')
+                      ->join('tb_gudang as b', 'b.id=a.id_gudang')
+                      ->where('a.id', $this->session->userdata('role'))
+                      ->get()->row();
       if($role){
+        $this->gudang = $role->nama_gudang;
+        $this->id_gudang = $role->id_gudang;
         $this->role = $this->session->userdata('role');
       }else{
         redirect('login');
@@ -28,7 +28,9 @@ class Admin extends CI_Controller
 
   public function index()
   {
-    $head['title'] = 'Inventory Gudang | Dashboard';
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
+    $head['title'] = $this->gudang . ' | Dashboard';
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['stokBarangMasuk'] = $this->M_admin->sum('tb_barang_masuk', 'jumlah');
     $data['stokBarangKeluar'] = $this->M_admin->sum('tb_barang_keluar', 'jumlah');
@@ -53,6 +55,8 @@ class Admin extends CI_Controller
 
   public function profile()
   {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $data['token_generate'] = $this->token_generate();
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $head['title'] = 'Inventory Gudang | Profile';
@@ -137,6 +141,8 @@ class Admin extends CI_Controller
       $this->load->library('image_lib', $config);
       $this->image_lib->initialize($config);
       if (!$this->image_lib->resize()) {
+        $data['role'] = $this->role;
+        $data['sidebar']['nama_gudang'] = $this->gudang;
         $data['pesan_error'] = $this->image_lib->display_errors();
         $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
         $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
@@ -171,6 +177,8 @@ class Admin extends CI_Controller
   ####################################
   public function users()
   {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | Users';
     $data['list_users'] = $this->M_admin->kecuali('user', $this->session->userdata('name'));
     $data['token_generate'] = $this->token_generate();
@@ -184,6 +192,8 @@ class Admin extends CI_Controller
 
   public function form_user()
   {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | Form Barang Masuk';
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['token_generate'] = $this->token_generate();
@@ -197,6 +207,8 @@ class Admin extends CI_Controller
 
   public function update_user()
   {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | User';
     $id = $this->uri->segment(3);
     $where = array('id' => $id);
@@ -246,6 +258,8 @@ class Admin extends CI_Controller
         redirect(base_url('admin/form_user'));
       }
     } else {
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
       $head['title'] = 'Inventory Gudang | Form Insert';
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
@@ -278,6 +292,8 @@ class Admin extends CI_Controller
         redirect(base_url('admin/users'));
       }
     } else {
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
       $head['title'] = 'Inventory Gudang | Form Update';
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
@@ -300,6 +316,8 @@ class Admin extends CI_Controller
 
   public function form_barangmasuk()
   {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | Form Barang Masuk';
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
@@ -310,15 +328,21 @@ class Admin extends CI_Controller
     $this->load->view('admin/form_barangmasuk/form_insert', $data);
   }
 
-  public function tabel_barangmasuk()
+  public function tabel_barangmasuk($id_kategori=false)
   {
-    $list_data = $this->M_admin->select_desc('tb_barang_masuk');
-    $join_data = $this->M_admin->join_tabel_desc();
+    $id_kategori = $this->input->get('id_kategori');
+    $where = array(
+      'id_gudang'   => $this->id_gudang,
+      'id_kategori' => $id_kategori
+    );
+    $list_data = $this->M_admin->join_tabel_desc($where);
     $data = array(
-      'list_data' => $join_data,
+      'list_data' => $list_data,
       'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'))
     );
-    $head['title'] = 'Inventory Gudang | Table Barang Masuk';
+    $head['title'] = $this->gudang . ' | Barang Keluar';
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
@@ -327,7 +351,8 @@ class Admin extends CI_Controller
 
   public function update_barang($id)
   {
-
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;  
     $head['title'] = 'Inventory Gudang | Form Update Barang Masuk';
     $where = array('id' => $id);
     $data['list_gudang'] = $this->M_admin->select('tb_gudang');
@@ -434,6 +459,8 @@ class Admin extends CI_Controller
       $head['title'] = 'Inventory Gudang | From Barang Masuk';
       $data['list_satuan'] = $this->M_admin->select('tb_satuan');
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
       $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
       $this->load->view('layout/head', $head);
@@ -497,6 +524,8 @@ class Admin extends CI_Controller
 
   public function form_satuan()
   {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | Satuan Barang';
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
@@ -507,6 +536,8 @@ class Admin extends CI_Controller
 
   public function tabel_satuan()
   {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | Tabel Satuan';
     $data['list_data'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
@@ -523,6 +554,8 @@ class Admin extends CI_Controller
     $data['token_generate'] = $this->token_generate();
     $data['data_satuan'] = $this->M_admin->get_data_row('tb_satuan', array('id_satuan' => $id));
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->session->set_userdata($data);
@@ -559,6 +592,8 @@ class Admin extends CI_Controller
       redirect(base_url('admin/form_satuan'));
     } else {
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
       $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
       $this->load->view('admin/form_satuan/form_insert', $data);
@@ -590,6 +625,8 @@ class Admin extends CI_Controller
       redirect(base_url('admin/tabel_satuan'));
     } else {
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
       $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
       $this->load->view('layout/head', $head);
@@ -614,6 +651,8 @@ class Admin extends CI_Controller
     $data['list_data'] = $this->M_admin->get_data_row('tb_barang_masuk', $where);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
@@ -669,6 +708,8 @@ class Admin extends CI_Controller
     } else {
       $head['title'] = 'Inventory Gudang | Perpindahan Barang';
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
       $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
       $this->load->view('layout/head', $head);
@@ -686,13 +727,16 @@ class Admin extends CI_Controller
 
   public function tabel_barangkeluar()
   {
-    $head['title'] = 'Inventory Gudang | Barang Keluar';
-    $data['list_data'] = $this->M_admin->select_desc('tb_barang_keluar');
+    $head['title'] = $this->gudang . ' | Barang Keluar';
+    $data['role'] = $this->role;
+    $id_kategori = $this->input->get('id_kategori');
+    $id_gudang = $this->id_gudang;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
+    $data['list_data'] = $this->M_admin->stok_barang_keluar($id_gudang,$id_kategori);
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
-
     $this->load->view('admin/tabel/tabel_barangkeluar', $data);
   }
 
@@ -704,6 +748,8 @@ class Admin extends CI_Controller
     $data['list_data'] = $this->M_admin->get_data('tb_barang_keluar', $where);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
@@ -721,6 +767,8 @@ class Admin extends CI_Controller
     $data['alamat'] = $this->M_admin->get_data_row('map_lokasi', array('id' => $list_data->id_lokasi));
     $data['list_data'] = $list_data;
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
@@ -737,6 +785,8 @@ class Admin extends CI_Controller
     $data['list_data'] = $this->M_admin->get_data('tb_barang_keluar', $where);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
@@ -826,8 +876,12 @@ class Admin extends CI_Controller
 
   public function tabel_barangkembali()
   {
-    $head['title'] = 'Inventory Gudang | Barang Kembali';
-    $data['list_data'] = $this->M_admin->select_desc('tb_barang_kembali');
+    $data['role'] = $this->role;
+    $id_gudang = $this->id_gudang;
+    $id_kategori = $this->input->get('id_kategori');
+    $data['sidebar']['nama_gudang'] = $this->gudang;
+    $head['title'] = $this->gudang . ' | Barang Keluar';
+    $data['list_data'] = $this->M_admin->stok_barang_kembali($id_gudang,$id_kategori);
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
@@ -838,8 +892,10 @@ class Admin extends CI_Controller
 
   public function tabel_gudang()
   {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | Data Gudang';
-    $data['list_data'] = $this->M_admin->select_desc('tb_gudang');
+    $data['list_data'] = $this->M_admin->select('tb_gudang');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
@@ -855,15 +911,19 @@ class Admin extends CI_Controller
       $head['title'] = 'Inventory Gudang | Data Gudang';
       $data['list_data'] = $this->M_admin->barang_by_gudang($id_gudang);
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
       $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
       $this->load->view('layout/head', $head);
-      $this->load->view('admin/stok/tabel_stok', $data);
+      $this->load->view('admin/tabel/tabel_barangmasuk', $data);
     }else{
-      redirect(base_url('admin/tabel_gudang'));;
+      redirect(base_url('admin/gudang/1'));;
     }
   }
-  
+
+ 
+
   public function tabel_delete_barang()
   {
     
