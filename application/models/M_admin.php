@@ -8,9 +8,10 @@ class M_admin extends CI_Model
     $this->db->insert($tabel, $data);
   }
 
-  public function select_desc($tabel)
+  public function select_desc($tabel, $where)
   {
     $this->db->order_by('id', 'DESC');
+    $this->db->where($where);
     $query = $this->db->get($tabel);
     return $query->result();
   }
@@ -128,12 +129,14 @@ class M_admin extends CI_Model
 
     return $query->result();
   }
-  public function join_tabel_desc()
+  public function join_tabel_desc($where)
   {
-    $this->db->select('a.*,b.nama_gudang');
+    $this->db->select('a.*,b.nama_gudang,c.nama_kategori');
     $this->db->from('tb_barang_masuk as a');
     $this->db->join('tb_gudang as b', "b.id = a.id_gudang");
+    $this->db->join('tb_kategori as c', 'c.id=a.id_kategori');
     $this->db->where('a.is_deleted', 0);
+    $this->db->where($where);
     $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get();
     return $query->result();
@@ -156,5 +159,30 @@ class M_admin extends CI_Model
     $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get();
     return $query->result();
-  } 
+  }
+  
+  public function stok_barang_keluar($id_gudang, $id_kategori)
+  {
+    $this->db->select('a.*,b.id_gudang,b.id_kategori');
+    $this->db->from('tb_barang_keluar as a');
+    $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
+    $this->db->where('b.id_gudang', $id_gudang);
+    $this->db->where('b.id_kategori', $id_kategori);
+    $this->db->order_by('a.id', 'DESC');
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  public function stok_barang_kembali($id_gudang, $id_kategori)
+  {
+    $this->db->select('a.*,b.id_gudang,b.id_kategori');
+    $this->db->from('tb_barang_kembali as a');
+    $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
+    $this->db->where('b.id_gudang', $id_gudang);
+    $this->db->where('b.id_kategori', $id_kategori);
+    $this->db->order_by('a.id', 'DESC');
+    $query = $this->db->get();
+    // var_dump($query);die();
+    return $query->result();
+  }
 }
