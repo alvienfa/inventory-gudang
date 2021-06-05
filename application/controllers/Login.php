@@ -9,12 +9,13 @@ class Login extends CI_Controller
 		parent::__construct();
 		$this->load->model('M_login');
 
-		if($this->session->userdata('status') == 'login'){
-			if($this->session->userdata('role') == 1) { //cek login ga?
-				redirect('admin', 'refresh');
+		if ($this->session->userdata('status') == 'login') {
+			$role = intval($this->session->userdata('role'));
+			if ($role == 1 || $role == 2 || $role == 3 || $role == 4) {
+				redirect('admin');
 			}
-			if($this->session->userdata('role') == 0) { //cek login ga?
-				redirect('user', 'refresh');
+			if ($role == 6 || $role == 5) {
+				redirect('user');
 			}
 		}
 	}

@@ -10,13 +10,12 @@ class User extends CI_Controller
     $this->load->model('M_user');
 
     if ($this->session->userdata('status') == 'login') {
-      $role = $this->db->select('*')
-                      ->from('tb_role')
-                      ->where('id', $this->session->userdata('role'))
-                      ->get()->result();
-      if($role){
-        $this->role = $this->session->userdata('role');
-      }else{
+      $role = intval($this->session->userdata('role'));
+      if($role == 1 || $role == 2 || $role == 3 || $role == 4){
+        redirect('admin');
+      }elseif ($role == 6 || $role == 5) {
+        $this->role = $role;
+      } else {
         redirect('login');
       }
     }
@@ -44,6 +43,7 @@ class User extends CI_Controller
       ),
 
     );
+    $head['sidebar_menu'] = $this->sidebar_menu();
     $head['username'] = $this->session->userdata('email');
     $head['title'] = 'Dashboard | User';
     $this->load->view('template/head.php', $head);
@@ -163,7 +163,7 @@ class User extends CI_Controller
       ),
       'list_gudang'   => $this->M_user->select('tb_gudang')
     );
-
+    $head['sidebar_menu'] = $this->sidebar_menu();
     $head['username'] = $this->session->userdata('email');
     $head['title'] = 'Barang Masuk | User';
     $this->load->view('template/head.php', $head);
@@ -209,7 +209,7 @@ class User extends CI_Controller
       ),
       'list_gudang' => $this->M_user->select('tb_gudang')
     );
-
+    $head['sidebar_menu'] = $this->sidebar_menu();
     $head['title'] = 'Barang Keluar | User';
     $head['username'] = $this->session->userdata('email');
     $this->load->view('template/head.php', $head);
@@ -254,7 +254,7 @@ class User extends CI_Controller
         'card_satu'  => $this->load->view('user_stisla/tabel/barang_kembali.php', $cards, TRUE),
       ),
     );
-
+    $head['sidebar_menu'] = $this->sidebar_menu();
     $head['title'] = 'Barang Kembali | User';
     $head['username'] = $this->session->userdata('email');
     $this->load->view('template/head.php', $head);
@@ -316,7 +316,7 @@ class User extends CI_Controller
       ),
       'list_gudang' => $this->M_user->select('tb_gudang')
     );
-
+    $head['sidebar_menu'] = $this->sidebar_menu();
     $head['username'] = $this->session->userdata('email');
     $head['title'] = 'Barang Masuk | User';
     $this->load->view('template/head.php', $head);
@@ -326,18 +326,27 @@ class User extends CI_Controller
 
   public function header()
   {
-    $data = array(
-      'total' => array(
-        'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
-        'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
-        'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
-      )
-    );
-    return $this->load->view('template/header', $data, TRUE);
+    if($this->role == 5){
+      $data = array(
+        'total' => array(
+          'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
+          'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
+          'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
+        )
+      );
+      return $this->load->view('template/header', $data, TRUE);
+    }else{
+      return false;
+    }
   }
 
   public function search()
   {
     return $this->load->view('user_stisla/list/search', '', TRUE);
+  }
+  public function sidebar_menu()
+  {
+    $data['role'] = $this->role;
+    return $this->load->view('template/sidebar_menu', $data, TRUE);
   }
 }

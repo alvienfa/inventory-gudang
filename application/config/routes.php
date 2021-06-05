@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['barang'] = 'barang/index';
+$route['barang/(:any)'] = 'barang/index';
+$route['scan/(:any)'] = 'barang/scan/$1';
 $route['barang/(:any)'] = 'barang/get_by_id/$1';
 $route['logout'] = 'admin/signout';
