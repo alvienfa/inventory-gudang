@@ -203,6 +203,7 @@ class Admin extends CI_Controller
     $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | Form Barang Masuk';
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
+    $data['list_role'] = $this->M_admin->select('tb_role');
     $data['token_generate'] = $this->token_generate();
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);

@@ -1,180 +1,182 @@
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="<?php echo base_url('admin')?>" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+    <header class="main-header">
+      <!-- Logo -->
+      <a href="<?php echo base_url('admin') ?>" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>A</b>LT</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>Admin</b>LTE</span>
       </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
 
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <?php foreach($avatar as $a){ ?>
-              <img src="<?php echo base_url('assets/upload/user/img/'.$a->nama_file)?>" class="user-image" alt="User Image">
-              <?php } ?>
-              <span class="hidden-xs"><?=$this->session->userdata('name')?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <?php foreach($avatar as $a){ ?>
-                <img src="<?php echo base_url('assets/upload/user/img/'.$a->nama_file)?>" class="img-circle" alt="User Image">
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <?php foreach ($avatar as $a) { ?>
+                  <img src="<?php echo base_url('assets/upload/user/img/' . $a->nama_file) ?>" class="user-image" alt="User Image">
                 <?php } ?>
-                <p>
-                  <?=$this->session->userdata('name')?> - Web Developer
-                  <small>Last Login : <?=$this->session->userdata('last_login')?></small>
-                </p>
-              </li>
-              <!-- Menu Body -->
+                <span class="hidden-xs"><?= $this->session->userdata('name') ?></span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <?php foreach ($avatar as $a) { ?>
+                    <img src="<?php echo base_url('assets/upload/user/img/' . $a->nama_file) ?>" class="img-circle" alt="User Image">
+                  <?php } ?>
+                  <p>
+                    <?= $this->session->userdata('name') ?> - Web Developer
+                    <small>Last Login : <?= $this->session->userdata('last_login') ?></small>
+                  </p>
+                </li>
+                <!-- Menu Body -->
 
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="<?= base_url('admin/profile')?>" class="btn btn-default btn-flat"><i class="fa fa-cogs" aria-hidden="true"></i> Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="<?= base_url('admin/signout')?>" class="btn btn-default btn-flat"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-
-  <?= $views['sidebar_menu']?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Tambah User
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">Satuan Barang</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- left column -->
-        <div class="col-md-12">
-          <div class="container">
-            <!-- general form elements -->
-          <div class="box box-primary" style="width:94%;">
-            <div class="box-header with-border">
-              <h3 class="box-title"><i class="fa fa-fw fa-user" aria-hidden="true"></i> Tambah Users Data</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <div class="container">
-            <form action="<?=base_url('admin/proses_tambah_user')?>" role="form" method="post">
-
-              <?php if($this->session->flashdata('msg_berhasil')){ ?>
-                <div class="alert alert-success alert-dismissible" style="width:91%">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Success!</strong><br> <?php echo $this->session->flashdata('msg_berhasil');?>
-               </div>
-              <?php } ?>
-
-              <?php if(validation_errors()){ ?>
-              <div class="alert alert-warning alert-dismissible">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
-             </div>
-            <?php } ?>
-
-              <div class="box-body">
-                <div class="form-group" style="display:block;">
-                  <label for="username" style="width:87%;margin-left: 0px;">Username</label>
-                  <input type="text" name="username" style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
-                </div>
-                <div class="form-group" style="display:block;">
-                  <label for="email" style="width:73%;">Email</label>
-                  <input type="text" name="email" style="width:30%;margin-right: 67px;" class="form-control" id="email" placeholder="Email">
-              </div>
-                <div class="form-group" style="display:block;">
-                  <label for="password" style="width:73%;">Password</label>
-                  <input type="password" name="password" style="width:30%;margin-right: 67px;" class="form-control" id="password" placeholder="Password">
-              </div>
-                <div class="form-group" style="display:block;">
-                  <label for="confirm_password" style="width:73%;">Confirm Password</label>
-                  <input type="password" name="confirm_password" style="width:30%;margin-right: 67px;" class="form-control" id="confirm_password" placeholder="Confirm Password">
-              </div>
-              <div class="form-group" style="display:block;">
-                <label for="role" style="width:73%;">Role</label>
-                <select class="form-control" name="role" style="width:11%;margin-right: 18px;">
-                  <option value="0" selected=""></option>
-                  <option value="0">User Biasa</option>
-                  <option value="1">User Admin</option>
-                </select>
-            </div>
-              <!-- /.box-body -->
-              <?php if(isset($token_generate)){ ?>
-                <input type="hidden" name="token"  class="form-control" value="<?= $token_generate?>">
-              <?php }else {
-                redirect(base_url('admin/form_user'));
-              }?>
-
-              <div class="box-footer" style="width:93%;">
-                <a type="button" class="btn btn-default" style="width:10%;margin-right:26%" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
-                <a type="button" class="btn btn-info" style="width:13%;margin-right:29%" href="<?=base_url('admin/users')?>" name="btn_listusers"><i class="fa fa-table" aria-hidden="true"></i> Lihat Users</a>
-                <button type="submit" style="width:20%" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>
-              </div>
-            </form>
-          </div>
-          </div>
-          <!-- /.box -->
-
-          <!-- Form Element sizes -->
-
-          <!-- /.box -->
-
-
-          <!-- /.box -->
-
-          <!-- Input addon -->
-
-          <!-- /.box -->
-
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="<?= base_url('admin/profile') ?>" class="btn btn-default btn-flat"><i class="fa fa-cogs" aria-hidden="true"></i> Profile</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="<?= base_url('admin/signout') ?>" class="btn btn-default btn-flat"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <!-- Control Sidebar Toggle Button -->
+          </ul>
         </div>
-        <!--/.col (left) -->
-        <!-- right column -->
-        <!-- <div class="col-md-6">
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+
+    <?= $views['sidebar_menu'] ?>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Tambah User
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="#">Forms</a></li>
+          <li class="active">Satuan Barang</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <div class="container">
+              <!-- general form elements -->
+              <div class="box box-primary" style="width:94%;">
+                <div class="box-header with-border">
+                  <h3 class="box-title"><i class="fa fa-fw fa-user" aria-hidden="true"></i> Tambah Users Data</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <div class="container">
+                  <form action="<?= base_url('admin/proses_tambah_user') ?>" role="form" method="post">
+
+                    <?php if ($this->session->flashdata('msg_berhasil')) { ?>
+                      <div class="alert alert-success alert-dismissible" style="width:91%">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Success!</strong><br> <?php echo $this->session->flashdata('msg_berhasil'); ?>
+                      </div>
+                    <?php } ?>
+
+                    <?php if (validation_errors()) { ?>
+                      <div class="alert alert-warning alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
+                      </div>
+                    <?php } ?>
+
+                    <div class="box-body">
+                      <div class="form-group" style="display:block;">
+                        <label for="username" style="width:87%;margin-left: 0px;">Username</label>
+                        <input type="text" name="username" style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
+                      </div>
+                      <div class="form-group" style="display:block;">
+                        <label for="email" style="width:73%;">Email</label>
+                        <input type="text" name="email" style="width:30%;margin-right: 67px;" class="form-control" id="email" placeholder="Email">
+                      </div>
+                      <div class="form-group" style="display:block;">
+                        <label for="password" style="width:73%;">Password</label>
+                        <input type="password" name="password" style="width:30%;margin-right: 67px;" class="form-control" id="password" placeholder="Password">
+                      </div>
+                      <div class="form-group" style="display:block;">
+                        <label for="confirm_password" style="width:73%;">Confirm Password</label>
+                        <input type="password" name="confirm_password" style="width:30%;margin-right: 67px;" class="form-control" id="confirm_password" placeholder="Confirm Password">
+                      </div>
+
+                      <div class="form-group" style="display:block;">
+                        <label for="role" style="width:73%;">Role</label>
+                        <select class="form-control" name="role" style="width:11%;margin-right: 18px;">
+                        <option value="">-- Pilih --</option>
+                            <?php foreach ($list_role as $item) : ?>
+                              <option value="<?= $item->id ?>"><?= $item->nama_role ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                      </div>
+                      <!-- /.box-body -->
+                      <?php if (isset($token_generate)) { ?>
+                        <input type="hidden" name="token" class="form-control" value="<?= $token_generate ?>">
+                      <?php } else {
+                        redirect(base_url('admin/form_user'));
+                      } ?>
+
+                      <div class="box-footer" style="width:93%;">
+                        <a type="button" class="btn btn-default" style="width:10%;margin-right:26%" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
+                        <a type="button" class="btn btn-info" style="width:13%;margin-right:29%" href="<?= base_url('admin/users') ?>" name="btn_listusers"><i class="fa fa-table" aria-hidden="true"></i> Lihat Users</a>
+                        <button type="submit" style="width:20%" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>
+                      </div>
+                  </form>
+                </div>
+              </div>
+              <!-- /.box -->
+
+              <!-- Form Element sizes -->
+
+              <!-- /.box -->
+
+
+              <!-- /.box -->
+
+              <!-- Input addon -->
+
+              <!-- /.box -->
+
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <!-- <div class="col-md-6">
           <!-- Horizontal Form -->
 
-          <!-- /.box -->
-          <!-- general form elements disabled -->
+            <!-- /.box -->
+            <!-- general form elements disabled -->
 
-          <!-- /.box -->
+            <!-- /.box -->
 
-        </div>
+          </div>
         </div>
         <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
+    </div>
+    <!-- /.row -->
     </section>
     <!-- /.content -->
   </div>
@@ -183,8 +185,8 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
-    <strong>Copyright &copy; <?=date('Y')?></strong>
-    
+    <strong>Copyright &copy; <?= date('Y') ?></strong>
+
   </footer>
 
   <!-- Control Sidebar -->
@@ -384,14 +386,15 @@
   <!-- ./wrapper -->
 
   <!-- jQuery 3 -->
-  <script src="<?php echo base_url()?>assets/web_admin/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/web_admin/bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
-  <script src="<?php echo base_url()?>assets/web_admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/web_admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- FastClick -->
-  <script src="<?php echo base_url()?>assets/web_admin/bower_components/fastclick/lib/fastclick.js"></script>
+  <script src="<?php echo base_url() ?>assets/web_admin/bower_components/fastclick/lib/fastclick.js"></script>
   <!-- AdminLTE App -->
-  <script src="<?php echo base_url()?>assets/web_admin/dist/js/adminlte.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/web_admin/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="<?php echo base_url()?>assets/web_admin/dist/js/demo.js"></script>
-  </body>
-  </html>
+  <script src="<?php echo base_url() ?>assets/web_admin/dist/js/demo.js"></script>
+</body>
+
+</html>
