@@ -4,9 +4,21 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <?php foreach ($avatar as $a) { ?>
-          <img src="<?php echo base_url('assets/upload/user/img/' . $a->nama_file) ?>" class="img-circle" alt="User Image">
+        <?php if(!empty($avatar)) : ?>
+        <?php foreach ($avatar as $a) {  ?>
+          <img 
+          src="<?php echo base_url('assets/upload/user/img/' . $a->nama_file) ?>"
+          class="img-circle" alt="User Image" 
+          onerror="this.onerror=null;this.src='<?= base_url('assets/img/default-profile.jpg')?>';" >
         <?php } ?>
+        <?php else :?>
+          <img 
+          src="<?= base_url('assets/img/default-profile.jpg')?>"
+          height="100"
+          width="100" 
+          class="img-circle" alt="User Image" 
+          onerror="this.onerror=null;this.src='<?= base_url('assets/img/default-profile.jpg')?>';" >
+        <?php endif;?>
       </div>
       <div class="pull-left info">
         <p><?= $this->session->userdata('name') ?></p>

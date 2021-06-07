@@ -75,7 +75,6 @@ class M_user extends CI_Model
     $this->db->not_like('a.is_deleted', 1);
     $this->db->order_by('a.id', 'desc');
     $query = $this->db->get()->result();
-    // var_dump($query);die();
     return $query;
   }
 

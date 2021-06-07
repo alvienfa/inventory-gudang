@@ -11,44 +11,42 @@ class User extends CI_Controller
 
     if ($this->session->userdata('status') == 'login') {
       $role = intval($this->session->userdata('role'));
-      if($role == 1 || $role == 2 || $role == 3 || $role == 4){
+      if ($role == 1 || $role == 2 || $role == 3 || $role == 4) {
         redirect('admin');
-      }elseif ($role == 6 || $role == 5) {
+      } elseif ($role == 6 || $role == 5) {
         $this->role = $role;
       } else {
         redirect('login');
       }
+    }else{
+      redirect('login');
     }
   }
 
   public function index()
   {
-    $cards['progress_barang'] = $this->M_user->progress_barang();
-    $cards['last_data']       = $this->M_user->select_limit('tb_barang_kembali', 'tb_status', 10);
-    $data = array(
-      'title'             => 'Dashboard',
-      'barang_keluar'     => $this->M_user->select('tb_barang_keluar'),
-      'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
-      'barang_kembali'    => $this->M_user->select('tb_barang_kembali'),
-      'total' => array(
-        'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
-        'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
-        'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
-      ),
-
-      'views' => array(
-        'header' => $this->header(),
-        'card_satu'  => $this->load->view('user_stisla/cards/barang_kembali.php', $cards, TRUE),
-        'card_dua' => $this->load->view('user_stisla/cards/progress_barang.php', $cards, TRUE)
-      ),
-
-    );
     $head['sidebar_menu'] = $this->sidebar_menu();
     $head['username'] = $this->session->userdata('email');
     $head['title'] = 'Dashboard | User';
-    $this->load->view('template/head.php', $head);
-    $this->load->view('user_stisla/index', $data);
-    $this->load->view('template/footer.php', $data);
+    $data['views']['header'] = $this->header();
+    if ($this->role == 5) {
+      $data['title'] = 'Dashboard';
+      $cards1['last_data']       = $this->M_user->select_limit('tb_barang_kembali', 'tb_status', 10);
+      $cards2['progress_barang'] = $this->M_user->progress_barang();
+      $data['views']['card_satu'] = $this->load->view('user_stisla/cards/barang_kembali.php', $cards1, TRUE);
+      $data['views']['card_dua'] = $this->load->view('user_stisla/cards/progress_barang.php', $cards2, TRUE);
+      $this->load->view('template/head.php', $head);
+      $this->load->view('user_stisla/index', $data);
+      $this->load->view('template/footer.php');
+    } else {
+      $data['title'] = 'Scan Barang';
+      $cards1['type'] = 'masuk';
+      $data['views']['card_satu'] = $this->load->view('user_stisla/cards/scan_barang.php', $cards1, TRUE);
+      $data['views']['card_dua'] = NULL;  
+      $this->load->view('template/head.php', $head);
+      $this->load->view('user_stisla/index', $data);
+      $this->load->view('template/footer.php');
+    }
   }
 
   public function token_generate()
@@ -75,7 +73,7 @@ class User extends CI_Controller
   {
     $data['token_generate'] = $this->token_generate();
     $this->session->set_userdata($data);
-
+    $head['sidebar_menu'] = $this->sidebar_menu();
     $head['title'] = 'Barang Keluar | User';
     $head['username'] = $this->session->userdata('email');
     $this->load->view('template/head.php', $head);
@@ -326,7 +324,7 @@ class User extends CI_Controller
 
   public function header()
   {
-    if($this->role == 5){
+    if ($this->role == 5) {
       $data = array(
         'total' => array(
           'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
@@ -335,7 +333,7 @@ class User extends CI_Controller
         )
       );
       return $this->load->view('template/header', $data, TRUE);
-    }else{
+    } else {
       return false;
     }
   }

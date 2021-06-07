@@ -11,23 +11,25 @@ class Barang extends CI_Controller
     $this->load->model('M_user');
     $this->load->model('M_barang');
     $this->load->library('upload');
+    $role = intval($this->session->userdata('role'));
     if ($this->session->userdata('status') == 'login') {
-      $role = intval($this->session->userdata('role'));
-      if($role == 1 || $role == 2 || $role == 3 || $role == 4){
+      if ($role == 1 || $role == 2 || $role == 3 || $role == 4) {
         redirect('admin');
-      }elseif ($role == 6 || $role == 5) {
+      } elseif ($role == 6 || $role == 5) {
         $this->role = $role;
       } else {
         redirect('login');
       }
+    }else{
+      redirect('login');
     }
   }
 
   public function index()
   {
-    $head['sidebar_menu'] = $this->sidebar_menu();
     $head['title'] = 'Scan QR Barang | User';
     $head['username'] = $this->session->userdata('email');
+    $head['sidebar_menu'] = $this->sidebar_menu();
     $data = array(
       'title' => 'Scan Barcode',
       'views' => array(
@@ -42,22 +44,20 @@ class Barang extends CI_Controller
   function get_by_id($id_transaksi = FALSE)
   {
     $head['title'] = 'Detail Barang | User';
+    $head['username'] = $this->session->userdata('email');
     $head['sidebar_menu'] = $this->sidebar_menu();
     $cards['detail'] = $this->M_barang->barang($id_transaksi);
+
     if ($this->M_barang->barang($id_transaksi)) {
       $data = array(
         'title' => $cards['detail']->nama_barang,
         'views' => array(
-          'header'    => $this->header(),
+          'header'    => $this->role !== 6??$this->header(),
           'card_satu' => $this->load->view('barang/photo_barang.php', $cards, TRUE),
           'card_dua'  => $this->load->view('barang/detail_barang.php', $cards, TRUE),
+          'card_tiga' => $this->load->view('barang/scanner.php', $cards, TRUE),
         ),
       );
-
-      $head['username'] = $this->session->userdata('email');
-      $this->load->view('template/head.php', $head);
-      $this->load->view('user_stisla/index', $data);
-      $this->load->view('template/footer.php', $data);
     } else {
       $data = array(
         'title' => 'Barang Tidak Ada',
@@ -66,12 +66,11 @@ class Barang extends CI_Controller
           'card_satu' => $this->load->view('barang/404.php', '', TRUE),
         ),
       );
-
-      $head['username'] = $this->session->userdata('email');
-      $this->load->view('template/head.php', $head);
-      $this->load->view('user_stisla/index', $data);
-      $this->load->view('template/footer.php', $data);
     }
+
+    $this->load->view('template/head.php', $head);
+    $this->load->view('user_stisla/index', $data);
+    $this->load->view('template/footer.php', $data);
   }
 
   public function scan($type = false)
@@ -147,7 +146,7 @@ class Barang extends CI_Controller
     $head['title'] = 'Inventory Gudang | Form Barang Kembali';
     $where = array('id' => $id);
     $list_data = $this->M_admin->get_data_row('tb_barang_keluar', $where);
-    $data['gambar_barang']= $this->M_admin->get_gambar($list_data->id_transaksi);
+    $data['gambar_barang'] = $this->M_admin->get_gambar($list_data->id_transaksi);
     $data['alamat'] = $this->M_admin->get_data_row('map_lokasi', array('id' => $list_data->id_lokasi));
     $data['list_data'] = $list_data;
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
@@ -209,6 +208,24 @@ class Barang extends CI_Controller
     redirect(base_url('admin/tabel_barangkeluar'));
   }
 
+  public function scan_barang($type = false)
+  {
+    $head['sidebar_menu'] = $this->sidebar_menu();
+    $head['title'] = 'Scan QR Barang | User';
+    $head['username'] = $this->session->userdata('email');
+    if ($type == 'kembali') {
+      $data = array(
+        'title' => 'Scan Barcode',
+        'views' => array(
+          'header'  => $this->header()
+        ),
+      );
+    } else {
+    }
+    $this->load->view('template/head', $head);
+    $this->load->view('barang/index', $data);
+    $this->load->view('template/footer', $data);
+  }
   public function header()
   {
     $data = array(

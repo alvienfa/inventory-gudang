@@ -24,12 +24,14 @@ class Admin extends CI_Controller
       } elseif ($role == 6 || $role == 5) {
         redirect('user');
       } elseif ($role == 1) {
-        $this->role = $role;//superadmin
-        $this->gudang = 'all';
-        $this->id_gudang = 'all';
+        $this->role = $role; //superadmin
+        $this->gudang = 'superadmin';
+        $this->id_gudang = 'superadmin';
       } else {
         redirect('login');
       }
+    }else{
+      redirect('login');
     }
   }
 
@@ -335,21 +337,24 @@ class Admin extends CI_Controller
     $this->load->view('admin/form_barangmasuk/form_insert', $data);
   }
 
-  public function tabel_barangmasuk($id_kategori = false)
+  public function tabel_barangmasuk()
   {
     $id_kategori = $this->input->get('id_kategori');
     $where = array(
       'id_gudang'   => $this->id_gudang,
       'id_kategori' => $id_kategori
     );
+
     $list_data = $this->M_admin->join_tabel_desc($where);
     $data = array(
+      'role'      => $this->role,
       'list_data' => $list_data,
-      'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'))
+      'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name')),
+      'sidebar'   => array(
+        'nama_gudang' => $this->gudang
+      ),
     );
     $head['title'] = $this->gudang . ' | Barang Keluar';
-    $data['role'] = $this->role;
-    $data['sidebar']['nama_gudang'] = $this->gudang;
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
