@@ -106,7 +106,7 @@
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
                         <th>Status</th>
-                        <th>Invoice</th>
+                        <th>Surat Jalan</th>
                       </tr>
                     </tfoot>
                   </table>
