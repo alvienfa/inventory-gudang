@@ -61,7 +61,8 @@
                             <td><?= $dd->username ?></td>
                             <td><?= $dd->nama_user ?></td>
                             <td><?= $dd->email ?></td>
-                            <?php if ($dd->role == 1) { ?>
+                            <td><?= $dd->nama_role?></td>
+                            <!-- <?php if ($dd->role == 1) { ?>
                               <td>SuperAdmin</td>
                             <?php } elseif($dd->role == 2) { ?>
                               <td>Admin 1 (Stok Gudang Pak Sandy)</td>
@@ -73,7 +74,7 @@
                               <td>Atasan </td>
                             <?php } elseif($dd->role == 6) { ?>
                               <td>User Biasa </td>
-                            <?php } ?>
+                            <?php } ?> -->
                             
                             <td><?= $dd->last_login ?></td>
                             <td><a type="button" class="btn btn-info" href="<?= base_url('admin/update_user/' . $dd->id) ?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>

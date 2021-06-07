@@ -122,11 +122,11 @@ class M_admin extends CI_Model
 
   public function kecuali($tabel, $username)
   {
-    $query = $this->db->select()
-      ->from($tabel)
+    $query = $this->db->select("a.id,a.nama_user,a.email,a.username,a.last_login,b.nama_role")
+      ->from($tabel .' as a')
+      ->join('tb_role as b', 'b.id=a.role')
       ->where_not_in('username', $username)
       ->get();
-
     return $query->result();
   }
   public function join_tabel_desc($where)

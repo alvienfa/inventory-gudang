@@ -65,14 +65,15 @@ class M_user extends CI_Model
     return $query;
   }
 
-  public function barang_masuk($a, $b,$limit,$start,$search)
+  public function barang_masuk($a, $b, $c,$limit,$start,$search)
   {
-    $this->db->select("a.*,b.nama_gudang");
+    $this->db->select("a.*,b.nama_gudang,c.nama_kategori");
     $this->db->from($a . ' as a');
     $this->db->join($b . ' as b', 'b.id = a.id_gudang', 'LEFT');
-    $this->db->limit($limit,$start);
+    $this->db->join($c . ' as c', 'c.id = a.id_kategori', 'LEFT');
     $this->db->like($search);
     $this->db->not_like('a.is_deleted', 1);
+    $this->db->limit($limit,$start);
     $this->db->order_by('a.id', 'desc');
     $query = $this->db->get()->result();
     return $query;

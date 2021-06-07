@@ -146,12 +146,15 @@ class User extends CI_Controller
       'nama_barang'   => $this->input->get('nama_barang'),
       'id_gudang'     => $this->input->get('id_gudang'),
       'id_transaksi'  => $this->input->get('id_transaksi'),
+      'id_kategori'   => $this->input->get('id_kategori')
     );
+
+    echo json_encode($search);die();
 
     $cards['total_barang_masuk'] = $this->M_user->total_row('tb_barang_masuk');
     $cards['page']               = $this->input->get('page');
     $cards['pagination']         = $this->pagination->create_links();
-    $cards['list_data']          = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', $limit, $start, $search);
+    $cards['list_data']          = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang' ,'tb_kategori', $limit, $start, $search);
     $data = array(
       'title' => 'Tabel Barang Masuk',
       'barang_masuk'  => $this->M_user->select('tb_barang_masuk'),
@@ -159,7 +162,8 @@ class User extends CI_Controller
         'header'      => $this->header(),
         'card_satu'   => $this->load->view('user_stisla/tabel/barang_masuk.php', $cards, TRUE),
       ),
-      'list_gudang'   => $this->M_user->select('tb_gudang')
+      'list_gudang'   => $this->M_user->select('tb_gudang'),
+      'list_kategori'   => $this->M_user->select('tb_kategori')
     );
     $head['sidebar_menu'] = $this->sidebar_menu();
     $head['username'] = $this->session->userdata('email');

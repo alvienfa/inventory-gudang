@@ -15,6 +15,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
+                            <th>Kategori</th>
                             <th>ID Transaksi</th>
                             <th>Total</th>
                             <th>QR Code</th>
@@ -29,6 +30,7 @@
                             <tr>
                                 <td><?= $no ?></td>
                                 <td><small class="text-uppercase font-weight-bold"><?= $item->nama_barang ?></small></td>
+                                <td><small class="text-uppercase font-weight-bold"><?= $item->nama_kategori ?></small></td>
                                 <td><small><?= $item->id_transaksi ?></small></td>
                                 <td><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </td>
                                 <td>
@@ -59,19 +61,3 @@
         <?= $this->load->view('user_stisla/modals/qrcode', '', TRUE) ?>
     </div>
 </div>
-<script>
-    // const preview = document.querySelector('#qr')
-    // document.querySelectorAll('.btn-qr').forEach(item => {
-    //     item.addEventListener('mouseover', (e) => {
-    //         console.log(e.clientX, e.clientY)
-    //         preview.classList.remove("d-none")
-    //         preview.style.left = `600px`
-    //         preview.style.top = `${e.clientY}px`
-    //     })
-
-    //     item.addEventListener('mouseout', (e) => {
-    //         preview.classList.add("d-none")
-
-    //     })
-    // })
-</script>

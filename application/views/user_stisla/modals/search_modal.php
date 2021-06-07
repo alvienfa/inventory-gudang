@@ -18,6 +18,17 @@
                         <input value="<?= $this->input->get('id_transaksi') ?>" type="text" name="id_transaksi" class="form-control form-control-sm">
                     </div>
                     <div class="form-group">
+                        <label for="nama barang">Kategori</label>
+                        <select class="form-control form-control-sm" name="id_kategori">
+                            <option value="">--Pilih Kategori--</option>
+                            <?php
+                            foreach ($list_kategori as $item) : ?>
+                                <option value="<?= $item->id ?>"><?= $item->nama_kategori ?></option>
+                            <?php
+                            endforeach; ?>
+                        </select>                    
+                    </div>
+                    <div class="form-group">
                         <label for="nama barang">Gudang Barang</label>
                         <select class="form-control form-control-sm" name="id_gudang">
                             <option value="">--Pilih Gudang--</option>
