@@ -918,19 +918,7 @@ class Admin extends CI_Controller
     $this->load->view('admin/tabel/tabel_barangkembali', $data);
   }
 
-  public function tabel_gudang()
-  {
-    $data['role'] = $this->role;
-    $data['sidebar']['nama_gudang'] = $this->gudang;
-    $head['title'] = 'Inventory Gudang | Data Gudang';
-    $data['list_data'] = $this->M_admin->select('tb_gudang');
-    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
-    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
-    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
-    $this->load->view('layout/head', $head);
-
-    $this->load->view('admin/tabel/tabel_gudang', $data);
-  }
+  
 
   public function gudang($id_gudang = false)
   {
@@ -950,8 +938,117 @@ class Admin extends CI_Controller
     }
   }
 
+  public function form_gudang()
+  {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
+    $head['title'] = 'Inventory Gudang | Tambah Gudang';
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
+    $this->load->view('admin/form_gudang/form_insert', $data);
+  }
 
+  public function tabel_gudang()
+  {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
+    $head['title'] = 'Inventory Gudang | Data Gudang';
+    $data['list_data'] = $this->M_admin->select('tb_gudang');
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
 
+    $this->load->view('admin/tabel/tabel_gudang', $data);
+  }
+
+  public function update_gudang()
+  {
+    $id = $this->uri->segment(3);
+    $head['title'] = 'Inventory Gudang | Update Data Gudang';
+    $data['token_generate'] = $this->token_generate();
+    $data['data_satuan'] = $this->M_admin->get_data_row('tb_gudang', array('id' => $id));
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->session->set_userdata($data);
+    $this->load->view('layout/head', $head);
+    $this->load->view('admin/form_gudang/form_update', $data);
+  }
+
+  public function delete_gudang()
+  {
+    $uri = $this->uri->segment(3);
+    $where = array('id_satuan' => $uri);
+    $this->M_admin->delete('tb_gudang', $where);
+    redirect(base_url('admin/tabel_gudang'));
+  }
+
+  public function proses_gudang_insert()
+  {
+    $this->form_validation->set_rules('nama_gudang', 'Nama Gudang', 'trim|required|max_length[100]');
+    $this->form_validation->set_rules('detail_gudang', 'Detail Gudang', 'trim|required|max_length[100]');
+
+    if ($this->form_validation->run() ==  TRUE) {
+      $nama_gudang = $this->input->post('nama_gudang', TRUE);
+      $detail_gudang = $this->input->post('detail_gudang', TRUE);
+
+      $data = array(
+        'nama_gudang' => $nama_gudang,
+        'detail_gudang' => $detail_gudang
+      );
+      $this->M_admin->insert('tb_gudang', $data);
+
+      $this->session->set_flashdata('msg_berhasil', 'Data Gudang Berhasil Ditambahkan');
+      redirect(base_url('admin/form_satuan'));
+    } else {
+      $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
+      $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+      $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+      $this->load->view('admin/form_gudang/form_insert', $data);
+    }
+  }
+
+  public function proses_gudang_update()
+  {
+    $head['title'] = 'Inventory Gudang | Form Gudang';
+    $this->form_validation->set_rules('nama_gudang', 'Nama Gudang', 'trim|required|max_length[100]');
+    $this->form_validation->set_rules('detail_gudang', 'Detail Gudang', 'trim|required|max_length[100]');
+
+    if ($this->form_validation->run() ==  TRUE) {
+      $id_gudang   = $this->input->post('id', TRUE);
+      $nama_gudang = $this->input->post('nama_gudang', TRUE);
+      $detail_gudang = $this->input->post('detail_gudang', TRUE);
+
+      $where = array(
+        'id' => $id_gudang
+      );
+
+      $data = array(
+        'nama_gudang' => $nama_gudang,
+        'detail_gudang' => $detail_gudang
+      );
+      $this->M_admin->update('tb_gudang', $data, $where);
+
+      $this->session->set_flashdata('msg_berhasil', 'Data Gudang Berhasil Di Update');
+      redirect(base_url('admin/tabel_satuan'));
+    } else {
+      $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
+      $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+      $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+      $this->load->view('layout/head', $head);
+      $this->load->view('admin/form_gudang/form_update');
+    }
+  }  
+  
   public function tabel_delete_barang()
   {
   }
