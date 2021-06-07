@@ -136,7 +136,7 @@ class M_admin extends CI_Model
     $this->db->join('tb_gudang as b', 'b.id = a.id_gudang');
     $this->db->join('tb_kategori as c', 'c.id = a.id_kategori');
     $this->db->where('a.is_deleted', 0);
-    if($this->session->userdata('role') !== 1)
+    if($this->session->userdata('role') !== '1' && $this->session->userdata('role') !== '5')
     {
       $this->db->where('a.id_gudang', $where['id_gudang']);
       $this->db->where('a.id_kategori', $where['id_kategori']);
@@ -146,6 +146,20 @@ class M_admin extends CI_Model
     $query = $this->db->get();
     // var_dump($this->session->userdata('role') !== 1);die();
     return $query->result();
+  }
+
+  public function print_stok()
+  {
+    $this->db->select('a.*,b.nama_gudang,c.nama_kategori');
+    $this->db->from('tb_barang_masuk as a');
+    $this->db->join('tb_gudang as b', 'b.id = a.id_gudang');
+    $this->db->join('tb_kategori as c', 'c.id = a.id_kategori');
+    $this->db->where('a.is_deleted', 0);
+    $this->db->order_by('a.id', 'DESC');
+    $query = $this->db->get();
+    var_dump($this->session->userdata('role') == '5');die();
+    return $query->result();
+
   }
 
   public function get_gambar($id_transaksi){
