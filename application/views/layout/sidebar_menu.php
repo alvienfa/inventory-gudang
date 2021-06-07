@@ -10,11 +10,11 @@
       </div>
       <div class="pull-left info">
         <p><?= $this->session->userdata('name') ?></p>
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <a href="#"><i class="fa fa-circle text-success" style="color: green;"></i> Online</a>
       </div>
     </div>
     <ul class="sidebar-menu" data-widget="tree">
-      <li class="header"><?= $sidebar['nama_gudang'] ?></li>
+      <li class="header" style="color: yellow;"><?= $sidebar['nama_gudang'] ?></li>
       <li class='<?= (base_url('admin') == current_url() ? ' active' : '') ?> '>
         <a href="<?= base_url('admin') ?>">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
