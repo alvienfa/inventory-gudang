@@ -155,9 +155,10 @@ class M_admin extends CI_Model
 
   public function barang_by_gudang($id_gudang)
   {
-    $this->db->select('a.*,b.nama_gudang');
+    $this->db->select('a.*,b.nama_gudang,c.nama_kategori');
     $this->db->from('tb_barang_masuk as a');
     $this->db->join('tb_gudang as b', "b.id = a.id_gudang");
+    $this->db->join('tb_kategori as c', "c.id=a.id_kategori");
     $this->db->where('a.is_deleted', 0);
     $this->db->where('a.id_gudang', $id_gudang);
     $this->db->order_by('a.id', 'DESC');
@@ -194,4 +195,6 @@ class M_admin extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
+
+  
 }
