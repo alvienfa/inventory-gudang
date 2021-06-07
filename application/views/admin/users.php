@@ -46,6 +46,7 @@
                     <thead>
                       <tr>
                         <th>Username</th>
+                        <th>Nama User</th>
                         <th>Email</th>
                         <th>Role</th>
                         <th>Last Login</th>
@@ -58,17 +59,28 @@
                         <?php if (is_array($list_users)) { ?>
                           <?php foreach ($list_users as $dd) : ?>
                             <td><?= $dd->username ?></td>
+                            <td><?= $dd->nama_user ?></td>
                             <td><?= $dd->email ?></td>
                             <?php if ($dd->role == 1) { ?>
-                              <td>User Admin</td>
-                            <?php } else { ?>
-                              <td>User Biasa</td>
+                              <td>SuperAdmin</td>
+                            <?php } elseif($dd->role == 2) { ?>
+                              <td>Admin 1 (Stok Gudang Pak Sandy)</td>
+                            <?php } elseif($dd->role == 3) { ?>
+                              <td>Admin 2 (Stok Gudang Rizqi Semesta)</td>
+                            <?php } elseif($dd->role == 4) { ?>
+                              <td>Admin 3 (Stok Gudang BBL)</td>
+                            <?php } elseif($dd->role == 5) { ?>
+                              <td>Atasan </td>
+                            <?php } elseif($dd->role == 6) { ?>
+                              <td>User Biasa </td>
                             <?php } ?>
+                            
                             <td><?= $dd->last_login ?></td>
                             <td><a type="button" class="btn btn-info" href="<?= base_url('admin/update_user/' . $dd->id) ?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                             <td><a type="button" class="btn btn-danger btn-delete" href="<?= base_url('admin/proses_delete_user/' . $dd->id) ?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                       </tr>
                     <?php endforeach; ?>
+                    
                   <?php } else { ?>
                     <td colspan="7" align="center"><strong>Data Kosong</strong></td>
                   <?php } ?>

@@ -114,6 +114,10 @@
                   <input type="text" name="username" style="width: 30%;margin-right: 67px;margin-left: 0px;"  required="" class="form-control" id="username" value="<?=$d->username?>">
                 </div>
                 <div class="form-group" style="display:block;">
+                  <label for="username" style="width:87%;margin-left: 0px;">Nama User</label>
+                  <input type="text" name="nama_user" style="width: 30%;margin-right: 67px;margin-left: 0px;"  required="" class="form-control" id="username" value="<?=$d->nama_user?>">
+                </div>
+                <div class="form-group" style="display:block;">
                   <label for="email" style="width:73%;">Email</label>
                   <input type="email" name="email" style="width:30%;margin-right: 67px;" class="form-control" id="email" required="" value="<?=$d->email?>">
               </div>
@@ -121,11 +125,47 @@
                 <label for="role" style="width:73%;">Role</label>
                 <select class="form-control" name="role" style="width:11%;margin-right: 18px;">
                   <?php if($d->role == 1){ ?>
-                  <option value="1" selected="">User Admin</option>
-                  <option value="0">User Biasa</option>
-                  <?php }else{ ?>
-                  <option value="1">User Admin</option>
-                  <option value="0" selected="">User Biasa</option>
+                  <option value="1" selected="">SuperAdmin</option>
+                  <option value="2">Admin 1 (Stok Gudang Pak Sandy)</option>
+                  <option value="3">Admin 2 (Stok Gudang Rizqi Semesta)</option>
+                  <option value="4">Admin 3 (Stok Gudang BBL)</option>
+                  <option value="5">Atasan</option>
+                  <option value="6">User Biasa</option>
+                  <?php }elseif($d->role == 2){ ?>
+                  <option value="1">SuperAdmin</option>
+                  <option value="2" selected="">Admin 1 (Stok Gudang Pak Sandy)</option>
+                  <option value="3">Admin 2 (Stok Gudang Rizqi Semesta)</option>
+                  <option value="4">Admin 3 (Stok Gudang BBL)</option>
+                  <option value="5">Atasan</option>
+                  <option value="6">User Biasa</option>
+                  <?php } elseif($d->role == 3){ ?>
+                  <option value="1">SuperAdmin</option>
+                  <option value="2">Admin 1 (Stok Gudang Pak Sandy)</option>
+                  <option value="3" selected="">Admin 2 (Stok Gudang Rizqi Semesta)</option>
+                  <option value="4">Admin 3 (Stok Gudang BBL)</option>
+                  <option value="5">Atasan</option>
+                  <option value="6">User Biasa</option>
+                  <?php } elseif($d->role == 4){ ?>
+                  <option value="1">SuperAdmin</option>
+                  <option value="2">Admin 1 (Stok Gudang Pak Sandy)</option>
+                  <option value="3">Admin 2 (Stok Gudang Rizqi Semesta)</option>
+                  <option value="4" selected="">Admin 3 (Stok Gudang BBL)</option>
+                  <option value="5">Atasan</option>
+                  <option value="6">User Biasa</option>
+                  <?php } elseif($d->role == 5){ ?>
+                  <option value="1">SuperAdmin</option>
+                  <option value="2">Admin 1 (Stok Gudang Pak Sandy)</option>
+                  <option value="3">Admin 2 (Stok Gudang Rizqi Semesta)</option>
+                  <option value="4">Admin 3 (Stok Gudang BBL)</option>
+                  <option value="5" selected="">Atasan</option>
+                  <option value="6">User Biasa</option>
+                  <?php } elseif($d->role == 6){ ?>
+                  <option value="1">SuperAdmin</option>
+                  <option value="2">Admin 1 (Stok Gudang Pak Sandy)</option>
+                  <option value="3">Admin 2 (Stok Gudang Rizqi Semesta)</option>
+                  <option value="4">Admin 3 (Stok Gudang BBL)</option>
+                  <option value="5">Atasan</option>
+                  <option value="6" selected="">User Biasa</option>
                   <?php } ?>
                 </select>
             </div>

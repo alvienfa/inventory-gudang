@@ -245,6 +245,7 @@ class Admin extends CI_Controller
   {
     $this->form_validation->set_rules('username', 'Username', 'required');
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+    $this->form_validation->set_rules('nama_user', 'nama_user', 'required');
     $this->form_validation->set_rules('password', 'Password', 'required');
     $this->form_validation->set_rules('confirm_password', 'Confirm password', 'required|matches[password]');
 
@@ -252,12 +253,14 @@ class Admin extends CI_Controller
       if ($this->session->userdata('token_generate') === $this->input->post('token')) {
 
         $username     = $this->input->post('username', TRUE);
+        $nama_user    = $this->input->post('nama_user', TRUE);
         $email        = $this->input->post('email', TRUE);
         $password     = $this->input->post('password', TRUE);
         $role         = $this->input->post('role', TRUE);
 
         $data = array(
           'username'     => $username,
+          'nama_user'    => $nama_user,
           'email'        => $email,
           'password'     => $this->hash_password($password),
           'role'         => $role,
@@ -288,12 +291,14 @@ class Admin extends CI_Controller
       if ($this->session->userdata('token_generate') === $this->input->post('token')) {
         $id           = $this->input->post('id', TRUE);
         $username     = $this->input->post('username', TRUE);
+        $nama_user    = $this->input->post('nama_user', TRUE);
         $email        = $this->input->post('email', TRUE);
         $role         = $this->input->post('role', TRUE);
 
         $where = array('id' => $id);
         $data = array(
           'username'     => $username,
+          'nama_user'    => $nama_user,
           'email'        => $email,
           'role'         => $role,
         );
