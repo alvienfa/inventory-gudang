@@ -60,7 +60,8 @@ class Login extends CI_Controller
 							'email' => $isi->email,
 							'status' => 'login',
 							'role' => $isi->role,
-							'last_login' => $isi->last_login
+							'last_login' => $isi->last_login,
+							'nama_user'  => $isi->nama_user
 						);
 
 						$this->session->set_userdata($data_session);

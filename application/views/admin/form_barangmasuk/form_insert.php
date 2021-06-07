@@ -42,7 +42,7 @@
             <div class="col-md-8">
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Keluar</h3>
+                  <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Stok Barang</h3>
                 </div>
 
                 <div class="container-fluid">
@@ -55,24 +55,16 @@
                         </div>
                         <div class="form-group">
                           <label for="tanggal">Tanggal</label>
-                          <input type="date" name="tanggal" class="form-control" placeholder="Klik Disini">
+                          <input type="date" name="tanggal" class="form-control" placeholder="Klik Disini" required>
                         </div>
-                        <div class="form-group">
-                          <label for="keterangan">Pilih Gudang</label>
-                          <select class="form-control" name="id_gudang">
-                            <option value="">-- Pilih --</option>
-                            <?php foreach ($list_gudang as $item) : ?>
-                              <option value="<?= $item->id ?>"><?= $item->nama_gudang ?></option>
-                            <?php endforeach; ?>
-                          </select>
-                        </div>
+                        
                         <div class="form-group">
                           <label for="kode_barang">Kode Barang / Barcode</label>
-                          <input type="text" name="kode_barang" class="form-control" id="kode_barang" value="">
+                          <input type="text" name="kode_barang" class="form-control" id="kode_barang" required value="">
                         </div>
                         <div class="form-group">
                           <label for="nama_Barang" style="width:73%;">Nama Barang</label>
-                          <input type="text" name="nama_barang" class="form-control" id="nama_Barang" value="">
+                          <input type="text" name="nama_barang" class="form-control" id="nama_Barang" required value="">
                         </div>
                         <div class="form-group">
                           <label for="satuan">Satuan</label>
@@ -83,8 +75,17 @@
                           </select>
                         </div>
                         <div class="form-group">
+                          <label for="satuan">Pilih Kategori</label>
+                          <select class="form-control" name="id_kategori">
+                            
+                              <option value="1">Demo / Entertaint</option>
+                              <option value="2">Inventory</option>
+                              <option value="3" selected>Persediaan</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
                           <label for="jumlah">Jumlah</label>
-                          <input type="phone" name="jumlah" class="form-control" id="jumlah">
+                          <input type="phone" name="jumlah" class="form-control" id="jumlah" required>
                         </div>
                         <div class="form-group">
                           <img src="<?= base_url('assets/img/preview.jpg') ?>" id="frame" alt="preview" width="200px" height="200px" onerror="" />

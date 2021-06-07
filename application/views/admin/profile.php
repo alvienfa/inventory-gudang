@@ -129,6 +129,13 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Nama User</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" name="nama_user" class="form-control" id="nama_user" value="<?=$this->session->userdata('nama_user')?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label for="new_password" class="col-sm-2 control-label">New Password</label>
 
                     <div class="col-sm-10">

@@ -25,7 +25,7 @@
     <li class='<?= (base_url('admin/gudang/3') == current_url() ? ' active' : '') ?> '><a href="<?php echo base_url('admin/gudang/3') ?>"><i class="fa fa-circle-o"></i> Stok Gudang BBL</a></li>
   </ul>
 </li>
-<?php $tables = strpos(current_url(), 'admin/tabel')? 'treeview active' : 'treeview' ?>
+<?php $tables = strpos(current_url(), 'admin/tabel') ? 'treeview active' : 'treeview' ?>
 <li class="<?= $tables ?>">
   <a href="#">
     <i class="fa fa-table"></i> <span>Superadmin </span>
@@ -68,4 +68,13 @@
       <a href="<?= base_url('admin/scan_barang_keluar') ?>"><i class="fa fa-arrow-down text-red"></i> Scan Barang Keluar</a>
     </li>
   </ul>
+</li>
+<li class="header">LABELS</li>
+<li class='<?= (base_url('admin/profile') == current_url() ? ' active' : '') ?> '>
+  <a href="<?php echo base_url('admin/profile') ?>">
+    <i class="fa fa-cogs" aria-hidden="true"></i> <span>Profile</span></a>
+</li>
+<li class='<?= (base_url('admin/users') ==  current_url() ? ' active' : '') ?> '>
+  <a href="<?php echo base_url('admin/users') ?>">
+    <i class="fa fa-fw fa-users" aria-hidden="true"></i> <span>Users</span></a>
 </li>
