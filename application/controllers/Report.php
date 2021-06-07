@@ -50,7 +50,7 @@ class Report extends CI_Controller
 
     $html=
       '<div>
-        <h1 align="center">Invoice Bukti Pengeluaran Barang</h1><br>
+        <h1 align="center">Surat Jalan Pengeluaran Barang</h1><br>
 
         <table border="0" width="100%">';
         $html .= '<thead>';

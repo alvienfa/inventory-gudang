@@ -109,7 +109,11 @@
                     <div class="box-body">
                       <div class="form-group" style="display:block;">
                         <label for="username" style="width:87%;margin-left: 0px;">Username</label>
-                        <input type="text" name="username" style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
+                        <input  type="text" name="username" style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
+                      </div>
+                      <div class="form-group" style="display:block;">
+                        <label for="username" style="width:87%;margin-left: 0px;">Nama User</label>
+                        <input  type="text" name="nama_user" style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
                       </div>
                       <div class="form-group" style="display:block;">
                         <label for="email" style="width:73%;">Email</label>

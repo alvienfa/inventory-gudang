@@ -4,21 +4,9 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <?php if(!empty($avatar)) : ?>
-        <?php foreach ($avatar as $a) {  ?>
-          <img 
-          src="<?php echo base_url('assets/upload/user/img/' . $a->nama_file) ?>"
-          class="img-circle" alt="User Image" 
-          onerror="this.onerror=null;this.src='<?= base_url('assets/img/default-profile.jpg')?>';" >
+        <?php foreach ($avatar as $a) { ?>
+          <img src="<?php echo base_url('assets/upload/user/img/' . $a->nama_file) ?>" class="img-circle" alt="User Image">
         <?php } ?>
-        <?php else :?>
-          <img 
-          src="<?= base_url('assets/img/default-profile.jpg')?>"
-          height="100"
-          width="100" 
-          class="img-circle" alt="User Image" 
-          onerror="this.onerror=null;this.src='<?= base_url('assets/img/default-profile.jpg')?>';" >
-        <?php endif;?>
       </div>
       <div class="pull-left info">
         <p><?= $this->session->userdata('name') ?></p>
@@ -41,16 +29,6 @@
       }
       
       ?>
-      
-      <li class="header">LABELS</li>
-      <li class='<?= (base_url('admin/profile') == current_url() ? ' active' : '') ?> '>
-        <a href="<?php echo base_url('admin/profile') ?>">
-          <i class="fa fa-cogs" aria-hidden="true"></i> <span>Profile</span></a>
-      </li>
-      <li class='<?= (base_url('admin/users') ==  current_url() ? ' active' : '') ?> '>
-        <a href="<?php echo base_url('admin/users') ?>">
-          <i class="fa fa-fw fa-users" aria-hidden="true"></i> <span>Users</span></a>
-      </li>
     </ul>
   </section>
   <!-- /.sidebar -->

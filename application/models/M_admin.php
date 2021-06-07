@@ -129,7 +129,7 @@ class M_admin extends CI_Model
 
     return $query->result();
   }
-  public function join_tabel_desc($where=false)
+  public function join_tabel_desc($where)
   {
     $this->db->select('a.*,b.nama_gudang,c.nama_kategori');
     $this->db->from('tb_barang_masuk as a');
@@ -138,11 +138,13 @@ class M_admin extends CI_Model
     $this->db->where('a.is_deleted', 0);
     if($this->session->userdata('role') !== '1' && $this->session->userdata('role') !== '5')
     {
-      $this->db->where($where);
+      $this->db->where('a.id_gudang', $where['id_gudang']);
+      $this->db->where('a.id_kategori', $where['id_kategori']);
     }
 
     $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get();
+    // var_dump($this->session->userdata('role') !== 1);die();
     return $query->result();
   }
 
@@ -185,7 +187,7 @@ class M_admin extends CI_Model
     $this->db->select('a.*,b.id_gudang,b.id_kategori');
     $this->db->from('tb_barang_keluar as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
-    if(!$this->session->userdata('role') == 1)
+    if($this->session->userdata('role') !== 1)
     {
       $this->db->where('b.id_gudang', $id_gudang);
       $this->db->where('b.id_kategori', $id_kategori);
@@ -200,7 +202,7 @@ class M_admin extends CI_Model
     $this->db->select('a.*,b.id_gudang,b.id_kategori');
     $this->db->from('tb_barang_kembali as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
-    if(!$this->session->userdata('role') == 1)
+    if(!$this->session->userdata('role') !== 1)
     {
       $this->db->where('b.id_gudang', $id_gudang);
       $this->db->where('b.id_kategori', $id_kategori);

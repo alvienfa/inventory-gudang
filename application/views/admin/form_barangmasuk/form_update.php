@@ -34,8 +34,7 @@
         </div>
       <?php } ?>
 
-      <form action="<?= base_url('admin/proses_databarang_masuk_update/' . $list_data->id) ?>" 
-      role="form" method="post" enctype="multipart/form-data">
+      <form action="<?= base_url('admin/proses_databarang_masuk_update/' . $list_data->id) ?>" role="form" method="post" enctype="multipart/form-data">
         <section class="content">
           <div class="row">
             <div class="col-md-8">
@@ -53,43 +52,43 @@
                           <input type="text" name="id_transaksi" readonly class="form-control" value="WG-<?= date("Y"); ?><?= random_string('numeric', 8); ?>">
                         </div>
                         <div class="form-group">
-                          <label for="keterangan">Pilih Gudang</label>
-                          <select class="form-control" name="id_gudang" value="<?= $list_data->id_gudang?>">
-                            <option value="">-- Pilih --</option>
-                            <?php foreach ($list_gudang as $item) : ?>
-                              <?php if($item->id == $list_data->id_gudang) : ?>
-                              <option selected value="<?= $item->id ?>"><?= $item->nama_gudang ?></option>
-                              <?php else:?>
-                              <option value="<?= $item->id ?>"><?= $item->nama_gudang ?></option>
-                              <?php endif;?>
-                            <?php endforeach; ?>
-                          </select>
-                        </div>
-                        <div class="form-group">
                           <label for="kode_barang">Kode Barang / Barcode</label>
-                          <input 
-                          type="text" 
-                          name="kode_barang" 
-                          class="form-control" 
-                          id="kode_barang" 
-                          value="<?= $list_data->kode_barang?>" 
-                          readonly>
+                          <input type="text" name="kode_barang" class="form-control" id="kode_barang" value="<?= $list_data->kode_barang ?>" readonly>
                         </div>
                         <div class="form-group">
                           <label for="nama_Barang" style="width:73%;">Nama Barang</label>
-                          <input type="text" name="nama_barang" class="form-control" 
-                          id="nama_Barang" value="<?= $list_data->nama_barang?>" >
+                          <input type="text" name="nama_barang" class="form-control" id="nama_Barang" value="<?= $list_data->nama_barang ?>">
                         </div>
                         <div class="form-group">
                           <label for="jumlah">Jumlah</label>
-                          <input type="phone" name="jumlah" class="form-control" id="jumlah" value="<?= $list_data->jumlah?> ">
+                          <input type="phone" name="jumlah" class="form-control" id="jumlah" value="<?= $list_data->jumlah ?> ">
+                        </div>
+                        <div class="form-group" style="display:block;">
+                          <label for="id_kategori" style="width:73%;">Pilih Kategori</label>
+                          <select class="form-control" name="id_kategori" style="width:100%;margin-right: 18px;">
+                            <?php if ($list_data->id_kategori == 1) { ?>
+                              <option value="1" selected="">Demo / Entertaint</option>
+                              <option value="2">Inventory</option>
+                              <option value="3">Persediaan</option>
+                            <?php } elseif ($list_data->id_kategori == 2) { ?>
+                              <option value="1">Demo / Entertaint</option>
+                              <option value="2" selected="">Inventory</option>
+                              <option value="3">Persediaan</option>
+
+                            <?php } elseif ($list_data->id_kategori == 3) { ?>
+                              <option value="1">Demo / Entertaint</option>
+                              <option value="2">Inventory</option>
+                              <option value="3" selected="">Persediaan</option>
+
+                            <?php } ?>
+                          </select>
                         </div>
                         <div class="form-group">
-                          <img src="<?= base_url('assets/upload/gambar/'.$list_data->gambar) ?>" id="frame" alt="preview" width="200px" height="200px" onerror="" />
+                          <img src="<?= base_url('assets/upload/gambar/' . $list_data->gambar) ?>" id="frame" alt="preview" width="200px" height="200px" onerror="" />
                         </div>
                         <div class="form-group">
                           <label for="gambar">Foto Barang</label>
-                          <input type="hidden" name="old_gambar" value="<?= $list_data->gambar?>">
+                          <input type="hidden" name="old_gambar" value="<?= $list_data->gambar ?>">
                           <input accept="image/*" type="file" name="gambar" class="form-control" id="gambar" onchange="preview()">
                         </div>
                         <div class="form-group">
