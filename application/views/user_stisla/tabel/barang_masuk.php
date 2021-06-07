@@ -1,7 +1,9 @@
 <div class="col-lg-12 col-md-12 col-12 col-sm-12">
     <div class="card position-relative">
         <div class="card-header d-flex justify-content-between">
-            <h4> Total Barang (<?= $total_barang_masuk ?>)</h4>
+            <div>
+                <a href="<?= base_url('report/barangMasuk')?>" class="btn btn-warning"><i class="fas fa-print"></i> PRINT</a>
+            </div>
             <div class="card-header-action">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">SEARCH <i class="fas fa-search"></i></button>
             </div>

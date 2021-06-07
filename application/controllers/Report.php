@@ -32,7 +32,7 @@ class Report extends CI_Controller
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
     //set margin
-    $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP + 10,PDF_MARGIN_RIGHT);
+    $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP,PDF_MARGIN_RIGHT);
     $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -263,5 +263,52 @@ class Report extends CI_Controller
     
     $pdf->Output('invoice_barang_keluar.pdf','I');
 
+  }
+
+  public function barangMasuk($id_gudang=false)
+  {
+    
+    $data = array(
+      'list_data' => $this->M_admin->join_tabel_desc($id_gudang)
+    );
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+    // document informasi
+    $pdf->SetCreator('Inventory Gudang');
+    $pdf->SetTitle('Laporan Stok Barang');
+    $pdf->SetSubject('Stok Barang');
+
+    //header Data
+    $pdf->SetHeaderData(FCPATH . 'assets\img\preview.jpg' ,0,'Barang','Stok Barang',array(203, 58, 44),array(255, 255, 255));
+    $pdf->SetFooterData(array(255, 255, 255), array(255, 255, 255));
+
+    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
+    $pdf->setFooterFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
+
+    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+    //set margin
+    $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP,PDF_MARGIN_RIGHT);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+    // $pdf->SetAutoPageBreak(FALSE, PDF_MARGIN_BOTTOM - 5);
+
+    //SET Scaling ImagickPixel
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+    //FONT Subsetting
+    $pdf->setFontSubsetting(true);
+
+    $pdf->SetFont('helvetica','',9,'',true);
+
+    $pdf->AddPage('A4');
+    $pdf->SetAutoPageBreak(TRUE, 10);
+
+    $html = $this->load->view('report/pdf_stok_barang', $data, TRUE);
+
+    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);    
+    $pdf->Output('stock_barang.pdf','I');
+    
   }
 }

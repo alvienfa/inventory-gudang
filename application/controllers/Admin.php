@@ -415,7 +415,7 @@ class Admin extends CI_Controller
       $config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
       $this->ciqrcode->initialize($config);
 
-      $image_name = $id_transaksi . '.png'; //buat name dari qr code sesuai dengan nim
+      $image_name = $nama_barang . "-" . $id_transaksi . '.png'; //buat name dari qr code sesuai dengan nim
 
       $params['data'] = $id_transaksi; //data yang akan di jadikan QR CODE
       $params['level'] = 'H'; //H=High
