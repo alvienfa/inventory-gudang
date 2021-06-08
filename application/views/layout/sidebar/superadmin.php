@@ -1,4 +1,4 @@
-<?php $forms = base_url('admin/form_barangmasuk') == current_url() || base_url('admin/form_satuan') == current_url() ? 'treeview active' : 'treeview' ?>
+<?php $forms = base_url('admin/form_barangmasuk') == current_url() || base_url('admin/form_satuan') == current_url() || base_url('admin/form_gudang') == current_url() ? 'treeview active' : 'treeview' ?>
 <li class='<?= $forms ?>'>
   <a href="#">
     <i class="fa fa-edit"></i> <span>Forms</span>
@@ -9,6 +9,7 @@
   <ul class="treeview-menu">
     <li class='<?= (base_url('admin/form_barangmasuk') == current_url() ? ' active' : '') ?> '><a href="<?php echo base_url('admin/form_barangmasuk') ?>"><i class="fa fa-circle-o"></i> Tambah Data Barang Baru</a></li>
     <li class='<?= (base_url('admin/form_satuan') == current_url() ? ' active' : '') ?> '><a href="<?php echo base_url('admin/form_satuan') ?>"><i class="fa fa-circle-o"></i> Tambah Satuan Barang</a></li>
+    <li class='<?= (base_url('admin/form_gudang') == current_url() ? ' active' : '') ?> '><a href="<?php echo base_url('admin/form_gudang') ?>"><i class="fa fa-circle-o"></i> Tambah Data Gudang</a></li>
   </ul>
 </li>
 <?php $stok = (strpos(current_url(), 'admin/gudang') ? 'treeview active' : 'treeview') ?>

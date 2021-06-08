@@ -942,7 +942,7 @@ class Admin extends CI_Controller
   {
     $data['role'] = $this->role;
     $data['sidebar']['nama_gudang'] = $this->gudang;
-    $head['title'] = 'Inventory Gudang | Tambah Gudang';
+    $head['title'] = 'Inventory Gudang | Tambah Data Gudang';
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
@@ -969,7 +969,7 @@ class Admin extends CI_Controller
     $id = $this->uri->segment(3);
     $head['title'] = 'Inventory Gudang | Update Data Gudang';
     $data['token_generate'] = $this->token_generate();
-    $data['data_satuan'] = $this->M_admin->get_data_row('tb_gudang', array('id' => $id));
+    $data['data_gudang'] = $this->M_admin->get_data_row('tb_gudang', array('id' => $id));
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['role'] = $this->role;
     $data['sidebar']['nama_gudang'] = $this->gudang;
@@ -983,7 +983,7 @@ class Admin extends CI_Controller
   public function delete_gudang()
   {
     $uri = $this->uri->segment(3);
-    $where = array('id_satuan' => $uri);
+    $where = array('id' => $uri);
     $this->M_admin->delete('tb_gudang', $where);
     redirect(base_url('admin/tabel_gudang'));
   }
@@ -1004,7 +1004,7 @@ class Admin extends CI_Controller
       $this->M_admin->insert('tb_gudang', $data);
 
       $this->session->set_flashdata('msg_berhasil', 'Data Gudang Berhasil Ditambahkan');
-      redirect(base_url('admin/form_satuan'));
+      redirect(base_url('admin/form_gudang'));
     } else {
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
       $data['role'] = $this->role;
@@ -1037,7 +1037,7 @@ class Admin extends CI_Controller
       $this->M_admin->update('tb_gudang', $data, $where);
 
       $this->session->set_flashdata('msg_berhasil', 'Data Gudang Berhasil Di Update');
-      redirect(base_url('admin/tabel_satuan'));
+      redirect(base_url('admin/tabel_gudang'));
     } else {
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
       $data['role'] = $this->role;
