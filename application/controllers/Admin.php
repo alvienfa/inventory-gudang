@@ -832,10 +832,7 @@ class Admin extends CI_Controller
     $insert = array(
       'id_transaksi'    => $data->id_transaksi,
       'tanggal_kembali' => date('Y-m-d'),
-      'lokasi'          => $data->lokasi,
-      'kode_barang'     => $data->kode_barang,
-      'nama_barang'     => $data->nama_barang,
-      'satuan'          => $data->satuan,
+      'id_lokasi'       => $data->id_lokasi,
       'jumlah'          => $jumlah,
       'status'          => $status,
       'keterangan'      => $keterangan,

@@ -167,8 +167,7 @@ class Report extends CI_Controller
     $ls   = array(
       'id' => $id_barang
       );
-    $data = $this->M_admin->get_data_row('tb_barang_keluar',$ls);
-    $user = $this->M_admin->user_by_id($data->created_by);
+    $data = $this->M_admin->barang_by_id('tb_barang_keluar',$id_barang);
     
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -188,7 +187,7 @@ class Report extends CI_Controller
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
     //set margin
-    $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP + 10,PDF_MARGIN_RIGHT);
+    $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP - 10,PDF_MARGIN_RIGHT);
     $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -219,7 +218,7 @@ class Report extends CI_Controller
             $html .= '<tr>';
             $html .= '<td style="width:180px">Ditunjukkan untuk</td>';
             $html .= '<td style="width:10px">:</td>';
-            $html .= '<td style="width:110px">'.$data->lokasi.'</td>';
+            $html .= '<td style="width:110px">'.$data->kota.'</td>';
             $html .= '<td style="width:100px"></td>';
             $html .= '<td style="width:150px"></td>';
             $html .= '<td style="width:180px">Penanggung Jawab</td>';
@@ -273,7 +272,7 @@ class Report extends CI_Controller
             $html .= '<td align="center">'.$data->id_transaksi.'</td>';
             $html .= '<td align="center">'.$data->tanggal_masuk.'</td>';
             $html .= '<td align="center">'.$data->tanggal_keluar.'</td>';
-            $html .= '<td align="center">'.$data->lokasi.'</td>';
+            $html .= '<td align="center">'.$data->kota.'</td>';
             $html .= '<td align="center">'.$data->kode_barang.'</td>';
             $html .= '<td align="center">'.$data->nama_barang.'</td>';
             $html .= '<td align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
@@ -334,7 +333,7 @@ class Report extends CI_Controller
         $html .= '<td style="width:180px">'. $this->session->userdata('nama_user') .'</td>';
         $html .= '<td></td>';
         $html .= '<td> </td>';
-        $html .= '<td colspan="1" style="width:180px">'.$user->nama_user.'</td>';
+        $html .= '<td colspan="1" style="width:180px">'.$data->nama_user.'</td>';
         $html .= '<td></td>';
         $html .= '<td style="width:180px">'.$data->nm_penjab.'</td>';
         $html .= '<td><br></td>';
