@@ -10,7 +10,7 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Tabel Barang Kembali
+          Tabel Data Gudang
         </h1>
         <ol class="breadcrumb">
           <li><a href="<?= base_url('admin') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -32,12 +32,14 @@
               <!-- /.box-header -->
               <div class="box-body">
 
-                <?php if ($this->session->flashdata('msg_berhasil')) { ?>
+              <?php if ($this->session->flashdata('msg_berhasil')) { ?>
                   <div class="alert alert-success alert-dismissible" style="width:100%">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Success!</strong><br> <?php echo $this->session->flashdata('msg_berhasil'); ?>
+                    <strong>Success!</strong><br> <?= $this->session->flashdata('msg_berhasil'); ?>
                   </div>
                 <?php } ?>
+
+                <a href="<?= base_url('admin/form_gudang') ?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Gudang</a>
 
                 
                 <div class="table-responsive">
@@ -47,6 +49,7 @@
                         <th>No </th>
                         <th>Nama Gudang</th>
                         <th>Detail Gudang</th>
+                        <th>Update</th>
                         
 
                         <!-- <th>Keluarkan</th> -->
@@ -60,7 +63,7 @@
                             <td><?= $no ?></td>
                             <td><?= $dd->nama_gudang ?></td>
                             <td><?= $dd->detail_gudang ?></td>
-                            
+                            <td><a type="button" class="btn btn-info" href="<?= base_url('admin/update_gudang/' . $dd->id) ?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                             
 
                             <!-- <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?= base_url('admin/barang_keluar/' . $dd->id_transaksi) ?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td> -->
