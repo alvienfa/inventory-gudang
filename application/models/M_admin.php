@@ -182,7 +182,6 @@ class M_admin extends CI_Model
   
   public function stok_barang_keluar($id_gudang, $id_kategori=false)
   {
-   
     $this->db->select('a.*,b.id_gudang,b.id_kategori,b.nama_barang,b.kode_barang,b.satuan,c.kota');
     $this->db->from('tb_barang_keluar as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
@@ -214,6 +213,43 @@ class M_admin extends CI_Model
     $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get();
     return $query->result();
+  }
+
+  public function user_by_id($id_user)
+  {
+    $this->db->select('*');
+    $this->db->from('user');
+    $this->db->where('id', $id_user);
+    $query = $this->db->get();
+    return $query->row();
+  }
+
+  // $this->db->join('tb_gudang as d', "d.id = b.id_gudang");
+  // $this->db->join('tb_kategori as e', "e.id=b.id_kategori");
+
+  // if(intval($this->session->userdata('role')) !== 1)
+  // {
+  //   $this->db->where('b.id_gudang', $id_gudang);
+  //   $this->db->where('b.id_kategori', $id_kategori);
+  // }
+  public function barang_by_id($tabel,$id_barang)
+  {
+    $this->db->select('
+    a.*,
+    b.satuan,
+    b.kode_barang,
+    b.nama_barang,
+    b.id_gudang,
+    b.id_kategori,
+    c.kota, c.alamat,c.provinsi,c.kecamatan,user.nama_user');
+    $this->db->from($tabel. ' as a');
+    $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
+    $this->db->join('map_lokasi as c', "c.id=a.id_lokasi");
+    $this->db->join('user', "user.id=a.created_by");
+    $this->db->where('a.id',$id_barang);
+    $this->db->order_by('a.id', 'DESC');
+    $query = $this->db->get()->row();
+    return $query;
   }
 
   

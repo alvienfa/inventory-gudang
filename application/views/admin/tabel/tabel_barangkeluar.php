@@ -66,7 +66,7 @@
                             <td><?= $dd->id_transaksi ?></td>
                             <td><?= $dd->tanggal_masuk ?></td>
                             <td><?= $dd->tanggal_keluar ?></td>
-                            <td><?= $dd->lokasi ?></td>
+                            <td><?= $dd->kota ?></td>
                             <td><?= strtoupper($dd->kode_barang) ?></td>
                             <td><?= $dd->nama_barang ?></td>
                             <td><span class="text-bold"> <?= $dd->jumlah ?> </span>(<?= $dd->satuan ?>)</td>

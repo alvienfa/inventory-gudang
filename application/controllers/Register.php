@@ -34,12 +34,14 @@ class Register extends CI_Controller
   {
 
     $this->form_validation->set_rules('username', 'Username', 'required');
+    $this->form_validation->set_rules('nama_user', 'Nama User', 'required');
     $this->form_validation->set_rules('email', 'Email', 'required');
     $this->form_validation->set_rules('password', 'Password', 'required');
     $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
 
     if ($this->form_validation->run() == TRUE) {
       $username = $this->input->post('username', TRUE);
+      $nama_user = $this->input->post('nama_user', TRUE);
       $email    = $this->input->post('email', TRUE);
       $password = $this->input->post('password', TRUE);
 
@@ -49,6 +51,7 @@ class Register extends CI_Controller
       } else {
         $data = array(
           'username' => $username,
+          'nama_user' => $nama_user,
           'email'    => $email,
           'password' => $this->hash_password($password)
         );

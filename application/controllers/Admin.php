@@ -90,6 +90,7 @@ class Admin extends CI_Controller
   public function proses_new_password()
   {
     $this->form_validation->set_rules('email', 'Email', 'required');
+    $this->form_validation->set_rules('nama_user', 'Nama User', 'required');
     $this->form_validation->set_rules('new_password', 'New Password', 'required');
     $this->form_validation->set_rules('confirm_new_password', 'Confirm New Password', 'required|matches[new_password]');
 
@@ -824,10 +825,7 @@ class Admin extends CI_Controller
     $insert = array(
       'id_transaksi'    => $data->id_transaksi,
       'tanggal_kembali' => date('Y-m-d'),
-      'lokasi'          => $data->lokasi,
-      'kode_barang'     => $data->kode_barang,
-      'nama_barang'     => $data->nama_barang,
-      'satuan'          => $data->satuan,
+      'id_lokasi'       => $data->id_lokasi,
       'jumlah'          => $jumlah,
       'status'          => $status,
       'keterangan'      => $keterangan,

@@ -39,6 +39,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="nama_user">Name</label>
+                                <input id="nama_user" type="text" class="form-control" name="nama_user" tabindex="1" required autofocus>
+                                <div class="invalid-feedback">
+                                    Please fill in your Name
+                                </div>
+                                <div class="valid-feedback">
+                                    Good
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="email">Email</label>
                                 <input id="email" type="email" class="form-control" name="email" tabindex="2" required autofocus>
                                 <div class="invalid-feedback">
