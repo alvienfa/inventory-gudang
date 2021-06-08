@@ -355,10 +355,10 @@ class Admin extends CI_Controller
       'id_gudang'   => $this->id_gudang,
       'id_kategori' => $id_kategori
     );
-    $list_data = $this->M_admin->join_tabel_desc($where);
+
     $data = array(
       'role'      => $this->role,
-      'list_data' => $list_data,
+      'list_data' => $this->M_admin->join_tabel_desc($where),
       'avatar'    => $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name')),
       'sidebar'   => array(
         'nama_gudang' => $this->gudang
@@ -673,13 +673,13 @@ class Admin extends CI_Controller
   public function scan_barang_keluar()
   {
     $uri = $this->uri->segment(3);
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | Perpindahan Barang';
     $where = array('id_transaksi' => $uri);
     $data['list_data'] = $this->M_admin->get_data_row('tb_barang_masuk', $where);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
-    $data['role'] = $this->role;
-    $data['sidebar']['nama_gudang'] = $this->gudang;
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
@@ -694,9 +694,6 @@ class Admin extends CI_Controller
       $tanggal_masuk  = $this->input->post('tanggal', TRUE);
       $tanggal_keluar = $this->input->post('tanggal_keluar', TRUE);
       $lokasi         = $this->input->post('lokasi', TRUE);
-      $kode_barang    = $this->input->post('kode_barang', TRUE);
-      $nama_barang    = $this->input->post('nama_barang', TRUE);
-      $satuan         = $this->input->post('satuan', TRUE);
       $jumlah         = $this->input->post('jumlah', TRUE);
       $keterangan     = $this->input->post('keterangan', TRUE);
       $alamat = array(
@@ -716,11 +713,7 @@ class Admin extends CI_Controller
         'id_transaksi' => $id_transaksi,
         'tanggal_masuk' => $tanggal_masuk,
         'tanggal_keluar' => $tanggal_keluar,
-        'lokasi' => $lokasi,
         'id_lokasi' => $id_lokasi,
-        'kode_barang' => $kode_barang,
-        'nama_barang' => $nama_barang,
-        'satuan' => $satuan,
         'jumlah' => $jumlah,
         'keterangan' => $keterangan,
         'nm_penjab' => $nm_penjab,
@@ -787,29 +780,29 @@ class Admin extends CI_Controller
   public function edit_list_barang()
   {
     $id = $this->uri->segment(3);
-    $head['title'] = 'Inventory Gudang | Form Barang Kembali';
-    $where = array('id' => $id);
-    $list_data = $this->M_admin->get_data_row('tb_barang_keluar', $where);
-    $data['gambar_barang'] = $this->M_admin->get_gambar($list_data->id_transaksi);
-    $data['alamat'] = $this->M_admin->get_data_row('map_lokasi', array('id' => $list_data->id_lokasi));
-    $data['list_data'] = $list_data;
-    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
-    $data['role'] = $this->role;
+    $data['role']                   = $this->role;
+    $head['title']                  = 'Inventory Gudang | Form Barang Kembali';
     $data['sidebar']['nama_gudang'] = $this->gudang;
-    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
-    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $row_data                       = $this->M_admin->get_data_row('tb_barang_keluar',array('id' => $id));
+    $data['gambar_barang']          = $this->M_admin->get_gambar($row_data->id_transaksi);
+    $data['alamat']                 = $this->M_admin->get_data_row('map_lokasi', array('id' => $row_data->id_lokasi));
+    $data['list_data']              = $row_data;
+    $data['avatar']                 = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['views']['sidebar_menu']  = $this->load->view('layout/sidebar_menu', $data, TRUE);
+    $data['views']['header']        = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
     $this->load->view('admin/scanner/form_barang_kembali.php', $data);
   }
+
   public function scan_list_barang()
   {
-    $uri = $this->uri->segment(3);
+    $id_transaksi = $this->uri->segment(3);
     $head['title'] = 'Inventory Gudang | List Barang by QR';
     $where = array(
       'status'       => '0',
-      'id_transaksi' => $uri
+      'id_transaksi' => $id_transaksi
     );
-    $data['list_data'] = $this->M_admin->get_data('tb_barang_keluar', $where);
+    $data['list_data'] = $this->M_admin->stok_barang_keluar($this->id_gudang);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['role'] = $this->role;

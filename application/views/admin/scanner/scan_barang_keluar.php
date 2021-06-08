@@ -59,21 +59,21 @@
                         <div class="col-md-6">
                             <div class="container-fluid">
                                 <div class="box box-primary">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Keluar</h3>
-                                    </div>
                                     <form action="<?= base_url('admin/proses_data_keluar') ?>" role="form" method="post">
-
-                                        <?php if (validation_errors()) { ?>
-                                            <div class="alert alert-warning alert-dismissible">
-                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                                <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
-                                            </div>
+                                    
+                                    <?php if (validation_errors()) { ?>
+                                        <div class="alert alert-warning alert-dismissible">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
+                                        </div>
                                         <?php } ?>
-
+                                        
                                         <div class="container-fluid">
                                             <div class="box-body" id='barang_scan'>
                                                 <div class="row">
+                                                    <div class="box-header with-border">
+                                                        <h3 class="box-title"><i class="fa fa-archive" aria-hidden="true"></i> Tambah Barang Keluar</h3>
+                                                    </div>
                                                     <div class="col-md-12">
                                                         <input type="hidden" name="id" readonly value="<?= $list_data->id ?>">
                                                         <div class="form-group">
@@ -102,21 +102,10 @@
                                                             <input type="text" name="nama_barang" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $list_data->nama_barang ?>">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="nama_Barang" style="width:73%;">Stok</label>
+                                                            <label for="nama_Barang" style="width:73%;">Stok (*<?= $list_data->satuan?>)</label>
                                                             <input type="text" name="stok" readonly="readonly" class="form-control" id="nama_Barang" value="<?= $list_data->keterangan ?>">
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="satuan">Satuan</label>
-                                                            <select class="form-control" name="satuan">
-                                                                <?php foreach ($list_satuan as $s) { ?>
-                                                                    <?php if ($list_data->satuan == $s->nama_satuan) { ?>
-                                                                        <option value="<?= $list_data->satuan ?>" selected=""><?= $list_data->satuan ?></option>
-                                                                    <?php } else { ?>
-                                                                        <option value="<?= $s->kode_satuan ?>"><?= $s->nama_satuan ?></option>
-                                                                    <?php } ?>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
+
                                                         <div class="form-group">
                                                             <label for="jumlah">Jumlah</label>
                                                             <input type="number" name="jumlah" class="form-control" id="jumlah" max="<?= $list_data->jumlah ?>" value="<?= $list_data->jumlah ?>">
@@ -136,27 +125,20 @@
                         <div class="col-md-6">
                             <div class="container-fluid">
                                 <div class="box box-primary">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title"><i class="fa fa-map-marker" aria-hidden="true"></i> Alamat Tujuan</h3>
-                                    </div>
                                     <div class="container-fluid">
                                         <div class="box-body" id='barang_scan'>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <?= $this->load->view('components/forms/form_lokasi', '', TRUE) ?>
-                                                </div>
-                                            </div>
+                                            <?= $this->load->view('components/forms/form_lokasi', '', TRUE) ?>
                                             <div class="row">
                                                 <div class="box-header with-border">
                                                     <h3 class="box-title"><i class="fa fa-user" aria-hidden="true"></i> Penanggung Jawab</h3>
                                                 </div>
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="status">Nama Penanggung Jawab</label>
+                                                        <label for="status">Nama </label>
                                                         <input type="text" name="nm_penjab" class="form-control" id="nm_penjab">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="status">Contact Penanggung Jawab</label>
+                                                        <label for="status">Contact</label>
                                                         <input type="phone" name="nohp_penjab" class="form-control" id="nohp_penjab">
                                                     </div>
                                                     <div class="form-group">

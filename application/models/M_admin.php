@@ -136,7 +136,8 @@ class M_admin extends CI_Model
     $this->db->join('tb_gudang as b', 'b.id = a.id_gudang');
     $this->db->join('tb_kategori as c', 'c.id = a.id_kategori');
     $this->db->where('a.is_deleted', 0);
-    if($this->session->userdata('role') !== '1' && $this->session->userdata('role') !== '5')
+    $id_role = intval($this->session->userdata('role'));
+    if($id_role !== 1 && $id_role !== 5)
     {
       $this->db->where('a.id_gudang', $where['id_gudang']);
       $this->db->where('a.id_kategori', $where['id_kategori']);
@@ -179,30 +180,36 @@ class M_admin extends CI_Model
     return $query->result();
   }
   
-  public function stok_barang_keluar($id_gudang, $id_kategori)
+  public function stok_barang_keluar($id_gudang, $id_kategori=false)
   {
-    $this->db->select('a.*,b.id_gudang,b.id_kategori');
+   
+    $this->db->select('a.*,b.id_gudang,b.id_kategori,b.nama_barang,b.kode_barang,b.satuan,c.kota');
     $this->db->from('tb_barang_keluar as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
+    $this->db->join('map_lokasi as c', "c.id=a.id_lokasi");
     if(intval($this->session->userdata('role')) !== 1)
     {
       $this->db->where('b.id_gudang', $id_gudang);
-      $this->db->where('b.id_kategori', $id_kategori);
+      if($id_kategori){
+        $this->db->where('b.id_kategori', $id_kategori);
+      }
     }
     $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get();
     return $query->result();
   }
 
-  public function stok_barang_kembali($id_gudang, $id_kategori)
+  public function stok_barang_kembali($id_gudang, $id_kategori=false)
   {
-    $this->db->select('a.*,b.id_gudang,b.id_kategori');
+    $this->db->select('a.*,b.id_gudang,b.id_kategori,b.nama_barang,b.kode_barang,b.satuan');
     $this->db->from('tb_barang_kembali as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
     if(intval($this->session->userdata('role')) !== 1)
     {
       $this->db->where('b.id_gudang', $id_gudang);
-      $this->db->where('b.id_kategori', $id_kategori);
+      if($id_kategori){
+        $this->db->where('b.id_kategori', $id_kategori);
+      }
     }
     $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get();

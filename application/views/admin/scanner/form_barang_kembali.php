@@ -36,7 +36,6 @@
                                                 <strong>Warning!</strong><br> <?php echo validation_errors(); ?>
                                             </div>
                                         <?php } ?>
-
                                         <div class="container-fluid">
                                             <div class="box-body" id='barang_scan'>
                                                 <div class="row">
@@ -50,10 +49,6 @@
                                                         <div class="form-group">
                                                             <label for="id_transaksi">ID Transaksi</label>
                                                             <input type="text" name="id_transaksi" class="form-control" readonly="readonly" value="<?= $list_data->id_transaksi ?>">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="lokasi">Lokasi</label>
-                                                            <input type="text" name="lokasi" class="form-control" value="<?= $list_data->lokasi ?>" readonly>
                                                         </div>
                                                         <?= $this->load->view('components/forms/form_lokasi_edit', $alamat, TRUE) ?>
                                                         <div class="form-group">
