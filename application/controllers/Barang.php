@@ -34,11 +34,12 @@ class Barang extends CI_Controller
     $data = array(
       'title' => 'Scan Barcode',
       'views' => array(
-        'header'  => $this->header()
+        // 'header'  => $this->header(),
+        'card_satu' => $this->load->view('user_stisla/cards/scan_barang', '', TRUE)
       ),
     );
     $this->load->view('template/head', $head);
-    $this->load->view('barang/index', $data);
+    $this->load->view('user_stisla/index', $data);
     $this->load->view('template/footer', $data);
   }
 
@@ -53,7 +54,7 @@ class Barang extends CI_Controller
       $data = array(
         'title' => $cards['detail']->nama_barang,
         'views' => array(
-          'header'    => $this->role !== 6 ?? $this->header(),
+          'header'    => $this->role !== 6 ?$this->header():NULL,
           'card_satu' => $this->load->view('barang/photo_barang.php', $cards, TRUE),
           'card_dua'  => $this->load->view('barang/detail_barang.php', $cards, TRUE),
           'card_tiga' => $this->load->view('barang/scanner.php', $cards, TRUE),
@@ -88,7 +89,6 @@ class Barang extends CI_Controller
 
   public function submit($type = false)
   {
-    $this->form_validation->set_rules('tanggal_keluar', 'Tanggal Keluar', 'trim|required');
     $this->form_validation->set_rules('jumlah', 'Jumlah', 'trim|required|numeric');
     $id_transaksi   = $this->input->post('id_transaksi', TRUE);
     $barang         = $this->M_barang->barang($id_transaksi);
@@ -109,9 +109,10 @@ class Barang extends CI_Controller
       $insert = array(
         'id_transaksi'    => $id_transaksi,
         'tanggal_masuk'   => date("Y-m-d"),
-        'tanggal_keluar'  => date("Y/m/d"),
-        'lokasi'          => $lokasi,
+        'tanggal_keluar'  => date("Y-m-d"),
+        'tanggal_kembali' => date("Y-m-d"),
         'id_lokasi'       => $this->M_admin->insert_lokasi('map_lokasi', $alamat),
+        'lokasi'          => 'hapus kolom db',
         'kode_barang'     => 'hapus kolom db',
         'nama_barang'     => 'hapus kolom db',
         'satuan'          => 'hapus kolom db',
@@ -144,8 +145,13 @@ class Barang extends CI_Controller
           break;
       endswitch;
     } else {
+      $error = array(
+        'message' => 'gagal submit',
+        'status'  => 400
+      );
+      echo json_encode($error);die();
       $this->session->set_flashdata('msg_gagal', 'Gagal Submit');
-      redirect('barang/' . $id_transaksi);
+      redirect(base_url('barang/' . $id_transaksi));
     }
   }
 
@@ -241,8 +247,10 @@ class Barang extends CI_Controller
       'total' => array(
         'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
         'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
-        'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
-      )
+        'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali'),
+      ),
+      'status' => $this->M_barang->total(),
+      'kategori' => $this->M_barang->kategori()
     );
     return $this->load->view('template/header', $data, TRUE);
   }

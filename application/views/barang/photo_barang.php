@@ -17,7 +17,6 @@
             <img
             class="img-fluid"
             onerror="this.onerror=null;this.src='<?= base_url('assets/img/error-image.png') ?>'" 
-             
             src="<?= base_url('assets/qrcode/images/') . $detail->qr_code ?>">
         </div>
     </div>

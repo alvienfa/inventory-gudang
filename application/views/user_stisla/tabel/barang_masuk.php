@@ -2,7 +2,7 @@
     <div class="card position-relative">
         <div class="card-header d-flex justify-content-between">
             <div>
-                <a href="<?= base_url('report/barangMasuk')?>" class="btn btn-warning"><i class="fas fa-print"></i> PRINT</a>
+                <button class="btn btn-warning" data-toggle="modal" data-target="#printModal"><i class="fas fa-print"></i> PRINT</button>
             </div>
             <div class="card-header-action">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">SEARCH <i class="fas fa-search"></i></button>

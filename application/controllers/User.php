@@ -8,6 +8,8 @@ class User extends CI_Controller
   {
     parent::__construct();
     $this->load->model('M_user');
+    $this->load->model('M_barang');
+
 
     if ($this->session->userdata('status') == 'login') {
       $role = intval($this->session->userdata('role'));
@@ -15,6 +17,7 @@ class User extends CI_Controller
         redirect('admin');
       } elseif ($role == 6 || $role == 5) {
         $this->role = $role;
+        $this->nama_user = $this->session->userdata('nama_user');
       } else {
         redirect('login');
       }
@@ -149,18 +152,21 @@ class User extends CI_Controller
       'id_kategori'   => $this->input->get('id_kategori')
     );
 
-    echo json_encode($search);die();
 
     $cards['total_barang_masuk'] = $this->M_user->total_row('tb_barang_masuk');
     $cards['page']               = $this->input->get('page');
     $cards['pagination']         = $this->pagination->create_links();
     $cards['list_data']          = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang' ,'tb_kategori', $limit, $start, $search);
+    $print['list_gudang']        = $this->M_user->select('tb_gudang');
+    $print['list_kategori']      = $this->M_user->select('tb_kategori');
+
     $data = array(
       'title' => 'Tabel Barang Masuk',
       'barang_masuk'  => $this->M_user->select('tb_barang_masuk'),
       'views'         => array(
         'header'      => $this->header(),
-        'card_satu'   => $this->load->view('user_stisla/tabel/barang_masuk.php', $cards, TRUE),
+        'card_satu'   => $this->load->view('user_stisla/tabel/barang_masuk', $cards, TRUE),
+        'modal_print' => $this->load->view('user_stisla/modals/print', $print, TRUE)
       ),
       'list_gudang'   => $this->M_user->select('tb_gudang'),
       'list_kategori'   => $this->M_user->select('tb_kategori')
@@ -202,7 +208,7 @@ class User extends CI_Controller
 
     $cards['pagination'] = $this->pagination->create_links();
 
-    $cards['list_data'] = $this->M_user->barang_keluar('tb_barang_keluar', 'map_lokasi', 'tb_status', 'tb_gudang', $limit, $start);
+    $cards['list_data'] = $this->M_user->barang_keluar('tb_barang_keluar', 'map_lokasi', 'tb_status', 'tb_gudang', $limit, $start, 'tb_barang_masuk');
     $data = array(
       'title' => 'Tabel Barang Keluar',
       'views' => array(
@@ -248,7 +254,7 @@ class User extends CI_Controller
 
     $cards['pagination'] = $this->pagination->create_links();
 
-    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali', 'tb_status', $limit, $start);
+    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali', 'tb_status', $limit, $start, 'tb_barang_masuk');
     $data = array(
       'title' => 'Tabel Barang Kembali',
       'views' => array(
@@ -333,12 +339,14 @@ class User extends CI_Controller
         'total' => array(
           'barang_masuk'    => $this->M_user->total_row('tb_barang_masuk'),
           'barang_keluar'   => $this->M_user->total_row('tb_barang_keluar'),
-          'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali')
-        )
+          'barang_kembali'  => $this->M_user->total_row('tb_barang_kembali'),
+        ),
+        'status' => $this->M_barang->total(),
+        'kategori' => $this->M_barang->kategori()
       );
       return $this->load->view('template/header', $data, TRUE);
-    } else {
-      return false;
+    }else{
+      return NULL;
     }
   }
 

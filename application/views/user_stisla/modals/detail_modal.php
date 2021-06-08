@@ -38,7 +38,10 @@
                             <label>Keterangan</label>
                             <input disabled type="text" name="keterangan" value="" class="<?= $input ?>">
                         </div>
-
+                        <div class="form-group">
+                            <label>Author</label>
+                            <input disabled type="text" name="created_by" value="" class="<?= $input ?>">
+                        </div>
                     </div>
                 </div>
 
@@ -56,12 +59,13 @@
     btnDetail.forEach(item => {
         item.addEventListener('click', (e) => {
             $("#detailModal").modal('show')
-            document.querySelector("input[name='alamat']").value = e.target.dataset.alamat
+            document.querySelector("input[name='alamat']").value = e.target.dataset.alamat || NULL
             document.querySelector("input[name='kecamatan']").value = e.target.dataset.kecamatan
-            document.querySelector("input[name='kota']").value = e.target.dataset.kota
-            document.querySelector("input[name='provinsi']").value = e.target.dataset.provinsi
-            document.querySelector("input[name='kode_pos']").value = e.target.dataset.pos
-            document.querySelector("input[name='keterangan']").value = e.target.dataset.keterangan
+            document.querySelector("input[name='kota']").value = e.target.dataset.kota || NULL
+            document.querySelector("input[name='provinsi']").value = e.target.dataset.provinsi || NULL
+            document.querySelector("input[name='kode_pos']").value = e.target.dataset.pos || NULL
+            document.querySelector("input[name='keterangan']").value = e.target.dataset.keterangan || NULL
+            document.querySelector("input[name='created_by']").value = "<?= $this->session->userdata('name')?>"
         })
     })
 </script>

@@ -35,10 +35,10 @@ $text_class = "text-uppercase font-weight-bold text-primary mb-0";
                     <table class="table table-strip">
                         <thead>
                             <tr>
-                                <th>
+                                <th class="bg-danger text-white">
                                     Rusak
                                 </th>
-                                <th>
+                                <th class="bg-primary text-white">
                                     Service
                                 </th>
 
@@ -46,10 +46,10 @@ $text_class = "text-uppercase font-weight-bold text-primary mb-0";
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="bg-danger text-white">
+                                <td class="text-danger font-weight-bold">
                                     <?= $total->total_rusak ?> <?= $detail->satuan ?>
                                 </td>
-                                <td class="bg-primary text-white">
+                                <td class="text-primary font-weight-bold">
                                     <?= $total->total_service ?> <?= $detail->satuan ?>
                                 </td>
 
@@ -57,20 +57,20 @@ $text_class = "text-uppercase font-weight-bold text-primary mb-0";
                         </tbody>
                         <thead>
                             <tr>
-                                <th>
+                                <th class="bg-warning text-white">
                                     Keluar
                                 </th>
-                                <th>
+                                <th class="bg-success text-white">
                                     Gudang
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="bg-warning text-white">
+                                <td class="text-warning font-weight-bold">
                                     <?= $total->total_keluar ?> <?= $detail->satuan ?>
                                 </td>
-                                <td class="bg-success text-white">
+                                <td class="text-success font-weight-bold">
                                     <?= $detail->jumlah ?> <?= $detail->satuan ?>
                                 </td>
                             </tr>

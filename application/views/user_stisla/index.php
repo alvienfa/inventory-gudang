@@ -16,5 +16,7 @@
   
   <?= $this->load->view('user_stisla/modals/search_modal', '', TRUE)?>
   <?= $this->load->view('user_stisla/modals/detail_modal', '', TRUE)?>
+
   <?= isset($views['modal_scanner'])?$views['modal_scanner']: NULL ?>
+  <?= isset($views['modal_print'])?$views['modal_print']: NULL ?>
 </div>

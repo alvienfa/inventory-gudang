@@ -9,6 +9,7 @@ class Report extends CI_Controller
     parent::__construct();
     $this->load->library('Pdf');
     $this->load->model('M_admin');
+    $this->load->model('M_user');
   }
 
   public function barangKeluarManual()
@@ -267,9 +268,20 @@ class Report extends CI_Controller
 
   public function barangMasuk($id_gudang=false)
   {
-    
+
+    $limit = $this->input->get('limit') ? intval($this->input->get('limit')) : 100;
+
+    $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
+
+    $search = array(
+      'nama_barang'   => $this->input->get('nama_barang'),
+      'id_gudang'     => $this->input->get('id_gudang'),
+      'id_transaksi'  => $this->input->get('id_transaksi'),
+      'id_kategori'   => $this->input->get('id_kategori')
+    );
+
     $data = array(
-      'list_data' => $this->M_admin->join_tabel_desc($id_gudang)
+      'list_data' => $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang' ,'tb_kategori', $limit, $start, $search)
     );
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -300,7 +312,7 @@ class Report extends CI_Controller
     //FONT Subsetting
     $pdf->setFontSubsetting(true);
 
-    $pdf->SetFont('helvetica','',9,'',true);
+    $pdf->SetFont('helvetica','',8,'',true);
 
     $pdf->AddPage('A4');
     $pdf->SetAutoPageBreak(TRUE, 10);
