@@ -19,6 +19,7 @@
           <span class="icon-bar"></span>
         </a>
 
+
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- User Account: style can be found in dropdown.less -->
@@ -89,6 +90,9 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
+
+                <?php echo validation_errors(); ?>
+
                 <div class="container">
                   <form action="<?= base_url('admin/proses_tambah_user') ?>" role="form" method="post">
 
@@ -109,11 +113,11 @@
                     <div class="box-body">
                       <div class="form-group" style="display:block;">
                         <label for="username" style="width:87%;margin-left: 0px;">Username</label>
-                        <input  type="text" name="username" style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
+                        <input type="text" name="username" style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
                       </div>
                       <div class="form-group" style="display:block;">
                         <label for="username" style="width:87%;margin-left: 0px;">Nama User</label>
-                        <input  type="text" name="nama_user" style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
+                        <input type="text" name="nama_user" style="width: 30%;margin-right: 67px;margin-left: 0px;" class="form-control" id="username" placeholder="Username">
                       </div>
                       <div class="form-group" style="display:block;">
                         <label for="email" style="width:73%;">Email</label>
@@ -131,11 +135,11 @@
                       <div class="form-group" style="display:block;">
                         <label for="role" style="width:73%;">Role</label>
                         <select class="form-control" name="role" style="width:11%;margin-right: 18px;">
-                        <option value="">-- Pilih --</option>
-                            <?php foreach ($list_role as $item) : ?>
-                              <option value="<?= $item->id ?>"><?= $item->nama_role ?></option>
-                            <?php endforeach; ?>
-                          </select>
+                          <option value="">-- Pilih --</option>
+                          <?php foreach ($list_role as $item) : ?>
+                            <option value="<?= $item->id ?>"><?= $item->nama_role ?></option>
+                          <?php endforeach; ?>
+                        </select>
                       </div>
                       <!-- /.box-body -->
                       <?php if (isset($token_generate)) { ?>

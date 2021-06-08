@@ -27,11 +27,22 @@ class M_barang extends CI_Model
         $keluar = $this->db->query("SELECT sum(jumlah) AS total_keluar FROM tb_barang_keluar as a WHERE a.status=0 ")->row()->total_keluar; 
         $data = (object) array(
             'total_keluar' => $keluar,
-            'total_stok' => NULL,
+            'total_stok' => 0,
             'total_service' => $service,
             'total_rusak' => $rusak
         );
-        // echo json_encode($data);die();
+        return $data;
+    }
+    public function kategori()
+    {
+        $demo = $this->db->query("SELECT 'a.id' FROM tb_barang_masuk as a WHERE a.id_kategori=1 ")->num_rows(); 
+        $inventory = $this->db->query("SELECT 'a.id' FROM tb_barang_masuk as a WHERE a.id_kategori=2 ")->num_rows();
+        $persediaan = $this->db->query("SELECT 'a.id' FROM tb_barang_masuk AS a WHERE a.id_kategori =3 ")->num_rows();
+        $data = (object) array(
+            'total_demo' => $demo,
+            'total_inventory' => $inventory,
+            'total_persediaan' => $persediaan
+        );
         return $data;
     }
 }

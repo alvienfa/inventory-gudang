@@ -144,7 +144,6 @@ class M_admin extends CI_Model
 
     $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get();
-    // var_dump($this->session->userdata('role') !== 1);die();
     return $query->result();
   }
 
@@ -157,7 +156,6 @@ class M_admin extends CI_Model
     $this->db->where('a.is_deleted', 0);
     $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get();
-    var_dump($this->session->userdata('role') == '5');die();
     return $query->result();
 
   }
@@ -165,7 +163,6 @@ class M_admin extends CI_Model
   public function get_gambar($id_transaksi){
     $this->db->select("gambar")->from('tb_barang_masuk')->where('id_transaksi', $id_transaksi);
     $query = $this->db->get()->row();
-    // var_dump($query);die();
     return $query;
   }
 
@@ -187,7 +184,7 @@ class M_admin extends CI_Model
     $this->db->select('a.*,b.id_gudang,b.id_kategori');
     $this->db->from('tb_barang_keluar as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
-    if($this->session->userdata('role') !== 1)
+    if(intval($this->session->userdata('role')) !== 1)
     {
       $this->db->where('b.id_gudang', $id_gudang);
       $this->db->where('b.id_kategori', $id_kategori);
@@ -202,7 +199,7 @@ class M_admin extends CI_Model
     $this->db->select('a.*,b.id_gudang,b.id_kategori');
     $this->db->from('tb_barang_kembali as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
-    if(!$this->session->userdata('role') !== 1)
+    if(intval($this->session->userdata('role')) !== 1)
     {
       $this->db->where('b.id_gudang', $id_gudang);
       $this->db->where('b.id_kategori', $id_kategori);

@@ -14,7 +14,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Jumlah (*<?= $detail->satuan ?>)</label>
-                                <input type="hidden" value="<?= $detail->id_transaksi ?>">
+                                <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
                                 <input value="" placeholder="" type="phone" name="jumlah" class="form-control form-control-sm">
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Jumlah (*<?= $detail->satuan ?>)</label>
-                                <input type="hidden" value="<?= $detail->id_transaksi ?>">
+                                <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
                                 <input value="" placeholder="" type="phone" name="jumlah" class="form-control form-control-sm">
                             </div>
                         </div>

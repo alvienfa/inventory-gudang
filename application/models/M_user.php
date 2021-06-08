@@ -79,23 +79,26 @@ class M_user extends CI_Model
     return $query;
   }
 
-  public function barang_keluar($a,$b,$c,$d,$limit,$start)
+  public function barang_keluar($a,$b,$c,$d,$limit,$start,$barang)
   {
-    $query = $this->db->select("a.*,b.alamat,b.kecamatan,b.kota,b.provinsi,b.kode_pos,c.text_status")
+    $query = $this->db->select("barang.id_transaksi,barang.nama_barang,barang.satuan,barang.kode_barang,a.nm_penjab,a.nohp_penjab,a.jumlah,a.status,a.keterangan,b.alamat,b.kecamatan,b.kota,b.provinsi,b.kode_pos,c.text_status")
     ->from($a . ' as a')
     ->join($b . ' as b', 'b.id=a.id_lokasi','left')
     ->join($c . ' as c', 'c.id=a.status', 'left')
+    ->join($barang . ' as barang', 'barang.id_transaksi=a.id_transaksi')
+    ->join($d . ' as d', 'd.id=barang.id_gudang', 'left' )
     ->limit($limit,$start)
     ->order_by('a.id', 'desc')
     ->get()->result();
   return $query;
   }
 
-  public function barang_kembali($a,$b,$limit,$start)
+  public function barang_kembali($a,$b,$limit,$start,$barang)
   {
-    $query = $this->db->select("a.*,b.text_status")
+    $query = $this->db->select("barang.id_transaksi,barang.nama_barang,barang.satuan,barang.kode_barang,a.status,a.jumlah,a.lokasi,b.text_status")
     ->from($a . ' as a')
     ->join($b . ' as b', 'b.id=a.status', 'left')
+    ->join($barang . ' as barang', 'barang.id_transaksi=a.id_transaksi')
     ->limit($limit,$start)
     ->order_by('a.id', 'desc')
     ->get()->result();

@@ -9,7 +9,8 @@ class Admin extends CI_Controller
     parent::__construct();
     $this->load->model('M_admin');
     $this->load->library('upload');
-
+    $this->load->helper(array('form', 'url'));
+    $this->load->library('form_validation');
     if ($this->session->userdata('status') == 'login') {
       $role = $this->session->userdata('role');
       $data = $this->db->select('a.*,b.nama_gudang')
@@ -246,7 +247,7 @@ class Admin extends CI_Controller
 
   public function proses_tambah_user()
   {
-    $this->form_validation->set_rules('username', 'Username', 'required');
+    $this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]');
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
     $this->form_validation->set_rules('nama_user', 'nama_user', 'required');
     $this->form_validation->set_rules('password', 'Password', 'required');
@@ -254,13 +255,11 @@ class Admin extends CI_Controller
 
     if ($this->form_validation->run() == TRUE) {
       if ($this->session->userdata('token_generate') === $this->input->post('token')) {
-
         $username     = $this->input->post('username', TRUE);
         $nama_user    = $this->input->post('nama_user', TRUE);
         $email        = $this->input->post('email', TRUE);
         $password     = $this->input->post('password', TRUE);
         $role         = $this->input->post('role', TRUE);
-
         $data = array(
           'username'     => $username,
           'nama_user'    => $nama_user,
@@ -285,8 +284,8 @@ class Admin extends CI_Controller
       $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
       $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
       $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
-      $this->load->view('layout/head',  $head);
-      $this->load->view('admin/form_users/form_insert', $data);
+      $this->session->set_flashdata('msg_gagal', 'Tambah User Gagal');
+      redirect(base_url('admin/form_user'));
     }
   }
 

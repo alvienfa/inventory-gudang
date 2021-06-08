@@ -19,22 +19,23 @@
         <thead>
             <tr>
                 <th style="white-space: nowrap;width:10%;">NO</th>
-                <th style="white-space: nowrap;width:50%;">Nama</th>
+                <th style="white-space: nowrap;width:50%;text-align: left;">Nama</th>
                 <th style="white-space: nowrap;width:25%;">ID</th>
                 <th style="white-space: nowrap;width:25%;">Jumlah</th>
             </tr>
         </thead>
         <tbody>
-            <?php 
-            $no=1;
+            <?php
+            $no = 1;
             foreach ($list_data as $item) : ?>
                 <tr>
-                    <th style="white-space: nowrap;width:10%;"><?= $no?></th>
-                    <th style="white-space: nowrap;width:50%;"><?= $item->nama_barang ?></th>
+                    <td style="white-space: nowrap;width:10%;"><?= $no ?></td>
+                    <td style="white-space: nowrap;width:50%;text-align: left;"><?= $item->nama_barang ?></td>
                     <td style="white-space: nowrap;width:25%;"><?= $item->id_transaksi ?></td>
-                    <td style="white-space: nowrap;width:15%;text-align: right;"><?= $item->jumlah ?> <?= $item->satuan?></td>
+                    <td style="white-space: nowrap;width:15%;text-align: right;"><?= $item->jumlah ?> <?= $item->satuan ?></td>
                 </tr>
-            <?php $no++;endforeach; ?>
+            <?php $no++;
+            endforeach; ?>
         </tbody>
     </table>
 </div>

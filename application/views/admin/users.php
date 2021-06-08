@@ -36,7 +36,7 @@
                 <?php if ($this->session->flashdata('msg_berhasil')) { ?>
                   <div class="alert alert-success alert-dismissible" style="width:100%">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Success!</strong><br> <?php echo $this->session->flashdata('msg_berhasil'); ?>
+                    <strong>Success!</strong><br> <?= $this->session->flashdata('msg_berhasil'); ?>
                   </div>
                 <?php } ?>
 
@@ -62,20 +62,6 @@
                             <td><?= $dd->nama_user ?></td>
                             <td><?= $dd->email ?></td>
                             <td><?= $dd->nama_role?></td>
-                            <!-- <?php if ($dd->role == 1) { ?>
-                              <td>SuperAdmin</td>
-                            <?php } elseif($dd->role == 2) { ?>
-                              <td>Admin 1 (Stok Gudang Pak Sandy)</td>
-                            <?php } elseif($dd->role == 3) { ?>
-                              <td>Admin 2 (Stok Gudang Rizqi Semesta)</td>
-                            <?php } elseif($dd->role == 4) { ?>
-                              <td>Admin 3 (Stok Gudang BBL)</td>
-                            <?php } elseif($dd->role == 5) { ?>
-                              <td>Atasan </td>
-                            <?php } elseif($dd->role == 6) { ?>
-                              <td>User Biasa </td>
-                            <?php } ?> -->
-                            
                             <td><?= $dd->last_login ?></td>
                             <td><a type="button" class="btn btn-info" href="<?= base_url('admin/update_user/' . $dd->id) ?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                             <td><a type="button" class="btn btn-danger btn-delete" href="<?= base_url('admin/proses_delete_user/' . $dd->id) ?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
