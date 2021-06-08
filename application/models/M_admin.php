@@ -212,5 +212,14 @@ class M_admin extends CI_Model
     return $query->result();
   }
 
+  public function user_by_id($id_user)
+  {
+    $this->db->select('*');
+    $this->db->from('user');
+    $this->db->where('id', $id_user);
+    $query = $this->db->get();
+    return $query->row();
+  }
+
   
 }

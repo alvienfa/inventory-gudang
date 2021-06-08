@@ -89,6 +89,7 @@ class Admin extends CI_Controller
   public function proses_new_password()
   {
     $this->form_validation->set_rules('email', 'Email', 'required');
+    $this->form_validation->set_rules('nama_user', 'Nama User', 'required');
     $this->form_validation->set_rules('new_password', 'New Password', 'required');
     $this->form_validation->set_rules('confirm_new_password', 'Confirm New Password', 'required|matches[new_password]');
 
