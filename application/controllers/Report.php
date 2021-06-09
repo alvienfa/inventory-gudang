@@ -230,7 +230,7 @@ class Report extends CI_Controller
             $html .= '<tr>';
             $html .= '<td>Tanggal</td>';
             $html .= '<td>:</td>';
-            $html .= '<td>'.$data->tanggal_keluar.'</td>';
+            $html .= '<td>'.date('d F Y',strtotime($data->tanggal_keluar)).'</td>';
             $html .= '<td></td>';
             $html .= '<td></td>';
             $html .= '<td>No. Handphone</td>';
@@ -261,7 +261,7 @@ class Report extends CI_Controller
             <th style="width:140px" align="center">Nama Barang</th>
             <th style="width:110px" align="center">Barang</th>
             <th style="width:110px" align="center">Tanggal Keluar</th>
-            <th style="width:130px" align="center">Lokasi</th>
+            <th style="width:130px" align="center">Tujuan</th>
             <th style="width:80px" align="center">Jumlah</th>
           </tr>';
 

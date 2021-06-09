@@ -48,7 +48,7 @@
                         <th>ID Transaksi</th>
                         <th>Tanggal Masuk</th>
                         <th>Tanggal Keluar</th>
-                        <th>Lokasi</th>
+                        <th>Tujuan</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
@@ -101,7 +101,7 @@
                         <th>ID Transaksi</th>
                         <th>Tanggal Masuk</th>
                         <th>Tanggal Keluar</th>
-                        <th>Lokasi</th>
+                        <th>Tujuan</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
