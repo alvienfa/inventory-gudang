@@ -241,11 +241,12 @@ class M_admin extends CI_Model
     b.nama_barang,
     b.id_gudang,
     b.id_kategori,
-    c.kota, c.alamat,c.provinsi,c.kecamatan,user.nama_user');
+    c.kota, c.alamat,c.provinsi,c.kecamatan,user.nama_user, d.nama_kategori');
     $this->db->from($tabel. ' as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
     $this->db->join('map_lokasi as c', "c.id=a.id_lokasi");
     $this->db->join('user', "user.id=a.created_by");
+    $this->db->join('tb_kategori as d', "d.id=b.id_kategori");
     $this->db->where('a.id',$id_barang);
     $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get()->row();

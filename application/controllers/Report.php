@@ -257,11 +257,11 @@ class Report extends CI_Controller
           <tr>
             <th style="width:40px" align="center">No</th>
             <th style="width:160px" align="center">ID Transaksi</th>
-            <th style="width:110px" align="center">Tanggal Masuk</th>
-            <th style="width:110px" align="center">Tanggal Keluar</th>
-            <th style="width:130px" align="center">Lokasi</th>
             <th style="width:140px" align="center">Kode Barang</th>
             <th style="width:140px" align="center">Nama Barang</th>
+            <th style="width:110px" align="center">Barang</th>
+            <th style="width:110px" align="center">Tanggal Keluar</th>
+            <th style="width:130px" align="center">Lokasi</th>
             <th style="width:80px" align="center">Jumlah</th>
           </tr>';
 
@@ -270,11 +270,11 @@ class Report extends CI_Controller
             $html .= '<tr>';
             $html .= '<td align="center" height="50px">'.$no.'</td>';
             $html .= '<td align="center">'.$data->id_transaksi.'</td>';
-            $html .= '<td align="center">'.$data->tanggal_masuk.'</td>';
-            $html .= '<td align="center">'.$data->tanggal_keluar.'</td>';
-            $html .= '<td align="center">'.$data->kota.'</td>';
             $html .= '<td align="center">'.$data->kode_barang.'</td>';
             $html .= '<td align="center">'.$data->nama_barang.'</td>';
+            $html .= '<td align="center">'.$data->nama_kategori.'</td>';
+            $html .= '<td align="center">'.$data->tanggal_keluar.'</td>';
+            $html .= '<td align="center">'.$data->kota.'</td>';
             $html .= '<td align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
             $html .= '</tr>';
 

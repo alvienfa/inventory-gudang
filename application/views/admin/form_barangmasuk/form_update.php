@@ -66,6 +66,15 @@
                         <div class="form-group" style="display:block;">
                           <label for="id_kategori" style="width:73%;">Pilih Kategori</label>
                           <select class="form-control" name="id_kategori" style="width:100%;margin-right: 18px;">
+                            
+                            <?php foreach ($list_kategori as $k) : ?>
+                            <?php if($k->id == $list_data->id_kategori) : ?>
+                            <option selected value="<?=$k->id ?>"> <?=$k->nama_kategori ?></option>
+                            <?php else : ?>
+                            <option value="<?=$k->id ?>"> <?=$k->nama_kategori ?></option>
+                            <?php endif; ?>
+                            <?php endforeach ?>
+                            
                             <?php if ($list_data->id_kategori == 1) { ?>
                               <option value="1" selected="">Demo / Entertaint</option>
                               <option value="2">Inventory</option>
