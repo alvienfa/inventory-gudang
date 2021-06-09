@@ -253,5 +253,12 @@ class M_admin extends CI_Model
     return $query;
   }
 
+  public function cek_username($tabel,$username){
+    return $this->db->select('username')
+             ->from($tabel)
+             ->where('username',$username)
+             ->get()->result();
+  }
+
   
 }

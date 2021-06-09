@@ -1065,20 +1065,22 @@ class Admin extends CI_Controller
   {
     $data['role'] = $this->role;
     $data['sidebar']['nama_gudang'] = $this->gudang;
-    $head['title'] = 'Inventory Gudang | Tambah Data Gudang';
+    $head['title'] = 'Inventory Gudang | Tambah Data Role User';
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['list_gudang'] = $this->m_admin->select('tb_gudang');
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->load->view('layout/head', $head);
-    $this->load->view('admin/form_gudang/form_insert', $data);
+    $this->load->view('admin/form_role/form_insert', $data);
   }
 
   public function tabel_role_user()
   {
     $data['role'] = $this->role;
     $data['sidebar']['nama_gudang'] = $this->gudang;
-    $head['title'] = 'Inventory Gudang | Data Gudang';
-    $data['list_data'] = $this->M_admin->select('tb_gudang');
+    $head['title'] = 'Inventory Gudang | Data Role User';
+    $data['list_data'] = $this->M_admin->select('tb_role');
+    $data['list_gudang'] = $this->M_admin->select('tb_gudang');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
@@ -1092,7 +1094,8 @@ class Admin extends CI_Controller
     $id = $this->uri->segment(3);
     $head['title'] = 'Inventory Gudang | Update Data Gudang';
     $data['token_generate'] = $this->token_generate();
-    $data['data_gudang'] = $this->M_admin->get_data_row('tb_gudang', array('id' => $id));
+    $data['data_role'] = $this->M_admin->get_data_row('tb_role', array('id' => $id));
+    $data['list_gudang'] = $this->M_admin->select('tb_gudang');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['role'] = $this->role;
     $data['sidebar']['nama_gudang'] = $this->gudang;
@@ -1100,13 +1103,13 @@ class Admin extends CI_Controller
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
     $this->session->set_userdata($data);
     $this->load->view('layout/head', $head);
-    $this->load->view('admin/form_gudang/form_update', $data);
+    $this->load->view('admin/form_role/form_update', $data);
   }
 
 
   public function proses_role_user_insert()
   {
-    $this->form_validation->set_rules('nama_gudang', 'Nama Gudang', 'trim|required|max_length[100]');
+    $this->form_validation->set_rules('nama_role', 'Nama Gudang', 'trim|required|max_length[100]');
     $this->form_validation->set_rules('detail_gudang', 'Detail Gudang', 'trim|required|max_length[100]');
 
     if ($this->form_validation->run() ==  TRUE) {
