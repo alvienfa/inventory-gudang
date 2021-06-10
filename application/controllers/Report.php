@@ -283,7 +283,7 @@ class Report extends CI_Controller
             $html .= '<tr>';
             $html .= '<td style="width:180px">Ditunjukkan untuk</td>';
             $html .= '<td style="width:10px">:</td>';
-            $html .= '<td style="width:180px">'.$data->kota.'</td>';
+            $html .= '<td style="width:180px">'.$data->perusahaan.'</td>';
             $html .= '<td style="width:100px"></td>';
             $html .= '<td style="width:150px"></td>';
             $html .= '<td style="width:180px">Penanggung Jawab</td>';
@@ -326,7 +326,7 @@ class Report extends CI_Controller
             <th style="width:140px" align="center">Nama Barang</th>
             <th style="width:110px" align="center">Barang</th>
             <th style="width:110px" align="center">Tanggal Keluar</th>
-            <th style="width:130px" align="center">Tujuan</th>
+            <th style="width:130px" align="center">Perusahaan</th>
             <th style="width:80px" align="center">Jumlah</th>
           </tr>';
 
@@ -339,7 +339,7 @@ class Report extends CI_Controller
             $html .= '<td align="center">'.$data->nama_barang.'</td>';
             $html .= '<td align="center">'.$data->nama_kategori.'</td>';
             $html .= '<td align="center">'.$data->tanggal_keluar.'</td>';
-            $html .= '<td align="center">'.$data->kota.'</td>';
+            $html .= '<td align="center">'.$data->perusahaan.'</td>';
             $html .= '<td align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
             $html .= '</tr>';
 

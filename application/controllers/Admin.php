@@ -710,6 +710,7 @@ class Admin extends CI_Controller
         'kota' => $this->input->post('kota', TRUE),
         'provinsi' => $this->input->post('provinsi', TRUE),
         'kode_pos' => $this->input->post('kode_pos', TRUE),
+        'perusaahaan' => $this->input->post('perusahaan', TRUE),
       );
       $nm_penjab         = $this->input->post('nm_penjab', TRUE);
       $nohp_penjab         = $this->input->post('nohp_penjab', TRUE);

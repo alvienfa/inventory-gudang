@@ -103,6 +103,7 @@ class Barang extends CI_Controller
       'kota'             => $this->input->post('kota', TRUE),
       'provinsi'         => $this->input->post('provinsi', TRUE),
       'kode_pos'         => $this->input->post('kode_pos', TRUE),
+      'perusahaan'         => $this->input->post('perusahaan', TRUE),
     );
 
     if ($this->form_validation->run() === TRUE) {

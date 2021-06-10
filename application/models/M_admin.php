@@ -241,7 +241,7 @@ class M_admin extends CI_Model
     b.nama_barang,
     b.id_gudang,
     b.id_kategori,
-    c.kota, c.alamat,c.provinsi,c.kecamatan,user.nama_user, d.nama_kategori');
+    c.perusahaan, c.kota, c.alamat,c.provinsi,c.kecamatan,user.nama_user, d.nama_kategori');
     $this->db->from($tabel. ' as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
     $this->db->join('map_lokasi as c', "c.id=a.id_lokasi");

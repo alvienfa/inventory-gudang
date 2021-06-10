@@ -10,7 +10,7 @@
       </div>
       <div class="pull-left info">
         <p><?= $this->session->userdata('name') ?></p>
-        <a href="#"><i class="fa fa-circle text-success" style="color: green;"></i> Online</a>
+        <a href="#" style="color: yellow;"><i class="fa fa-circle text-success" style="color: green;"></i> Online</a>
       </div>
     </div>
     <ul class="sidebar-menu" data-widget="tree">
