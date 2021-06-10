@@ -417,6 +417,8 @@ class Admin extends CI_Controller
       $jumlah       = $this->input->post('jumlah', TRUE);
       $id_kategori  = $this->input->post('id_kategori', TRUE);
       $id_gudang    = $this->id_gudang;
+      $id_user      = $this->session->userdata('id');
+      
       //qrcode
       $qr = $this->load->library('ciqrcode'); //pemanggilan library QR CODE
       $config['cacheable']    = true; //boolean, the default is true
@@ -460,7 +462,8 @@ class Admin extends CI_Controller
           'gambar'       => 'preview.jpg',
           'id_kategori'  => $id_kategori,
           'id_gudang'    => $id_gudang,
-          'created_at'   => date("Y-m-d H:i:s") 
+          'created_at'   => date("Y-m-d H:i:s"),
+          'created_by'   => $id_user 
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
@@ -480,7 +483,8 @@ class Admin extends CI_Controller
           'gambar'       => $nama_file,
           'id_kategori'   => $id_kategori,
           'id_gudang'    => $id_gudang,
-          'created_at'   => date("Y-m-d H:i:s") 
+          'created_at'   => date("Y-m-d H:i:s"),
+          'created_by'   => $id_user 
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');

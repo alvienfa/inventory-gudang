@@ -88,7 +88,7 @@ class Report extends CI_Controller
             $html .= '<tr>';
             $html .= '<td style="width:180px">Ditunjukkan untuk</td>';
             $html .= '<td style="width:10px">:</td>';
-            $html .= '<td style="width:110px"></td>';
+            $html .= '<td style="width:150px"></td>';
             $html .= '<td style="width:100px"></td>';
             $html .= '<td style="width:150px"></td>';
             $html .= '<td style="width:180px">Penanggung Jawab</td>';
@@ -98,61 +98,126 @@ class Report extends CI_Controller
             $html .= '</tr>';
 
             $html .= '<tr>';
-            $html .= '<td>Tanggal</td>';
+            $html .= '<td>Hari / Tanggal</td>';
             $html .= '<td>:</td>';
-            $html .= '<td></td>';
+            $html .= '<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/</td>';
             $html .= '<td></td>';
             $html .= '<td></td>';
             $html .= '<td>No. Handphone</td>';
             $html .= '<td>:</td>';
-            $html .= '<td><br><br></td>';
+            $html .= '<td><br></td>';
             $html .= '</tr>';
             
         $html .= '<tr>';
-        $html .= '<td colspan="8" style="width:140px">Po. Customer  :<br></td>';
+        $html .= '<td style="width:180px">Po. Customer  </td>';
+        $html .= '<td>:<br></td>';
+        $html .= '<td> </td>';
+        $html .= '<td></td>';
+        $html .= '<td></td>';
+        $html .= '<td></td>';
+        $html .= '<td></td>';
+        $html .= '<td><br></td>';
         $html .= '</tr>';
         $html .= '</thead>';
 
     $html .=
       '</table>
         
-        <table border="1" >
+        <table border="1"  >
           <tr>
             <th style="width:40px" align="center">No</th>
-            <th style="width:110px" align="center">ID Transaksi</th>
-            <th style="width:110px" align="center">Tanggal Masuk</th>
-            <th style="width:110px" align="center">Tanggal Keluar</th>
-            <th style="width:130px" align="center">Lokasi</th>
+            <th style="width:160px" align="center">ID Transaksi</th>
             <th style="width:140px" align="center">Kode Barang</th>
             <th style="width:140px" align="center">Nama Barang</th>
-            <th style="width:80px" align="center">Satuan</th>
+            <th style="width:110px" align="center">Barang</th>
+            <th style="width:110px" align="center">Tanggal Keluar</th>
+            <th style="width:130px" align="center">Tujuan</th>
             <th style="width:80px" align="center">Jumlah</th>
           </tr>';
 
 
           $no = 1;
             $html .= '<tr>';
-            $html .= '<td style="height:50px" align="center"></td>';
+            $html .= '<td align="center" height="50px"></td>';
             $html .= '<td align="center"></td>';
             $html .= '<td align="center"></td>';
             $html .= '<td align="center"></td>';
             $html .= '<td align="center"></td>';
             $html .= '<td align="center"></td>';
             $html .= '<td align="center"></td>';
-            $html .= '<td align="center"></td>';
-            $html .= '<td align="center"></td>';
+            $html .= '<td align="center"> </td>';
             $html .= '</tr>';
 
             $html .= '<tr>';
-            $html .= '<td align="center" colspan="8"><b>Jumlah</b></td>';
+            $html .= '<td align="center" colspan="7" height="40px"><b>Jumlah</b></td>';
             $html .= '<td align="center"></td>';
             $html .= '</tr>';
             $no++;
 
         $html .='
-            </table><br>
-            <h6>Mengetahui</h6><br><br><br><br>
-            <h6>Admin</h6>
+            </table><br><br>
+            <table border="0" width="100%">';
+        $html .= '<thead>';
+            
+        $html .= '<tr>';
+        $html .= '<td style="width:180px">Mengetahui  </td>';
+        $html .= '<td></td>';
+        $html .= '<td></td>';
+        $html .= '<td colspan="1" style="width:180px">Penyedia</td>';
+        $html .= '<td></td>';
+        $html .= '<td style="width:180px">Penanggung Jawab</td>';
+        $html .= '<td><br></td>';
+        $html .= '</tr>';
+
+        $html .= '<tr>';
+        $html .= '<td style="width:180px">  </td>';
+        $html .= '<td></td>';
+        $html .= '<td> </td>';
+        $html .= '<td colspan="1"></td>';
+        $html .= '<td></td>';
+        $html .= '<td><br></td>';
+        $html .= '</tr>';
+
+        $html .= '<tr>';
+        $html .= '<td style="width:180px">  </td>';
+        $html .= '<td></td>';
+        $html .= '<td> </td>';
+        $html .= '<td colspan="1"></td>';
+        $html .= '<td></td>';
+        $html .= '<td><br></td>';
+        $html .= '</tr>';
+
+        $html .= '<tr>';
+        $html .= '<td style="width:180px">  </td>';
+        $html .= '<td></td>';
+        $html .= '<td> </td>';
+        $html .= '<td></td>';
+        $html .= '<td></td>';
+        $html .= '<td></td>';
+        $html .= '<td></td>';
+        $html .= '<td><br></td>';
+        $html .= '</tr>';
+
+
+        $html .= '<tr>';
+        $html .= '<td style="width:180px"></td>';
+        $html .= '<td></td>';
+        $html .= '<td> </td>';
+        $html .= '<td colspan="1" style="width:180px"></td>';
+        $html .= '<td></td>';
+        $html .= '<td style="width:180px"></td>';
+        $html .= '<td><br></td>';
+        $html .= '</tr>';
+
+        $html .= '</thead>';
+
+    $html .=
+      '</table>
+            <br>
+            <br>
+            
+            <h6>Catatan :  </h6><br><br>
+            
           </div>';
 
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);
@@ -218,7 +283,7 @@ class Report extends CI_Controller
             $html .= '<tr>';
             $html .= '<td style="width:180px">Ditunjukkan untuk</td>';
             $html .= '<td style="width:10px">:</td>';
-            $html .= '<td style="width:110px">'.$data->kota.'</td>';
+            $html .= '<td style="width:180px">'.$data->kota.'</td>';
             $html .= '<td style="width:100px"></td>';
             $html .= '<td style="width:150px"></td>';
             $html .= '<td style="width:180px">Penanggung Jawab</td>';
@@ -228,9 +293,9 @@ class Report extends CI_Controller
             $html .= '</tr>';
 
             $html .= '<tr>';
-            $html .= '<td>Tanggal</td>';
+            $html .= '<td>Hari / Tanggal</td>';
             $html .= '<td>:</td>';
-            $html .= '<td>'.date('d F Y',strtotime($data->tanggal_keluar)).'</td>';
+            $html .= '<td>'.date('D / d F Y',strtotime($data->tanggal_keluar)).'</td>';
             $html .= '<td></td>';
             $html .= '<td></td>';
             $html .= '<td>No. Handphone</td>';
@@ -330,12 +395,12 @@ class Report extends CI_Controller
 
 
         $html .= '<tr>';
-        $html .= '<td style="width:180px">'. $this->session->userdata('nama_user') .'</td>';
+        $html .= '<td style="width:180px"><u>'. $this->session->userdata('nama_user') .'</u></td>';
         $html .= '<td></td>';
         $html .= '<td> </td>';
-        $html .= '<td colspan="1" style="width:180px">'.$data->nama_user.'</td>';
+        $html .= '<td colspan="1" style="width:180px"><u>'.$data->nama_user.'</u></td>';
         $html .= '<td></td>';
-        $html .= '<td style="width:180px">'.$data->nm_penjab.'</td>';
+        $html .= '<td style="width:180px"><u>'.$data->nm_penjab.'</u></td>';
         $html .= '<td><br></td>';
         $html .= '</tr>';
 
