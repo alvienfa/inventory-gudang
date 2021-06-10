@@ -21,7 +21,7 @@
                         <?php foreach ($avatar as $a) { ?>
                             <img src="<?php echo base_url('assets/upload/user/img/' . $a->nama_file) ?>" class="user-image" alt="User Image">
                         <?php } ?>
-                        <span class="hidden-xs"><?= $this->session->userdata('name') ?></span>
+                        <span class="hidden-xs"><?= $this->session->userdata('nama_user') ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -31,7 +31,7 @@
                             <?php } ?>
 
                             <p>
-                                <?= $this->session->userdata('name') ?> - Web Developer
+                            <?= $this->session->userdata('nama_user') ?>  - <?= $this->session->userdata('name') ?> 
                                 <small>Last Login : <?= $this->session->userdata('last_login') ?></small>
                             </p>
                         </li>

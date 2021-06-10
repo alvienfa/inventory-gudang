@@ -9,7 +9,7 @@
         <?php } ?>
       </div>
       <div class="pull-left info">
-        <p><?= $this->session->userdata('name') ?></p>
+        <p style="color:yellow"><?= $this->session->userdata('nama_user') ?></p>
         <a href="#" style="color: yellow;"><i class="fa fa-circle text-success" style="color: green;"></i> Online</a>
       </div>
     </div>

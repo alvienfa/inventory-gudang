@@ -260,5 +260,29 @@ class M_admin extends CI_Model
              ->get()->result();
   }
 
+  public function kembali_by_id($tabel,$id_barang)
+  {
+    $this->db->select('
+    a.*,
+    b.satuan,
+    b.kode_barang,
+    b.nama_barang,
+    b.id_gudang,
+    b.id_kategori,
+    c.perusahaan, c.kota, c.alamat,c.provinsi,c.kecamatan,user.nama_user, 
+    d.nama_kategori, e.tanggal_keluar, e.nm_penjab, e.nohp_penjab, status.text_status');
+    $this->db->from($tabel. ' as a');
+    $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
+    $this->db->join('user', "user.id=a.created_by");
+    $this->db->join('tb_kategori as d', "d.id=b.id_kategori");
+    $this->db->join('tb_barang_keluar as e', "e.id=a.id_barang_keluar");
+    $this->db->join('map_lokasi as c', "c.id=e.id_lokasi");
+    $this->db->join('tb_status as status', "status.id=a.status");
+    $this->db->where('a.id',$id_barang);
+    $this->db->order_by('a.id', 'DESC');
+    $query = $this->db->get()->row();
+    return $query;
+  }
+
   
 }
