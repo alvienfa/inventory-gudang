@@ -15,7 +15,7 @@
 <?php $stok = (strpos(current_url(), 'admin/gudang') ? 'treeview active' : 'treeview') ?>
 <li class='<?= $stok ?>'>
   <a href="#">
-    <i class="fa fa-edit"></i> <span>Stok</span>
+    <i class="fa fa-th"></i> <span>Stok</span>
     <span class="pull-right-container">
       <i class="fa fa-angle-left pull-right"></i>
     </span>
@@ -73,7 +73,7 @@
 <li class="header">LABELS</li>
 <li class='<?= (base_url('admin/profile') == current_url() ? ' active' : '') ?> '>
   <a href="<?php echo base_url('admin/profile') ?>">
-    <i class="fa fa-cogs" aria-hidden="true"></i> <span>Profile</span></a>
+    <i class="fa fa-cogs" aria-hidden="true"></i> <span>Setting</span></a>
 </li>
 <li class='<?= (base_url('admin/users') ==  current_url() ? ' active' : '') ?> '>
   <a href="<?php echo base_url('admin/users') ?>">

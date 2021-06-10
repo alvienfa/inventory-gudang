@@ -40,7 +40,7 @@ $id_kategori = $this->input->get('id_kategori')
 <?php $barang_keluar = (strpos(current_url(), 'admin/tabel_barangkeluar') ? 'treeview active' : 'treeview') ?>
 <li class="<?= $barang_keluar ?>">
     <a href="#">
-        <i class="fa fa-table"></i> <span>Barang Keluar </span>
+        <i class="fa fa-th"></i> <span>Barang Keluar </span>
         <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
         </span>
@@ -61,7 +61,7 @@ $id_kategori = $this->input->get('id_kategori')
 <?php $barang_keluar = (strpos(current_url(), 'admin/tabel_barangkembali') ? 'treeview active' : 'treeview') ?>
 <li class="<?= $barang_keluar ?>">
     <a href="#">
-        <i class="fa fa-table"></i> <span>Barang Kembali </span>
+        <i class="fa fa-th-large"></i> <span>Barang Kembali </span>
         <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
         </span>
@@ -81,5 +81,5 @@ $id_kategori = $this->input->get('id_kategori')
 </li>
 <li class='<?= (base_url('admin/profile') == current_url() ? ' active' : '') ?> '>
   <a href="<?php echo base_url('admin/profile') ?>">
-    <i class="fa fa-cogs" aria-hidden="true"></i> <span>Profile</span></a>
+    <i class="fa fa-cogs" aria-hidden="true"></i> <span>Setting</span></a>
 </li>
