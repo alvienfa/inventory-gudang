@@ -92,7 +92,8 @@ $query_builder = TRUE;
 // 	'compress' => FALSE,
 // 	'stricton' => FALSE,
 // 	'failover' => array(),
-// 	'save_queries' => TRUE
+// 	'save_queries' => TRUE,
+//  'options' => [PDO::ATTR_EMULATE_PREPARES => false],
 // );
 
 $db['default'] = array(
@@ -114,5 +115,8 @@ $db['default'] = array(
 	'compress' => FALSE,
 	'stricton' => FALSE,
 	'failover' => array(),
-	'save_queries' => TRUE
+	'save_queries' => TRUE,
+	'options' => [
+		PDO::ATTR_EMULATE_PREPARES => false,
+	],
 );

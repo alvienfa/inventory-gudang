@@ -67,21 +67,19 @@
                             <td><?= $dd->kode_barang ?></td>
                             <td><?= $dd->nama_barang ?></td>
                             <td><?= $dd->jumlah ?> <?= $dd->satuan ?></td>
-                            <td><?php if ($dd->status === '0') {
+                            <td><?php if ($dd->status == 0) {
                                   echo '<span class="label label-warning">Belum</span>';
-                                } elseif ($dd->status === '1') {
+                                } elseif ($dd->status == 1) {
                                   echo '<span class="label label-success">Sudah</span>';
-                                } elseif ($dd->status === '2') {
+                                } elseif ($dd->status == 2) {
                                   echo '<span class="label label-primary">Diperbaiki</span>';
-                                } elseif ($dd->status === '3') {
+                                } elseif ($dd->status == 3) {
                                   echo '<span class="label label-danger">Rusak</span>';
                                 }
 
                                 ?>
-
                             </td>
                             <td><a type="button" class="btn btn-danger btn-report" href="<?= base_url('report/barangKembali/' . $dd->id) ?>" name="btn_report" style="margin:auto;"><i class="fa fa-file-text" aria-hidden="true"></i></a></td>
-
                             <!-- <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?= base_url('admin/barang_keluar/' . $dd->id_transaksi) ?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td> -->
                       </tr>
                       <?php $no++; ?>
@@ -90,15 +88,11 @@
                     <td align="center" colspan="11" center="center"><strong style="color:gray">Data Kosong</strong></td>
                   <?php } ?>
                     </tbody>
-
                   </table>
                 </div>
               </div>
               <!-- /.box-body -->
             </div>
-
-
-
             <!-- /.box -->
           </div>
           <!-- /.col -->
@@ -135,7 +129,6 @@
 
                 <div class="menu-info">
                   <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
                   <p>Will be 23 on April 24th</p>
                 </div>
               </a>

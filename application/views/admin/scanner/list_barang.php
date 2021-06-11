@@ -69,16 +69,16 @@
                     <td><?=$dd->jumlah; ?> <?=$dd->satuan?></td>
                     <td style="vertical-align:middle">
                     <?php switch($dd->status):
-                        case '0':
+                        case 0:
                             echo '<span class="label label-warning">belum</span>';
                             break;
-                        case '1':
+                        case 1:
                             echo '<span class="label label-success">sudah</span>';
                             break;
-                        case '2':
+                        case 2:
                             echo '<span class="label label-primary">diperbaiki</span>';
                             break;
-                        case '3': 
+                        case 3: 
                             echo '<span class="label label-danger">rusak</span>';
                             break;   
                         endswitch;
