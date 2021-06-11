@@ -333,19 +333,19 @@ class Report extends CI_Controller
 
           $no = 1;
             $html .= '<tr>';
-            $html .= '<td align="center" height="50px">'.$no.'</td>';
-            $html .= '<td align="center">'.$data->id_transaksi.'</td>';
-            $html .= '<td align="center">'.$data->kode_barang.'</td>';
-            $html .= '<td align="center">'.$data->nama_barang.'</td>';
-            $html .= '<td align="center">'.$data->nama_kategori.'</td>';
-            $html .= '<td align="center">'.$data->tanggal_keluar.'</td>';
-            $html .= '<td align="center">'.$data->perusahaan.'</td>';
-            $html .= '<td align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center" height="50px">'.$no.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->id_transaksi.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->kode_barang.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->nama_barang.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->nama_kategori.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->tanggal_keluar.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->perusahaan.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
             $html .= '</tr>';
 
             $html .= '<tr>';
-            $html .= '<td align="center" colspan="7" height="40px"><b>Jumlah</b></td>';
-            $html .= '<td align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
+            $html .= '<td style="line-height: 50px;" align="center" colspan="7" height="40px"><b>Jumlah</b></td>';
+            $html .= '<td style="line-height: 50px;" align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
             $html .= '</tr>';
             $no++;
 
@@ -574,13 +574,13 @@ class Report extends CI_Controller
             
             
             <th style="width:140px" align="center">Kode</th>
-            <th style="width:140px" align="center">Nama</th>
-            <th style="width:110px" align="center">Tipe Barang</th>
-            <th style="width:110px" align="center">Tanggal Keluar</th>
+            <th style=" width:140px" align="center">Nama</th>
+            <th style=" width:110px" align="center">Tipe Barang</th>
+            <th style="width:110px;height:60px" align="center">Tanggal Keluar</th>
             <th style="width:110px" align="center">Tanggal Kembali</th>
-            <th style="width:130px" align="center">Perusahaan</th>
-            <th style="width:80px" align="center">Jumlah</th>
+            <th style=" width:130px" align="center">Perusahaan</th>
             <th style="width:110px" align="center">Status</th>
+            <th style="width:80px" align="center">Jumlah</th>
           </tr>';
 
 
@@ -588,19 +588,19 @@ class Report extends CI_Controller
             $html .= '<tr>';
             
             
-            $html .= '<td align="center" height="60px">'.$data->kode_barang.'</td>';
-            $html .= '<td align="center">'.$data->nama_barang.'</td>';
-            $html .= '<td align="center">'.$data->nama_kategori.'</td>';
-            $html .= '<td align="center">'.$data->tanggal_keluar.'</td>';
-            $html .= '<td align="center">'.$data->tanggal_kembali.'</td>';
-            $html .= '<td align="center">'.$data->perusahaan.'</td>';
-            $html .= '<td align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
-            $html .= '<td align="center">'.$data->text_status.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center" height="60px">'.$data->kode_barang.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center" >'.$data->nama_barang.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center" >'.$data->nama_kategori.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->tanggal_keluar.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->tanggal_kembali.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->perusahaan.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->text_status.'</td>';
+            $html .= '<td style="line-height: 30px;" align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
             $html .= '</tr>';
 
             $html .= '<tr>';
-            $html .= '<td align="center" colspan="7" height="40px"><b>Jumlah</b></td>';
-            $html .= '<td align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
+            $html .= '<td style="line-height: 50px;" align="center" colspan="7" height="40px"><b>Jumlah</b></td>';
+            $html .= '<td style="line-height: 50px;" align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
             $html .= '</tr>';
             $no++;
 

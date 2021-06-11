@@ -27,7 +27,7 @@
             <!-- /.box -->
             <div class="box">
               <div class="box-header">
-                <h3 class="box-title"><i class="fa fa-table" aria-hidden="true"></i> Stok Barang Masuk</h3>
+                <h3 class="box-title"><i class="fa fa-table" aria-hidden="true"></i> Data Barang kembali</h3>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -46,9 +46,11 @@
                       <tr>
                         <th>No </th>
                         <th>ID_Transaksi</th>
-                        <th>Tanggal</th>
                         <th>Kode Barang</th>
-                        <th>Nama Barang</th>
+                        <th>Nama </th>
+                        <th>Tanggal Keluar</th>
+                        <th>Tanggal Kembali</th>
+                        <th>Penanggung Jawab</th>
                         <th>Jumlah</th>
                         <th>Status</th>
                         <th>Surat Pengembalian</th>
@@ -63,9 +65,11 @@
                           <?php foreach ($list_data as $dd) : ?>
                             <td><?= $no ?></td>
                             <td><?= $dd->id_transaksi ?></td>
-                            <td><?= $dd->tanggal_kembali ?></td>
                             <td><?= $dd->kode_barang ?></td>
                             <td><?= $dd->nama_barang ?></td>
+                            <td><?= $dd->tanggal_keluar ?></td>
+                            <td><?= $dd->tanggal_kembali ?></td>
+                            <td><?= $dd->nm_penjab ?></td>
                             <td><?= $dd->jumlah ?> <?= $dd->satuan ?></td>
                             <td><?php if ($dd->status == 0) {
                                   echo '<span class="label label-warning">Belum</span>';

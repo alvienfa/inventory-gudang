@@ -48,7 +48,7 @@
                         <th>ID</th>
                         <th>Tanggal</th>
                         <th>Nama Barang</th>
-                        <th>Kategori</th>
+                        <th>Tipe Barang</th>
                         <th>Jumlah</th>
                         <th>Gudang</th>
                         <th>Foto</th>

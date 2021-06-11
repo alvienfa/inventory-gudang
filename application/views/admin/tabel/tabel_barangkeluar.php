@@ -95,20 +95,7 @@
                     <td colspan="7" align="center"><strong>Data Kosong</strong></td>
                   <?php } ?>
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>No</th>
-                        <th>ID Transaksi</th>
-                        <th>Tanggal Masuk</th>
-                        <th>Tanggal Keluar</th>
-                        <th>Tujuan</th>
-                        <th>Kode Barang</th>
-                        <th>Nama Barang</th>
-                        <th>Jumlah</th>
-                        <th>Status</th>
-                        <th>Surat Jalan</th>
-                      </tr>
-                    </tfoot>
+                    
                   </table>
                 </div>
                 <!-- /.box-body -->

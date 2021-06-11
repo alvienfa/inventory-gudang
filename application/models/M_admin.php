@@ -200,9 +200,10 @@ class M_admin extends CI_Model
 
   public function stok_barang_kembali($id_gudang, $id_kategori=false)
   {
-    $this->db->select('a.*,b.id_gudang,b.id_kategori,b.nama_barang,b.kode_barang,b.satuan');
+    $this->db->select('a.*,b.id_gudang,b.id_kategori,b.nama_barang,b.kode_barang,b.satuan,c.nm_penjab,c.tanggal_keluar');
     $this->db->from('tb_barang_kembali as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
+    $this->db->join('tb_barang_keluar as c', "c.id=a.id_barang_keluar");
     if(intval($this->session->userdata('role')) !== 1)
     {
       $this->db->where('b.id_gudang', $id_gudang);
