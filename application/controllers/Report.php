@@ -105,7 +105,7 @@ class Report extends CI_Controller
             $html .= '<td></td>';
             $html .= '<td>No. Handphone</td>';
             $html .= '<td>:</td>';
-            $html .= '<td><br></td>';
+            $html .= '<td><br><br></td>';
             $html .= '</tr>';
             
         $html .= '<tr>';
@@ -283,8 +283,8 @@ class Report extends CI_Controller
             $html .= '<tr>';
             $html .= '<td style="width:180px">Ditunjukkan untuk</td>';
             $html .= '<td style="width:10px">:</td>';
-            $html .= '<td style="width:180px">'.$data->perusahaan.'</td>';
-            $html .= '<td style="width:100px"></td>';
+            $html .= '<td style="width:200px">'.$data->perusahaan.'</td>';
+            $html .= '<td style="width:80px"></td>';
             $html .= '<td style="width:120px"></td>';
             $html .= '<td style="width:180px">Penanggung Jawab</td>';
             $html .= '<td style="width:10px">:</td>';
@@ -295,7 +295,7 @@ class Report extends CI_Controller
             $html .= '<tr>';
             $html .= '<td>Hari / Tanggal</td>';
             $html .= '<td>:</td>';
-            $html .= '<td>'.date('D / d F Y',strtotime($data->tanggal_keluar)).'</td>';
+            $html .= '<td>'.date('l / d F Y',strtotime($data->tanggal_keluar)).'</td>';
             $html .= '<td></td>';
             $html .= '<td></td>';
             $html .= '<td>No. Handphone</td>';
@@ -533,8 +533,8 @@ class Report extends CI_Controller
             $html .= '<tr>';
             $html .= '<td style="width:180px">No. Transaksi</td>';
             $html .= '<td style="width:10px">:</td>';
-            $html .= '<td style="width:180px">'.$data->id_transaksi.'</td>';
-            $html .= '<td style="width:100px"></td>';
+            $html .= '<td style="width:200px">'.$data->id_transaksi.'</td>';
+            $html .= '<td style="width:80px"></td>';
             $html .= '<td style="width:120px"></td>';
             $html .= '<td style="width:180px">Penanggung Jawab</td>';
             $html .= '<td style="width:10px">:</td>';
@@ -545,7 +545,8 @@ class Report extends CI_Controller
             $html .= '<tr>';
             $html .= '<td>Hari / Tanggal</td>';
             $html .= '<td>:</td>';
-            $html .= '<td>'.date('D / d F Y',strtotime($data->tanggal_kembali)).'</td>';
+            date_default_timezone_set('Asia/Jakarta');
+            $html .= '<td>'.date('l / d F Y',strtotime($data->tanggal_kembali)).'</td>';
             $html .= '<td></td>';
             $html .= '<td></td>';
             $html .= '<td>No. Handphone</td>';
