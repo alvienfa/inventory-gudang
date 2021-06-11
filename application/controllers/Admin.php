@@ -228,6 +228,7 @@ class Admin extends CI_Controller
     $where = array('id' => $id);
     $data['token_generate'] = $this->token_generate();
     $data['list_data'] = $this->M_admin->get_data('user', $where);
+    $data['list_role'] = $this->M_admin->select('tb_role');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
@@ -342,6 +343,7 @@ class Admin extends CI_Controller
     $data['sidebar']['nama_gudang'] = $this->gudang;
     $head['title'] = 'Inventory Gudang | Form Barang Masuk';
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
+    $data['list_kategori'] = $this->M_admin->select('tb_kategori');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
     $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
     $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
@@ -379,6 +381,7 @@ class Admin extends CI_Controller
     $head['title'] = 'Inventory Gudang | Form Update Barang Masuk';
     $where = array('id' => $id);
     $data['list_gudang'] = $this->M_admin->select('tb_gudang');
+    $data['list_kategori'] = $this->M_admin->select('tb_kategori');
     $data['list_data'] = $this->M_admin->get_data_row('tb_barang_masuk', $where);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
@@ -414,6 +417,8 @@ class Admin extends CI_Controller
       $jumlah       = $this->input->post('jumlah', TRUE);
       $id_kategori  = $this->input->post('id_kategori', TRUE);
       $id_gudang    = $this->id_gudang;
+      $id_user      = $this->session->userdata('id');
+      
       //qrcode
       $qr = $this->load->library('ciqrcode'); //pemanggilan library QR CODE
       $config['cacheable']    = true; //boolean, the default is true
@@ -457,7 +462,8 @@ class Admin extends CI_Controller
           'gambar'       => 'preview.jpg',
           'id_kategori'  => $id_kategori,
           'id_gudang'    => $id_gudang,
-          'created_at'   => date("Y-m-d H:i:s") 
+          'created_at'   => date("Y-m-d H:i:s"),
+          'created_by'   => $id_user 
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
@@ -477,7 +483,8 @@ class Admin extends CI_Controller
           'gambar'       => $nama_file,
           'id_kategori'   => $id_kategori,
           'id_gudang'    => $id_gudang,
-          'created_at'   => date("Y-m-d H:i:s") 
+          'created_at'   => date("Y-m-d H:i:s"),
+          'created_by'   => $id_user 
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
@@ -703,6 +710,7 @@ class Admin extends CI_Controller
         'kota' => $this->input->post('kota', TRUE),
         'provinsi' => $this->input->post('provinsi', TRUE),
         'kode_pos' => $this->input->post('kode_pos', TRUE),
+        'perusaahaan' => $this->input->post('perusahaan', TRUE),
       );
       $nm_penjab         = $this->input->post('nm_penjab', TRUE);
       $nohp_penjab         = $this->input->post('nohp_penjab', TRUE);
@@ -1057,4 +1065,112 @@ class Admin extends CI_Controller
       echo json_encode($error);
     }
   }
+
+  public function form_role_user()
+  {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
+    $head['title'] = 'Inventory Gudang | Tambah Data Role User';
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['list_gudang'] = $this->m_admin->select('tb_gudang');
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
+    $this->load->view('admin/form_role/form_insert', $data);
+  }
+
+  public function tabel_role_user()
+  {
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
+    $head['title'] = 'Inventory Gudang | Data Role User';
+    $data['list_data'] = $this->M_admin->select('tb_role');
+    $data['list_gudang'] = $this->M_admin->select('tb_gudang');
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->load->view('layout/head', $head);
+
+    $this->load->view('admin/tabel/tabel_gudang', $data);
+  }
+
+  public function update_role_user()
+  {
+    $id = $this->uri->segment(3);
+    $head['title'] = 'Inventory Gudang | Update Data Gudang';
+    $data['token_generate'] = $this->token_generate();
+    $data['data_role'] = $this->M_admin->get_data_row('tb_role', array('id' => $id));
+    $data['list_gudang'] = $this->M_admin->select('tb_gudang');
+    $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+    $data['role'] = $this->role;
+    $data['sidebar']['nama_gudang'] = $this->gudang;
+    $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+    $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+    $this->session->set_userdata($data);
+    $this->load->view('layout/head', $head);
+    $this->load->view('admin/form_role/form_update', $data);
+  }
+
+
+  public function proses_role_user_insert()
+  {
+    $this->form_validation->set_rules('nama_role', 'Nama Gudang', 'trim|required|max_length[100]');
+    $this->form_validation->set_rules('detail_gudang', 'Detail Gudang', 'trim|required|max_length[100]');
+
+    if ($this->form_validation->run() ==  TRUE) {
+      $nama_gudang = $this->input->post('nama_gudang', TRUE);
+      $detail_gudang = $this->input->post('detail_gudang', TRUE);
+
+      $data = array(
+        'nama_gudang' => $nama_gudang,
+        'detail_gudang' => $detail_gudang
+      );
+      $this->M_admin->insert('tb_gudang', $data);
+
+      $this->session->set_flashdata('msg_berhasil', 'Data Gudang Berhasil Ditambahkan');
+      redirect(base_url('admin/form_gudang'));
+    } else {
+      $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
+      $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+      $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+      $this->load->view('admin/form_gudang/form_insert', $data);
+    }
+  }
+
+  public function proses_role_user_update()
+  {
+    $head['title'] = 'Inventory Gudang | Form Gudang';
+    $this->form_validation->set_rules('nama_gudang', 'Nama Gudang', 'trim|required|max_length[100]');
+    $this->form_validation->set_rules('detail_gudang', 'Detail Gudang', 'trim|required|max_length[100]');
+
+    if ($this->form_validation->run() ==  TRUE) {
+      $id_gudang   = $this->input->post('id', TRUE);
+      $nama_gudang = $this->input->post('nama_gudang', TRUE);
+      $detail_gudang = $this->input->post('detail_gudang', TRUE);
+
+      $where = array(
+        'id' => $id_gudang
+      );
+
+      $data = array(
+        'nama_gudang' => $nama_gudang,
+        'detail_gudang' => $detail_gudang
+      );
+      $this->M_admin->update('tb_gudang', $data, $where);
+
+      $this->session->set_flashdata('msg_berhasil', 'Data Gudang Berhasil Di Update');
+      redirect(base_url('admin/tabel_gudang'));
+    } else {
+      $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
+      $data['role'] = $this->role;
+      $data['sidebar']['nama_gudang'] = $this->gudang;
+      $data['views']['sidebar_menu'] = $this->load->view('layout/sidebar_menu', $data, TRUE);
+      $data['views']['header'] = $this->load->view('layout/header', $data, TRUE);
+      $this->load->view('layout/head', $head);
+      $this->load->view('admin/form_gudang/form_update');
+    }
+  }
+
 }

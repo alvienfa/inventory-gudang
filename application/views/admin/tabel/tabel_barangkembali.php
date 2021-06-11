@@ -51,6 +51,7 @@
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
                         <th>Status</th>
+                        <th>Surat Pengembalian</th>
 
                         <!-- <th>Keluarkan</th> -->
                       </tr>
@@ -78,6 +79,7 @@
 
                                 ?>
                             </td>
+                            <td><a type="button" class="btn btn-danger btn-report" href="<?= base_url('report/barangKembali/' . $dd->id) ?>" name="btn_report" style="margin:auto;"><i class="fa fa-file-text" aria-hidden="true"></i></a></td>
                             <!-- <td><a type="button" class="btn btn-success btn-barangkeluar"  href="<?= base_url('admin/barang_keluar/' . $dd->id_transaksi) ?>" name="btn_barangkeluar" style="margin:auto;"><i class="fa fa-sign-out" aria-hidden="true"></i></a></td> -->
                       </tr>
                       <?php $no++; ?>

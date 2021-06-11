@@ -68,9 +68,7 @@
                                 </button>
                             </div>
 
-                            <div class="mt-5 text-center">
-                                Don't have an account? <a href="<?= base_url('register') ?>">Create new one</a>
-                            </div>
+
                         </form>
 
                         <div class="text-center mt-5 text-small">

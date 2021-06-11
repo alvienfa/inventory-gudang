@@ -2,9 +2,9 @@
     <!-- Logo -->
     <a href="<?= base_url('admin') ?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>LT</span>
+        <span class="logo-mini"><img src="assets/img/CB-1.1.png" style="width: 30px;" ></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-lg"><b>Dashboard Admin</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -21,7 +21,7 @@
                         <?php foreach ($avatar as $a) { ?>
                             <img src="<?php echo base_url('assets/upload/user/img/' . $a->nama_file) ?>" class="user-image" alt="User Image">
                         <?php } ?>
-                        <span class="hidden-xs"><?= $this->session->userdata('name') ?></span>
+                        <span class="hidden-xs"><?= $this->session->userdata('nama_user') ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -31,7 +31,7 @@
                             <?php } ?>
 
                             <p>
-                                <?= $this->session->userdata('name') ?> - Web Developer
+                            <?= $this->session->userdata('nama_user') ?>  - <?= $this->session->userdata('name') ?> 
                                 <small>Last Login : <?= $this->session->userdata('last_login') ?></small>
                             </p>
                         </li>
@@ -39,7 +39,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     <div class="pull-left">
-                        <a href="<?= base_url('admin/profile') ?>" class="btn btn-default btn-flat"><i class="fa fa-cogs" aria-hidden="true"></i> Profile</a>
+                        <a href="<?= base_url('admin/profile') ?>" class="btn btn-default btn-flat"><i class="fa fa-cogs" aria-hidden="true"></i> Setting</a>
                     </div>
                     <div class="pull-right">
                         <a href="<?= base_url('admin/signout'); ?>" class="btn btn-default btn-flat"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</a>

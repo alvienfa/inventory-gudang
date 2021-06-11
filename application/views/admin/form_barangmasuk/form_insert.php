@@ -77,10 +77,10 @@
                         <div class="form-group">
                           <label for="satuan">Pilih Kategori</label>
                           <select class="form-control" name="id_kategori">
-                            
-                              <option value="1">Demo / Entertaint</option>
-                              <option value="2">Inventory</option>
-                              <option value="3" selected>Persediaan</option>
+                              <option value=""> Pilih Kategori </option>
+                              <?php foreach($list_kategori as $k) : ?>
+                              <option value="<?=$k->id ?> "><?=$k->nama_kategori ?> </option>
+                              <?php endforeach; ?>
                           </select>
                         </div>
                         <div class="form-group">
