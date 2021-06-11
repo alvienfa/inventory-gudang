@@ -35,15 +35,12 @@
 <script src="<?php echo base_url() ?>assets/js/qr-packed.js"></script>
 <script>
   const qrcodes = window.qrcode;
-
   const video = document.createElement("video");
   const canvasElement = document.getElementById("qr-canvas");
   const canvas = canvasElement.getContext("2d");
-
   const qrResult = document.getElementById("qr-result");
   const outputData = document.getElementById("outputData");
   const btnScanQR = document.getElementById("btn-scan-qr");
-
   let scanning = false;
   window.onload = function() {
     document.getElementById("btn-scan-qr").click();
@@ -57,12 +54,10 @@
       document.getElementById("qr-content").style.display = 'none';
       window.location.href = '<?= base_url('barang/') ?>' + res;
       scanning = false;
-
       // Stop video
       video.srcObject.getTracks().forEach(track => {
         track.stop();
       })
-
       qrResult.hidden = false; // Show result
       canvasElement.hidden = true; // Hide canvas
       btnScanQR.hidden = false; // Show scan button again
@@ -83,7 +78,6 @@
         btnScanQR.hidden = true;
         canvasElement.hidden = false;
         video.setAttribute("playsinline", true);
-
         video.srcObject = stream;
         video.play(); // Show video
         tick(); // Set canvas
@@ -95,7 +89,6 @@
     canvasElement.height = video.videoHeight;
     canvasElement.width = video.videoWidth;
     canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
-
     scanning && requestAnimationFrame(tick);
   }
 
@@ -106,6 +99,16 @@
       setTimeout(scan, 300);
     }
   }
+</script>
+<script>
+  document.querySelectorAll(".btnKembalikan").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      $("#kembali").append("<input type='hidden' name='id' value='" + e.target.dataset.id + "'>")
+      $("#kembali").append("<input type='hidden' name='id_lokasi' value='" + e.target.dataset.id_lokasi + "'>")
+      $("#kembali").append("<input type='hidden' name='total' value='" + e.target.dataset.jumlah + "'>")
+      document.querySelector("[name='stok']").value = e.target.dataset.stok
+    })
+  })
 </script>
 </body>
 

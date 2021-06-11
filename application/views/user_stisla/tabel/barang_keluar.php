@@ -19,6 +19,7 @@
                             <th>Contact</th>
                             <th>Detail</th>
                             <th>Status</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,7 +29,7 @@
                             <tr>
                                 <td><?= $no ?></td>
                                 <td class="font-weight-bold">
-                                    <smaall><?= $item->nama_barang ?></smaall>
+                                    <h6><a class="text-primary" href="<?= base_url('barang/' . $item->id_transaksi)?>"><?= $item->nama_barang ?></h6>
                                 </td>
                                 <td><small><?= $item->id_transaksi ?></small></td>
                                 <td class="text-uppercase"><small><?= $item->kode_barang ?></small></td>
@@ -36,16 +37,16 @@
                                 <td class="text-uppercase text-small"><small><i class="fas fa-user"></i> <?= $item->nm_penjab ?> (<?= $item->nohp_penjab ?>)</small></td>
                                 <?php
                                 switch ($item->status):
-                                    case '0':
+                                    case 0:
                                         $badge = 'badge badge-warning';
                                         break;
-                                    case '1':
+                                    case 1:
                                         $badge = 'badge badge-success';
                                         break;
-                                    case '2':
+                                    case 2:
                                         $badge = 'badge badge-primary';
                                         break;
-                                    case '3':
+                                    case 3:
                                         $badge = 'badge badge-danger';
                                         break;
                                 endswitch;
@@ -61,6 +62,7 @@
                                     data-pos=<?= $item->kode_pos ?> 
                                     class="btn btn-secondary btn-sm btn-detail">...</a>
                                 </td>
+                                <td><?= $item->status ?></td>
                                 <td class="text-uppercase text-sm">
                                     <span class="<?= $badge ?>">
                                         <small><?= $item->text_status ?></small>

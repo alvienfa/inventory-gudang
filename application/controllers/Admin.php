@@ -799,10 +799,10 @@ class Admin extends CI_Controller
   {
     $id_transaksi = $this->uri->segment(3);
     $head['title'] = 'Inventory Gudang | List Barang by QR';
-    $where = array(
-      'status'       => '0',
-      'id_transaksi' => $id_transaksi
-    );
+    // $where = array(
+    //   'status'       => 0,
+    //   'id_transaksi' => $id_transaksi
+    // );
     $data['list_data'] = $this->M_admin->stok_barang_keluar($this->id_gudang);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
@@ -836,7 +836,7 @@ class Admin extends CI_Controller
       'keterangan' => $keterangan
     );
 
-    if ($status == '1' || $status == '2') {
+    if ($status !== 0) {
       $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
     }
 

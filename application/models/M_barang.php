@@ -1,6 +1,25 @@
 <?php
 class M_barang extends CI_Model
 {
+    public function select($table, $where)
+    {
+        $query = $this->db->select("a.*,b.satuan,b.nama_barang,lokasi.kota,lokasi.provinsi")
+        ->from($table . ' as a')
+        ->join('tb_barang_masuk as b' , 'b.id_transaksi=a.id_transaksi')
+        ->join('map_lokasi as lokasi' , 'lokasi.id=a.id_lokasi')
+        ->where($where)
+        ->get()->result();
+        return $query;
+    }
+
+    public function select_row($table, $where)
+    {
+        $this->db->select("*");
+        $this->db->from($table);
+        $this->db->where($where);
+        $query = $this->db->get()->row();
+        return $query;
+    }
 
     public function barang($id_transaksi)
     {
@@ -44,5 +63,5 @@ class M_barang extends CI_Model
             'total_persediaan' => $persediaan
         );
         return $data;
-    }
+    } 
 }
