@@ -43,7 +43,7 @@ class Logs extends CI_Controller
     $head['username'] = $this->session->userdata('email');
     $head['sidebar_menu'] = $this->sidebar_menu();
     $card['pagination'] = NULL;
-    $card['list_data'] = $this->M_user->barang_keluar('tb_barang_keluar', 'map_lokasi', 'tb_status', 'tb_gudang', 10, 0, 'tb_barang_masuk');
+    $card['list_data'] = $this->M_user->barang_keluar(10, 0);
     $data = array(
       'title' => 'Log Barang',
       'views' => array(

@@ -1,3 +1,8 @@
+<style>
+    .test{
+        border-radius:1rem;
+    }
+</style>
 <div class="col-lg-12 col-md-12 col-12 col-sm-12">
     <div class="card position-relative">
         <div class="card-header d-flex justify-content-between">
@@ -13,14 +18,13 @@
                 <table class="table table-striped table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Kategori</th>
-                            <th>ID Transaksi</th>
-                            <th>Total</th>
-                            <th>QR Code</th>
-                            <th>Gudang</th>
-                            <th>Detail</th>
+                            <th>NO</th>
+                            <th>NAMA</th>
+                            <th>KATEGORI</th>
+                            <th>JUMLAH</th>
+                            <th>GAMBAR</th>
+                            <th>GUDANG</th>
+                            <th>DETAIL</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,16 +33,17 @@
                         foreach ($list_data as $item) : ?>
                             <tr>
                                 <td><?= $no ?></td>
-                                <td><small class="text-uppercase font-weight-bold"><?= $item->nama_barang ?></small></td>
-                                <td><small class="text-uppercase font-weight-bold"><?= $item->nama_kategori ?></small></td>
-                                <td><small><?= $item->id_transaksi ?></small></td>
-                                <td><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </td>
                                 <td>
-                                    <a href="javascript:void(0)" class="btn-qr"  
+                                    <small><a class="badge text-uppercase font-weight-bold" href="<?= base_url('barang/') . $item->id_transaksi?>"><?= $item->nama_barang ?></a></small>
+                                </td>
+                                <td><small class="text-uppercase font-weight-bold"><?= $item->nama_kategori ?></small></td>
+                                <td><span class="font-weight-bold text-small"><?= $item->jumlah . $item->satuan ?> </span></td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn-qr test"  
                                     data-toggle="tooltip" 
                                     data-html="true" 
-                                    title="<img class='img-fluid' src='<?= base_url('assets/qrcode/images/') . $item->qr_code ?>' >">
-                                        <img class="img-fluid" src="<?= base_url('assets/qrcode/images/') . $item->qr_code ?>" alt="<?= $item->nama_barang ?>" width="70" 
+                                    title="<img class='img-fluid' src='<?= base_url('assets/upload/gambar/') . $item->gambar ?>' >">
+                                        <img class="img-fluid p-2 test" src="<?= base_url('assets/upload/gambar/') . $item->gambar ?>" alt="<?= $item->nama_barang ?>" width="70" 
                                         onerror="this.onerror=null;this.src='<?= base_url('assets/img/error-image.png') ?>'" >
                                     </a>
                                 </td>

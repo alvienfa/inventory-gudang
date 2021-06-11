@@ -18,10 +18,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <td>
-                            <a href="#" class="font-weight-600">
-                            <img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                        </td> -->
                         <?php foreach ($last_data as $last) : ?>
                             <tr>
                                 <td><?= $last->nama_barang ?></td>
