@@ -34,10 +34,10 @@ class User extends CI_Controller
     $data['views']['header'] = $this->header();
     if ($this->role == 5) {
       $data['title'] = 'Dashboard';
-      $cards1['last_data']       = $this->M_user->select_limit('tb_barang_kembali', 'tb_status','tb_barang_masuk', 10);
-      $cards2['progress_barang'] = $this->M_user->progress_barang();
+      $cards1['last_data']        = $this->M_user->select_limit('tb_barang_kembali', 'tb_status','tb_barang_masuk', 10);
+      $cards2['progress_barang']  = $this->M_user->progress_barang();
       $data['views']['card_satu'] = $this->load->view('user_stisla/cards/barang_kembali.php', $cards1, TRUE);
-      $data['views']['card_dua'] = $this->load->view('user_stisla/cards/progress_barang.php', $cards2, TRUE);
+      $data['views']['card_dua']  = $this->load->view('user_stisla/cards/progress_barang.php', $cards2, TRUE);
       $this->load->view('template/head.php', $head);
       $this->load->view('user_stisla/index', $data);
       $this->load->view('template/footer.php');
@@ -164,7 +164,6 @@ class User extends CI_Controller
       'title' => 'Tabel Barang Masuk',
       'barang_masuk'  => $this->M_user->select('tb_barang_masuk'),
       'views'         => array(
-        'header'      => $this->header(),
         'card_satu'   => $this->load->view('user_stisla/tabel/barang_masuk', $cards, TRUE),
         'modal_print' => $this->load->view('user_stisla/modals/print', $print, TRUE)
       ),
