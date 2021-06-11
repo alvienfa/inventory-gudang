@@ -57,10 +57,6 @@
                   <label for="tanggal_keluar" style="margin-left:220px;display:inline;">Tanggal Keluar</label>
                   <input type="text" name="tanggal_keluar" style="margin-left:66px;width:20%;display:inline;" class="form-control form_datetime" required="" placeholder="Klik Disini">
                 </div>
-                <div class="form-group" style="margin-bottom:40px;">
-                  <label for="lokasi" style="margin-left:220px;display:inline;">Lokasi</label>
-                  <input type="text" name="lokasi" style="margin-left:117px;width:20%;display:inline;" class="form-control"  value="<?=$d->lokasi?>">
-                </div>
                 <div class="form-group" style="display:inline-block;">
                   <label for="kode_barang" style="width:87%;margin-left: 12px;">Kode Barang / Barcode</label>
                   <input type="text" name="kode_barang" readonly="readonly" style="width: 90%;margin-right: 67px;margin-left: 11px;" class="form-control" id="kode_barang" value="<?=$d->kode_barang?>">

@@ -95,7 +95,7 @@ class M_user extends CI_Model
 
   public function barang_kembali($a,$b,$limit,$start,$barang)
   {
-    $query = $this->db->select("barang.id_transaksi,barang.nama_barang,barang.satuan,barang.kode_barang,a.status,a.jumlah,a.lokasi,b.text_status")
+    $query = $this->db->select("barang.id_transaksi,barang.nama_barang,barang.satuan,barang.kode_barang,a.status,a.jumlah,b.text_status")
     ->from($a . ' as a')
     ->join($b . ' as b', 'b.id=a.status', 'left')
     ->join($barang . ' as barang', 'barang.id_transaksi=a.id_transaksi')

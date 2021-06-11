@@ -17,7 +17,6 @@
                             <th>Kode</th>
                             <th>Jumlah</th>
                             <th>Status</th>
-                            <th>Lokasi</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
@@ -50,7 +49,6 @@
                                 <td class="text-uppercase">
                                     <span class="<?= $badge ?>"><small><?= $item->text_status ?></small></span>
                                 </td>
-                                <td><small><?= $item->lokasi ?></small></td>
                                 <td>
                                     <a class="btn btn-secondary btn-sm" href="<?= base_url('barang/') . $item->id_transaksi ?>"><i class="fas fa-eye"></i></a>
                                 </td>
