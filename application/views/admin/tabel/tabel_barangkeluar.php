@@ -72,16 +72,16 @@
                             <td><span class="text-bold"> <?= $dd->jumlah ?> </span>(<?= $dd->satuan ?>)</td>
                             <td style="vertical-align:middle">
                               <?php switch ($dd->status):
-                                case '0':
+                                case 0:
                                   echo '<span class="label label-warning text-uppercase">belum</span>';
                                   break;
-                                case '1':
+                                case 1:
                                   echo '<span class="label label-success text-uppercase">sudah</span>';
                                   break;
-                                case '2':
+                                case 2:
                                   echo '<span class="label label-primary text-uppercase">diperbaiki</span>';
                                   break;
-                                case '3':
+                                case 3:
                                   echo '<span class="label label-danger text-uppercase">rusak</span>';
                                   break;
                               endswitch;
