@@ -26,7 +26,7 @@
             <!-- /.box -->
             <div class="box">
               <div class="box-header">
-                <h3 class="box-title"><i class="fa fa-table" aria-hidden="true"></i> Stok Barang Masuk</h3>
+                <h3 class="box-title"><i class="fa fa-table" aria-hidden="true"></i> Dara Barang Keluar </h3>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -38,7 +38,7 @@
                   </div>
                 <?php } ?>
 
-                <a href="<?= base_url('admin/scan_barang_keluar') ?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Data Keluar</a>
+                
                 <a href="<?= base_url('report/barangKeluarManual') ?>" style="margin-bottom:10px;" type="button" class="btn btn-danger" name="laporan_data"><i class="fa fa-file-text" aria-hidden="true"></i> Invoice Manual</a>
                 <div class="table-responsive">
                   <table id="example1" class="table table-bordered table-striped">
@@ -46,11 +46,11 @@
                       <tr>
                         <th>No</th>
                         <th>ID Transaksi</th>
-                        <th>Tanggal Masuk</th>
-                        <th>Tanggal Keluar</th>
-                        <th>Tujuan</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
+                        <th>Tanggal Keluar</th>
+                        <th>Tujuan</th>
+                        <th>Penanggung Jawab</th>
                         <th>Jumlah</th>
                         <th>Status</th>
                         <th>Surat Jalan</th>
@@ -64,11 +64,11 @@
                           <?php foreach ($list_data as $dd) : ?>
                             <td><?= $no ?></td>
                             <td><?= $dd->id_transaksi ?></td>
-                            <td><?= $dd->tanggal_masuk ?></td>
-                            <td><?= $dd->tanggal_keluar ?></td>
-                            <td><?= $dd->kota ?></td>
                             <td><?= strtoupper($dd->kode_barang) ?></td>
                             <td><?= $dd->nama_barang ?></td>
+                            <td><?= $dd->tanggal_keluar ?></td>
+                            <td><?= $dd->perusahaan ?></td>
+                            <td><?= $dd->nm_penjab ?></td>
                             <td><span class="text-bold"> <?= $dd->jumlah ?> </span>(<?= $dd->satuan ?>)</td>
                             <td style="vertical-align:middle">
                               <?php switch ($dd->status):

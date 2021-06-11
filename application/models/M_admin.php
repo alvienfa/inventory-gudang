@@ -182,7 +182,7 @@ class M_admin extends CI_Model
   
   public function stok_barang_keluar($id_gudang, $id_kategori=false)
   {
-    $this->db->select('a.*,b.id_gudang,b.id_kategori,b.nama_barang,b.kode_barang,b.satuan,c.kota');
+    $this->db->select('a.*,b.id_gudang,b.id_kategori,b.nama_barang,b.kode_barang,b.satuan,c.kota,c.perusahaan');
     $this->db->from('tb_barang_keluar as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
     $this->db->join('map_lokasi as c', "c.id=a.id_lokasi");
