@@ -1,7 +1,9 @@
 <div class="col-lg-12 col-md-12 col-12 col-sm-12">
     <div class="card">
-        <div class="card-header">
-            <h4>Barang Keluar</h4>
+        <div class="card-header d-flex justify-content-between">
+            <div>
+                <button class="btn btn-warning" data-toggle="modal" data-target="#printBarangKeluar"><i class="fas fa-print"></i> PRINT</button>
+            </div>
             <div class="card-header-action">
                 <a href="#" class="btn btn-primary">Search <i class="fas fa-search"></i></a>
             </div>
@@ -19,7 +21,6 @@
                             <th>Contact</th>
                             <th>Detail</th>
                             <th>Status</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,7 +30,7 @@
                             <tr>
                                 <td><?= $no ?></td>
                                 <td class="font-weight-bold">
-                                    <h6><a class="text-primary" href="<?= base_url('barang/' . $item->id_transaksi)?>"><?= $item->nama_barang ?></h6>
+                                    <a class="badge text-primary text-uppercase" href="<?= base_url('barang/' . $item->id_transaksi) ?>"><?= $item->nama_barang ?>
                                 </td>
                                 <td><small><?= $item->id_transaksi ?></small></td>
                                 <td class="text-uppercase"><small><?= $item->kode_barang ?></small></td>
@@ -52,17 +53,11 @@
                                 endswitch;
                                 ?>
                                 <td>
-                                    <a
-                                    type="button"
-                                    data-keterangan=<?= $item->keterangan?> 
-                                    data-alamat=<?= $item->alamat ?> 
-                                    data-kecamatan=<?= $item->kecamatan ?> 
-                                    data-kota=<?= $item->kota ?> 
-                                    data-provinsi=<?= $item->provinsi ?> 
-                                    data-pos=<?= $item->kode_pos ?> 
+                                    <a type="button" 
+                                    data-keterangan=<?= $item->keterangan ?> data-alamat=<?= $item->alamat ?> data-kecamatan=<?= $item->kecamatan ?> 
+                                    data-kota=<?= $item->kota ?> data-provinsi=<?= $item->provinsi ?> data-pos=<?= $item->kode_pos ?> 
                                     class="btn btn-secondary btn-sm btn-detail">...</a>
                                 </td>
-                                <td><?= $item->status ?></td>
                                 <td class="text-uppercase text-sm">
                                     <span class="<?= $badge ?>">
                                         <small><?= $item->text_status ?></small>

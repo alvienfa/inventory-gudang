@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-md-6 col-12 col-sm-12">
+<div class="col-lg-9 col-md-6 col-12 col-sm-12">
     <div class="card">
         <div class="card-header">
             <h4>Last Barang Kembali</h4>
@@ -11,23 +11,21 @@
                 <table class="table table-striped table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Total</th>
-                            <th>Status</th>
+                            <th>TITLE</th>
+                            <th>ID TRANSAKSI</th>
+                            <th>JUMLAH</th>
+                            <th>PENERIMA</th>
+                            <th>STATUS</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <td>
-                            <a href="#" class="font-weight-600">
-                            <img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                        </td> -->
                         <?php foreach ($last_data as $last) : ?>
                             <tr>
-                                <td><?= $last->nama_barang ?></td>
-                                <td><?= $last->id_transaksi ?></td>
-                                <td><span class="font-weight-bold"><?= $last->jumlah . "</span> " . $last->satuan ?> </td>
-                                <td><span class="badge badge-success text-uppercase"><?= $last->text_status ?></span></td>
+                                <td><a class="badge text-primary" href="<?= base_url('barang/' . $last->id_transaksi)?>"><?= $last->nama_barang ?></a></td>
+                                <td class="text-small"><?= $last->id_transaksi ?></td>
+                                <td class="text-small"><span class="font-weight-bold"><?= $last->jumlah . "</span> " . $last->satuan ?> </td>
+                                <td class="text-uppercase text-small"><?= $last->nm_penjab ?></td>
+                                <td><span class="badge badge-success text-uppercase text-small"><?= $last->text_status ?></span></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

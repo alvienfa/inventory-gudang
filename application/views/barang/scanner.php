@@ -26,6 +26,13 @@
         </div>
     </div>
     <h6>Barang Keluar</h6>
+    <?php if (!$barang_keluar) : ?>
+        <div class="card">
+            <div class="card-body pb-2">
+                <h6 class="text-uppercase text-center">belum ada transaksi</h6>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="hide-scroll" style="height: 35rem;overflow-y:scroll;">
         <?php
         $no = 1;
@@ -66,9 +73,7 @@
                     <?= $button ?>
                     <?php if ($item->status !== 1) : ?>
                         <div>
-                            <button type="button" class="btn btn-secondary btn-round text-small btnKembalikan" 
-                            href="javascript:void(0)" data-lokasi="<?= $item->id_lokasi ?>" data-id="<?= $item->id ?>" data-stok="<?= $item->jumlah ?>" 
-                            data-toggle="modal" data-target="#scannerKembali">PROSES</button>
+                            <button type="button" class="btn btn-secondary btn-round text-small btnKembalikan" href="javascript:void(0)" data-lokasi="<?= $item->id_lokasi ?>" data-id="<?= $item->id ?>" data-stok="<?= $item->jumlah ?>" data-toggle="modal" data-target="#scannerKembali">PROSES</button>
                         </div>
                     <?php endif; ?>
                 </div>

@@ -23,7 +23,7 @@ class Report extends CI_Controller
         $this->gudang = $data->nama_gudang;
         $this->id_gudang = $data->id_gudang;
       } elseif ($role == 6 || $role == 5) {
-        redirect('user');
+        $this->role = $role;
       } elseif ($role == 1) {
         $this->role = $role; //superadmin
         $this->gudang = 'superadmin';
@@ -268,152 +268,7 @@ class Report extends CI_Controller
 
     $pdf->AddPage('L');
     
-    $html=
-      '<div>
-        <h1 align="center">Surat Jalan Pengeluaran Barang</h1><br>
-
-        <table border="0" width="100%">';
-        $html .= '<thead>';
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">No. Transaksi</td>';
-        $html .= '<td style="width:10px">:</td>';
-        $html .= '<td colspan="6" style="width:340px">'.$data->id_transaksi.'</td>';
-        $html .= '</tr>';
-
-            $html .= '<tr>';
-            $html .= '<td style="width:180px">Ditunjukkan untuk</td>';
-            $html .= '<td style="width:10px">:</td>';
-            $html .= '<td style="width:200px">'.$data->perusahaan.'</td>';
-            $html .= '<td style="width:80px"></td>';
-            $html .= '<td style="width:120px"></td>';
-            $html .= '<td style="width:180px">Penanggung Jawab</td>';
-            $html .= '<td style="width:10px">:</td>';
-            $html .= '<td style="width:180px">'.$data->nm_penjab.'</td>';
-            
-            $html .= '</tr>';
-
-            $html .= '<tr>';
-            $html .= '<td>Hari / Tanggal</td>';
-            $html .= '<td>:</td>';
-            $html .= '<td>'.date('l / d F Y',strtotime($data->tanggal_keluar)).'</td>';
-            $html .= '<td></td>';
-            $html .= '<td></td>';
-            $html .= '<td>No. Handphone</td>';
-            $html .= '<td>:</td>';
-            $html .= '<td>'.$data->nohp_penjab.'<br></td>';
-            $html .= '</tr>';
-            
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">Po. Customer  </td>';
-        $html .= '<td>:<br></td>';
-        $html .= '<td> </td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-        $html .= '</thead>';
-
-    $html .=
-      '</table>
-        
-        <table border="1"  >
-          <tr>
-            <th style="width:40px" align="center">No</th>
-            <th style="width:160px" align="center">ID Transaksi</th>
-            <th style="width:140px" align="center">Kode</th>
-            <th style="width:140px" align="center">Nama </th>
-            <th style="width:110px" align="center">Tipe Barang</th>
-            <th style="width:110px" align="center">Tanggal Keluar</th>
-            <th style="width:130px" align="center">Perusahaan</th>
-            <th style="width:80px" align="center">Jumlah</th>
-          </tr>';
-
-
-          $no = 1;
-            $html .= '<tr>';
-            $html .= '<td style="line-height: 30px;" align="center" height="50px">'.$no.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->id_transaksi.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->kode_barang.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->nama_barang.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->nama_kategori.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->tanggal_keluar.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->perusahaan.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
-            $html .= '</tr>';
-
-            $html .= '<tr>';
-            $html .= '<td style="line-height: 50px;" align="center" colspan="7" height="40px"><b>Jumlah</b></td>';
-            $html .= '<td style="line-height: 50px;" align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
-            $html .= '</tr>';
-            $no++;
-
-        $html .='
-            </table><br><br>
-            <table border="0" width="100%">';
-        $html .= '<thead>';
-            
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">Mengetahui  </td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td colspan="1" style="width:180px">Penyedia</td>';
-        $html .= '<td></td>';
-        $html .= '<td style="width:180px">Penanggung Jawab</td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">  </td>';
-        $html .= '<td></td>';
-        $html .= '<td> </td>';
-        $html .= '<td colspan="1"></td>';
-        $html .= '<td></td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">  </td>';
-        $html .= '<td></td>';
-        $html .= '<td> </td>';
-        $html .= '<td colspan="1"></td>';
-        $html .= '<td></td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">  </td>';
-        $html .= '<td></td>';
-        $html .= '<td> </td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-
-
-        $html .= '<tr>';
-        $html .= '<td style="width:180px"><u>'. $this->session->userdata('nama_user') .'</u></td>';
-        $html .= '<td></td>';
-        $html .= '<td> </td>';
-        $html .= '<td colspan="1" style="width:180px"><u>'.$data->nama_user.'</u></td>';
-        $html .= '<td></td>';
-        $html .= '<td style="width:180px"><u>'.$data->nm_penjab.'</u></td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-
-        $html .= '</thead>';
-
-    $html .=
-      '</table>
-            <br>
-            <br>
-            
-            <h6>Catatan : '.$data->keterangan.' </h6><br><br>
-            
-          </div>';
+    $html = $this->load->view('report/pdf_barangKeluar',$data,TRUE);
 
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);
     
@@ -423,60 +278,59 @@ class Report extends CI_Controller
 
   public function barangMasuk($id_gudang=false)
   {
-
-    $limit = $this->input->get('limit') ? intval($this->input->get('limit')) : 100;
+    $limit = 100;
 
     $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
 
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    
+    // document informasi
+    $pdf->SetCreator('Inventory Gudang');
+    $pdf->SetTitle('Laporan Stok Barang');
+    $pdf->SetSubject('Stok Barang');
+    
+    //header Data
+    $pdf->SetHeaderData(FCPATH . 'assets\img\preview.jpg' ,0,'Barang','Stok Barang',array(203, 58, 44),array(255, 255, 255));
+    $pdf->SetFooterData(array(255, 255, 255), array(255, 255, 255));
+    
+    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
+    $pdf->setFooterFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
+    
+    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+    
+    //set margin
+    $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP,PDF_MARGIN_RIGHT);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+    
+    // $pdf->SetAutoPageBreak(FALSE, PDF_MARGIN_BOTTOM - 5);
+    
+    //SET Scaling ImagickPixel
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+    
+    //FONT Subsetting
+    $pdf->setFontSubsetting(true);
+    
+    $pdf->SetFont('helvetica','',8,'',true);
+    
+    $pdf->AddPage('A4');
+    $pdf->SetAutoPageBreak(TRUE, 10);
+    
     $search = array(
       'nama_barang'   => $this->input->get('nama_barang'),
       'id_gudang'     => $this->input->get('id_gudang'),
       'id_transaksi'  => $this->input->get('id_transaksi'),
       'id_kategori'   => $this->input->get('id_kategori')
     );
-
+  
     $data = array(
       'list_data' => $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang' ,'tb_kategori', $limit, $start, $search)
     );
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
-    // document informasi
-    $pdf->SetCreator('Inventory Gudang');
-    $pdf->SetTitle('Laporan Stok Barang');
-    $pdf->SetSubject('Stok Barang');
-
-    //header Data
-    $pdf->SetHeaderData(FCPATH . 'assets\img\preview.jpg' ,0,'Barang','Stok Barang',array(203, 58, 44),array(255, 255, 255));
-    $pdf->SetFooterData(array(255, 255, 255), array(255, 255, 255));
-
-    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
-    $pdf->setFooterFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
-
-    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
-    //set margin
-    $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP,PDF_MARGIN_RIGHT);
-    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-
-    // $pdf->SetAutoPageBreak(FALSE, PDF_MARGIN_BOTTOM - 5);
-
-    //SET Scaling ImagickPixel
-    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-    //FONT Subsetting
-    $pdf->setFontSubsetting(true);
-
-    $pdf->SetFont('helvetica','',8,'',true);
-
-    $pdf->AddPage('A4');
-    $pdf->SetAutoPageBreak(TRUE, 10);
 
     $html = $this->load->view('report/pdf_stok_barang', $data, TRUE);
-
+    
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);    
     $pdf->Output('stock_barang.pdf','I');
-    
   }
   
   public function barangKembali()
@@ -522,157 +376,66 @@ class Report extends CI_Controller
 
     $pdf->AddPage('L');
     
-    $html=
-      '<div>
-        <h1 align="center">Surat Pengembalian Barang</h1><br>
-
-        <table border="0" width="100%">';
-        $html .= '<thead>';
-        
-
-            $html .= '<tr>';
-            $html .= '<td style="width:180px">No. Transaksi</td>';
-            $html .= '<td style="width:10px">:</td>';
-            $html .= '<td style="width:200px">'.$data->id_transaksi.'</td>';
-            $html .= '<td style="width:80px"></td>';
-            $html .= '<td style="width:120px"></td>';
-            $html .= '<td style="width:180px">Penanggung Jawab</td>';
-            $html .= '<td style="width:10px">:</td>';
-            $html .= '<td style="width:180px">'.$data->nm_penjab.'</td>';
-            
-            $html .= '</tr>';
-
-            $html .= '<tr>';
-            $html .= '<td>Hari / Tanggal</td>';
-            $html .= '<td>:</td>';
-            date_default_timezone_set('Asia/Jakarta');
-            $html .= '<td>'.date('l / d F Y',strtotime($data->tanggal_kembali)).'</td>';
-            $html .= '<td></td>';
-            $html .= '<td></td>';
-            $html .= '<td>No. Handphone</td>';
-            $html .= '<td>:</td>';
-            $html .= '<td>'.$data->nohp_penjab.'<br></td>';
-            $html .= '</tr>';
-            
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">Po. Customer  </td>';
-        $html .= '<td>:<br></td>';
-        $html .= '<td> </td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-        $html .= '</thead>';
-
-    $html .=
-      '</table>
-        
-        <table border="1"  >
-          <tr>
-            
-            
-            <th style="width:140px" align="center">Kode</th>
-            <th style=" width:140px" align="center">Nama</th>
-            <th style=" width:110px" align="center">Tipe Barang</th>
-            <th style="width:110px;height:60px" align="center">Tanggal Keluar</th>
-            <th style="width:110px" align="center">Tanggal Kembali</th>
-            <th style=" width:130px" align="center">Perusahaan</th>
-            <th style="width:110px" align="center">Status</th>
-            <th style="width:80px" align="center">Jumlah</th>
-          </tr>';
-
-
-          $no = 1;
-            $html .= '<tr>';
-            
-            
-            $html .= '<td style="line-height: 30px;" align="center" height="60px">'.$data->kode_barang.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center" >'.$data->nama_barang.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center" >'.$data->nama_kategori.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->tanggal_keluar.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->tanggal_kembali.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->perusahaan.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->text_status.'</td>';
-            $html .= '<td style="line-height: 30px;" align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
-            $html .= '</tr>';
-
-            $html .= '<tr>';
-            $html .= '<td style="line-height: 50px;" align="center" colspan="7" height="40px"><b>Jumlah</b></td>';
-            $html .= '<td style="line-height: 50px;" align="center">'.$data->jumlah.' '.$data->satuan.'</td>';
-            $html .= '</tr>';
-            $no++;
-
-        $html .='
-            </table><br><br>
-            <table border="0" width="100%">';
-        $html .= '<thead>';
-            
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">Mengetahui  </td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td colspan="1" style="width:180px">Penyedia</td>';
-        $html .= '<td></td>';
-        $html .= '<td style="width:180px">Penanggung Jawab</td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">  </td>';
-        $html .= '<td></td>';
-        $html .= '<td> </td>';
-        $html .= '<td colspan="1"></td>';
-        $html .= '<td></td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">  </td>';
-        $html .= '<td></td>';
-        $html .= '<td> </td>';
-        $html .= '<td colspan="1"></td>';
-        $html .= '<td></td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-
-        $html .= '<tr>';
-        $html .= '<td style="width:180px">  </td>';
-        $html .= '<td></td>';
-        $html .= '<td> </td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td></td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-
-
-        $html .= '<tr>';
-        $html .= '<td style="width:180px"><u>'. $this->session->userdata('nama_user') .'</u></td>';
-        $html .= '<td></td>';
-        $html .= '<td> </td>';
-        $html .= '<td colspan="1" style="width:180px"><u>'.$data->nama_user.'</u></td>';
-        $html .= '<td></td>';
-        $html .= '<td style="width:180px"><u>'.$data->nm_penjab.'</u></td>';
-        $html .= '<td><br></td>';
-        $html .= '</tr>';
-
-        $html .= '</thead>';
-
-    $html .=
-      '</table>
-            <br>
-            <br>
-            
-            <h6>Catatan : '.$data->keterangan.' </h6><br><br>
-            
-          </div>';
+    $html = $this->load->view('report/pdf_barangKembali',$data);
 
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);
     
     $pdf->Output('surat_jalan_barang_keluar.pdf','I');
 
+  }
+
+  public function laporan_barang()
+  {
+    $limit = 1000;
+
+    $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
+
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    
+    // document informasi
+    $pdf->SetCreator('Inventory Gudang');
+    $pdf->SetTitle('Laporan Barang Keluar');
+    $pdf->SetSubject('Barang Keluar');
+    
+    //header Data
+    $pdf->SetHeaderData(FCPATH . '\assets\img\preview.jpg' ,0,'Barang','Barang Keluar',array(203, 58, 44),array(255, 255, 255));
+    $pdf->SetFooterData(array(255, 255, 255), array(255, 255, 255));
+    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
+    $pdf->setFooterFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
+    
+    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+    
+    //set margin
+    $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP,PDF_MARGIN_RIGHT);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+    
+    // $pdf->SetAutoPageBreak(FALSE, PDF_MARGIN_BOTTOM - 5);
+    
+    //SET Scaling ImagickPixel
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+    
+    //FONT Subsetting
+    $pdf->setFontSubsetting(true);
+    
+    $pdf->SetFont('helvetica','',8,'',true);
+    
+    $pdf->AddPage('A4');
+    $pdf->SetAutoPageBreak(TRUE, 10);
+    
+    $search = array(
+      'barang.nama_barang'   => $this->input->get('nama_barang'),
+      'barang.id_gudang'     => $this->input->get('id_gudang'),
+      'barang.id_transaksi'  => $this->input->get('id_transaksi'),
+      'barang.id_kategori'   => $this->input->get('id_kategori')
+    );
+  
+    $data = array(
+      'list_data' => $this->M_user->barang_keluar($limit, $start, $search)
+    );
+    $html = $this->load->view('report/pdf_barang_keluar', $data, TRUE);
+    
+    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);    
+    $pdf->Output('stock_barang.pdf','I');
   }
 }
