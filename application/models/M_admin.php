@@ -233,7 +233,7 @@ class M_admin extends CI_Model
   //   $this->db->where('b.id_gudang', $id_gudang);
   //   $this->db->where('b.id_kategori', $id_kategori);
   // }
-  public function barang_by_id($tabel,$id_barang)
+  public function barang_by_id($id_barang)
   {
     $this->db->select('
     a.*,
@@ -243,7 +243,7 @@ class M_admin extends CI_Model
     b.id_gudang,
     b.id_kategori,
     c.perusahaan, c.kota, c.alamat,c.provinsi,c.kecamatan,user.nama_user, d.nama_kategori');
-    $this->db->from($tabel. ' as a');
+    $this->db->from( 'tb_barang_keluar as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
     $this->db->join('map_lokasi as c', "c.id=a.id_lokasi");
     $this->db->join('user', "user.id=a.created_by");
