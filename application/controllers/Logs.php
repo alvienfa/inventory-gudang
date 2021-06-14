@@ -44,10 +44,8 @@ class Logs extends CI_Controller
     $head['sidebar_menu'] = $this->sidebar_menu();
     $card['pagination'] = NULL;
     $search = array(
-      'a.created_by' => $this->role
+      'a.created_by' => $this->session->userdata('id')
     );
-    // var_dump($search);
-    // die();
     $card['list_data'] = $this->M_user->barang_keluar(10, 0, $search);
     $data = array(
       'title' => 'Log Barang',

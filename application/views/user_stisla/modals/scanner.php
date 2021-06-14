@@ -17,61 +17,59 @@
                             <div class="form-group">
                                 <label for="nama barang">Jumlah (*<?= $detail->satuan ?>)</label>
                                 <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
-                                <input value="" type="number" max="<?= $detail->jumlah?>" min="1" name="jumlah" class="<?= $input_styles?>">
+                                <input value="" type="number" max="<?= $detail->jumlah ?>" min="1" name="jumlah" class="<?= $input_styles ?>">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="stok barang">Stok</label>
-                                <input type="text" value="<?= $detail->jumlah ?> <?= $detail->satuan ?>" 
-                                class="<?= $input_styles?>" disabled>
+                                <input type="text" value="<?= $detail->jumlah ?> <?= $detail->satuan ?>" class="<?= $input_styles ?>" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Keterangan</label>
-                        <input value="" type="text" name="keterangan" class="<?= $input_styles?>">
+                        <input value="" type="text" name="keterangan" class="<?= $input_styles ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="nama barang">Alamat</label>
-                        <input value="" type="text" name="alamat" class="<?= $input_styles?> ">
+                        <input value="" type="text" name="alamat" class="<?= $input_styles ?> ">
                     </div>
 
                     <div class="form-group">
                         <label for="nama barang">Kecamatan</label>
-                        <input value="" placeholder="" type="text" name="kecamatan" class="<?= $input_styles?> ">
+                        <input value="" placeholder="" type="text" name="kecamatan" class="<?= $input_styles ?> ">
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Kota</label>
-                        <input value="" placeholder="" type="text" name="kota" class="<?= $input_styles?> ">
+                        <input value="" placeholder="" type="text" name="kota" class="<?= $input_styles ?> ">
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Provinsi</label>
-                        <input value="" placeholder="" type="text" name="provinsi" class="<?= $input_styles?> ">
+                        <input value="" placeholder="" type="text" name="provinsi" class="<?= $input_styles ?> ">
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Kode Pos</label>
-                        <input value="" placeholder="" type="phone" name="kode_pos" class="<?= $input_styles?> " maxlength="5">
+                        <input value="" placeholder="" type="phone" name="kode_pos" class="<?= $input_styles ?> " maxlength="5">
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Penanggung Jawab</label>
-                                <input value="" placeholder="" type="text" name="nm_penjab" class="<?= $input_styles?> ">
+                                <input value="" placeholder="" type="text" name="nm_penjab" class="<?= $input_styles ?> ">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">No HP Penanggung Jawab</label>
-                                <input value="" placeholder="" type="phone" name="nohp_penjab" class="<?= $input_styles?>">
+                                <input value="" placeholder="" type="phone" name="nohp_penjab" class="<?= $input_styles ?>">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Author</label>
-                        <input value="<?= $this->session->userdata('name') ?>" placeholder="" type="text" 
-                        class="<?= $input_styles?>" readonly>
+                        <input value="<?= $this->session->userdata('name') ?>" placeholder="" type="text" class="<?= $input_styles ?>" readonly>
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
@@ -82,18 +80,6 @@
     </div>
 </form>
 
-<script>
-    const btnSubmit = document.querySelectorAll(".btnSubmit")
-    const frmKeluar = document.querySelector("#keluar")
-    btnSubmit.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault()
-            item.closest("form").submit()
-            e.target.setAttribute('disabled', 'disabled')
-        })
-
-    })
-</script>
 
 <!-- Kembali -->
 <form id="kembali" action="<?= base_url('barang/submit/kembali') ?>" method="POST">
@@ -112,27 +98,22 @@
                             <div class="form-group">
                                 <label for="nama barang">Jumlah (*<?= $detail->satuan ?>)</label>
                                 <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
-                                <input value="<?= $detail->jumlah?>" 
-                                max="<?= $detail->jumlah?>" min="1" 
-                                type="number" 
-                                name="jumlah" 
-                                class="<?= $input_styles?>" required>
+                                <input value="<?= $detail->jumlah ?>" max="<?= $detail->jumlah ?>" min="1" type="number" name="jumlah" class="<?= $input_styles ?>" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="stok barang">Stok</label>
-                                <input id="stok" type="number" name="stok" value="" class="<?= $input_styles?>" disabled>
+                                <input id="stok" type="number" name="stok" value="" class="<?= $input_styles ?>" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6"><?= $this->load->view('components/forms/input_number', NULL ,TRUE)?></div>
+                        <div class="col-6"><?= $this->load->view('components/forms/input_number', NULL, TRUE) ?></div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Author</label>
-                                <input 
-                                value="@<?= $this->session->userdata('name') ?>" type="text" class="<?= $input_styles?>" disabled>
+                                <input value="@<?= $this->session->userdata('name') ?>" type="text" class="<?= $input_styles ?>" disabled>
                             </div>
                         </div>
                         <div class="col-6">
@@ -148,7 +129,7 @@
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Keterangan</label>
-                        <input value="" type="text" name="keterangan" class="<?= $input_styles?>" required>
+                        <input value="" type="text" name="keterangan" class="<?= $input_styles ?>" required>
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
@@ -158,3 +139,14 @@
         </div>
     </div>
 </form>
+<script>
+    const btnSubmit = document.querySelectorAll(".btnSubmit")
+    btnSubmit.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault()
+            item.closest("form").submit()
+            e.target.setAttribute('disabled', 'disabled')
+        })
+
+    })
+</script>
