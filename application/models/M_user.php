@@ -62,15 +62,22 @@ class M_user extends CI_Model
 
   public function select_limit($tabel1, $tabel2, $tabel3, $limit)
   {
-    $query = $this->db->select("a.*,b.text_status,c.nama_barang,c.satuan,c.kode_barang")
+    $query = $this->db->select("
+    a.*,
+    b.text_status,
+    c.nama_barang,
+    c.satuan,
+    c.kode_barang,
+    d.nm_penjab,
+    d.nohp_penjab
+    ")
       ->from($tabel1 . ' as a')
-      ->join($tabel2 . ' as b', 'b.id = a.status')
-      ->join($tabel3 . ' as c', 'c.id_transaksi=a.id_transaksi')
-      // ->join('tb_barang_keluar as d', 'd.id=a.id_barang_keluar')
+      ->join($tabel2 . ' as b', 'b.id = a.status', 'LEFT')
+      ->join($tabel3 . ' as c', 'c.id_transaksi=a.id_transaksi' , 'LEFT')
+      ->join('tb_barang_keluar as d', 'd.id=a.id_barang_keluar', 'LEFT')
       ->limit($limit)
       ->order_by('id', 'desc')
       ->get()->result();
-      // echo json_encode($query);die();
     return $query;
   }
 
