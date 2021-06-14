@@ -393,10 +393,17 @@ class Admin extends CI_Controller
 
   public function delete_barang()
   {
+    $role = $this->role;
+    $id_kategori = $this->input->post('id_kategori');
     $id = $this->input->post('id', TRUE);
     $where = array('id' => $id);
-    $this->M_admin->delete('tb_barang_masuk', $where);
-    redirect('admin/tabel_barangmasuk');
+    if($role == 1){
+      $this->M_admin->delete('tb_barang_masuk', $where);
+      redirect('admin/tabel_barangmasuk');
+    }else{
+      echo json_encode($where);
+      redirect(base_url('admin/tabel_barangmasuk?id_kategori=' . $id_kategori));
+    }
   }
 
 
