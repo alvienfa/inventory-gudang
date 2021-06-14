@@ -227,19 +227,18 @@ class Report extends CI_Controller
 
   public function barangKeluar()
   {
-    $id_barang = $this->uri->segment(3);
+    $id_barang = intval($this->uri->segment(3));
     
-    $ls   = array(
-      'id' => $id_barang
+    $where   = array(
+      'a.id' => $id_barang
       );
-    $data['list_data'] = $this->M_admin->barang_by_id('tb_barang_keluar',$id_barang);
+    $data['list_data'] = $this->M_admin->barang_by_id($id_barang);
     
     $limit = 1000;
 
     $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
 
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-    
     // document informasi
     $pdf->SetCreator('Inventory Gudang');
     $pdf->SetTitle('Laporan Barang Keluar');
@@ -272,7 +271,9 @@ class Report extends CI_Controller
     $pdf->SetAutoPageBreak(TRUE, 10);
     
     $html = $this->load->view('report/pdf_barangKeluar',$data,TRUE);
-
+    // var_dump($html);
+    // die();
+    
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);    
     $pdf->Output('stock_barang.pdf','I');
 
@@ -342,7 +343,7 @@ class Report extends CI_Controller
     $ls   = array(
       'id' => $id_barang
       );
-    $data = $this->M_admin->kembali_by_id('tb_barang_kembali',$id_barang);
+    $data = $this->M_admin->kembali_by_id($id_barang);
     
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 

@@ -70,7 +70,7 @@ class M_user extends CI_Model
       ->limit($limit)
       ->order_by('id', 'desc')
       ->get()->result();
-      echo json_encode($query);die();
+      // echo json_encode($query);die();
     return $query;
   }
 

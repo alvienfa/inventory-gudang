@@ -242,14 +242,20 @@ class M_admin extends CI_Model
     b.nama_barang,
     b.id_gudang,
     b.id_kategori,
-    c.perusahaan, c.kota, c.alamat,c.provinsi,c.kecamatan,user.nama_user, d.nama_kategori');
+    c.perusahaan, 
+    c.kota, 
+    c.alamat,
+    c.provinsi,
+    c.kecamatan,
+    user.nama_user,
+    d.nama_kategori
+    ');
     $this->db->from( 'tb_barang_keluar as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
     $this->db->join('map_lokasi as c', "c.id=a.id_lokasi");
     $this->db->join('user', "user.id=a.created_by");
     $this->db->join('tb_kategori as d', "d.id=b.id_kategori");
     $this->db->where('a.id',$id_barang);
-    $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get()->row();
     return $query;
   }
@@ -261,7 +267,7 @@ class M_admin extends CI_Model
              ->get()->result();
   }
 
-  public function kembali_by_id($tabel,$id_barang)
+  public function kembali_by_id($id_barang)
   {
     $this->db->select('
     a.*,
@@ -272,7 +278,7 @@ class M_admin extends CI_Model
     b.id_kategori,
     c.perusahaan, c.kota, c.alamat,c.provinsi,c.kecamatan,user.nama_user, 
     d.nama_kategori, e.tanggal_keluar, e.nm_penjab, e.nohp_penjab, status.text_status');
-    $this->db->from($tabel. ' as a');
+    $this->db->from('tb_barang_kembali as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
     $this->db->join('user', "user.id=a.created_by");
     $this->db->join('tb_kategori as d', "d.id=b.id_kategori");
@@ -280,7 +286,6 @@ class M_admin extends CI_Model
     $this->db->join('map_lokasi as c', "c.id=e.id_lokasi");
     $this->db->join('tb_status as status', "status.id=a.status");
     $this->db->where('a.id',$id_barang);
-    $this->db->order_by('a.id', 'DESC');
     $query = $this->db->get()->row();
     return $query;
   }
