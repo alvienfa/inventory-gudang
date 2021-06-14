@@ -415,6 +415,7 @@ class Admin extends CI_Controller
       $nama_barang  = $this->input->post('nama_barang', TRUE);
       $satuan       = $this->input->post('satuan', TRUE);
       $jumlah       = $this->input->post('jumlah', TRUE);
+      $min_jumlah   = $this->input->post('min_jumlah', TRUE);
       $id_kategori  = $this->input->post('id_kategori', TRUE);
       $id_gudang    = $this->id_gudang;
       $id_user      = $this->session->userdata('id');
@@ -458,6 +459,7 @@ class Admin extends CI_Controller
           'nama_barang'  => $nama_barang,
           'satuan'       => $satuan,
           'jumlah'       => $jumlah,
+          'min_jumlah'   => $min_jumlah,
           'qr_code'      => $image_name,
           'gambar'       => 'preview.jpg',
           'id_kategori'  => $id_kategori,
@@ -479,6 +481,7 @@ class Admin extends CI_Controller
           'nama_barang'  => $nama_barang,
           'satuan'       => $satuan,
           'jumlah'       => $jumlah,
+          'min_jumlah'   => $min_jumlah,
           'qr_code'      => $image_name,
           'gambar'       => $nama_file,
           'id_kategori'   => $id_kategori,
@@ -507,6 +510,7 @@ class Admin extends CI_Controller
     $nama_barang  = $this->input->post('nama_barang', TRUE);
     $keterangan   = $this->input->post('keterangan', TRUE);
     $jumlah       = $this->input->post('jumlah', TRUE);
+    $min_jumlah   = $this->input->post('min_jumlah', TRUE);
     $id_kategori  = $this->input->post('id_kategori', TRUE);
     $where = array('id' => $id);
     //update gambar
@@ -526,6 +530,7 @@ class Admin extends CI_Controller
         'nama_barang'  => $nama_barang,
         'gambar'       => $gambar,
         'jumlah'       => $jumlah,
+        'min_jumlah'   => $min_jumlah,
         'id_kategori'  => $id_kategori,
         'keterangan'   => $keterangan,
         'updated_at'   => date("Y-m-d H:i:s")
@@ -540,6 +545,7 @@ class Admin extends CI_Controller
         'nama_barang'  => $nama_barang,
         'gambar'       => $nama_file,
         'jumlah'       => $jumlah,
+        'min_jumlah'   => $min_jumlah,
         'id_kategori'  => $id_kategori,
         'keterangan'   => $keterangan,
         'updated_at'   => date("Y-m-d H:i:s")
