@@ -38,7 +38,7 @@
                           <?php $no = 1; ?>
                           <?php foreach ($list_data as $dd) : ?>
     <h1 class="text-center">Surat Jalan Pengeluaran Barang</h1><br>
-    <table border="0" width="100%">
+    <table border="0">
         <thead>
             <tr>
                 <td style="width:180px">No. Transaksi</td>
