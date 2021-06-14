@@ -34,10 +34,11 @@
                             <tr>
                                 <td><?= $no ?></td>
                                 <td>
-                                    <small><a class="badge text-uppercase font-weight-bold" href="<?= base_url('barang/') . $item->id_transaksi?>"><?= $item->nama_barang ?></a></small>
+                                    <small><a class="badge text-uppercase font-weight-bold" 
+                                    href="<?= base_url('barang/') . $item->id_transaksi?>"><?= $item->nama_barang ?></a></small>
                                 </td>
                                 <td><small class="text-uppercase font-weight-bold"><?= $item->nama_kategori ?></small></td>
-                                <td><span class="font-weight-bold text-small"><?= $item->jumlah . $item->satuan ?> </span></td>
+                                <td data-toggle="tooltip" title="<?= ($item->jumlah >= $item->min_jumlah? 'tersedia' :  'warning! minimum barang stok ')?>"><span class="font-weight-bold text-small <?= ($item->jumlah >= $item->min_jumlah? 'text-primary'  :  'text-danger')?>"><?= $item->jumlah ." ". $item->satuan ?> </span></td>
                                 <td>
                                     <a href="javascript:void(0)" class="btn-qr test"  
                                     data-toggle="tooltip" 
@@ -51,6 +52,7 @@
                                 <td>
                                     <a class="btn btn-secondary btn-sm" href="<?= base_url('barang/') . $item->id_transaksi ?>"><i class="fas fa-eye"></i></a>
                                 </td>
+                               
                             </tr>
                         <?php $no++;
                         endforeach; ?>
