@@ -1,10 +1,13 @@
 <style>
     .table th {
         text-align: center;
+        height: 240px;
     }
 
     .table td {
         text-align: center;
+        vertical-align: middle;
+        height: 40px;
     }
 
 
@@ -39,8 +42,8 @@
     }
 </style>
 <div>
-    <h1 class="text-center">Surat Jalan Pengeluaran Barang</h1><br>
-    <table width="100%">
+    <h1 align="center">Surat Jalan Pengeluaran Barang</h1><br><br>
+    <table border="0" width="100%">
         <thead>
             <tr>
                 <td style="width:180px">No. Transaksi</td>
@@ -84,53 +87,53 @@
 
     </table>
 
-    <table border="1">
+    <table border="1" cellspacing="0" cellpadding="7">
+    
         <tr>
-            <th style="width:40px" class="text-center">No</th>
-            <th style="width:160px" class="text-center">ID Transaksi</th>
-            <th style="width:140px" class="text-center">Kode</th>
-            <th style="width:140px" class="text-center">Nama </th>
-            <th style="width:110px" class="text-center">Tipe Barang</th>
-            <th style="width:110px" class="text-center">Tanggal Keluar</th>
-            <th style="width:130px" class="text-center">Perusahaan</th>
-            <th style="width:80px" class="text-center">Jumlah</th>
+            
+            <th align="center" style="width: 180px;height: 40px;">ID Transaksi</th>
+            <th align="center"  >Kode</th>
+            <th align="center"  >Nama </th>
+            <th align="center"  >Tipe Barang</th>
+            <th align="center" style="width: 160px;"  >Tanggal Keluar</th>
+            
+            <th align="center" style="width: 80px;"  >Jumlah</th>
         </tr>
 
 
 
         <tr>
-            <td class="text-center" height="50px"></td>
-            <td class="text-center"><?= $list_data->id_transaksi ?></td>
-            <td class="text-center"><?= $list_data->kode_barang ?></td>
-            <td class="text-center"><?= $list_data->nama_barang ?></td>
-            <td class="text-center"><?= $list_data->nama_kategori ?></td>
-            <td class="text-center"><?= $list_data->tanggal_keluar ?></td>
-            <td class="text-center"><?= $list_data->perusahaan ?></td>
-            <td class="text-center"><?= $list_data->jumlah ?> <?= $list_data->satuan ?></td>
+            <td align="center" ><?= $list_data->id_transaksi ?></td>
+            <td align="center"  ><?= $list_data->kode_barang ?></td>
+            <td align="center"  ><?= $list_data->nama_barang ?></td>
+            <td align="center"  ><?= $list_data->nama_kategori ?></td>
+            <td align="center"  ><?= date('d F Y', strtotime($list_data->tanggal_keluar)) ?></td>
+            
+            <td align="center"  ><?= $list_data->jumlah ?> <?= $list_data->satuan ?></td>
         </tr>
 
         <tr>
-            <td class="text-center" colspan="7" height="40px"><b>Jumlah</b></td>
-            <td class="text-center"><?= $list_data->jumlah ?> <?= $list_data->satuan ?></td>
+            <td align="center" colspan="5" height="40px"><b>Jumlah</b></td>
+            <td align="center"><?= $list_data->jumlah ?> <?= $list_data->satuan ?></td>
         </tr>
     </table><br><br>
     <table>
         <thead>
 
             <tr>
-                <td style="width:180px">Mengetahui </td>
+                <td align="center" style="width:180px">Mengetahui </td>
                 <td></td>
+                
+                <td align="center" colspan="1" style="width:180px">Penyedia</td>
                 <td></td>
-                <td colspan="1" style="width:180px">Penyedia</td>
-                <td></td>
-                <td style="width:180px">Penanggung Jawab</td>
+                <td align="center" style="width:180px">Penanggung Jawab</td>
                 <td><br></td>
             </tr>
 
             <tr>
                 <td style="width:180px"> </td>
                 <td></td>
-                <td> </td>
+                
                 <td colspan="1"></td>
                 <td></td>
                 <td><br></td>
@@ -139,7 +142,7 @@
             <tr>
                 <td style="width:180px"> </td>
                 <td></td>
-                <td> </td>
+                
                 <td colspan="1"></td>
                 <td></td>
                 <td><br></td>
@@ -148,7 +151,7 @@
             <tr>
                 <td style="width:180px"> </td>
                 <td></td>
-                <td> </td>
+                
                 <td></td>
                 <td></td>
                 <td></td>
@@ -158,15 +161,15 @@
 
 
             <tr>
-                <td style="width:180px"><u><?= $this->session->userdata('nama_user') ?></u></td>
+                <td align="center" style="width:180px"><u><?= $this->session->userdata('nama_user') ?></u></td>
                 <td></td>
-                <td> </td>
-                <td colspan="1" style="width:180px"><u><?= $list_data->nama_user ?></u></td>
+
+                <td align="center" colspan="1" style="width:180px"><u><?= $list_data->nama_user ?></u></td>
                 <td></td>
-                <td style="width:180px"><u><?= $list_data->nm_penjab ?></u></td>
+                <td align="center" style="width:180px"><u><?= $list_data->nm_penjab ?></u></td>
                 <td><br></td>
             </tr>
         </thead>
     </table>
-    <h6>Catatan : <?= $list_data->keterangan ?> </h6><br><br>
+    <br><h6>Catatan : <?= $list_data->keterangan ?> </h6><br><br>
 </div>
