@@ -130,7 +130,7 @@ class User extends CI_Controller
     $config['use_page_numbers']     = TRUE;
     $config['first_link']           = 'FIRST';
     $config['last_link']            = 'LAST';
-    $config['num_links']            = 2;
+    $config['num_links']            = 3;
     $config['query_string_segment'] = 'page';
     $config['full_tag_open']        = '<ul class="pagination">';
     $config['full_tag_close']       = '</ul>';
@@ -156,7 +156,7 @@ class User extends CI_Controller
     $cards['total_barang_masuk'] = $this->M_user->total_row('tb_barang_masuk');
     $cards['page']               = $this->input->get('page');
     $cards['pagination']         = $this->pagination->create_links();
-    $cards['list_data']          = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang' ,'tb_kategori', $limit, $start, $search);
+    $cards['list_data']          = $this->M_user->barang_masuk($limit, $start, $search);
     $print['list_gudang']        = $this->M_user->select('tb_gudang');
     $print['list_kategori']      = $this->M_user->select('tb_kategori');
 

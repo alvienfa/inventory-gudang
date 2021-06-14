@@ -81,7 +81,12 @@ class M_user extends CI_Model
     return $query;
   }
 
-  public function barang_masuk($a, $b, $c, $limit, $start, $search)
+  public function log_barang()
+  {
+
+  }
+
+  public function barang_masuk($limit, $start, $search)
   {
     $this->db->select("a.*,b.nama_gudang,c.nama_kategori");
     $this->db->from('tb_barang_masuk as a');
@@ -109,6 +114,7 @@ class M_user extends CI_Model
     b.provinsi,
     b.kode_pos,
     c.text_status,
+    e.nama_kategori,
     barang.id_transaksi,
     barang.nama_barang,
     barang.kode_barang,
