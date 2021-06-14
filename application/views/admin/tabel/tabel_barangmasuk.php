@@ -69,7 +69,7 @@
                             <td style="white-space: nowrap;"><small><?= $dd->tanggal ?></small></td>
                             <td><small class="text-bold"><?= strtoupper($dd->nama_barang) ?></small><br><small>#<?= strtoupper($dd->kode_barang) ?></small></td>
                             <td><small><?= $dd->nama_kategori ?></small></td>
-                            <td><small><span class="text-bold"><?= $dd->jumlah ?> </span><?= $dd->satuan ?></small></td>
+                            <td class="text-bold"><span class="font-weight-bold text-small <?= ($dd->jumlah >= $dd->min_jumlah? 'text-primary'  :  'text-danger')?>"><?= $dd->jumlah ." ". $dd->satuan ?> </span></td>
                             <td><small><?= $dd->nama_gudang ?></small></td>
                             <td>
                               <a href="javascript:void(0)" type="button" 
@@ -89,8 +89,11 @@
                               <a class="btn btn-success" href="<?= base_url('admin/soft_delete_barang/') . $dd->id?>"><i class="fa fa-eye"></i></a>
                             </td>
                             <td>
-                              <form class="form-delete" role="form" action="<?= base_url('admin/delete_barang') ?>" method="post">
-                                <input type="hidden" name="id" value="<?= $dd->id ?>">
+                              <form class="form-delete" role="form" 
+                              action="<?= base_url('admin/delete_barang') ?>" 
+                              method="POST">
+                              <input type="hidden" name="id" value="<?= $dd->id ?>">
+                                <input type="hidden" name="id_kategori" value="<?= $this->input->get('id_kategori')?>">
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                               </form>
                               </a>
@@ -166,7 +169,6 @@
       $('.form-delete').on('submit', function() {
         const getLink = $(this).attr('action')
         const body = $(this).serializeArray()
-
         swal({
           title: 'Delete Data',
           text: 'Yakin Ingin Menghapus Data ?',
@@ -177,13 +179,17 @@
           $.ajax({
             url: getLink,
             type: 'post',
-            dataType: 'application/json',
+            dataType: 'json',
             data: body,
             success: function(data) {
               console.log('success')
+              console.log(body)
+              window.location.href = getLink
+            },
+            error: function(err){
+              console.log("Error",err.statusText)
             }
           })
-          window.location.href = getLink
         });
         return false;
       });

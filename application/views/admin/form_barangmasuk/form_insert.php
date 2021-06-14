@@ -88,6 +88,10 @@
                           <input type="phone" name="jumlah" class="form-control" id="jumlah" required>
                         </div>
                         <div class="form-group">
+                          <label for="jumlah">Minimal Jumlah Stok</label>
+                          <input type="phone" name="min_jumlah" class="form-control" id="min_jumlah" required>
+                        </div>
+                        <div class="form-group">
                           <img src="<?= base_url('assets/img/preview.jpg') ?>" id="frame" alt="preview" width="200px" height="200px" onerror="" />
                         </div>
                         <div class="form-group">

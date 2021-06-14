@@ -63,6 +63,10 @@
                           <label for="jumlah">Jumlah</label>
                           <input type="phone" name="jumlah" class="form-control" id="jumlah" value="<?= $list_data->jumlah ?> ">
                         </div>
+                        <div class="form-group">
+                          <label for="jumlah">Minimal Jumlah Stok</label>
+                          <input type="phone" name="min_jumlah" class="form-control" id="min_jumlah" value="<?= $list_data->min_jumlah ?> ">
+                        </div>
                         <div class="form-group" style="display:block;">
                           <label for="id_kategori" style="width:73%;">Pilih Kategori</label>
                           <select class="form-control" name="id_kategori" style="width:100%;margin-right: 18px;">
@@ -75,21 +79,7 @@
                             <?php endif; ?>
                             <?php endforeach ?>
                             
-                            <?php if ($list_data->id_kategori == 1) { ?>
-                              <option value="1" selected="">Demo / Entertaint</option>
-                              <option value="2">Inventory</option>
-                              <option value="3">Persediaan</option>
-                            <?php } elseif ($list_data->id_kategori == 2) { ?>
-                              <option value="1">Demo / Entertaint</option>
-                              <option value="2" selected="">Inventory</option>
-                              <option value="3">Persediaan</option>
-
-                            <?php } elseif ($list_data->id_kategori == 3) { ?>
-                              <option value="1">Demo / Entertaint</option>
-                              <option value="2">Inventory</option>
-                              <option value="3" selected="">Persediaan</option>
-
-                            <?php } ?>
+                            
                           </select>
                         </div>
                         <div class="form-group">
