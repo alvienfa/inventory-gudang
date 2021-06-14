@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <label for="nama barang">Jumlah (*<?= $detail->satuan ?>)</label>
                                 <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
-                                <input value="" placeholder="" type="phone" name="jumlah" class="<?= $input_styles?>">
+                                <input value="" type="number" max="<?= $detail->jumlah?>" min="1" name="jumlah" class="<?= $input_styles?>">
                             </div>
                         </div>
                         <div class="col-6">
@@ -75,12 +75,25 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <button type="submit" onclick="this.disabled = true" class="btn btn-danger">SUBMIT BARANG <i class="fas fa-arrow-down"></i></button>
+                    <button type="submit" class="btn btn-danger btnSubmit">SUBMIT BARANG <i class="fas fa-arrow-down"></i></button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+<script>
+    const btnSubmit = document.querySelectorAll(".btnSubmit")
+    const frmKeluar = document.querySelector("#keluar")
+    btnSubmit.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault()
+            item.closest("form").submit()
+            e.target.setAttribute('disabled', 'disabled')
+        })
+
+    })
+</script>
 
 <!-- Kembali -->
 <form id="kembali" action="<?= base_url('barang/submit/kembali') ?>" method="POST">
@@ -88,7 +101,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><?= $detail->nama_barang ?> (#<?= $detail->kode_barang ?>) </h5>
+                    <h5 class="modal-title text-uppercase"><?= $detail->nama_barang ?> (#<?= $detail->kode_barang ?>) </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -99,27 +112,33 @@
                             <div class="form-group">
                                 <label for="nama barang">Jumlah (*<?= $detail->satuan ?>)</label>
                                 <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
-                                <input value="<?= $detail->jumlah?>" type="phone" name="jumlah" class="<?= $input_styles?>" required>
+                                <input value="<?= $detail->jumlah?>" 
+                                max="<?= $detail->jumlah?>" min="1" 
+                                type="number" 
+                                name="jumlah" 
+                                class="<?= $input_styles?>" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="stok barang">Stok</label>
-                                <input id="stok" type="number" name="stok" value="" class="<?= $input_styles?>" readonly>
+                                <input id="stok" type="number" name="stok" value="" class="<?= $input_styles?>" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-6"><?= $this->load->view('components/forms/input_number', NULL ,TRUE)?></div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Author</label>
-                                <input value="@<?= $this->session->userdata('name') ?>" type="text" class="form-control" readonly>
+                                <input 
+                                value="@<?= $this->session->userdata('name') ?>" type="text" class="<?= $input_styles?>" disabled>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Status</label>
-                                <select name="status" class="custom-select form-control-s " required>
+                                <select name="status" class="custom-select form-control-sm text-small text-uppercase" required>
                                     <?php foreach ($list_status as $item) : ?>
                                         <option value="<?= $item->id ?>"><?= $item->text_status ?></option>
                                     <?php endforeach; ?>
@@ -133,7 +152,7 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <button type="submit" onclick="this.disabled = true" class="btn btn-success">SUBMIT BARANG <i class="fas fa-arrow-up"></i></button>
+                    <button type="submit" onclick="this.disabled = true" class="btn btn-success btnSubmit">SUBMIT BARANG <i class="fas fa-arrow-up"></i></button>
                 </div>
             </div>
         </div>
