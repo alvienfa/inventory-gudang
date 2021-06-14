@@ -80,7 +80,6 @@
     </div>
 </form>
 
-
 <!-- Kembali -->
 <form id="kembali" action="<?= base_url('barang/submit/kembali') ?>" method="POST">
     <div class="modal fade" tabindex="-1" role="dialog" id="scannerKembali">
@@ -109,7 +108,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6"><?= $this->load->view('components/forms/input_number', NULL, TRUE) ?></div>
+                        <!-- <div class="col-6"><?= $this->load->view('components/forms/input_number', NULL, TRUE) ?></div> -->
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Author</label>
@@ -133,7 +132,7 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <button type="submit" onclick="this.disabled = true" class="btn btn-success btnSubmit">SUBMIT BARANG <i class="fas fa-arrow-up"></i></button>
+                    <button type="submit" class="btn btn-success btnSubmit">SUBMIT BARANG <i class="fas fa-arrow-up"></i></button>
                 </div>
             </div>
         </div>
@@ -147,6 +146,5 @@
             item.closest("form").submit()
             e.target.setAttribute('disabled', 'disabled')
         })
-
     })
 </script>
