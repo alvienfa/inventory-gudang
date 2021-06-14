@@ -33,18 +33,18 @@ class User extends CI_Controller
     $head['title'] = 'Dashboard | User';
     $data['views']['header'] = $this->header();
     if ($this->role == 5) {
-      $data['title'] = 'Dashboard';
-      $cards1['last_data']        = $this->M_user->select_limit('tb_barang_kembali', 'tb_status','tb_barang_masuk', 10);
-      $cards2['progress_barang']  = $this->M_user->progress_barang();
-      $data['views']['card_satu'] = $this->load->view('user_stisla/cards/barang_kembali.php', $cards1, TRUE);
-      $data['views']['card_dua']  = $this->load->view('user_stisla/cards/progress_barang.php', $cards2, TRUE);
+      $data['title'] = 'Atasan | Dashboard';
+      $cards_satu['last_data']        = $this->M_user->select_limit('tb_barang_kembali', 'tb_status','tb_barang_masuk', 10);
+      $cards_dua['progress_barang']  = $this->M_user->progress_barang();
+      $data['views']['card_satu'] = $this->load->view('user_stisla/cards/barang_kembali.php', $cards_satu, TRUE);
+      $data['views']['card_dua']  = $this->load->view('user_stisla/cards/progress_barang.php', $cards_dua, TRUE);
       $this->load->view('template/head.php', $head);
       $this->load->view('user_stisla/index', $data);
       $this->load->view('template/footer.php');
     } else {
       $data['title'] = 'Scan Barang';
-      $cards1['type'] = 'masuk';
-      $data['views']['card_satu'] = $this->load->view('user_stisla/cards/scan_barang.php', $cards1, TRUE);
+      $cards_satu['type'] = 'masuk';
+      $data['views']['card_satu'] = $this->load->view('user_stisla/cards/scan_barang.php', $cards_satu, TRUE);
       $data['views']['card_dua'] = NULL;  
       $this->load->view('template/head.php', $head);
       $this->load->view('user_stisla/index', $data);
