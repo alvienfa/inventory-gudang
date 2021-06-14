@@ -108,7 +108,7 @@ class Report extends CI_Controller
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
     
     //set margin
-    $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP,PDF_MARGIN_RIGHT);
+    $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP - 10,PDF_MARGIN_RIGHT);
     $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
     
@@ -120,7 +120,7 @@ class Report extends CI_Controller
     //FONT Subsetting
     $pdf->setFontSubsetting(true);
     
-    $pdf->SetFont('helvetica','',8,'',true);
+    $pdf->SetFont('helvetica','',14,'',true);
     
     $pdf->AddPage('L');
     $pdf->SetAutoPageBreak(TRUE, 10);
@@ -130,7 +130,7 @@ class Report extends CI_Controller
     // die();
     
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);    
-    $pdf->Output('stock_barang.pdf','I');
+    $pdf->Output('surat_barang_keluar.pdf','I');
 
   }
 
@@ -193,52 +193,55 @@ class Report extends CI_Controller
   
   public function barangKembali()
   {
-    $id_barang = $this->uri->segment(3);
+    $id_barang = intval($this->uri->segment(3));
     
-    $ls   = array(
-      'id' => $id_barang
+    $where   = array(
+      'a.id' => $id_barang
       );
-    $data = $this->M_admin->kembali_by_id($id_barang);
+    $data['list_data'] = $this->M_admin->kembali_by_id($id_barang);
     
+    $limit = 1000;
+
+    $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
+
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
     // document informasi
-    $pdf->SetCreator('Web Aplikasi Gudang');
-    $pdf->SetTitle('Laporan Data Barang Kembali');
+    $pdf->SetCreator('Inventory Gudang');
+    $pdf->SetTitle('Laporan Barang Kembali');
     $pdf->SetSubject('Barang Kembali');
-
+    
     //header Data
-    $pdf->SetHeaderData('unsada.jpg',30,'Laporan Data','Barang Kembali',array(203, 58, 44),array(0, 0, 0));
+    $pdf->SetHeaderData(FCPATH . '\assets\img\preview.jpg' ,0,'Barang','Barang Keluar',array(203, 58, 44),array(255, 255, 255));
     $pdf->SetFooterData(array(255, 255, 255), array(255, 255, 255));
-
-
     $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
     $pdf->setFooterFont(Array(PDF_FONT_NAME_MAIN,'',PDF_FONT_SIZE_MAIN));
-
+    
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
+    
     //set margin
     $pdf->SetMargins(PDF_MARGIN_LEFT,PDF_MARGIN_TOP - 10,PDF_MARGIN_RIGHT);
     $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-
-    $pdf->SetAutoPageBreak(FALSE, PDF_MARGIN_BOTTOM - 5);
-
+    
+    // $pdf->SetAutoPageBreak(FALSE, PDF_MARGIN_BOTTOM - 5);
+    
     //SET Scaling ImagickPixel
     $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
+    
     //FONT Subsetting
     $pdf->setFontSubsetting(true);
-
+    
     $pdf->SetFont('helvetica','',14,'',true);
-
+    
     $pdf->AddPage('L');
+    $pdf->SetAutoPageBreak(TRUE, 10);
     
-    $html = $this->load->view('report/pdf_barangKembali',$data);
-
-    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);
+    $html = $this->load->view('report/pdf_barangKembali',$data,TRUE);
+    // var_dump($html);
+    // die();
     
-    $pdf->Output('surat_jalan_barang_keluar.pdf','I');
+    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);    
+    $pdf->Output('surat_barang_kembali.pdf','I');
 
   }
 
