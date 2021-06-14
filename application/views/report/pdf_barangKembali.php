@@ -42,7 +42,7 @@
     }
 </style>
 <div>
-    <h1 align="center">Surat Jalan Pengeluaran Barang</h1><br><br>
+    <h1 align="center">Surat Pengembalian Barang</h1><br><br>
     <table border="0" width="100%">
         <thead>
             
