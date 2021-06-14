@@ -34,3 +34,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 .env.development
 
 /assets/upload/gambar
+/application/config/database.php
