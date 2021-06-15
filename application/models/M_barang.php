@@ -8,6 +8,7 @@ class M_barang extends CI_Model
         ->join('tb_barang_masuk as b' , 'b.id_transaksi=a.id_transaksi')
         ->join('map_lokasi as lokasi' , 'lokasi.id=a.id_lokasi')
         ->where($where)
+        ->order_by('a.id', 'desc')
         ->get()->result();
         return $query;
     }

@@ -7,7 +7,7 @@ $dummy = (object) array(
     'provinsi'   => 'DKI Jakarta',
     'kode_pos'   => '12345',
     'nm_penjab'  => 'Ari Lesmana',
-    'nohp_penjab'=> '62878288394921'
+    'nohp_penjab' => '62878288394921'
 );
 
 ?>
@@ -26,32 +26,34 @@ $dummy = (object) array(
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="nama barang">Jumlah (*<?= $detail->satuan ?>)</label>
+                                <label for="nama barang">Jumlah</label>
                                 <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
-                                <input value="" type="number" max="<?= $detail->jumlah ?>" min="1" name="jumlah" 
-                                class="<?= $input_styles ?>">
+                                <input value="" type="number" max="<?= $detail->jumlah ?>" min="1" name="jumlah" class="<?= $input_styles ?>">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="stok barang">Stok Di Gudang</label>
-                                <input type="text" value="<?= $detail->jumlah ?> <?= $detail->satuan ?>" class="<?= $input_styles ?>" disabled>
+                                <label for="stok barang">Stok Di Gudang (<?= $detail->satuan ?>)</label>
+                                <div class="row pl-3">
+                                        <input type="text" name="stok_barang" value="<?= $detail->jumlah ?>" class="w-25 <?= $input_styles ?>" readonly>
+                                        <label class="p-1"><?= $detail->satuan ?></label>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Keterangan</label>
-                        <input value="<?= $dummy->keterangan?>" type="text" name="keterangan" class="<?= $input_styles ?>">
+                        <input value="<?= $dummy->keterangan ?>" type="text" name="keterangan" class="<?= $input_styles ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="nama barang">Alamat</label>
-                        <input value="<?= $dummy->alamat?>" type="text" name="alamat" class="<?= $input_styles ?> ">
+                        <input value="<?= $dummy->alamat ?>" type="text" name="alamat" class="<?= $input_styles ?> ">
                     </div>
 
                     <div class="form-group">
                         <label for="nama barang">Kecamatan</label>
-                        <input value="<?= $dummy->kecamatan?>" type="text" name="kecamatan" class="<?= $input_styles ?> ">
+                        <input value="<?= $dummy->kecamatan ?>" type="text" name="kecamatan" class="<?= $input_styles ?> ">
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Kota</label>
@@ -59,17 +61,17 @@ $dummy = (object) array(
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Provinsi</label>
-                        <input value="<?= $dummy->provinsi?>" type="text" name="provinsi" class="<?= $input_styles ?> ">
+                        <input value="<?= $dummy->provinsi ?>" type="text" name="provinsi" class="<?= $input_styles ?> ">
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Kode Pos</label>
-                        <input value="<?= $dummy->kode_pos?>" type="phone" name="kode_pos" class="<?= $input_styles ?> " maxlength="5">
+                        <input value="<?= $dummy->kode_pos ?>" type="phone" name="kode_pos" class="<?= $input_styles ?> " maxlength="5">
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Penanggung Jawab</label>
-                                <input value="<?= $dummy->nm_penjab?>" type="text" name="nm_penjab" class="<?= $input_styles ?> ">
+                                <input value="<?= $dummy->nm_penjab ?>" type="text" name="nm_penjab" class="<?= $input_styles ?> ">
                             </div>
                         </div>
                         <div class="col-6">
@@ -109,17 +111,13 @@ $dummy = (object) array(
                             <div class="form-group">
                                 <label for="nama barang">Jumlah (*<?= $detail->satuan ?>)</label>
                                 <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
-                                <input value="" max="<?= $detail->jumlah ?>" 
-                                min="1" 
-                                type="number" 
-                                name="jumlah" 
-                                class="<?= $input_styles ?> jumlah" required>
+                                <input value="" max="<?= $detail->jumlah ?>" min="1" type="number" name="jumlah" class="<?= $input_styles ?> jumlah" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="stok barang">Stok Di Gudang</label>
-                                <input id="stok" type="number" name="stok" value="<?= $detail->jumlah?>" class="<?= $input_styles ?>" readonly>
+                                <input id="stok" type="number" name="stok" value="<?= $detail->jumlah ?>" class="<?= $input_styles ?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -136,7 +134,7 @@ $dummy = (object) array(
                                 <label for="nama barang">Status</label>
                                 <select name="status" class="custom-select form-control-sm text-small text-uppercase" required>
                                     <?php foreach ($list_status as $item) : ?>
-                                        <option <?= ($item->id == 0? 'disabled' : NULL ) ?>  value="<?= $item->id ?>"><?= $item->text_status ?></option>
+                                        <option <?= ($item->id == 0 ? 'disabled' : NULL) ?> value="<?= $item->id ?>"><?= $item->text_status ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
