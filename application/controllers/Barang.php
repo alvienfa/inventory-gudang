@@ -129,7 +129,7 @@ class Barang extends CI_Controller
           $update = array(
             'status'      => $status,
             'keterangan'  => $keterangan,
-            'jumlah'      => $this->input->post('stok', TRUE) - $jumlah,
+            'jumlah'      => $jumlah,
             'updated_at'  => date("Y-m-d"),
           );
           if($status !== 0){
