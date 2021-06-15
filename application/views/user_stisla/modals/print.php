@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nama barang">Nama Barang</label>
-                        <input value="<?= $this->input->get('nama_barang') ?>" placeholder="" type="text" name="nama_barang" class="form-control form-control-sm">
+                        <input value="<?= $this->input->get('nama_barang') ?>" type="text" name="nama_barang" class="form-control form-control-sm">
                     </div>
                     <div class="form-group">
                         <label for="nama barang">ID Transaksi</label>
@@ -62,7 +62,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nama barang">Nama Barang</label>
-                        <input value="<?= $this->input->get('nama_barang') ?>" placeholder="" type="text" name="nama_barang" class="form-control form-control-sm">
+                        <input value="<?= $this->input->get('nama_barang') ?>" type="text" name="nama_barang" class="form-control form-control-sm">
                     </div>
                     <div class="form-group">
                         <label for="nama barang">ID Transaksi</label>

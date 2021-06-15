@@ -56,7 +56,7 @@ class Barang extends CI_Controller
       'a.created_by'    => $this->author
     );
     $cards['barang_keluar'] = $this->M_barang->select('tb_barang_keluar', $where);
-    // echo json_encode($cards['barang_keluar']);die();
+    
     if ($this->M_barang->barang($id_transaksi)) {
       $data = array(
         'title' => $cards['detail']->nama_barang,
@@ -129,7 +129,7 @@ class Barang extends CI_Controller
           $update = array(
             'status'      => $status,
             'keterangan'  => $keterangan,
-            'jumlah'      => $this->input->post('stok', TRUE) - $jumlah,
+            'jumlah'      => $jumlah,
             'updated_at'  => date("Y-m-d"),
           );
           if($status !== 0){

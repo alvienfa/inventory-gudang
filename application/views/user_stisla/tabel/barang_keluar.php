@@ -18,7 +18,8 @@
                             <th>ID Transaksi</th>
                             <th>Kode Barang</th>
                             <th>Jumlah</th>
-                            <th>Contact</th>
+                            <th>Penerima</th>
+                            <th>Phone</th>
                             <th>Detail</th>
                             <th>Status</th>
                         </tr>
@@ -35,7 +36,8 @@
                                 <td><small><?= $item->id_transaksi ?></small></td>
                                 <td class="text-uppercase"><small><?= $item->kode_barang ?></small></td>
                                 <td><small><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </small></td>
-                                <td class="text-uppercase text-small"><small><i class="fas fa-user"></i> <?= $item->nm_penjab ?> (<?= $item->nohp_penjab ?>)</small></td>
+                                <td><small><?= $item->nm_penjab ?></small></td>
+                                <td><span class="badge badge-success"><i class="fab fa-whatsapp"></i> <?= $item->nohp_penjab ?></span></td>
                                 <?php
                                 switch ($item->status):
                                     case 0:
@@ -54,8 +56,11 @@
                                 ?>
                                 <td>
                                     <a type="button" 
-                                    data-keterangan=<?= $item->keterangan ?> data-alamat=<?= $item->alamat ?> data-kecamatan=<?= $item->kecamatan ?> 
-                                    data-kota=<?= $item->kota ?> data-provinsi=<?= $item->provinsi ?> data-pos=<?= $item->kode_pos ?> 
+                                    data-keterangan="<?= $item->keterangan ?>"
+                                    data-alamat="<?= $item->alamat ?>" 
+                                    data-kecamatan="<?= $item->kecamatan ?>" 
+                                    data-kota="<?= $item->kota ?>" 
+                                    data-provinsi="<?= $item->provinsi ?>" data-pos="<?= $item->kode_pos ?>" 
                                     class="btn btn-secondary btn-sm btn-detail">...</a>
                                 </td>
                                 <td class="text-uppercase text-sm">

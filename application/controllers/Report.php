@@ -182,7 +182,7 @@ class Report extends CI_Controller
     );
   
     $data = array(
-      'list_data' => $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang' ,'tb_kategori', $limit, $start, $search)
+      'list_data' => $this->M_user->barang_masuk($limit, $start, $search)
     );
 
     $html = $this->load->view('report/pdf_stok_barang', $data, TRUE);

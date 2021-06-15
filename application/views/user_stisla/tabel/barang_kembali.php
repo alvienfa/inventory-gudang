@@ -26,7 +26,7 @@
                         foreach ($list_data as $item) : ?>
                             <tr>
                                 <td><?= $no?></td>
-                                <td class="font-weight-bold"><?= $item->nama_barang ?></td>
+                                <td class="font-weight-bold text-uppercase"><a href="<?= base_url('barang/') . $item->id_transaksi?>" class="badge"><?= $item->nama_barang ?></a></td>
                                 <td><small><?= $item->id_transaksi ?></small></td>
                                 <td class="text-uppercase"><small><?= $item->kode_barang ?></small></td>
                                 <td><small><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </small></td>

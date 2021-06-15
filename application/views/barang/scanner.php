@@ -43,7 +43,7 @@
                     $color = "bg-warning";
                     break;
                 case 1:
-                    $button = '<div><button class="btn btn-success btn-round text-small" href="javascript:void(0)" >SUDAH</button></div>';
+                    $button = '<div><button class="btn btn-success btn-round text-small" href="javascript:void(0)" ><i class="fas fa-check"></i></button></div>';
                     $color = "bg-success";
                     break;
                 case 2:
@@ -73,7 +73,14 @@
                     <?= $button ?>
                     <?php if ($item->status !== 1) : ?>
                         <div>
-                            <button type="button" class="btn btn-secondary btn-round text-small btnKembalikan" href="javascript:void(0)" data-lokasi="<?= $item->id_lokasi ?>" data-id="<?= $item->id ?>" data-stok="<?= $item->jumlah ?>" data-toggle="modal" data-target="#scannerKembali">PROSES</button>
+                            <button type="button" 
+                            class="btn btn-secondary btn-round text-small btnKembalikan" 
+                            href="javascript:void(0)" 
+                            data-lokasi="<?= $item->id_lokasi ?>" 
+                            data-id="<?= $item->id ?>" 
+                            data-stok="<?= $item->jumlah ?>" 
+                            data-toggle="modal" 
+                            data-target="#scannerKembali">PROSES</button>
                         </div>
                     <?php endif; ?>
                 </div>

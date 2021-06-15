@@ -207,6 +207,7 @@ class User extends CI_Controller
 
     $cards['pagination']         = $this->pagination->create_links();
     $cards['list_data']          = $this->M_user->barang_keluar($limit, $start, array());
+    // var_dump($cards['list_data']);die();
     $print['list_gudang']        = $this->M_user->select('tb_gudang');
     $print['list_kategori']      = $this->M_user->select('tb_kategori');
     $print['list_status']        = $this->M_user->select('tb_status');
@@ -304,11 +305,11 @@ class User extends CI_Controller
         'nama_gudang'   => $this->input->get('search'),
         'kode_barang'   => $this->input->get('search'),
       );
-      $list_data = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang', 'tb_kategori' , $limit, $start, $search);
+      $list_data = $this->M_user->barang_masuk($limit, $start, $search);
       $config['total_rows'] = count($list_data);
     } else {
       $search = array();
-      $list_data = $this->M_user->barang_masuk('tb_barang_masuk', 'tb_gudang','tb_kategori', $limit, $start, $search);
+      $list_data = $this->M_user->barang_masuk($limit, $start, $search);
     }
 
     $this->pagination->initialize($config);
