@@ -43,7 +43,7 @@
                     $color = "bg-warning";
                     break;
                 case 1:
-                    $button = '<div><button class="btn btn-success btn-round text-small" href="javascript:void(0)" >SUDAH</button></div>';
+                    $button = '<div><button class="btn btn-success btn-round text-small" href="javascript:void(0)" ><i class="fas fa-check"></i></button></div>';
                     $color = "bg-success";
                     break;
                 case 2:
