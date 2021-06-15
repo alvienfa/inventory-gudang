@@ -132,8 +132,6 @@ class Barang extends CI_Controller
             'jumlah'      => $this->input->post('stok', TRUE) - $jumlah,
             'updated_at'  => date("Y-m-d"),
           );
-          echo json_encode(array($kembali, $update, $this->input->post('stok', TRUE)));
-          die();
           if($status !== 0){
             $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
           }
