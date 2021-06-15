@@ -36,7 +36,7 @@
                                 <td><small><?= $item->id_transaksi ?></small></td>
                                 <td class="text-uppercase"><small><?= $item->kode_barang ?></small></td>
                                 <td><small><span class="font-weight-bold"><?= $item->jumlah . "</span> " . $item->satuan ?> </small></td>
-                                <th><small><span class="text-uppercase text-small font-weight-bold"><?= $item->nm_penjab ?></span> </small></th>
+                                <td><small><?= $item->nm_penjab ?></small></td>
                                 <td><span class="badge badge-success"><i class="fab fa-whatsapp"></i> <?= $item->nohp_penjab ?></span></td>
                                 <?php
                                 switch ($item->status):
@@ -56,8 +56,11 @@
                                 ?>
                                 <td>
                                     <a type="button" 
-                                    data-keterangan=<?= $item->keterangan ?> data-alamat=<?= $item->alamat ?> data-kecamatan=<?= $item->kecamatan ?> 
-                                    data-kota=<?= $item->kota ?> data-provinsi=<?= $item->provinsi ?> data-pos=<?= $item->kode_pos ?> 
+                                    data-keterangan="<?= $item->keterangan ?>"
+                                    data-alamat="<?= $item->alamat ?>" 
+                                    data-kecamatan="<?= $item->kecamatan ?>" 
+                                    data-kota="<?= $item->kota ?>" 
+                                    data-provinsi="<?= $item->provinsi ?>" data-pos="<?= $item->kode_pos ?>" 
                                     class="btn btn-secondary btn-sm btn-detail">...</a>
                                 </td>
                                 <td class="text-uppercase text-sm">

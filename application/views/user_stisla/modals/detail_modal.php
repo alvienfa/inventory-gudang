@@ -58,6 +58,7 @@
     const modalDetail = document.getElementById('detailModal').children[0].children[0].children[1].children
     btnDetail.forEach(item => {
         item.addEventListener('click', (e) => {
+            console.log(e.target.dataset)
             $("#detailModal").modal('show')
             document.querySelector("input[name='alamat']").value = e.target.dataset.alamat || NULL
             document.querySelector("input[name='kecamatan']").value = e.target.dataset.kecamatan || NULL
