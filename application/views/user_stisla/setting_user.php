@@ -11,7 +11,7 @@
         </div>
 
         <div class="section-body">
-            <form action="<?php echo base_url('user/proses_new_password') ?>" method="post">
+            <form action="<?= base_url('user/proses_new_password') ?>" method="post">
                 <?php if ($this->session->flashdata('msg_berhasil')) { ?>
                     <div class="alert alert-success alert-dismissible">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

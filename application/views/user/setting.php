@@ -16,7 +16,7 @@
             <h4 class="dashboard-title">Change Password</h4>
               <hr>
 
-              <form action="<?php echo base_url('user/proses_new_password') ?>" method="post">
+              <form action="<?= base_url('user/proses_new_password') ?>" method="post">
 
                 <?php if($this->session->flashdata('msg_berhasil')){ ?>
                   <div class="alert alert-success alert-dismissible">

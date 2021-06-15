@@ -106,7 +106,7 @@
       $("#kembali").append("<input type='hidden' name='id' value='" + e.target.dataset.id + "'>")
       $("#kembali").append("<input type='hidden' name='id_lokasi' value='" + e.target.dataset.id_lokasi + "'>")
       $("#kembali").append("<input type='hidden' name='total' value='" + e.target.dataset.jumlah + "'>")
-      document.querySelector("[name='stok']").value = e.target.dataset.stok
+      document.querySelector(".jumlah").value = e.target.dataset.stok
     })
   })
 </script>
