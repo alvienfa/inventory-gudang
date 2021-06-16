@@ -49,7 +49,6 @@
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Tanggal Keluar</th>
-                        <th>Tujuan</th>
                         <th>Penanggung Jawab</th>
                         <th>Jumlah</th>
                         <th>Status</th>
@@ -67,7 +66,6 @@
                             <td><?= strtoupper($dd->kode_barang) ?></td>
                             <td><?= $dd->nama_barang ?></td>
                             <td><?= $dd->tanggal_keluar ?></td>
-                            <td><?= $dd->perusahaan ?></td>
                             <td><?= $dd->nm_penjab ?></td>
                             <td><span class="text-bold"> <?= $dd->jumlah ?> </span>(<?= $dd->satuan ?>)</td>
                             <td style="vertical-align:middle">
