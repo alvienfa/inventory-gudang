@@ -81,28 +81,28 @@ class M_user extends CI_Model
     return $query;
   }
 
-  public function log_barang()
-  {
-
-  }
-
-  public function barang_masuk($limit, $start, $search)
+  public function barang_masuk($limit, $start, $search=NULL,$daterange=false)
   {
     $this->db->select("a.*,b.nama_gudang,c.nama_kategori");
     $this->db->from('tb_barang_masuk as a');
     $this->db->join('tb_gudang as b', 'b.id = a.id_gudang', 'LEFT');
     $this->db->join('tb_kategori as c', 'c.id = a.id_kategori', 'LEFT');
-    $this->db->like($search);
-    $this->db->not_like('a.is_deleted', 1);
+    if($search == NULL){
+      $this->db->like($search);
+    }
+    if($daterange){
+      $this->db->where("created_at BETWEEN '{$daterange[0]} 00:01' AND '{$daterange[1]} 23:59'");
+    }
+    $this->db->where('a.is_deleted', 0);
     $this->db->limit($limit, $start);
     $this->db->order_by('a.id', 'desc');
-    $query = $this->db->get()->result();
-    return $query;
+    $query = $this->db->get();
+    return $query->result();
   }
 
-  public function barang_keluar($limit, $start, $search)
+  public function barang_keluar($limit, $start, $search=NULL, $daterange=false)
   {
-    $query = $this->db->select("
+    $this->db->select("
     a.nm_penjab,
     a.nohp_penjab,
     a.jumlah,
@@ -126,20 +126,24 @@ class M_user extends CI_Model
       ->join('tb_barang_masuk as barang', 'barang.id_transaksi=a.id_transaksi')
       ->join('tb_gudang as d', 'd.id=barang.id_gudang')
       ->join('tb_kategori as e', 'e.id=barang.id_kategori')
-      ->limit($limit, $start)
-      ->like($search)
-      ->order_by('a.id', 'desc')
-      ->get()
-      ->result();
-    return $query;
+      ->limit($limit, $start);
+      if($search==NULL){
+        $this->db->like($search);
+      }
+      if($daterange){
+        $this->db->where("a.created_at BETWEEN '{$daterange[0]} 00:01' AND '{$daterange[1]} 23:59'");
+      }
+      $this->db->order_by('a.id', 'desc');
+      $query = $this->db->get();
+    return $query->result();
   }
 
-  public function barang_kembali($a, $b, $limit, $start, $barang)
+  public function barang_kembali($limit, $start)
   {
     $query = $this->db->select("barang.id_transaksi,barang.nama_barang,barang.satuan,barang.kode_barang,a.status,a.jumlah,b.text_status")
-      ->from($a . ' as a')
-      ->join($b . ' as b', 'b.id=a.status', 'left')
-      ->join($barang . ' as barang', 'barang.id_transaksi=a.id_transaksi')
+      ->from('tb_barang_kembali as a')
+      ->join('tb_status as b', 'b.id=a.status', 'left')
+      ->join('tb_barang_masuk as barang', 'barang.id_transaksi=a.id_transaksi')
       ->limit($limit, $start)
       ->order_by('a.id', 'desc')
       ->get()->result();

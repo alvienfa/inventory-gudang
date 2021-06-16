@@ -152,11 +152,13 @@ class User extends CI_Controller
       'id_kategori'   => $this->input->get('id_kategori')
     );
 
-
+    $daterange = explode(" - ",$this->input->get("daterange", TRUE));
+    $list_data = $this->M_user->barang_masuk($limit, $start, $search, $daterange);
     $cards['total_barang_masuk'] = $this->M_user->total_row('tb_barang_masuk');
     $cards['page']               = $this->input->get('page');
     $cards['pagination']         = $this->pagination->create_links();
-    $cards['list_data']          = $this->M_user->barang_masuk($limit, $start, $search);
+    $cards['list_data']          = $list_data;
+    
     $print['list_gudang']        = $this->M_user->select('tb_gudang');
     $print['list_kategori']      = $this->M_user->select('tb_kategori');
 
@@ -207,7 +209,6 @@ class User extends CI_Controller
 
     $cards['pagination']         = $this->pagination->create_links();
     $cards['list_data']          = $this->M_user->barang_keluar($limit, $start, array());
-    // var_dump($cards['list_data']);die();
     $print['list_gudang']        = $this->M_user->select('tb_gudang');
     $print['list_kategori']      = $this->M_user->select('tb_kategori');
     $print['list_status']        = $this->M_user->select('tb_status');
@@ -257,7 +258,7 @@ class User extends CI_Controller
 
     $cards['pagination'] = $this->pagination->create_links();
 
-    $cards['list_data'] = $this->M_user->barang_kembali('tb_barang_kembali', 'tb_status', $limit, $start, 'tb_barang_masuk');
+    $cards['list_data'] = $this->M_user->barang_kembali($limit, $start);
     $data = array(
       'title' => 'Tabel Barang Kembali',
       'views' => array(
@@ -305,6 +306,7 @@ class User extends CI_Controller
         'nama_gudang'   => $this->input->get('search'),
         'kode_barang'   => $this->input->get('search'),
       );
+
       $list_data = $this->M_user->barang_masuk($limit, $start, $search);
       $config['total_rows'] = count($list_data);
     } else {

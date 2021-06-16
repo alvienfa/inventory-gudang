@@ -69,6 +69,18 @@ class M_admin extends CI_Model
     return $query;
   }
 
+  public function delete_soft($tabel, $where)
+  {
+    $this->db->where($where);
+    $this->db->set('is_deleted', 1);
+    $success = $this->db->update($tabel);
+    if($success) {
+      return true;
+    }
+    return false;
+  } 
+
+
   public function delete($tabel, $where)
   {
     $this->db->where($where);

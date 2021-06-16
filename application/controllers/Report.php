@@ -174,15 +174,18 @@ class Report extends CI_Controller
     $pdf->AddPage('A4');
     $pdf->SetAutoPageBreak(TRUE, 10);
     
+    $daterange = explode(" - ",$this->input->get("daterange", TRUE));
+    
     $search = array(
       'nama_barang'   => $this->input->get('nama_barang'),
       'id_gudang'     => $this->input->get('id_gudang'),
       'id_transaksi'  => $this->input->get('id_transaksi'),
-      'id_kategori'   => $this->input->get('id_kategori')
+      'id_kategori'   => $this->input->get('id_kategori'),
     );
   
+    
     $data = array(
-      'list_data' => $this->M_user->barang_masuk($limit, $start, $search)
+      'list_data' => $this->M_user->barang_masuk($limit, $start, $search, $daterange)
     );
 
     $html = $this->load->view('report/pdf_stok_barang', $data, TRUE);
@@ -195,9 +198,6 @@ class Report extends CI_Controller
   {
     $id_barang = intval($this->uri->segment(3));
     
-    $where   = array(
-      'a.id' => $id_barang
-      );
     $data['list_data'] = $this->M_admin->kembali_by_id($id_barang);
     
     $limit = 1000;
@@ -290,10 +290,13 @@ class Report extends CI_Controller
       'barang.id_transaksi'  => $this->input->get('id_transaksi'),
       'barang.id_kategori'   => $this->input->get('id_kategori')
     );
-  
+    
+    $daterange = explode(" - ",$this->input->get("daterange", TRUE));
+
     $data = array(
-      'list_data' => $this->M_user->barang_keluar($limit, $start, $search)
+      'list_data' => $this->M_user->barang_keluar($limit, $start, $search, $daterange)
     );
+
     $html = $this->load->view('report/pdf_barang_keluar', $data, TRUE);
     
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);    

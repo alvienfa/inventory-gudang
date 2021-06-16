@@ -394,15 +394,25 @@ class Admin extends CI_Controller
   public function delete_barang()
   {
     $role = $this->role;
-    $id_kategori = $this->input->post('id_kategori');
     $id = $this->input->post('id', TRUE);
     $where = array('id' => $id);
-    if($role == 1){
-      $this->M_admin->delete('tb_barang_masuk', $where);
-      redirect('admin/tabel_barangmasuk');
+    if($role !== 5 && $role !== 6){
+      $delete = $this->M_admin->delete_soft('tb_barang_masuk', $where);
+      if($delete){
+        echo json_encode(array(
+          'success' => 'Data Terhapus',
+          'status'  => 200,
+        )); 
+        die();
+      }
+      echo json_encode(array(
+        'error' => 'Gagal Hapus Data 1', 
+        'status' => 400));
     }else{
-      echo json_encode($where);
-      redirect(base_url('admin/tabel_barangmasuk?id_kategori=' . $id_kategori));
+      echo json_encode(array(
+        'error' => 'Gagal Hapus Data 2' ,
+        'id'     => $id, 
+        'status' => 400));
     }
   }
 
@@ -819,10 +829,7 @@ class Admin extends CI_Controller
   {
     $id_transaksi = $this->uri->segment(3);
     $head['title'] = 'Inventory Gudang | List Barang by QR';
-    // $where = array(
-    //   'status'       => 0,
-    //   'id_transaksi' => $id_transaksi
-    // );
+    
     $data['list_data'] = $this->M_admin->stok_barang_keluar($this->id_gudang);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
@@ -865,36 +872,6 @@ class Admin extends CI_Controller
     $this->session->set_flashdata('msg_berhasil_masuk', 'Barang Berhasil DiKembalikan');
     redirect(base_url('admin/tabel_barangkeluar'));
   }
-  // public function proses_data_kembali()
-  // {
-  //   $this->form_validation->set_rules('tanggal_kembali', 'Tanggal Kembali', 'trim|required');
-  //   $id_transaksi    = $this->input->post('id_transaksi', TRUE);
-  //   $tanggal_kembali = $this->input->post('tanggal_kembali', TRUE);
-  //   $jumlah          = $this->input->post('jumlah', TRUE);
-  //   $status          = $this->input->post('status', TRUE);
-  //   $keterangan      = $this->input->post('keterangan', TRUE);
-  //   if ($this->form_validation->run() === TRUE) {
-
-  //     $where = array('id_transaksi' => $id_transaksi);
-  //     $data  = array(
-  //       'id_transaksi' => $id_transaksi,
-  //       'tanggal_kembali' => $tanggal_kembali,
-  //       'jumlah'            => $jumlah,
-  //       'status'            => $status,
-  //       'keterangan'        => $keterangan,
-  //       'id_barang_keluar'  => $this->input->post('id', TRUE)
-  //     );
-  //     if($status !== 0){
-  //       $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
-  //     }
-  //     $this->M_admin->insert('tb_barang_kembali', $data);
-  //     $this->session->set_flashdata('msg_berhasil_masuk', 'Barang Berhasil DiKembalikan');
-  //     redirect(base_url('admin/tabel_barangmasuk'));
-  //   } else {
-  //     $this->load->view('perpindahan_barang/form_update_kembali/' . $id_transaksi);
-  //   }
-  // }
-
 
   ####################################
   // END DATA MASUK KE DATA KELUAR

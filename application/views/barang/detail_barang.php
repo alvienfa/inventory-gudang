@@ -16,7 +16,7 @@ $text_class = "text-uppercase font-weight-bold text-primary mb-0";
         width: 1%;
     }
 </style>
-<div class="col-lg-5 col-md-6 col-12 col-sm-12">
+<div class="col-lg-5 col-md-6 col-12 col-sm-6">
     <article class="article article-style-c">
         <div class="article-details">
             <div class="article-body">

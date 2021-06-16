@@ -17,7 +17,7 @@
         border-radius: 20px;
     }
 </style>
-<div class="col-lg-4 col-md-4 col-12 col-sm-12">
+<div class="col-lg-4 col-md-4 col-12 col-sm-6">
     <div class="card bg-transparent shadow-none">
         <div class="card-body d-flex justify-content-center">
             <a class="btn btn-danger btn-round text-lg" href="javascript:void(0)" data-toggle="modal" data-target="#scannerKeluar">
@@ -78,7 +78,9 @@
                             href="javascript:void(0)" 
                             data-lokasi="<?= $item->id_lokasi ?>" 
                             data-id="<?= $item->id ?>" 
-                            data-stok="<?= $item->jumlah ?>" 
+                            data-stok="<?= $item->jumlah ?>"
+                            data-nm_penjab="<?= $item->nm_penjab?>"
+                            data-nohp_penjab="<?= $item->nohp_penjab?>" 
                             data-toggle="modal" 
                             data-target="#scannerKembali">PROSES</button>
                         </div>

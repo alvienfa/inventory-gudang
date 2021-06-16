@@ -98,6 +98,7 @@ class Barang extends CI_Controller
   {
     $this->form_validation->set_rules('jumlah', 'Jumlah', 'trim|required|numeric');
     $id_transaksi         = $this->input->post('id_transaksi', TRUE);
+    $stok                 = $this->input->post('stok_barang', TRUE);
     $barang               = $this->M_barang->barang($id_transaksi);
     $jumlah               = $this->input->post('jumlah', TRUE);
     $keterangan           = $this->input->post('keterangan', TRUE);
@@ -139,7 +140,7 @@ class Barang extends CI_Controller
           $this->M_admin->insert('tb_barang_kembali', $kembali);
           $this->M_admin->update('tb_barang_keluar', $update, array('id' => $kembali['id_barang_keluar']));
           $this->session->set_flashdata('msg_berhasil_kembali', 'Data Berhasil Kembali');
-          redirect('logs');
+          redirect(base_url('barang/') . $id_transaksi);
           break;
         case 'keluar':
           $keluar = array(
@@ -156,7 +157,7 @@ class Barang extends CI_Controller
           $this->M_admin->mengurangi('tb_barang_masuk', $id_transaksi, $jumlah);
           $this->M_admin->insert('tb_barang_keluar', $keluar);
           $this->session->set_flashdata('msg_berhasil_keluar', 'Data Berhasil Keluar');
-          redirect('logs');
+          redirect(base_url('barang/') . $id_transaksi);
           break;
         default:
           $error = array(

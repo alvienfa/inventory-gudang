@@ -18,6 +18,17 @@
                         <input value="<?= $this->input->get('id_transaksi') ?>" type="text" name="id_transaksi" class="form-control form-control-sm">
                     </div>
                     <div class="form-group">
+                        <label>Dari Tanggal Sampai Tanggal</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                            </div>
+                            <input type="text" name="daterange" class="form-control daterange-cus">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="nama barang">Kategori</label>
                         <select class="form-control form-control-sm" name="id_kategori">
                             <option value="">--Pilih Kategori--</option>

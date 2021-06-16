@@ -53,9 +53,7 @@
                         <th>Gudang</th>
                         <th>Foto</th>
                         <th>QR</th>
-                        <th>Update</th>
-                        <th>Hide</th>
-                        <th>Delete</th>
+                        <th>Action</th>
                         <!-- <th>Keluarkan</th> -->
                       </tr>
                     </thead>
@@ -68,35 +66,26 @@
                             <td style="white-space: nowrap;"><small><?= $dd->id_transaksi ?></small></td>
                             <td style="white-space: nowrap;"><small><?= $dd->tanggal ?></small></td>
                             <td><small class="text-bold"><?= strtoupper($dd->nama_barang) ?></small><br><small>#<?= strtoupper($dd->kode_barang) ?></small></td>
-                            <td><small><?= $dd->nama_kategori ?></small></td>
-                            <td class="text-bold"><span class="font-weight-bold text-small <?= ($dd->jumlah >= $dd->min_jumlah? 'text-primary'  :  'text-danger')?>"><?= $dd->jumlah ." ". $dd->satuan ?> </span></td>
-                            <td><small><?= $dd->nama_gudang ?></small></td>
+                            <td class="text-uppercase"><small><?= $dd->nama_kategori ?></small></td>
+                            <td class="text-bold"><span class="font-weight-bold text-small <?= ($dd->jumlah >= $dd->min_jumlah ? 'text-primary'  :  'text-danger') ?>"><?= $dd->jumlah . " " . $dd->satuan ?> </span></td>
+                            <td style="white-space: nowrap;"><small><?= $dd->nama_gudang ?></small></td>
                             <td>
-                              <a href="javascript:void(0)" type="button" 
-                              class="show-modal" 
-                            
-                              data-toggle="modal" 
-                              data-target="#modal-default">
-                                <img data-image="<?= $dd->gambar?>"   class="img-thumbnail" style="width: 50px;" src="<?= base_url() . 'assets/upload/gambar/' . $dd->gambar; ?>">
+                              <a href="javascript:void(0)" type="button" class="show-modal" data-toggle="modal" data-target="#modal-default">
+                                <img data-image="<?= $dd->gambar ?>" class="img-thumbnail" style="width: 50px;" src="<?= base_url() . 'assets/upload/gambar/' . $dd->gambar; ?>">
                               </a>
                             </td>
                             <td><a download href="<?php echo base_url() . 'assets/qrcode/images/' . $dd->qr_code; ?>">
-                                <img class="img-thumbnail" style="width: 50px;" src="<?php echo base_url() . 'assets/qrcode/images/' . $dd->qr_code; ?>">
+                                <img class="img-thumbnail" onerror="this.onerror=null;this.src='<?= base_url('assets/img/error-image.png') ?>'" style="width: 50px;" src="<?php echo base_url() . 'assets/qrcode/images/' . $dd->qr_code; ?>">
                               </a>
                             </td>
-                            <td><a type="button" class="btn btn-info" href="<?= base_url('admin/update_barang/') . $dd->id ?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                             <td>
-                              <a class="btn btn-success" href="<?= base_url('admin/soft_delete_barang/') . $dd->id?>"><i class="fa fa-eye"></i></a>
-                            </td>
-                            <td>
-                              <form class="form-delete" role="form" 
-                              action="<?= base_url('admin/delete_barang') ?>" 
-                              method="POST">
-                              <input type="hidden" name="id" value="<?= $dd->id ?>">
-                                <input type="hidden" name="id_kategori" value="<?= $this->input->get('id_kategori')?>">
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                              <a type="button" class="btn btn-info" href="<?= base_url('admin/update_barang/') . $dd->id ?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil"></i></a>
+                              <form class="form-delete" role="form" action="<?= base_url('admin/delete_barang') ?>" method="POST">
+                                <input type="hidden" name="id" value="<?= $dd->id ?>">
+                                <input type="hidden" name="id_kategori" value="<?= $this->input->get('id_kategori') ?>">
+                                <button type="submit" class="btn btn-danger">
+                                  <i class="fa fa-trash" aria-hidden="true"></i></button>
                               </form>
-                              </a>
                             </td>
                       </tr>
                       <?php $no++; ?>
@@ -184,10 +173,10 @@
             success: function(data) {
               console.log('success')
               console.log(body)
-              window.location.href = getLink
+              // window.location.href = getLink
             },
-            error: function(err){
-              console.log("Error",err.statusText)
+            error: function(err) {
+              console.log("Error", err.statusText)
             }
           })
         });
@@ -214,7 +203,7 @@
       item.addEventListener('click', (e) => {
         console.log(e.target.dataset.image)
         $("#modal-defaul").modal('show')
-        $("#modal-foto").attr('src', '<?= base_url("assets/upload/gambar/")?>' +  e.target.dataset.image);
+        $("#modal-foto").attr('src', '<?= base_url("assets/upload/gambar/") ?>' + e.target.dataset.image);
       })
     })
   </script>

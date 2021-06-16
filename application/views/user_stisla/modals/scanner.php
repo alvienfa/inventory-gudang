@@ -9,6 +9,17 @@ $dummy = (object) array(
     'nm_penjab'  => 'Ari Lesmana',
     'nohp_penjab' => '62878288394921'
 );
+// $dummy = (object) array(
+//     'keterangan' => NULL,
+//     'alamat'     => NULL,
+//     'kecamatan'  => NULL,
+//     'kota'       => NULL,
+//     'provinsi'   => NULL,
+//     'kode_pos'   => NULL,
+//     'nm_penjab'  => NULL,
+//     'nohp_penjab' => NULL
+// );
+
 
 ?>
 <!-- Keluar -->
@@ -27,18 +38,34 @@ $dummy = (object) array(
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Jumlah</label>
-                                <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
-                                <input value="" type="number" max="<?= $detail->jumlah ?>" min="1" name="jumlah" class="<?= $input_styles ?>">
+                                <?php if ($detail->jumlah <= 0) : ?>
+                                    <p class="text-danger font-weight-bold text-small">Stok Barang Tidak Tersedia</p>
+                                    <input type="hidden" name="jumlah" value="0" class="<?= $input_styles ?>">
+                                <?php else : ?>
+                                    <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
+                                    <input type="number" max="<?= $detail->jumlah ?>" min="1" name="jumlah" class="<?= $input_styles ?>">
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="stok barang">Stok Di Gudang (<?= $detail->satuan ?>)</label>
+                                <label for="stok barang">Stok Di Gudang</label>
                                 <div class="row pl-3">
-                                        <input type="text" name="stok_barang" value="<?= $detail->jumlah ?>" class="w-25 <?= $input_styles ?>" readonly>
-                                        <label class="p-1"><?= $detail->satuan ?></label>
+                                    <input type="number" min="0" name="stok_barang" value="<?= $detail->jumlah ?>" class="w-50 <?= $input_styles ?>" readonly>
+                                    <label class="p-1"><?= $detail->satuan ?></label>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Dari Tanggal Sampai Tanggal</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                            </div>
+                            <input type="text" name="daterange" class="form-control daterange-cus">
                         </div>
                     </div>
                     <div class="form-group">
@@ -71,13 +98,13 @@ $dummy = (object) array(
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Penanggung Jawab</label>
-                                <input value="<?= $dummy->nm_penjab ?>" type="text" name="nm_penjab" class="<?= $input_styles ?> ">
+                                <input value="<?= $dummy->nm_penjab ?>" type="text" name="nm_penjab" class="<?= $input_styles ?> " required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">No HP Penanggung Jawab</label>
-                                <input value="<?= $dummy->nohp_penjab ?>" type="phone" name="nohp_penjab" class="<?= $input_styles ?>">
+                                <input value="<?= $dummy->nohp_penjab ?>" type="phone" name="nohp_penjab" class="<?= $input_styles ?>" required>
                             </div>
                         </div>
                     </div>
@@ -87,7 +114,7 @@ $dummy = (object) array(
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <button type="submit" class="btn btn-danger btnSubmit">SUBMIT BARANG <i class="fas fa-arrow-down"></i></button>
+                    <button type="submit" class="btn btn-danger btnSubmit">SUBMIT BARANG</button>
                 </div>
             </div>
         </div>
@@ -117,7 +144,7 @@ $dummy = (object) array(
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="stok barang">Stok Di Gudang</label>
-                                <input id="stok" type="number" name="stok" value="<?= $detail->jumlah ?>" class="<?= $input_styles ?>" readonly>
+                                <input id="stok" type="number" name="stok_barang" value="<?= $detail->jumlah ?>" class="<?= $input_styles ?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -126,7 +153,7 @@ $dummy = (object) array(
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nama barang">Author</label>
-                                <input value="@<?= $this->session->userdata('name') ?>" type="text" class="<?= $input_styles ?>" disabled>
+                                <input value="<?= $this->session->userdata('name') ?>" type="text" class="<?= $input_styles ?>" disabled>
                             </div>
                         </div>
                         <div class="col-6">
@@ -152,13 +179,35 @@ $dummy = (object) array(
         </div>
     </div>
 </form>
+
 <script>
     const btnSubmit = document.querySelectorAll(".btnSubmit")
+    const jumlah = document.querySelector("input[name='jumlah']")
+    jumlah.addEventListener('change', (e) => {
+        console.dir(jumlah.closest("form").querySelector(".btnSubmit").removeAttribute('disabled'))
+    })
     btnSubmit.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault()
-            item.closest("form").submit()
-            e.target.setAttribute('disabled', 'disabled')
+            const form = item.closest("form")
+            const stok = item.closest("form").querySelector("input[name='stok_barang']").value
+            const jumlah = item.closest("form").querySelector("input[name='jumlah']").value
+            switch (form.attributes.id.value) {
+                case 'kembali':
+                    item.closest("form").submit()
+                    e.target.setAttribute('disabled', 'disabled')
+                    break;
+                    case 'keluar':
+                    
+                    if (+stok > 0 && +stok >= +jumlah) {
+                        item.closest("form").submit()
+                        e.target.setAttribute('disabled', 'disabled')
+                    } else {
+                        alert('Barang Tidak Tersedia')
+                    }
+                    break;
+            }
+
         })
     })
 </script>
