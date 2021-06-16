@@ -412,8 +412,9 @@ class Admin extends CI_Controller
       echo json_encode(array(
         'error' => 'Gagal Hapus Data 2' ,
         'id'     => $id, 
-        'status' => 400));
-    }
+        'status' => 400)
+      );
+    } 
   }
 
 
