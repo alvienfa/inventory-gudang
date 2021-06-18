@@ -81,16 +81,15 @@ class M_user extends CI_Model
     return $query;
   }
 
-  public function barang_masuk($limit, $start, $search=NULL,$daterange=false)
+  public function barang_masuk($limit, $start, $search,$daterange)
   {
     $this->db->select("a.*,b.nama_gudang,c.nama_kategori");
     $this->db->from('tb_barang_masuk as a');
     $this->db->join('tb_gudang as b', 'b.id = a.id_gudang', 'LEFT');
     $this->db->join('tb_kategori as c', 'c.id = a.id_kategori', 'LEFT');
-    if($search == NULL){
-      $this->db->like($search);
-    }
-    if($daterange){
+    $this->db->like($search);
+
+    if($daterange !== NULL){
       $this->db->where("created_at BETWEEN '{$daterange[0]} 00:01' AND '{$daterange[1]} 23:59'");
     }
     $this->db->where('a.is_deleted', 0);
@@ -100,9 +99,10 @@ class M_user extends CI_Model
     return $query->result();
   }
 
-  public function barang_keluar($limit, $start, $search=NULL, $daterange=false)
+  public function barang_keluar($limit, $start, $search, $daterange)
   {
     $this->db->select("
+    
     a.nm_penjab,
     a.nohp_penjab,
     a.jumlah,
@@ -126,11 +126,10 @@ class M_user extends CI_Model
       ->join('tb_barang_masuk as barang', 'barang.id_transaksi=a.id_transaksi')
       ->join('tb_gudang as d', 'd.id=barang.id_gudang')
       ->join('tb_kategori as e', 'e.id=barang.id_kategori')
-      ->limit($limit, $start);
-      if($search==NULL){
-        $this->db->like($search);
-      }
-      if($daterange){
+      ->limit($limit, $start)
+      ->like($search);
+      
+      if($daterange !== NULL){
         $this->db->where("a.created_at BETWEEN '{$daterange[0]} 00:01' AND '{$daterange[1]} 23:59'");
       }
       $this->db->order_by('a.id', 'desc');

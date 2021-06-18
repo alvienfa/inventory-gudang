@@ -328,7 +328,7 @@ class Admin extends CI_Controller
 
 
   ####################################
-  // End Users
+  // End Usephprs
   ####################################
 
 

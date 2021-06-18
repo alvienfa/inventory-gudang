@@ -1,9 +1,11 @@
-<div class="col-lg-12 col-md-6 col-12 col-sm-12">
+<div class="col-lg-12 col-md-12 col-12 col-sm-12">
     <div class="card">
-        <div class="card-header">
-            <h4>Barang Kembali</h4>
+        <div class="card-header d-flex justify-content-between">
+            <div>
+                <button class="btn btn-warning" data-toggle="modal" data-target="#printBarangKembali"><i class="fas fa-print"></i> PRINT</button>
+            </div>
             <div class="card-header-action">
-                <a href="#" class="btn btn-primary">Search <i class="fas fa-search"></i></a>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">SEARCH <i class="fas fa-search"></i></button>
             </div>
         </div>
         <div class="card-body p-0">

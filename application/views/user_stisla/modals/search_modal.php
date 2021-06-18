@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label>Dari Tanggal Sampai Tanggal</label>
-                        <div class="input-group">
+                        <div class="input-group text-small">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="fas fa-calendar"></i>
@@ -29,8 +29,19 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="nama barang">Status Barang</label>
+                        <select class="custom-select text-small text-uppercase" name="id_gudang">
+                            <option value="">--Pilih Status--</option>
+                            <?php
+                            foreach ($list_status as $item) : ?>
+                                <option value="<?= $item->id ?>"><?= $item->text_status ?></option>
+                            <?php
+                            endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="nama barang">Kategori</label>
-                        <select class="form-control form-control-sm" name="id_kategori">
+                        <select class="custom-select text-small text-uppercase" name="id_kategori">
                             <option value="">--Pilih Kategori--</option>
                             <?php
                             foreach ($list_kategori as $item) : ?>
@@ -41,7 +52,7 @@
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Gudang Barang</label>
-                        <select class="form-control form-control-sm" name="id_gudang">
+                        <select class="custom-select text-small text-uppercase" name="id_gudang">
                             <option value="">--Pilih Gudang--</option>
                             <?php
                             foreach ($list_gudang as $item) : ?>
@@ -52,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label for="nama barang">Show Data Per Page</label>
-                        <select class="form-control" name="limit" value="<?= $this->input->get('id_gudang') ?>">
+                        <select class="custom-select text-small text-uppercase" name="limit" value="<?= $this->input->get('id_gudang') ?>">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>

@@ -5,7 +5,7 @@
                 <button class="btn btn-warning" data-toggle="modal" data-target="#printBarangKeluar"><i class="fas fa-print"></i> PRINT</button>
             </div>
             <div class="card-header-action">
-                <a href="#" class="btn btn-primary">Search <i class="fas fa-search"></i></a>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">SEARCH <i class="fas fa-search"></i></button>
             </div>
         </div>
         <div class="card-body p-0">
