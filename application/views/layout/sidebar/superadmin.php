@@ -50,6 +50,9 @@
     <li class='<?= (base_url('admin/tabel_gudang') == current_url() ? ' active' : '') ?> '>
       <a href="<?= base_url('admin/tabel_gudang') ?>"><i class="fa fa-circle-o"></i> Tabel Data Gudang</a>
     </li>
+    <li class='<?= (base_url('admin/tabel_delete_barang') == current_url() ? ' active' : '') ?> '>
+      <a href="<?= base_url('admin/tabel_delete_barang') ?>"><i class="fa fa-circle-o"></i> Tabel Barang Terhapus</a>
+    </li>
   </ul>
 </li>
 <?php $scans = base_url('admin/scan_barang_kembali') == current_url() ||
