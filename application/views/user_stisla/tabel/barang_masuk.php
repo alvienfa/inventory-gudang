@@ -10,7 +10,7 @@
                 <button class="btn btn-warning" data-toggle="modal" data-target="#printModal"><i class="fas fa-print"></i> PRINT</button>
             </div>
             <div class="card-header-action">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">SEARCH <i class="fas fa-search"></i></button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#searchBarang">SEARCH <i class="fas fa-search"></i></button>
             </div>
         </div>
         <div class="card-body p-0 ">

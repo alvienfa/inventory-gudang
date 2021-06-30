@@ -166,7 +166,8 @@ class User extends CI_Controller
       'barang_masuk'  => $this->M_user->select('tb_barang_masuk'),
       'views'         => array(
         'card_satu'   => $this->load->view('user_stisla/tabel/barang_masuk', $cards, TRUE),
-        'modal_print' => $this->load->view('user_stisla/modals/print', $print, TRUE)
+        'modal_print' => $this->load->view('user_stisla/modals/print', $print, TRUE),
+        'search_barang' => $this->load->view('user_stisla/modals/search_barang', "", TRUE),
       ),
       'list_gudang'   => $this->M_user->select('tb_gudang'),
       'list_kategori'   => $this->M_user->select('tb_kategori')
@@ -342,7 +343,9 @@ class User extends CI_Controller
     $cards['total_barang_masuk'] = $config['total_rows'];
     $cards['page']               = $this->input->get('page');
     $cards['list_data']          = $list_data;
-
+    $print['list_gudang']        = $this->M_user->select('tb_gudang');
+    $print['list_kategori']      = $this->M_user->select('tb_kategori');
+    $print['list_status']        = $this->M_user->select('tb_status');
     $data = array(
       'title' => 'List Barang Masuk',
       'barang_masuk'      => $this->M_user->select('tb_barang_masuk'),
