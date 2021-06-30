@@ -319,9 +319,9 @@ class User extends CI_Controller
     $config['num_tag_open']         = '<li class="page-item">';
     $config['num_tag_close']        = '</li>';
     $config['total_rows']           = $this->M_user->total_row_active('tb_barang_masuk');
-
+    
     $start = $this->input->get('page') ? (intval($this->input->get('page')) - 1) * $limit : 0;
-
+    
     if (!$this->input->get('search') == NULL) {
       $search = array(
         'id_transaksi'  => $this->input->get('search'),
@@ -329,12 +329,11 @@ class User extends CI_Controller
         'nama_gudang'   => $this->input->get('search'),
         'kode_barang'   => $this->input->get('search'),
       );
-
-      $list_data = $this->M_user->barang_masuk($limit, $start, $search);
+      $list_data = $this->M_user->barang_masuk($limit, $start, $search, NULL);
       $config['total_rows'] = count($list_data);
     } else {
       $search = array();
-      $list_data = $this->M_user->barang_masuk($limit, $start, $search);
+      $list_data = $this->M_user->barang_masuk($limit, $start, $search, NULL);
     }
 
     $this->pagination->initialize($config);

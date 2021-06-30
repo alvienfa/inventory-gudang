@@ -1,4 +1,4 @@
-<div class="col-lg-9 col-md-6 col-12 col-sm-12">
+<div class="col-lg-8 col-md-6 col-12 col-sm-12">
     <div class="card">
         <div class="card-header">
             <h4>Last Barang Kembali</h4>
