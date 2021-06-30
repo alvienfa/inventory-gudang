@@ -31,7 +31,7 @@ class Admin extends CI_Controller
       } else {
         redirect('login');
       }
-    }else{
+    } else {
       redirect('login');
     }
   }
@@ -272,7 +272,7 @@ class Admin extends CI_Controller
         $profile = array(
           'username_user'    => $username,
           'nama_file'   => 'nopic.png'
-        ); 
+        );
         $this->M_admin->insert('user', $data);
         $this->M_admin->insert('tb_upload_gambar_user', $profile);
         $this->session->set_flashdata('msg_berhasil', 'User Berhasil Ditambahkan');
@@ -396,25 +396,28 @@ class Admin extends CI_Controller
     $role = $this->role;
     $id = $this->input->post('id', TRUE);
     $where = array('id' => $id);
-    if($role !== 5 && $role !== 6){
+    if ($role !== 5 && $role !== 6) {
       $delete = $this->M_admin->delete_soft('tb_barang_masuk', $where);
-      if($delete){
+      if ($delete) {
         echo json_encode(array(
           'success' => 'Data Terhapus',
           'status'  => 200,
-        )); 
+        ));
         die();
       }
       echo json_encode(array(
-        'error' => 'Gagal Hapus Data 1', 
-        'status' => 400));
-    }else{
-      echo json_encode(array(
-        'error' => 'Gagal Hapus Data 2' ,
-        'id'     => $id, 
-        'status' => 400)
+        'error' => 'Gagal Hapus Data 1',
+        'status' => 400
+      ));
+    } else {
+      echo json_encode(
+        array(
+          'error' => 'Gagal Hapus Data 2',
+          'id'     => $id,
+          'status' => 400
+        )
       );
-    } 
+    }
   }
 
 
@@ -437,7 +440,7 @@ class Admin extends CI_Controller
       $id_kategori  = $this->input->post('id_kategori', TRUE);
       $id_gudang    = $this->id_gudang;
       $id_user      = $this->session->userdata('id');
-      
+
       //qrcode
       $qr = $this->load->library('ciqrcode'); //pemanggilan library QR CODE
       $config['cacheable']    = true; //boolean, the default is true
@@ -458,14 +461,14 @@ class Admin extends CI_Controller
       $params['savename'] = FCPATH . $config['imagedir'] . $image_name; //simpan image QR CODE ke folder assets/images/
       $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
       //upload gambar
-      $config =  array(
-        'upload_path'     => "./assets/upload/gambar/",
-        'allowed_types'   => "gif|jpg|png|jpeg",
-        'encrypt_name'    => False, //
-        'max_size'        => "60000",  // ukuran file gambar
-        'max_height'      => "9680",
-        'max_width'       => "9024"
-      );
+
+      $config["upload_path"] = "./assets/upload/gambar/";
+      $config["allowed_types"] = "gif|jpg|png|jpeg";
+      $config["encrypt_name"] = false;
+      $config["max_size"] = 60000;
+      $config["max_height"] = 9680;
+      $config["max_width"] = 9024;
+      $config["file_name"] = preg_replace('/\s+/', '-', strtolower($_FILES["gambar"]["name"]));
       $this->load->library('upload', $config);
       $this->upload->initialize($config);
       if (!$this->upload->do_upload('gambar')) {
@@ -483,14 +486,15 @@ class Admin extends CI_Controller
           'id_kategori'  => $id_kategori,
           'id_gudang'    => $id_gudang,
           'created_at'   => date("Y-m-d H:i:s"),
-          'created_by'   => $id_user 
+          'created_by'   => $id_user
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
-        redirect(base_url('admin/tabel_barangmasuk') . '?id_kategori='. $id_kategori);
+        redirect(base_url('admin/tabel_barangmasuk') . '?id_kategori=' . $id_kategori);
       } else {
         $upload_data = $this->upload->data();
         $nama_file = $upload_data['file_name'];
+        $nama_file = preg_replace('/\s+/', '-', $nama_file);
         $data = array(
           'id_transaksi' => $id_transaksi,
           'tanggal'      => $tanggal,
@@ -502,14 +506,14 @@ class Admin extends CI_Controller
           'min_jumlah'   => $min_jumlah,
           'qr_code'      => $image_name,
           'gambar'       => $nama_file,
-          'id_kategori'   => $id_kategori,
+          'id_kategori'  => $id_kategori,
           'id_gudang'    => $id_gudang,
           'created_at'   => date("Y-m-d H:i:s"),
-          'created_by'   => $id_user 
+          'created_by'   => $id_user
         );
         $this->M_admin->insert('tb_barang_masuk', $data);
         $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Ditambahkan');
-        redirect(base_url('admin/tabel_barangmasuk') . '?id_kategori='. $id_kategori);
+        redirect(base_url('admin/tabel_barangmasuk') . '?id_kategori=' . $id_kategori);
       }
     } else {
       $head['title'] = 'Inventory Gudang | From Barang Masuk';
@@ -555,7 +559,7 @@ class Admin extends CI_Controller
       );
       $this->M_admin->update('tb_barang_masuk', $data, $where);
       $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Diupdate');
-      redirect(base_url('admin/tabel_barangmasuk') . '?id_kategori='. $id_kategori);
+      redirect(base_url('admin/tabel_barangmasuk') . '?id_kategori=' . $id_kategori);
     } else {
       $upload_data = $this->upload->data();
       $nama_file = $upload_data['file_name'];
@@ -571,7 +575,7 @@ class Admin extends CI_Controller
       //
       $this->M_admin->update('tb_barang_masuk', $data, $where);
       $this->session->set_flashdata('msg_berhasil', 'Data Barang Berhasil Diupdate');
-      redirect(base_url('admin/tabel_barangmasuk') . '?id_kategori='. $id_kategori);
+      redirect(base_url('admin/tabel_barangmasuk') . '?id_kategori=' . $id_kategori);
     }
   }
   ####################################
@@ -815,7 +819,7 @@ class Admin extends CI_Controller
     $data['role']                   = $this->role;
     $head['title']                  = 'Inventory Gudang | Form Barang Kembali';
     $data['sidebar']['nama_gudang'] = $this->gudang;
-    $row_data                       = $this->M_admin->get_data_row('tb_barang_keluar',array('id' => $id));
+    $row_data                       = $this->M_admin->get_data_row('tb_barang_keluar', array('id' => $id));
     $data['gambar_barang']          = $this->M_admin->get_gambar($row_data->id_transaksi);
     $data['alamat']                 = $this->M_admin->get_data_row('map_lokasi', array('id' => $row_data->id_lokasi));
     $data['list_data']              = $row_data;
@@ -830,7 +834,7 @@ class Admin extends CI_Controller
   {
     $id_transaksi = $this->uri->segment(3);
     $head['title'] = 'Inventory Gudang | List Barang by QR';
-    
+
     $data['list_data'] = $this->M_admin->stok_barang_keluar($this->id_gudang);
     $data['list_satuan'] = $this->M_admin->select('tb_satuan');
     $data['avatar'] = $this->M_admin->get_data_gambar('tb_upload_gambar_user', $this->session->userdata('name'));
@@ -900,7 +904,7 @@ class Admin extends CI_Controller
     $this->load->view('admin/tabel/tabel_barangkembali', $data);
   }
 
-  
+
 
   public function gudang($id_gudang = false)
   {
@@ -1029,9 +1033,9 @@ class Admin extends CI_Controller
       $this->load->view('layout/head', $head);
       $this->load->view('admin/form_gudang/form_update');
     }
-  }  
-  
-  
+  }
+
+
 
   public function soft_delete_barang($id = false)
   {
@@ -1178,9 +1182,9 @@ class Admin extends CI_Controller
     $this->db->where('id', $id_barang_masuk);
     $this->db->set('is_deleted', 0);
     $success = $this->db->update('tb_barang_masuk');
-    if($success) {
-      redirect('admin/tabel_delete_barang');    
+    if ($success) {
+      redirect('admin/tabel_delete_barang');
     }
-      echo 'gagal return data barang';
+    echo 'gagal return data barang';
   }
 }
