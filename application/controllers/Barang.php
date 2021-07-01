@@ -215,12 +215,13 @@ class Barang extends CI_Controller
 
   public function submit_barang_kembali()
   {
-    $id_transaksi     = $this->input->post('id_transaksi', TRUE);
-    $status           = $this->input->post('status', TRUE);
-    $keterangan       = $this->input->post('keterangan', TRUE);
+    $id_transaksi       = $this->input->post('id_transaksi', TRUE);
+    $status             = $this->input->post('status', TRUE);
+    $keterangan         = $this->input->post('keterangan', TRUE);
     $where = array('id' => $this->input->post('id', TRUE));
-    $jumlah           = $this->input->post('jumlah', TRUE);
-    $data = $this->M_admin->get_data_row('tb_barang_keluar', $where);
+    $jumlah             = $this->input->post('jumlah', TRUE);
+    $stok_barang        = $this->input->post('stok_barang', TRUE);
+    $data               = $this->M_admin->get_data_row('tb_barang_keluar', $where);
     $insert = array(
       'id_transaksi'    => $data->id_transaksi,
       'tanggal_kembali' => date('Y-m-d'),
@@ -234,7 +235,8 @@ class Barang extends CI_Controller
     );
     $update = array(
       'status' => $status,
-      'keterangan' => $keterangan
+      'keterangan' => $keterangan,
+      'jumlah' => $stok_barang - $jumlah
     );
 
     if ($status !== 0) {
