@@ -218,27 +218,24 @@ class Barang extends CI_Controller
     $id_transaksi       = $this->input->post('id_transaksi', TRUE);
     $status             = $this->input->post('status', TRUE);
     $keterangan         = $this->input->post('keterangan', TRUE);
-    $where = array('id' => $this->input->post('id', TRUE));
     $jumlah             = $this->input->post('jumlah', TRUE);
-    $total_keluar        = $this->input->post('total_keluar', TRUE);
+    $where = array('id' => $this->input->post('id', TRUE));
     $data               = $this->M_admin->get_data_row('tb_barang_keluar', $where);
     $insert = array(
-      'id_transaksi'    => $data->id_transaksi,
-      'tanggal_kembali' => date('Y-m-d'),
-      'kode_barang'     => $data->kode_barang,
-      'nama_barang'     => $data->nama_barang,
-      'satuan'          => $data->satuan,
-      'jumlah'          => $jumlah,
-      'status'          => $status,
-      'keterangan'      => $keterangan,
-      'created_at'      => date('Y-m-d H:i:s')
+      'id_transaksi'     => $data->id_transaksi,
+      'tanggal_kembali'  => date('Y-m-d'),
+      'jumlah'           => $jumlah,
+      'status'           => $status,
+      'keterangan'       => $keterangan,
+      'created_at'       => date('Y-m-d H:i:s'),
+      'id_barang_keluar' =>  $data->id
     );
-    $update = array(
-      'status' => $status,
+    $update = [
+      'status' => $data->jumlah - $jumlah <= 0 ? 0 : $status,
       'keterangan' => $keterangan,
-      'jumlah' => $total_keluar - $jumlah
-    );
-
+      'jumlah' => $data->jumlah - $jumlah
+    ];
+    
     if ($status !== 0) {
       $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
     }
