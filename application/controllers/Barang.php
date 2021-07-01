@@ -115,6 +115,7 @@ class Barang extends CI_Controller
     );
 
     if ($this->form_validation->run() === TRUE) {
+      $id_barang_keluar  = $this->input->post('id', TRUE);
       switch ($type):
         case 'kembali':
           $status = $this->input->post('status', TRUE);
@@ -123,17 +124,20 @@ class Barang extends CI_Controller
             'jumlah'            => $jumlah,
             'keterangan'        => $keterangan,
             'status'            => $status,
-            'id_barang_keluar'  => $this->input->post('id', TRUE),
+            'id_barang_keluar'  => $id_barang_keluar,
             'created_by'        => $this->author,
             'tanggal_kembali'   => date("Y-m-d"),
             'created_at'        => date("Y-m-d H:i:s"),
           );
-          $update = array(
-            'status'      => $status,
-            'keterangan'  => $keterangan,
-            'jumlah'      => $jumlah,
+        
+          $data               = $this->M_admin->get_data_row('tb_barang_keluar', $where);
+
+          $update = [
+            'status' => $data->jumlah - $jumlah == 0 ? $status : 0,
+            'keterangan' => $keterangan,
+            'jumlah' => $data->jumlah - $jumlah,
             'updated_at'  => date("Y-m-d"),
-          );
+          ];
           if($status !== 0){
             $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
           }
@@ -235,9 +239,7 @@ class Barang extends CI_Controller
       'keterangan' => $keterangan,
       'jumlah' => $data->jumlah - $jumlah
     ];
-
-    var_dump($update);die();
-    
+   
     if ($status !== 0) {
       $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
     }
