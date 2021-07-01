@@ -50,7 +50,7 @@ class Barang extends CI_Controller
     $head['sidebar_menu'] = $this->sidebar_menu();
     $cards['detail'] = $this->M_barang->barang($id_transaksi);
     $cards['list_status'] = $this->M_admin->select('tb_status');
-    $cards['total'] = $this->M_barang->total();
+    $cards['total'] = $this->M_barang->total_per_barang($id_transaksi);
     var_dump($cards['total']);die();
     $where = array(
       'a.id_transaksi'  => $id_transaksi,
