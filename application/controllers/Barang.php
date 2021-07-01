@@ -141,7 +141,7 @@ class Barang extends CI_Controller
           }
 
           $this->M_admin->insert('tb_barang_kembali', $kembali);
-          $this->M_admin->update('tb_barang_keluar', $update, array('id' => $kembali['id_barang_keluar']));
+          $this->M_admin->update('tb_barang_keluar', $update, array('id' => $this->input->post('id', TRUE)));
           $this->session->set_flashdata('msg_berhasil_kembali', 'Data Berhasil Kembali');
           redirect(base_url('barang/') . $id_transaksi);
           break;
