@@ -55,7 +55,6 @@
 <script>
   document.querySelectorAll(".btnKembalikan").forEach(btn => {
     btn.addEventListener("click", (e) => {
-      alert('footer.php')
       $("#kembali").append("<input type='hidden' name='id' value='" + e.target.dataset.id + "'>")
       $("#kembali").append("<input type='hidden' name='id_lokasi' value='" + e.target.dataset.id_lokasi + "'>")
       $("#kembali").append("<input type='hidden' name='total' value='" + e.target.dataset.jumlah + "'>")
