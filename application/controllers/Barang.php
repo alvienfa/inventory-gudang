@@ -220,7 +220,7 @@ class Barang extends CI_Controller
     $keterangan         = $this->input->post('keterangan', TRUE);
     $where = array('id' => $this->input->post('id', TRUE));
     $jumlah             = $this->input->post('jumlah', TRUE);
-    $stok_barang        = $this->input->post('stok_barang', TRUE);
+    $total_keluar        = $this->input->post('total_keluar', TRUE);
     $data               = $this->M_admin->get_data_row('tb_barang_keluar', $where);
     $insert = array(
       'id_transaksi'    => $data->id_transaksi,
@@ -236,7 +236,7 @@ class Barang extends CI_Controller
     $update = array(
       'status' => $status,
       'keterangan' => $keterangan,
-      'jumlah' => $stok_barang - $jumlah
+      'jumlah' => $total_keluar - $jumlah
     );
 
     if ($status !== 0) {

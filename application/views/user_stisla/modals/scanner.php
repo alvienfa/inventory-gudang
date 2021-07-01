@@ -139,6 +139,7 @@ $dummy = (object) array(
                                 <label for="nama barang">Jumlah (*<?= $detail->satuan ?>)</label>
                                 <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
                                 <input value="" max="<?= $detail->jumlah ?>" min="1" type="number" name="jumlah" class="<?= $input_styles ?> jumlah" required>
+                                <input type="hidden" name="total_keluar" value="<?= $detail->jumlah ?>">
                             </div>
                         </div>
                         <div class="col-6">
