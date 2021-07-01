@@ -45,10 +45,10 @@ class M_barang extends CI_Model
         $service = $this->db->query("SELECT sum(jumlah) AS total_service FROM tb_barang_keluar as a WHERE a.status=2 AND a.id_transaksi='{$id_transaksi}' ")->row()->total_service;
         $keluar = $this->db->query("SELECT sum(jumlah) AS total_keluar FROM tb_barang_keluar as a WHERE a.status=0 AND a.id_transaksi='{$id_transaksi}' ")->row()->total_keluar; 
         $data = (object) array(
-            'total_keluar' => $keluar,
+            'total_keluar' => intval($keluar),
             'total_stok' => 0,
-            'total_service' => $service,
-            'total_rusak' => $rusak
+            'total_service' => intval($service),
+            'total_rusak' => intval($rusak)
         );
         return $data;
     }

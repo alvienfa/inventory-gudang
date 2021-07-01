@@ -51,7 +51,7 @@ class Barang extends CI_Controller
     $cards['detail'] = $this->M_barang->barang($id_transaksi);
     $cards['list_status'] = $this->M_admin->select('tb_status');
     $cards['total'] = $this->M_barang->total_per_barang($id_transaksi);
-    var_dump($cards['total']);die();
+    // var_dump($cards['total']);die();
     $where = array(
       'a.id_transaksi'  => $id_transaksi,
       'a.created_by'    => $this->author
