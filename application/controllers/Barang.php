@@ -115,7 +115,6 @@ class Barang extends CI_Controller
     );
 
     if ($this->form_validation->run() === TRUE) {
-      $id_barang_keluar  = $this->input->post('id', TRUE);
       switch ($type):
         case 'kembali':
           $status = $this->input->post('status', TRUE);
@@ -124,13 +123,13 @@ class Barang extends CI_Controller
             'jumlah'            => $jumlah,
             'keterangan'        => $keterangan,
             'status'            => $status,
-            'id_barang_keluar'  => $id_barang_keluar,
+            'id_barang_keluar'  => $barang->id,
             'created_by'        => $this->author,
             'tanggal_kembali'   => date("Y-m-d"),
             'created_at'        => date("Y-m-d H:i:s"),
           );
         
-          $data               = $this->M_admin->get_data_row('tb_barang_keluar', $where);
+          $data  = $this->M_admin->get_data_row('tb_barang_keluar', ['id' => $barang->id]);
 
           $update = [
             'status' => $data->jumlah - $jumlah == 0 ? $status : 0,
