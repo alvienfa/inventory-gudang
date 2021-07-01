@@ -231,7 +231,7 @@ class Barang extends CI_Controller
       'id_barang_keluar' =>  $data->id
     );
     $update = [
-      'status' => $data->jumlah - $jumlah <= 0 ? 0 : $status,
+      'status' => $data->jumlah - $jumlah == 0 ? $status : 0,
       'keterangan' => $keterangan,
       'jumlah' => $data->jumlah - $jumlah
     ];
