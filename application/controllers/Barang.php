@@ -130,7 +130,7 @@ class Barang extends CI_Controller
           );
         
           $data  = $this->M_admin->get_data_row('tb_barang_keluar', ['id' => $barang->id]);
-
+          var_dump($data);die();
           $update = [
             'status' => $data->jumlah - $jumlah == 0 ? $status : 0,
             'keterangan' => $keterangan,
