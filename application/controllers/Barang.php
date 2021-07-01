@@ -228,13 +228,15 @@ class Barang extends CI_Controller
       'status'           => $status,
       'keterangan'       => $keterangan,
       'created_at'       => date('Y-m-d H:i:s'),
-      'id_barang_keluar' =>  $data->id
+      'id_barang_keluar' => $data->id
     );
     $update = [
       'status' => $data->jumlah - $jumlah == 0 ? $status : 0,
       'keterangan' => $keterangan,
       'jumlah' => $data->jumlah - $jumlah
     ];
+
+    var_dump($update);die();
     
     if ($status !== 0) {
       $this->M_admin->menambah('tb_barang_masuk', $id_transaksi, $jumlah);
