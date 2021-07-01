@@ -129,7 +129,7 @@ class Barang extends CI_Controller
             'created_at'        => date("Y-m-d H:i:s"),
           );
         
-          $data  = $this->M_admin->get_data_row('tb_barang_keluar', ['id' => $barang->id]);
+          $data  = $this->M_admin->get_data_row('tb_barang_keluar', array('id' => $barang->id));
           var_dump($data);die();
           $update = [
             'status' => $data->jumlah - $jumlah == 0 ? $status : 0,
