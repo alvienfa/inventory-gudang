@@ -128,9 +128,8 @@ class Barang extends CI_Controller
             'tanggal_kembali'   => date("Y-m-d"),
             'created_at'        => date("Y-m-d H:i:s"),
           );
-        
-          $data  = $this->M_admin->get_data_row('tb_barang_keluar', array('id' => $barang->id));
-          var_dump($data, $kembali,$barang);die();
+          $where = array('id' => $this->input->post('id', TRUE));
+          $data  = $this->M_admin->get_data_row('tb_barang_keluar', $where);
           $update = [
             'status' => $data->jumlah - $jumlah == 0 ? $status : 0,
             'keterangan' => $keterangan,
