@@ -80,7 +80,9 @@
                             data-id="<?= $item->id ?>" 
                             data-stok="<?= $item->jumlah ?>"
                             data-nm_penjab="<?= $item->nm_penjab?>"
-                            data-nohp_penjab="<?= $item->nohp_penjab?>" 
+                            data-nohp_penjab="<?= $item->nohp_penjab?>"
+                            data-customer_nama="<?= $item->customer_nama?>"
+                            data-customer_telp="<?= $item->customer_telp?>" 
                             data-toggle="modal" 
                             data-target="#scannerKembali">PROSES</button>
                         </div>

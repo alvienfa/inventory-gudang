@@ -154,6 +154,20 @@ $dummy = (object) array(
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
+                                <label for="customer nama">Customer Nama</label>
+                                <input type="text" value="" name="customer_nama" class="<?= $input_styles ?>" disabled>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="customer nama">Customer Telp</label>
+                                <input type="text" value="" name="customer_telp" class="<?= $input_styles ?>" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
                                 <label for="nama barang">Jumlah (*<?= $detail->satuan ?>)</label>
                                 <input type="hidden" name="id_transaksi" value="<?= $detail->id_transaksi ?>">
                                 <input value="" max="<?= $detail->jumlah ?>" min="1" type="number" name="jumlah" class="<?= $input_styles ?> jumlah" required>
@@ -178,7 +192,7 @@ $dummy = (object) array(
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="nama barang">Status</label>
+                                <label for="status">Status</label>
                                 <select name="status" class="custom-select form-control-sm text-small text-uppercase" required>
                                     <?php foreach ($list_status as $item) : ?>
                                         <option <?= ($item->id == 0 ? 'disabled' : NULL) ?> value="<?= $item->id ?>"><?= $item->text_status ?></option>
@@ -212,13 +226,14 @@ $dummy = (object) array(
             const form = item.closest("form")
             const stok = item.closest("form").querySelector("input[name='stok_barang']").value
             const jumlah = item.closest("form").querySelector("input[name='jumlah']").value
+            const customerNama = item.closest("form").querySelector("input[name='customer_nama']").value
+            const customerTelp = item.closest("form").querySelector("input[name='customer_telp']").value
             switch (form.attributes.id.value) {
                 case 'kembali':
                     item.closest("form").submit()
                     e.target.setAttribute('disabled', 'disabled')
                     break;
-                    case 'keluar':
-                    
+                case 'keluar':
                     if (+stok > 0 && +stok >= +jumlah) {
                         item.closest("form").submit()
                         e.target.setAttribute('disabled', 'disabled')

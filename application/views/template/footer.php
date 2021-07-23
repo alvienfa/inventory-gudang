@@ -58,6 +58,8 @@
       $("#kembali").append("<input type='hidden' name='id' value='" + e.target.dataset.id + "'>")
       $("#kembali").append("<input type='hidden' name='id_lokasi' value='" + e.target.dataset.id_lokasi + "'>")
       $("#kembali").append("<input type='hidden' name='total' value='" + e.target.dataset.jumlah + "'>")
+      document.querySelector("#scannerKembali").querySelector("input[name='customer_nama']").value = e.target.dataset.customer_nama
+      document.querySelector("#scannerKembali").querySelector("input[name='customer_telp']").value = e.target.dataset.customer_telp
       document.querySelector(".jumlah").value = e.target.dataset.stok
     })
   })
