@@ -56,7 +56,7 @@
                 <td style="width:10px">:</td>
                 <td style="width:200px"><?= $list_data->perusahaan ?></td>
                 <td style="width:80px"></td>
-                <td style="width:120px"></td>
+                <td style="width:90px"></td>
                 <td style="width:180px">Penanggung Jawab</td>
                 <td style="width:10px">:</td>
                 <td style="width:180px"><?= $list_data->nm_penjab ?></td>
@@ -70,19 +70,32 @@
                 <td></td>
                 <td>No. Handphone</td>
                 <td>:</td>
-                <td><?= $list_data->nohp_penjab ?><br></td>
+                <td><?= $list_data->nohp_penjab ?></td>
             </tr>
 
             <tr>
-                <td style="width:180px">Po. Customer </td>
-                <td>:<br></td>
-                <td> </td>
+                <td>Nama Customer </td>
+                <td>:</td>
+                <td><?= $list_data->customer_nama ?> </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td><div align="justify"><?= $list_data->alamat ?></div><br></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td><br></td>
             </tr>
+
+           
         </thead>
 
     </table>

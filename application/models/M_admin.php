@@ -289,7 +289,7 @@ class M_admin extends CI_Model
     b.id_gudang,
     b.id_kategori,
     c.perusahaan, c.kota, c.alamat,c.provinsi,c.kecamatan,user.nama_user, 
-    d.nama_kategori, e.tanggal_keluar, e.nm_penjab, e.nohp_penjab, status.text_status');
+    d.nama_kategori, e.tanggal_keluar, e.nm_penjab, e.nohp_penjab, e.customer_nama, e.customer_telp, status.text_status');
     $this->db->from('tb_barang_kembali as a');
     $this->db->join('tb_barang_masuk as b', "b.id_transaksi=a.id_transaksi");
     $this->db->join('user', "user.id=a.created_by");
