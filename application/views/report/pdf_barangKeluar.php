@@ -87,7 +87,7 @@
             <tr>
                 <td>Alamat</td>
                 <td>:</td>
-                <td><div align="justify"><?= $list_data->alamat ?></div><br></td>
+                <td><?= $list_data->alamat ?><br></td>
                 <td></td>
                 <td></td>
                 <td></td>
