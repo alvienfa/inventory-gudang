@@ -7,7 +7,9 @@ $dummy = (object) array(
     'provinsi'   => 'DKI Jakarta',
     'kode_pos'   => '12345',
     'nm_penjab'  => 'Ari Lesmana',
-    'nohp_penjab' => '62878288394921'
+    'nohp_penjab' => '62878288394921',
+    'customer_nama' => 'PT. Risky Semesta',
+    'customer_telp' => '087889238391',
 );
 // $dummy = (object) array(
 //     'keterangan' => NULL,
@@ -17,7 +19,9 @@ $dummy = (object) array(
 //     'provinsi'   => NULL,
 //     'kode_pos'   => NULL,
 //     'nm_penjab'  => NULL,
-//     'nohp_penjab' => NULL
+//     'nohp_penjab' => NULL,
+//     'customer_nama' => NULL,
+//     'customer_telp' => NULL,
 // );
 
 
@@ -105,6 +109,20 @@ $dummy = (object) array(
                             <div class="form-group">
                                 <label for="nama barang">No HP Penanggung Jawab</label>
                                 <input value="<?= $dummy->nohp_penjab ?>" type="phone" name="nohp_penjab" class="<?= $input_styles ?>" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="nama barang">Nama Customer</label>
+                                <input value="<?= $dummy->customer_nama ?>" type="text" name="customer_nama" class="<?= $input_styles ?> " required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="nama barang">Customer Telp</label>
+                                <input value="<?= $dummy->customer_telp ?>" type="phone" name="customer_telp" class="<?= $input_styles ?>" required>
                             </div>
                         </div>
                     </div>

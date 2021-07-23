@@ -105,6 +105,9 @@ class Barang extends CI_Controller
     $keterangan           = $this->input->post('keterangan', TRUE);
     $nm_penjab            = $this->input->post('nm_penjab', TRUE);
     $nohp_penjab          = $this->input->post('nohp_penjab', TRUE);
+    $cust_nama            = $this->input->post('customer_nama', TRUE);
+    $cust_telp           = $this->input->post('customer_telp', TRUE);
+    
     $alamat = array(
       'alamat'           => $this->input->post('alamat', TRUE),
       'kecamatan'        => $this->input->post('kecamatan', TRUE),
@@ -154,6 +157,8 @@ class Barang extends CI_Controller
             'keterangan'      => $keterangan,
             'nm_penjab'       => $nm_penjab, //penerima
             'nohp_penjab'     => $nohp_penjab, //no hape penerima
+            'customer_nama'   => $cust_nama,
+            'customer_telp'   => $cust_telp,
             'created_by'      => $this->author,
             'created_at'      => date("Y-m-d H:i:s")
           );
