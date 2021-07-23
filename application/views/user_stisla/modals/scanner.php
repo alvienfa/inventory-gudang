@@ -11,18 +11,18 @@ $dummy = (object) array(
     'customer_nama' => 'PT. Risky Semesta',
     'customer_telp' => '087889238391',
 );
-// $dummy = (object) array(
-//     'keterangan' => NULL,
-//     'alamat'     => NULL,
-//     'kecamatan'  => NULL,
-//     'kota'       => NULL,
-//     'provinsi'   => NULL,
-//     'kode_pos'   => NULL,
-//     'nm_penjab'  => NULL,
-//     'nohp_penjab' => NULL,
-//     'customer_nama' => NULL,
-//     'customer_telp' => NULL,
-// );
+$dummy = (object) array(
+    'keterangan' => NULL,
+    'alamat'     => NULL,
+    'kecamatan'  => NULL,
+    'kota'       => NULL,
+    'provinsi'   => NULL,
+    'kode_pos'   => NULL,
+    'nm_penjab'  => NULL,
+    'nohp_penjab' => NULL,
+    'customer_nama' => NULL,
+    'customer_telp' => NULL,
+);
 
 
 ?>
